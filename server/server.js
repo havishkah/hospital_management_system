@@ -1,10 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require("dotenv").config();
 
 const app = express();
 
-const port = 8000;
-const DB_URL='mongodb+srv://hospital_ectc:vYwiG1gVSE0L6OSq@hospitalsystem.ajkmceb.mongodb.net/hospitalsystem?retryWrites=true&w=majority';
+const port = process.env.PORT || 8080;
+const DB_URL=process.env.DB_URL;
 
 mongoose.connect(DB_URL)
 .then(()=>{
@@ -14,5 +15,5 @@ mongoose.connect(DB_URL)
 .catch((err)=>console.log("DB connection error", err))
 
 app.listen(port, ()=>{
-    console.log('App is running on ',{port})
+    console.log('App is running on:',{port})
 });
