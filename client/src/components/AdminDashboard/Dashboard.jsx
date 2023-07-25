@@ -24,11 +24,11 @@ export default function Dashboard()  {
                   </a>
                 </li>
                 <li className="nav-item py-2 py-sm-0">
-                  <a href="#sidemenu" className="nav-link text-white" data-bs-toggle="collapse" aria-current="page">
+                  <a href="#submenu1" className="nav-link text-white" data-toggle="collapse" data-target="#submenu1">
                     <i class="fa-solid fa-stethoscope"></i>&nbsp;&nbsp;<span className='fs-5 d-none d-sm-inline'>Manage Doctors</span>
                     &nbsp;&nbsp;<i className="fa fa-caret-down"></i>
                   </a>
-                  <ul className="nav collapse ms-1 flex-column" id="sidemenu" data-bs-parent="#menu">
+                  <ul className="list-unstyled flex-column pl-3 collapse" id="submenu1" aria-expanded="false">
                        <li className="nav-item">
                            <a href="" className="nav-link text-white">Add Doctor</a>
                        </li>
@@ -38,19 +38,46 @@ export default function Dashboard()  {
                   </ul>
                 </li>
                 <li className="nav-item py-2 py-sm-0">
-                  <a href="#" className="nav-link text-white">
+                  <a href="#submenu2" className="nav-link text-white" data-toggle="collapse" data-target="#submenu2">
                     <i class="fa-solid fa-bed-pulse"></i>&nbsp;&nbsp;<span className='fs-5 d-none d-sm-inline'>Manage Patients</span>
+                    &nbsp;&nbsp;<i className="fa fa-caret-down"></i>
                   </a>
+                  <ul className="list-unstyled flex-column pl-3 collapse" id="submenu2" aria-expanded="false">
+                       <li className="nav-item">
+                           <a href="" className="nav-link text-white">Add Patient</a>
+                       </li>
+                       <li className="nav-item">
+                           <a href="" className="nav-link text-white">View Patients</a>
+                       </li>
+                  </ul>
                 </li>
                 <li className="nav-item py-2 py-sm-0">
-                  <a href="#" className="nav-link text-white">
+                  <a href="#submenu3" className="nav-link text-white" data-toggle="collapse" data-target="#submenu3">
                     <i class="fa-solid fa-bed"></i>&nbsp;&nbsp;<span className='fs-5 d-none d-sm-inline'>Manage Beds</span>
+                    &nbsp;&nbsp;<i className="fa fa-caret-down"></i>
                   </a>
+                  <ul className="list-unstyled flex-column pl-3 collapse" id="submenu3" aria-expanded="false">
+                       <li className="nav-item">
+                           <a href="" className="nav-link text-white">Add Bed</a>
+                       </li>
+                       <li className="nav-item">
+                           <a href="" className="nav-link text-white">View Beds</a>
+                       </li>
+                  </ul>
                 </li>
                 <li className="nav-item py-2 py-sm-0">
-                  <a href="#" className="nav-link text-white">
+                  <a href="#submenu4" className="nav-link text-white" data-toggle="collapse" data-target="#submenu4">
                     <i class="fa-solid fa-tablets"></i>&nbsp;&nbsp;<span className='fs-5 d-none d-sm-inline'>Manage Drugs</span>
+                    &nbsp;&nbsp;<i className="fa fa-caret-down"></i>
                   </a>
+                  <ul className="list-unstyled flex-column pl-3 collapse" id="submenu4" aria-expanded="false">
+                       <li className="nav-item">
+                           <a href="" className="nav-link text-white">Add Drug</a>
+                       </li>
+                       <li className="nav-item">
+                           <a href="" className="nav-link text-white">View Drugs</a>
+                       </li>
+                  </ul>
                 </li>
 
              </ul>
