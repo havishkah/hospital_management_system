@@ -86,10 +86,10 @@ export default function Dashboard()  {
           {/*end of side-bar*/}
 
   {/* <h1>Home</h1> */}
-     <div className='col-sm-7 d-flex p-5'>
+     <div className='col-sm-7 d-flex p-5' style={{backgroundColor:'rgb(231, 229, 229)'}}>
       <div>
      <div class='card mx-4 mt-5 my-5'>
-          <div class='card-body bg-secondary'>
+          <div class='card-body bg-secondary' style={{height:'160px',width:'250px'}}>
              <h5 class='card-title text-bold text-white'>Total Patients Onboard</h5>
              <h1 className='text-white text-bold mt-6'>10</h1>
           </div>
@@ -98,7 +98,7 @@ export default function Dashboard()  {
 
      <div>
      <div class='card mx-4 mt-5 my-5'>
-          <div class='card-body bg-secondary'>
+          <div class='card-body bg-secondary' style={{height:'160px',width:'250px'}}>
               <h5 class='card-title text-bold text-white'>Total Patients Discharged</h5>
               <h1 className='text-white text-bold mt-6'>5</h1>
           </div>
@@ -107,7 +107,7 @@ export default function Dashboard()  {
 
    </div>
 
- <div className="col-lg-2 d-flex">
+ <div className="col-lg-2 d-flex" style={{backgroundColor:'rgb(231, 229, 229)'}}>
  <div className="dropdown p-3">
             <button className="btn border-none dropdown-toggle" type="button" id="triggerId" aria-expanded="false" data-bs-toggle="dropdown">
                  <i className="fa fa-user"></i>&nbsp;<span className='ms-2'>John Doe</span>
