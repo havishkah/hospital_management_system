@@ -16,9 +16,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-         <Route path='/admin' element={<AdminDashbord/>}></Route> 
-         {/* <Route path='/create' element={}></Route>
-         <Route path='/update' element={}></Route> */}
+        
         </Routes>
       </BrowserRouter>
     </div>
