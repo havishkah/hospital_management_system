@@ -53,21 +53,21 @@ pipeline {
         //     }
         // }
 
-        stage("Run ESLint and SonarQube Analysis for Client") {
-            steps {
-                dir("client") {
-                    // Run ESLint
-                    sh "npx eslint ."
+        // stage("Run ESLint and SonarQube Analysis for Client") {
+        //     steps {
+        //         dir("client") {
+        //             // Run ESLint
+        //             sh "npx eslint ."
 
-                    // Run SonarQube Scanner for ESLint report
-                    script {
-                        withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
-                            sh "sonar-scanner"
-                        }
-                    }
-                }
-            }
-        }
+        //             // Run SonarQube Scanner for ESLint report
+        //             script {
+        //                 withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+        //                     sh "sonar-scanner"
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
         stage("Run ESLint and SonarQube Analysis for Server") {
             steps {
@@ -77,9 +77,9 @@ pipeline {
 
                     // Run SonarQube Scanner for ESLint report
                     script {
+                        def scannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                         withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
-                            sh "sonar-scanner"
-                        }
+                            sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
             }
