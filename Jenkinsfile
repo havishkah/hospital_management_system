@@ -68,6 +68,17 @@ pipeline {
         //         }
         //     }
         // }
+        stage('Install Dependencies and Run ESLint') {
+            steps {
+                script {
+                    // Install ESLint as a development dependency
+                    sh 'npm install eslint --save-dev'
+
+                    // Run ESLint using the locally installed version
+                    sh './node_modules/.bin/eslint .'
+                }
+            }
+        }
 
         stage("Run ESLint and SonarQube Analysis for Server") {
             steps {
