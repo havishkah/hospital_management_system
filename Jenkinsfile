@@ -45,15 +45,17 @@ pipeline {
             }
         }
 
-        stage('Build and Run SonarQube Analysis') {
+        stage('Run SonarQube Analysis') {
             steps {
                 script {
+                    def scannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+
                     withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
-                        sh "${SCANNER_HOME}/bin/sonar-scanner"
-                        }
+                        sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
             }
+        }
 
 
         // stage("Test Server") {
