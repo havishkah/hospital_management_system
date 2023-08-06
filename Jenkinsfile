@@ -82,7 +82,7 @@ pipeline {
 
         stage("Run ESLint and SonarQube Analysis for Server") {
             steps {
-                dir("server") {
+                dir("client") {
                     // Run ESLint
                     sh "npx eslint ."
 
