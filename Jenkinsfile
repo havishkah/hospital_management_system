@@ -80,11 +80,12 @@ pipeline {
                         def scannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                         withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
                             sh "${scannerHome}/bin/sonar-scanner"
+                        }
                     }
                 }
             }
+
         }
 
     }
-
 }
