@@ -6,7 +6,6 @@ pipeline {
 
     tools {
         nodejs "nodejs"
-        npm "nodejs"
     }
 
     stages {
