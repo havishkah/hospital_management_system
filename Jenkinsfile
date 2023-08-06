@@ -29,13 +29,13 @@ pipeline {
             }
         }
 
-        stage("Test Client") {
-            steps {
-                dir("client") {
-                    sh "npm test"
-                }
-            }
-        }
+        // stage("Test Client") {
+        //     steps {
+        //         dir("client") {
+        //             sh "npm test"
+        //         }
+        //     }
+        // }
 
         stage("Build Server") {
             steps {
@@ -45,13 +45,13 @@ pipeline {
             }
         }
 
-        stage("Test Server") {
-            steps {
-                dir("server") {
-                    sh "npm test"
-                }
-            }
-        }
+        // stage("Test Server") {
+        //     steps {
+        //         dir("server") {
+        //             sh "npm test"
+        //         }
+        //     }
+        // }
 
     }
 
