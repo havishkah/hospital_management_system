@@ -62,7 +62,7 @@ pipeline {
                     // Run SonarQube Scanner for ESLint report
                     script {
                         withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
-                            sh "${scannerHome}/bin/sonar-scanner"
+                            sh "sonar-scanner"
                         }
                     }
                 }
@@ -78,7 +78,7 @@ pipeline {
                     // Run SonarQube Scanner for ESLint report
                     script {
                         withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
-                            sh "${scannerHome}/bin/sonar-scanner"
+                            sh "sonar-scanner"
                         }
                     }
                 }
