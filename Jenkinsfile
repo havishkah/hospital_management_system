@@ -53,6 +53,38 @@ pipeline {
         //     }
         // }
 
+        stage("Run ESLint and SonarQube Analysis for Client") {
+            steps {
+                dir("client") {
+                    // Run ESLint
+                    sh "npx eslint ."
+
+                    // Run SonarQube Scanner for ESLint report
+                    script {
+                        withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+                            sh "sonar-scanner -Dsonar.analysis.mode=preview"
+                        }
+                    }
+                }
+            }
+        }
+
+        stage("Run ESLint and SonarQube Analysis for Server") {
+            steps {
+                dir("server") {
+                    // Run ESLint
+                    sh "npx eslint ."
+
+                    // Run SonarQube Scanner for ESLint report
+                    script {
+                        withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+                            sh "sonar-scanner -Dsonar.analysis.mode=preview"
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
 }
