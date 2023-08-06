@@ -45,6 +45,17 @@ pipeline {
             }
         }
 
+        stage('Build and Run SonarQube Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+                        sh "${SCANNER_HOME}/bin/sonar-scanner"
+                        }
+                    }
+                }
+            }
+
+
         // stage("Test Server") {
         //     steps {
         //         dir("server") {
@@ -68,35 +79,35 @@ pipeline {
         //         }
         //     }
         // }
-        stage('Install Dependencies and Run ESLint') {
-            steps {
-                script {
-                    // Install ESLint as a development dependency
-                    sh 'npm install eslint --save-dev'
+        // stage('Install Dependencies and Run ESLint') {
+        //     steps {
+        //         script {
+        //             // Install ESLint as a development dependency
+        //             sh 'npm install eslint --save-dev'
 
-                    // Run ESLint using the locally installed version
-                    sh './node_modules/.bin/eslint .'
-                }
-            }
-        }
+        //             // Run ESLint using the locally installed version
+        //             sh './node_modules/.bin/eslint .'
+        //         }
+        //     }
+        // }
 
-        stage("Run ESLint and SonarQube Analysis for Server") {
-            steps {
-                dir("client") {
-                    // Run ESLint
-                    sh "npx eslint ."
+        // stage("Run ESLint and SonarQube Analysis for Server") {
+        //     steps {
+        //         dir("client") {
+        //             // Run ESLint
+        //             sh "npx eslint ."
 
-                    // Run SonarQube Scanner for ESLint report
-                    script {
-                        def scannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                        withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
-                            sh "${scannerHome}/bin/sonar-scanner"
-                        }
-                    }
-                }
-            }
+        //             // Run SonarQube Scanner for ESLint report
+        //             script {
+        //                 def scannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        //                 withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+        //                     sh "${scannerHome}/bin/sonar-scanner"
+        //                 }
+        //             }
+        //         }
+        //     }
 
-        }
+        // }
 
     }
 }

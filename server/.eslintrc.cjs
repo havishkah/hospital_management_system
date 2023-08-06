@@ -1,5 +1,7 @@
+/* eslint-env node */
+
 module.exports = {
-  env: { es2020: true },
+  env: { browser: true, es2020: true },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -8,8 +10,11 @@ module.exports = {
   ],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
-  // Remove react-refresh plugin if not needed for server-side code
+  plugins: ['react-refresh'],
   rules: {
-    // Your ESLint rules for the server folder here
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
   },
-};
+}
