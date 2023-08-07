@@ -25,16 +25,16 @@ const deleteDoctorrByID = (docId) => {
   return Doctor.deleteOne({ _id: id });
 };
 
-const getDoctorByID = (id) => {
-  const DoctorID = id.trim();
+const getDoctorByID = (iD) => {
+  const DoctorID = iD.trim();
   return Doctor.findOne({ _id: DoctorID });
 }
 
 
 
-  // module.exports = {
-  //   createDoctor,
-  //   getAlldoctors,
-  //   deleteDoctorrByID,
-  //   getDoctorByID
-  // };
+   module.exports = {
+    createDoctor,
+    getAlldoctors,
+    deleteDoctorrByID,
+    getDoctorByID
+  };
