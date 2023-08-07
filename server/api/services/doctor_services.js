@@ -33,8 +33,8 @@ const getDoctorByID = (id) => {
 
 
    module.exports = {
-     createDoctor,
-     getAlldoctors,
-     deleteDoctorrByID,
+    createDoctor,
+    getAlldoctors,
+    deleteDoctorrByID,
     getDoctorByID
   };
