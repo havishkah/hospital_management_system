@@ -20,8 +20,8 @@ const getAlldoctors = () =>{
   return Doctor.find();
 };
 
-const deleteDoctorrByID = (docID) => {
-  let id = docID;
+const deleteDoctorrByID = (docId) => {
+  let id = docId;
   return Doctor.deleteOne({ _id: id });
 };
 
