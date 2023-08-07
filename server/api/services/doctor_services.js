@@ -32,9 +32,9 @@ const getDoctorByID = (id) => {
 
 
 
-  // module.exports = {
-  //   createDoctor,
-  //   getAlldoctors,
-  //   deleteDoctorrByID,
-  //   getDoctorByID
-  // };
+   module.exports = {
+     createDoctor,
+     getAlldoctors,
+     deleteDoctorrByID,
+    getDoctorByID
+  };
