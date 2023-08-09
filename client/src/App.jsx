@@ -5,7 +5,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 // import Dashboard from './components/DoctorDashboard/DoctorDashboard'
 
-// import Dashbord from './components/Dashboard/Dashboard'
+
 
 import AdminDashbord from "./components/AdminDasboard"
 
