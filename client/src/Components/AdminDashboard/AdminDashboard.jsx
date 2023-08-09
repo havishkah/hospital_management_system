@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Service from '../../utilities/http';
 import {BsPeopleFill} from 'react-icons/bs'
 import doctor from '../../assets/doctor.png'
 
 export const AdminDashboard = () => {
 
+  const [dashboardData, setDashboardData] = useState([]);
+  const service=new Service ();
+  useEffect(() => {
+    const respone = service.get ('adminDashboard/data') 
+    respone.then((response) => {
+      console.log (response)
+      setDashboardData(response.data);
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+
+    // // Fetch data from the server
+    // axios.get('http://localhost:8000/api/adminDashboard/data')
+ 
+  }, []);
+
   return (
     <main className='main-container'>
        <div className='main-title'>
           <h4>DASHBOARD</h4>
+          <div>
+          <pre>{JSON.stringify(dashboardData, null, 2)}</pre>
+          </div>
        </div> 
 
        <div className='main-cards'>
