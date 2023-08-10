@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
 const drugsSchema = new mongoose.Schema({
-    DrugName:{
+    drugName:{
         type:String,
         required:true,
     },
-    Type:{
+    type:{
         type:String,
         required:true,
     },
-    Qty:{
+    qty:{
         type:Number,
         required:true,
     },
