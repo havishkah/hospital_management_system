@@ -4,12 +4,12 @@ function AddDocs () {
   return (
 
 
-      <div className="container">
+      <main className="main-container">
                 <div className="row">
                     <div className="col-md-12">
-                    <div className='main-title mt-3'>
-                    <h5 className="mt-2">Doctor Details</h5>
-                    <button1 style={{marginLeft:'880px'}} type="submit" className="btn btn-danger text-white btn-lg">Delete</button1> &nbsp;
+                    <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
+                    <h5>Doctor Details</h5>
+                    <button style={{marginLeft:'50px'}} type="submit" className="btn btn-danger text-white btn-lg">Delete</button> 
                     </div>
                    
                     <p>Basic Infromation</p>
@@ -94,19 +94,73 @@ function AddDocs () {
                         
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                <label className="form-lable"></label>
-                                    <button style={{marginLeft:'350px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
+                                {/* <label className="form-lable"></label> */}
+                                    <button style={{marginLeft:'280px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
                                     
                                     <button type="submit" className="btn btn-primary btn-lg">Update</button>
                                 </div>
                                
                             </div>
-
+                        
                         </div>
                     </form>
                     </div>
-                </div>
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div className="main-title">
+                     <h4>Dr kamals Patients</h4>
+                         </div>
+                    <div className="col-lg-3 mt-2 mb-2">
+                     <input style={{marginLeft:'715px'}} type="search" className="form-control"  placeholder="Search.."/>
+                    </div> <br />
+                    <div>
+
+        <table class="table" celled>
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Patient Name</th>
+                        <th scope="col">NIC</th>
+                        <th scope="col">Word Specialist</th>
+                        <th scope="col">Assigned Wards</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                            <td>1</td>
+                            <td>Nimal</td>
+                            <td>999999999V</td>
+                            <td>Cardiology Specialist</td>
+                            <td>Cardiology Ward 01</td>
+                            <td>Onboard</td>
+                            <td>
+                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
+                            </td>
+                            </tr> 
+
+                            <tr>
+                            <td>2</td>
+                            <td>Amal</td>
+                            <td>888888888V</td>
+                            <td>Cardiology Specialist</td>
+                            <td> Cardiology Ward 01</td>
+                            <td>Discharged</td>
+                            <td>
+                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
+                            </td>
+                            </tr> 
+
+
+                    </tbody>
+                </table>
             </div>
+
+                </div>
+            </main>
         
 
   )

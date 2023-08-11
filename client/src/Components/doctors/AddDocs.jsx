@@ -4,7 +4,7 @@ function AddDocs () {
   return (
 
 
-      <div className="container">
+      <main className="main-container">
                 <div className="row">
                     <div className="col-md-12">
                     <h5 className="mt-2">Add Doctors</h5>
@@ -66,8 +66,8 @@ function AddDocs () {
                                     <label className="form-lable">Ward Specialist</label>
                                     <select className="form-control" name="status" >
                                         <option value="">--Select Ward Specialist--</option>
-                                        <option value="1">Active</option>
-                                        <option value="0">Inactive</option>
+                                        <option value="1">Cardiology Specialist</option>
+                                     
                                     </select>
                                 </div>
                             </div>
@@ -76,8 +76,9 @@ function AddDocs () {
                                     <label className="form-lable">Assigned Ward</label>
                                     <select className="form-control" name="status" >
                                         <option value="">--Select Assigned Ward--</option>
-                                        <option value="1">Active</option>
-                                        <option value="0">Inactive</option>
+                                        <option value="1">Cardiology Ward 01</option>
+                                        <option value="1">Cardiology Ward 02</option>
+                                        <option value="1">Cardiology Ward 02</option>
                                     </select>
                                 </div>
                             </div>
@@ -90,7 +91,7 @@ function AddDocs () {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                 <label className="form-lable"></label>
-                                    <button style={{marginLeft:'350px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
+                                    <button style={{marginLeft:'320px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
                                     
                                     <button type="submit" className="btn btn-primary btn-lg">Submit</button>
                                 </div>
@@ -101,7 +102,7 @@ function AddDocs () {
                     </form>
                     </div>
                 </div>
-            </div>
+            </main>
         
 
   )
