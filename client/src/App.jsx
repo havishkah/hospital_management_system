@@ -6,6 +6,9 @@ import { AdminDashboard } from './Components/AdminDashboard/AdminDashboard'
 import { NavBar } from './Components/Navbar/NavBar'
 import { SideBar } from './Components/SideBar/SideBar'
 import { ViewDoctors } from './Components/doctors/ViewDoctors'
+import { DoctorDashboard } from './Components/doctors/DoctorDashboard'
+import { PatientDashboard } from './Components/patients/PatientDashboard'
+
 
 
 function App() {
@@ -24,6 +27,8 @@ function App() {
       <Routes>
          <Route path='/admin' element={<AdminDashboard/>}></Route>
          <Route path='/alldoc' element={<ViewDoctors/>}></Route>
+         <Route path='/doctor' element={<DoctorDashboard/>}></Route>
+         <Route path='/patientdashboard' element={<PatientDashboard/>}></Route>
       </Routes>
     </BrowserRouter>
   </div>
