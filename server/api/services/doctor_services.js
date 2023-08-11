@@ -6,14 +6,14 @@ const createDoctor = (data) => {
     let email = data.email;
     let contact = data.phone;
   
-    const user = new User({
+    const doctor = new Doctor({
       fullName: name,
       email: email,
       nic:nic,
-      phone: contact,
+      phone: contact
      
     });
-    return user.save();
+    return Doctor.save();
   };
 
 const getAlldoctors = () =>{
