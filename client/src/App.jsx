@@ -6,6 +6,7 @@ import { AdminDashboard } from './Components/AdminDashboard/AdminDashboard'
 import { NavBar } from './Components/Navbar/NavBar'
 import { SideBar } from './Components/SideBar/SideBar'
 import { ViewDoctors } from './Components/doctors/ViewDoctors'
+import { DocPatientPrescrip } from './Components/doctors/DocPatientPrescrip'
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <Routes>
          <Route path='/admin' element={<AdminDashboard/>}></Route>
          <Route path='/alldoc' element={<ViewDoctors/>}></Route>
+         <Route path='/doc_pa_priscrip' element={<DocPatientPrescrip/>}></Route>
       </Routes>
     </BrowserRouter>
   </div>
