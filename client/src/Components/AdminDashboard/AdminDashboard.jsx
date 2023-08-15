@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Service from '../../../utilities/http'
+import Service from '../../../utilities/http';
 import {BsPeopleFill} from 'react-icons/bs'
 import doctor from '../../assets/doctor.png'
 
