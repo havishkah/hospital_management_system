@@ -1,6 +1,6 @@
 import React from 'react'
 
-function AddDocs () {
+function ViewDocDetail () {
   return (
 
 
@@ -166,4 +166,4 @@ function AddDocs () {
   )
 }
 
-export default AddDocs
+export default ViewDocDetail

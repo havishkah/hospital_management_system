@@ -1,12 +1,13 @@
 import React from 'react'
 
-export const DocPatientPrescrip = () => {
+export const PatientPrescripd = () => {
   return (
     <main className='main-container'>
-      <div className="main-title">
-          <h4>Dr. Kamal's Patient Prescription Details</h4>
-      </div>
+        <div className="main-title">
+            <h4>Patient Thivanka Prescription Details</h4>
+        </div>
 
+        <br />
       <p className="mt-3" style={{color:'grey'}}>Patient Infromation</p>
                    
                    <form>
@@ -14,7 +15,7 @@ export const DocPatientPrescrip = () => {
                            <div className="col-md-6">
                                <div className="mb-3">
                                    <label style={{fontSize:'14px'}} className="form-lable">Name</label>
-                                   <input type="text" name="username" className="form-control" value="Nimal"/>
+                                   <input type="text" name="username" className="form-control" value="Thivanka"/>
                                </div>
                            </div>
                            <div className="col-md-6">
@@ -59,10 +60,9 @@ export const DocPatientPrescrip = () => {
                            <div className="col-md-6">
                                <div className="mb-3">
                                    <label style={{fontSize:'14px'}} className="form-lable">Frequency</label>
-                                   <textarea rows="4" cols="50" type="text" name="address" className="form-control" value="Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text"/>
+                                   <textarea rows="4" cols="50"  type="text" name="address" className="form-control" value="Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text"/>
                                </div>
                            </div>
-                           <br /> <br />
                            <p className="mt-3" style={{color:'grey'}}>Other Infromation</p>
                            <div className="col-md-6">
                                <div className="mb-3">

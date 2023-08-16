@@ -90,8 +90,8 @@ export const DocPatientHistoryd = () => {
                            <div className="col-md-6">
                                <div className="mb-3">
                                {/* <label className="form-lable"></label> */}
-                                   <button style={{marginLeft:'-80px',width:'280px',height:'48px', fontSize:'22px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">View Prescription</button>&nbsp;
-                                   <button style={{width:'280px',height:'48px', fontSize:'22px'}} type="submit" className="btn btn-primary text-white btn-lg">View Diagnosis Report</button>
+                                   <button style={{marginLeft:'-80px',width:'280px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">View Prescription</button>&nbsp;
+                                   <button style={{width:'280px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary text-white btn-lg">View Diagnosis Report</button>
                                </div>
                               
                            </div>

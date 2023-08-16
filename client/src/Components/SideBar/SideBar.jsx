@@ -28,7 +28,7 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
             <a href="#" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Patients</span></a>
             <br />
             <i class="fa-solid fa-user-group fs-6 me-3 my-2"></i>
-            <a href="#" className='text-decoration-none text-black'><span className='fs-6'>View Patients</span></a>
+            <a href="/allpatient" className='text-decoration-none text-black'><span className='fs-6'>View Patients</span></a>
           </a>
           <a href="" className="list-group-item py-3">
             <small>Manage Beds</small><br />

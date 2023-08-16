@@ -10,7 +10,10 @@ import { SideBar } from './Components/SideBar/SideBar'
 import { ViewDoctors } from './Components/doctors/ViewDoctors'
 import { DocPatientPrescrip } from './Components/doctors/DocPatientPrescrip'
 import { DocPatientHistoryd } from './Components/doctors/DocPatientHistoryd'
-
+import { ViewPatients } from './Components/patients/ViewPatients'
+import { PatientPrescripd } from './Components/patients/PatientPrescripd'
+import { DocPatientHistory } from './Components/doctors/DocPatientHistory'
+import { AddPrescrip } from './Components/doctors/AddPrescrip'
 
 
 function App() {
@@ -33,6 +36,10 @@ function App() {
          <Route path='/adddoc' element={<AddDoc/>}></Route>
          <Route path='/viewdocd' element={<ViewDocd/>}></Route>
          <Route path='/doc_pa_historyd' element={<DocPatientHistoryd/>}></Route>
+         <Route path='/allpatient' element={<ViewPatients/>}></Route>
+         <Route path='/pa_prescripd' element={<PatientPrescripd/>}></Route>
+         <Route path='/doc_pa_viewhistory' element={<DocPatientHistory/>}></Route>
+         <Route path='/addprescrip' element={<AddPrescrip/>}></Route>
       </Routes>
     </BrowserRouter>
   </div>
