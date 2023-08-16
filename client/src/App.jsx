@@ -9,7 +9,7 @@ import { NavBar } from './Components/Navbar/NavBar'
 import { SideBar } from './Components/SideBar/SideBar'
 import { ViewDoctors } from './Components/doctors/ViewDoctors'
 import Viewdocpde from './Components/doctors/ViewDoctorPDetail'
-
+import AddPatients from './Components/patients/AddPatient'
 
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
          <Route path='/adddoc' element={<AddDoc/>}></Route>
         <Route path='/viewdocd' element={<ViewDocd/>}></Route>
         <Route path='/viewdocpde' element={<Viewdocpde/>}></Route>
+        <Route path='/addpatients' element={<AddPatients/>}></Route>
       </Routes>
     </BrowserRouter>
   </div>

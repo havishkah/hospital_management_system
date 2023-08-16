@@ -12,63 +12,63 @@ function AddDocs () {
                     <button style={{marginLeft:'50px'}} type="submit" className="btn btn-danger text-white btn-lg">Delete</button> 
                     </div>
                    
-                    <p>Basic Infromation</p>
+                    <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
                    
                     <form>
                         <div className="row">
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label className="form-lable">First name</label>
+                                    <label style={{fontSize:'14px'}} className="form-lable">First name</label>
                                     <input type="text" name="username" className="form-control" />
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label className="form-lable">Last Name</label>
+                                    <label style={{fontSize:'14px'}} className="form-lable">Last Name</label>
                                     <input type="text" name="email" className="form-control" />
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label className="form-lable">Name with Initials</label>
+                                    <label style={{fontSize:'14px'}} className="form-lable">Name with Initials</label>
                                     <input type="text" name="phone" className="form-control" />
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label className="form-lable">Date of Birth</label>
+                                    <label style={{fontSize:'14px'}} className="form-lable">Date of Birth</label>
                                     <input type="text" name="address" className="form-control" />
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label className="form-lable">Nic</label>
+                                    <label style={{fontSize:'14px'}} className="form-lable">Nic</label>
                                     <input type="text" name="address" className="form-control" />
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label className="form-lable">Gender</label>
+                                    <label style={{fontSize:'14px'}} className="form-lable">Gender</label>
                                     <input type="text" name="address" className="form-control" />
                                 </div>
                             </div>
-                            <p>Contact Infromation</p>
+                            <p className="mt-3" style={{color:'grey'}}>Contact Infromation</p>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label className="form-lable">Contact Number</label>
+                                    <label style={{fontSize:'14px'}} className="form-lable">Contact Number</label>
                                     <input type="text" name="address" className="form-control" />
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label className="form-lable">Email</label>
+                                    <label style={{fontSize:'14px'}} className="form-lable">Email</label>
                                     <input type="text" name="address" className="form-control" />
                                 </div>
                             </div>
-                            <p>Other Infromation</p>
+                            <p className="mt-3" style={{color:'grey'}}>Other Infromation</p>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label className="form-lable">Ward Specialist</label>
+                                    <label style={{fontSize:'14px'}} className="form-lable">Ward Specialist</label>
                                     <select className="form-control" name="status" >
                                         <option value="">--Select Ward Specialist--</option>
                                         <option value="1">Cardiology Specialist</option>
@@ -78,7 +78,7 @@ function AddDocs () {
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label className="form-lable">Assigned Ward</label>
+                                    <label style={{fontSize:'14px'}} className="form-lable">Assigned Ward</label>
                                     <select className="form-control" name="status" >
                                         <option value="">--Select Assigned Ward--</option>
                                         <option value="1">Cardiology Ward o1</option>
