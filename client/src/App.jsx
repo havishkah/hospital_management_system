@@ -9,6 +9,7 @@ import { NavBar } from './Components/Navbar/NavBar'
 import { SideBar } from './Components/SideBar/SideBar'
 import { ViewDoctors } from './Components/doctors/ViewDoctors'
 import { DocPatientPrescrip } from './Components/doctors/DocPatientPrescrip'
+import { DocPatientHistoryd } from './Components/doctors/DocPatientHistoryd'
 
 
 
@@ -28,9 +29,10 @@ function App() {
       <Routes>
          <Route path='/admin' element={<AdminDashboard/>}></Route>
          <Route path='/alldoc' element={<ViewDoctors/>}></Route>
-         <Route path='/doc_pa_priscrip' element={<DocPatientPrescrip/>}></Route>
+         <Route path='/doc_pa_priscripd' element={<DocPatientPrescrip/>}></Route>
          <Route path='/adddoc' element={<AddDoc/>}></Route>
-        <Route path='/viewdocd' element={<ViewDocd/>}></Route>
+         <Route path='/viewdocd' element={<ViewDocd/>}></Route>
+         <Route path='/doc_pa_historyd' element={<DocPatientHistoryd/>}></Route>
       </Routes>
     </BrowserRouter>
   </div>
