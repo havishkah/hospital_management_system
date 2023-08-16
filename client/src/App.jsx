@@ -14,7 +14,8 @@ import { ViewPatients } from './Components/patients/ViewPatients'
 import { PatientPrescripd } from './Components/patients/PatientPrescripd'
 import { DocPatientHistory } from './Components/doctors/DocPatientHistory'
 import { AddPrescrip } from './Components/doctors/AddPrescrip'
-
+import Viewdocpde from './Components/doctors/ViewDoctorPDetail'
+import AddPatients from './Components/patients/AddPatient'
 
 function App() {
 
@@ -40,6 +41,9 @@ function App() {
          <Route path='/pa_prescripd' element={<PatientPrescripd/>}></Route>
          <Route path='/doc_pa_viewhistory' element={<DocPatientHistory/>}></Route>
          <Route path='/addprescrip' element={<AddPrescrip/>}></Route>
+        <Route path='/viewdocpde' element={<Viewdocpde/>}></Route>
+        <Route path='/addpatients' element={<AddPatients/>}></Route>
+
       </Routes>
     </BrowserRouter>
   </div>

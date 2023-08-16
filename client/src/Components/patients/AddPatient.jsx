@@ -1,19 +1,14 @@
 import React from 'react'
 
-function ViewDocDetail () {
+function AddDocs () {
   return (
 
 
       <main className="main-container">
                 <div className="row">
                     <div className="col-md-12">
-                    <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
-                    <h5>Doctor Details</h5>
-                    <button style={{marginLeft:'50px'}} type="submit" className="btn btn-danger text-white btn-lg">Delete</button> 
-                    </div>
-                   
+                    <h5 className="mt-2">Add Patients</h5>
                     <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
-                   
                     <form>
                         <div className="row">
                             <div className="col-md-6">
@@ -30,7 +25,7 @@ function ViewDocDetail () {
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Name with Initials</label>
+                                    <label style={{fontSize:'14px'}}className="form-lable">Name with Initials</label>
                                     <input type="text" name="phone" className="form-control" />
                                 </div>
                             </div>
@@ -49,6 +44,16 @@ function ViewDocDetail () {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Gender</label>
+                                    <select className="form-control" name="status" >
+                                        <option value="">--Select Gender--</option>
+                                        <option value="1">Male</option>
+                                        <option value="1">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{fontSize:'14px'}} className="form-lable">Age</label>
                                     <input type="text" name="address" className="form-control" />
                                 </div>
                             </div>
@@ -65,14 +70,43 @@ function ViewDocDetail () {
                                     <input type="text" name="address" className="form-control" />
                                 </div>
                             </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{fontSize:'14px'}} className="form-lable">Address</label>
+                                    <input type="text" name="address" className="form-control" />
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{fontSize:'14px'}} className="form-lable">Emergency Contact Number</label>
+                                    <input type="text" name="address" className="form-control" />
+                                </div>
+                            </div>
                             <p className="mt-3" style={{color:'grey'}}>Other Infromation</p>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{fontSize:'14px'}} className="form-lable">Doctor Name</label>
+                                    <select className="form-control" name="status" >
+                                        <option value="">--Select Doctor Name--</option>
+                                        <option value="1">Dr. Kamal</option>
+                                     
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{fontSize:'14px'}} className="form-lable">BHT No</label>
+                                    <input type="text" name="address" className="form-control" />
+                                </div>
+                            </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Ward Specialist</label>
                                     <select className="form-control" name="status" >
                                         <option value="">--Select Ward Specialist--</option>
-                                        <option value="1">Cardiology Specialist</option>
-                                        <option value="0">Cardiology Specialist</option>
+                                        <option value="1">Cardiology Ward 01</option>
+                                        <option value="1">Cardiology Ward 02</option>
+                                        <option value="1">Cardiology Ward 02</option>
                                     </select>
                                 </div>
                             </div>
@@ -81,9 +115,27 @@ function ViewDocDetail () {
                                     <label style={{fontSize:'14px'}} className="form-lable">Assigned Ward</label>
                                     <select className="form-control" name="status" >
                                         <option value="">--Select Assigned Ward--</option>
-                                        <option value="1">Cardiology Ward o1</option>
-                                        <option value="0">Cardiology Ward o2</option>
+                                        <option value="1">Cardiology Ward 01</option>
+                                        <option value="1">Cardiology Ward 02</option>
+                                        <option value="1">Cardiology Ward 02</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{fontSize:'14px'}} className="form-lable"> Ward Bed</label>
+                                    <select className="form-control" name="status" >
+                                        <option value="">--Select Ward Bed--</option>
+                                        <option value="1">Cardiology Ward 01</option>
+                                        <option value="1">Cardiology Ward 02</option>
+                                        <option value="1">Cardiology Ward 02</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{fontSize:'14px'}} className="form-lable">Diagnosis</label>
+                                    <textarea rows="4" cols="50" type="text" name="address" className="form-control" />
                                 </div>
                             </div>
                             
@@ -94,71 +146,17 @@ function ViewDocDetail () {
                         
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                {/* <label className="form-lable"></label> */}
-                                    <button style={{marginLeft:'280px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
+                                <label className="form-lable"></label>
+                                    <button style={{marginLeft:'320px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
                                     
-                                    <button type="submit" className="btn btn-primary btn-lg">Update</button>
+                                    <button type="submit" className="btn btn-primary btn-lg">Submit</button>
                                 </div>
                                
                             </div>
-                        
+
                         </div>
                     </form>
                     </div>
-
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div className="main-title">
-                     <h4>Dr kamals Patients</h4>
-                         </div>
-                    <div className="col-lg-3 mt-2 mb-2">
-                     <input style={{marginLeft:'715px'}} type="search" className="form-control"  placeholder="Search.."/>
-                    </div> <br />
-                    <div>
-
-        <table class="table" celled>
-                    <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Patient Name</th>
-                        <th scope="col">NIC</th>
-                        <th scope="col">Word Specialist</th>
-                        <th scope="col">Assigned Wards</th>
-                        <th scope="col">Status</th>
-                        <th scope="col"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                            <tr>
-                            <td>1</td>
-                            <td>Nimal</td>
-                            <td>999999999V</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 01</td>
-                            <td>Onboard</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>2</td>
-                            <td>Amal</td>
-                            <td>888888888V</td>
-                            <td>Cardiology Specialist</td>
-                            <td> Cardiology Ward 01</td>
-                            <td>Discharged</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
-
-
-                    </tbody>
-                </table>
-            </div>
-
                 </div>
             </main>
         
@@ -166,4 +164,4 @@ function ViewDocDetail () {
   )
 }
 
-export default ViewDocDetail
+export default AddDocs
