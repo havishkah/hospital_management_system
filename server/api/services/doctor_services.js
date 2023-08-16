@@ -30,11 +30,19 @@ const getDoctorByID = (iD) => {
   return Doctor.findOne({ _id: DoctorID });
 }
 
+const UpdateDoctorbyID = (id) => {
+  const DoctorID = id.trim();
+  return Doctor.findOneAndUpdate({_id:DoctorID},{
+    ...req.body
+  })
+}
+
 
 
    module.exports = {
     createDoctor,
     getAlldoctors,
     deleteDoctorrByID,
-    getDoctorByID
+    getDoctorByID,
+    UpdateDoctorbyID
   };
