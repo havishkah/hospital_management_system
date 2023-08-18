@@ -12,6 +12,7 @@ import Viewdocpde from './Components/doctors/ViewDoctorPDetail'
 import AddPatients from './Components/patients/AddPatient'
 import AddBeds from './Components/Beds/AddBeds'
 import ViewPatientDetail  from './Components/patients/ViewPatientDetail'
+import ViewDiagnosis from './Components/doctors/ViewDiagnosis'
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path='/addpatients' element={<AddPatients/>}></Route>
         <Route path='/addbeds' element={<AddBeds/>}></Route>
         <Route path='/viewpatientdetail' element={<ViewPatientDetail/>}></Route>
+        <Route path='/viewdiagnosis' element={<ViewDiagnosis/>}></Route>
       </Routes>
     </BrowserRouter>
   </div>
