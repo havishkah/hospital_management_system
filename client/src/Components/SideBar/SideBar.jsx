@@ -9,7 +9,7 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
       </div>
       <hr className="text-dark" />
       <div className='list-group list-group-flush'>
-          <a href="" className="list-group-item py-1">
+          <a href="/admin" className="list-group-item py-1">
             <small>Menu</small><br />
             <i class="fa-solid fa-house fs-6 me-3 my-2"></i>
             <span className='fs-6 my-2'>Dashboard</span>
@@ -17,26 +17,26 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
           <a href="" className="list-group-item py-3">
             <small>Manage Doctors</small><br />
             <i class="fa-solid fa-user-doctor fs-6 me-3 my-2"></i>
-            <a href="#" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Doctors</span></a>
+            <a href="/adddoc" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Doctors</span></a>
             <br />
             <i class="fa-solid fa-users fs-6 me-3 my-2"></i>
-            <a href="#" className='text-decoration-none text-black'><span className='fs-6'>View Doctors</span></a>
+            <a href="/alldoc" className='text-decoration-none text-black'><span className='fs-6'>View Doctors</span></a>
           </a>
           <a href="" className="list-group-item py-3">
             <small>Manage Patients</small><br />
             <i class="fa-solid fa-user-plus fs-6 me-3 my-2"></i>
-            <a href="#" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Patients</span></a>
+            <a href="/addpatients" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Patients</span></a>
             <br />
             <i class="fa-solid fa-user-group fs-6 me-3 my-2"></i>
-            <a href="#" className='text-decoration-none text-black'><span className='fs-6'>View Patients</span></a>
+            <a href="/allpatient" className='text-decoration-none text-black'><span className='fs-6'>View Patients</span></a>
           </a>
           <a href="" className="list-group-item py-3">
             <small>Manage Beds</small><br />
             <i class="fa-solid fa-bed-pulse fs-6 me-3 my-2"></i>
-            <a href="#" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Beds</span></a>
+            <a href="/addbeds" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Beds</span></a>
             <br />
             <i class="fa-solid fa-bed fs-6 me-3 my-2"></i>
-            <a href="#" className='text-decoration-none text-black'><span className='fs-6'>View Beds</span></a>
+            <a href="/allbed" className='text-decoration-none text-black'><span className='fs-6'>View Beds</span></a>
           </a>
           <a href="" className="list-group-item py-3">
             <small>Manage Drugs</small><br />
