@@ -1,3 +1,4 @@
+const apiErrorHandler = require("./utilities/Error/errorHandler");
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -23,9 +24,11 @@ mongoose.connect(DB_URL)
 
 // Import route files
 const adminDashboardRoutes = require('./api/routes/adminDashboardRoutes');
+const doctorRoutes = require('./api/routes/doctor_routes')
 
 // Use main routes file
 app.use('/api/adminDashboard', adminDashboardRoutes);
+app.use('/api/doctor', doctorRoutes);
 
 app.listen(port, ()=>{
     console.log('App is running on:',{port})

@@ -38,7 +38,7 @@ const createDoctor = async (req, res, next)=>{
       response
         .then((data) => {
           if (!data) {
-            next(ApiError.notCreated(`User not created.`));
+            next(ApiError.notCreated(`Doctor is not created.`));
             return;
           }
           res.status(200).send({ message: "User registered successfully!" });
@@ -73,8 +73,16 @@ const getDoctor = (req,res,next) =>{
   }
 
   const response = getDoctorByID();
+  response
+  .then((data) => {
+    if(!data){
+      next(ApiError.notFound('Doctor details not found'));
+      return;
+    }
+    res.status(200).send({data: data})
+  });
   
-}
+};
 
 
 const deleteDoctorr = (req,res,next) =>{
@@ -109,5 +117,6 @@ module.exports ={
   createDoctor: createDoctor,
   getAlldoctors: getAlldoctordetails,
   deleteDoctor: deleteDoctorr,
-  updatedoctor: updateDoctorbyID
+  updatedoctor: updateDoctorbyID,
+  getDoctor: getDoctor
 }

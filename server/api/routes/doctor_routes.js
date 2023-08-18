@@ -4,18 +4,18 @@ const{
     createDoctor,
   getAlldoctors,
   deleteDoctor,
-  updatedoctor
+  updatedoctor,
+  getDoctor
 } = require("../Controllers/doctorController");
-const { getDoctorByID } = require('../services/doctor_services');
 
-router.get('/doctor', getAlldoctors)
+router.get('/', getAlldoctors)
 
-router.get('/doctor/:id', getDoctorByID)
+router.get('/:id', getDoctor)
 
-router.post('/doctor', createDoctor)
+router.post('/', createDoctor)
 
-router.patch('/doctor/:id',updatedoctor)
+router.patch('/:id',updatedoctor)
 
-router.delete('/doctor/:id',deleteDoctor)
+router.delete('/:id',deleteDoctor)
 
 module.exports = router
