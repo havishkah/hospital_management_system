@@ -7,7 +7,7 @@ import doctor from '../../assets/doctor.png'
 export const AdminDashboard = () => {
 
   const [dashboardData, setDashboardData] = useState([]);
-  const service=new Service ();
+  const service=new Service();
   useEffect(() => {
     const respone = service.get ('adminDashboard/data') 
     respone.then((response) => {
