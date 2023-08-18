@@ -9,7 +9,7 @@ function ViewDocDetail () {
                     <div className="col-md-12">
                     <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
                     <h5>Doctor Details</h5>
-                    <button style={{marginLeft:'50px'}} type="submit" className="btn btn-danger text-white btn-lg">Delete</button> 
+                    <button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-danger text-white btn-lg">Delete</button> 
                     </div>
                    
                     <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
@@ -95,9 +95,9 @@ function ViewDocDetail () {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                 {/* <label className="form-lable"></label> */}
-                                    <button style={{marginLeft:'280px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
+                                    <button style={{marginLeft:'280px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
                                     
-                                    <button type="submit" className="btn btn-primary btn-lg">Update</button>
+                                    <button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary btn-lg">Update</button>
                                 </div>
                                
                             </div>

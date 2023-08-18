@@ -9,7 +9,7 @@ function AddDocs () {
                     <div className="col-md-12">
                     <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
                     <h5>Dr.Kamals Patient Details</h5>
-                    <button style={{marginLeft:'50px'}} type="submit" className="btn btn-danger text-white btn-lg">Discharge</button> 
+                    <button style={{marginLeft:'50px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-danger text-white btn-lg">Discharge</button> 
                     </div>
                    
                     <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
@@ -124,9 +124,9 @@ function AddDocs () {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                 {/* <label className="form-lable"></label> */}
-                                    <button style={{marginLeft:'30px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">View Patient History</button> &nbsp;
+                                    <button style={{marginLeft:'120px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">View Patient History</button> &nbsp;
                                     
-                                    <button type="submit" className="btn btn-primary btn-lg">View Diagonosis Report</button>
+                                    <button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary btn-lg">View Diagonosis Report</button>
                                 </div>
                                
                             </div>

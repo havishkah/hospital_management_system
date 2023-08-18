@@ -33,7 +33,7 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
           <a href="" className="list-group-item py-3">
             <small>Manage Beds</small><br />
             <i class="fa-solid fa-bed-pulse fs-6 me-3 my-2"></i>
-            <a href="#" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Beds</span></a>
+            <a href="/addbeds" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Beds</span></a>
             <br />
             <i class="fa-solid fa-bed fs-6 me-3 my-2"></i>
             <a href="/allbed" className='text-decoration-none text-black'><span className='fs-6'>View Beds</span></a>
