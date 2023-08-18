@@ -8,7 +8,8 @@ import { SideBar } from './Components/SideBar/SideBar'
 import { ViewDoctors } from './Components/doctors/ViewDoctors'
 import { DoctorDashboard } from './Components/doctors/DoctorDashboard'
 import { PatientDashboard } from './Components/patients/PatientDashboard'
-
+import  AddDrugs  from './Components/Drugs/AddDrugs'
+import PatientDiognosis from './Components/patients/PatientDiognosis'
 
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
          <Route path='/alldoc' element={<ViewDoctors/>}></Route>
          <Route path='/doctor' element={<DoctorDashboard/>}></Route>
          <Route path='/patientdashboard' element={<PatientDashboard/>}></Route>
+         <Route path='/adddrugs' element={<AddDrugs/>}></Route>
+         <Route path='/patientdiognosis' element={<PatientDiognosis/>}></Route>
       </Routes>
     </BrowserRouter>
   </div>
