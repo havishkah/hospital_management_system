@@ -20,6 +20,7 @@ import { ViewBeds } from './Components/Beds/ViewBeds'
 import { MedicalReport } from './Components/patients/MedicalReport'
 import AddBeds from './Components/Beds/AddBeds'
 import ViewPatientDetail  from './Components/patients/ViewPatientDetail'
+import { ViewDrugs } from './Components/Drugs/ViewDrugs'
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
          <Route path='/medical_rprt' element={<MedicalReport/>}></Route>
          <Route path='/addbeds' element={<AddBeds/>}></Route>
          <Route path='/viewpatientdetail' element={<ViewPatientDetail/>}></Route>
+         <Route path='/alldrug' element={<ViewDrugs/>}></Route>
       </Routes>
     </BrowserRouter>
   </div>

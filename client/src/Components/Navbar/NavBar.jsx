@@ -1,5 +1,5 @@
 import React from 'react'
-import {BsPersonCircle, BsSearch, BsJustify} from 'react-icons/bs'
+import {BsSearch, BsJustify, BsPersonCircle} from 'react-icons/bs'
 
 export const NavBar = ({OpenSidebar}) => {
   return (

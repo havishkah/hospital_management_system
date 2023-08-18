@@ -44,7 +44,7 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
             <a href="#" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Drugs</span></a>
             <br />
             <i class="fa-solid fa-pills fs-6 me-3 my-2"></i>
-            <a href="#" className='text-decoration-none text-black'><span className='fs-6'>View Drugs</span></a>
+            <a href="/alldrug" className='text-decoration-none text-black'><span className='fs-6'>View Drugs</span></a>
           </a>
       </div>
     </aside>
