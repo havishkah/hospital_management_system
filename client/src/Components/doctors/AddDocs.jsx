@@ -91,9 +91,9 @@ function AddDocs () {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                 <label className="form-lable"></label>
-                                    <button style={{marginLeft:'320px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
+                                    <button style={{marginLeft:'320px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
                                     
-                                    <button type="submit" className="btn btn-primary btn-lg">Submit</button>
+                                    <button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary btn-lg">Submit</button>
                                 </div>
                                
                             </div>

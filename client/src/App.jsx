@@ -10,6 +10,8 @@ import { SideBar } from './Components/SideBar/SideBar'
 import { ViewDoctors } from './Components/doctors/ViewDoctors'
 import Viewdocpde from './Components/doctors/ViewDoctorPDetail'
 import AddPatients from './Components/patients/AddPatient'
+import AddBeds from './Components/Beds/AddBeds'
+import ViewPatientDetail  from './Components/patients/ViewPatientDetail'
 
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
         <Route path='/viewdocd' element={<ViewDocd/>}></Route>
         <Route path='/viewdocpde' element={<Viewdocpde/>}></Route>
         <Route path='/addpatients' element={<AddPatients/>}></Route>
+        <Route path='/addbeds' element={<AddBeds/>}></Route>
+        <Route path='/viewpatientdetail' element={<ViewPatientDetail/>}></Route>
       </Routes>
     </BrowserRouter>
   </div>
