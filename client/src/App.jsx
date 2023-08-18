@@ -8,6 +8,10 @@ import { AdminDashboard } from './Components/AdminDashboard/AdminDashboard'
 import { NavBar } from './Components/Navbar/NavBar'
 import { SideBar } from './Components/SideBar/SideBar'
 import { ViewDoctors } from './Components/doctors/ViewDoctors'
+import { DoctorDashboard } from './Components/doctors/DoctorDashboard'
+import { PatientDashboard } from './Components/patients/PatientDashboard'
+import AddDrugs from './Components/drugs/AddDrugs'
+import PatientDiognosis from './Components/patients/PatientDiognosis'
 import { DocPatientPrescrip } from './Components/doctors/DocPatientPrescrip'
 import { DocPatientHistoryd } from './Components/doctors/DocPatientHistoryd'
 import { ViewPatients } from './Components/patients/ViewPatients'
@@ -21,6 +25,7 @@ import { MedicalReport } from './Components/patients/MedicalReport'
 import AddBeds from './Components/Beds/AddBeds'
 import ViewPatientDetail  from './Components/patients/ViewPatientDetail'
 import { ViewDrugs } from './Components/Drugs/ViewDrugs'
+
 
 
 function App() {
@@ -39,6 +44,10 @@ function App() {
       <Routes>
          <Route path='/admin' element={<AdminDashboard/>}></Route>
          <Route path='/alldoc' element={<ViewDoctors/>}></Route>
+         <Route path='/doctor' element={<DoctorDashboard/>}></Route>
+         <Route path='/patientdashboard' element={<PatientDashboard/>}></Route>
+         <Route path='/adddrugs' element={<AddDrugs/>}></Route>
+         <Route path='/patientdiognosis' element={<PatientDiognosis/>}></Route>
          <Route path='/doc_pa_priscripd' element={<DocPatientPrescrip/>}></Route>
          <Route path='/adddoc' element={<AddDoc/>}></Route>
          <Route path='/viewdocd' element={<ViewDocd/>}></Route>

@@ -219,3 +219,15 @@ small{
     display: none;
   }
 }
+
+.artical1{
+
+    float: left;
+    padding: 20px;
+    width: 60%;
+    background-color: hsl(117, 83%, 91%);
+    border-color: rgb(31, 176, 21);
+    width: 310px;
+    height:250px;
+}
+
