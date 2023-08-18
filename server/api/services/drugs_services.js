@@ -1,4 +1,4 @@
-const Drugs = require('../models/drugs')
+const Drug = require('../models/drugs');
 
 const createDrugs = (data) =>{
     let drugName =data.drugName;
@@ -11,11 +11,36 @@ const createDrugs = (data) =>{
         qty
     });
 
-    return drugs.save();
+    return Drugs.save();
 
 }
 
+const getDrugs =() =>{
+    return Drug.find();
+}
+
+const deleteDrugByID = (drugId) => {
+    let id = drugId;
+    return Drug.deleteOne({ _id: id });
+  };
+  
+  const getDrugByID = (iD) => {
+    const DrugID = iD.trim();
+    return Drug.findOne({ _id: DrugID });
+  }
+  
+  const UpdateDoctorbyID = (id) => {
+    const DrugID = id.trim();
+    
+    return Doctor.findOneAndUpdate({_id:DrugID},{
+      ...req.body
+    })
+  }
+
 module.exports = {
     createDrugs,
-    
+    getDrugs,
+    deleteDrugByID,
+    getDrugByID,
+    UpdateDoctorbyID
   };
