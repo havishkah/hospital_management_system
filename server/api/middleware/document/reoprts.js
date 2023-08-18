@@ -6,9 +6,9 @@ var storage = multer.diskStorage({
     cb(null, "documents/profile_images");
   },
   filename: function (req, file, cb) {
-      let nic = req.params.nic;
+      let pid = req.params.pid;
       let ext = path.extname(file.originalname);
-      let fileName = nic.trim();
+      let fileName = pid.trim();
     cb(null, fileName + ext);
   },
 });
