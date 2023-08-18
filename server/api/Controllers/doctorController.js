@@ -66,10 +66,17 @@ const getAlldoctordetails = (req,res,next) =>{
 };
 
 const getDoctor = (req,res,next) =>{
+  const id = req.params.id;
+  if (!id) {
+    next(ApiError.notFound("Doctor ID required"));
+    return;
+  }
 
+  const response = getDoctorByID();
   
-
 }
+
+
 const deleteDoctorr = (req,res,next) =>{
   const id = req.params.id;
   if (!id) {
