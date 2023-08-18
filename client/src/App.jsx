@@ -16,6 +16,8 @@ import { DocPatientHistory } from './Components/doctors/DocPatientHistory'
 import { AddPrescrip } from './Components/doctors/AddPrescrip'
 import Viewdocpde from './Components/doctors/ViewDoctorPDetail'
 import AddPatients from './Components/patients/AddPatient'
+import { ViewBeds } from './Components/Beds/ViewBeds'
+import { MedicalReport } from './Components/patients/MedicalReport'
 
 function App() {
 
@@ -41,9 +43,10 @@ function App() {
          <Route path='/pa_prescripd' element={<PatientPrescripd/>}></Route>
          <Route path='/doc_pa_viewhistory' element={<DocPatientHistory/>}></Route>
          <Route path='/addprescrip' element={<AddPrescrip/>}></Route>
-        <Route path='/viewdocpde' element={<Viewdocpde/>}></Route>
-        <Route path='/addpatients' element={<AddPatients/>}></Route>
-
+         <Route path='/viewdocpde' element={<Viewdocpde/>}></Route>
+         <Route path='/addpatients' element={<AddPatients/>}></Route>
+         <Route path='/allbed' element={<ViewBeds/>}></Route>
+         <Route path='/medical_rprt' element={<MedicalReport/>}></Route>
       </Routes>
     </BrowserRouter>
   </div>
