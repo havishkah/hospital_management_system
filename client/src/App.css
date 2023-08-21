@@ -24,7 +24,7 @@ body {
 .icon {
   vertical-align: middle;
   line-height: 1px;
-  font-size: 25px;
+  font-size: 20px;
 }
 .icon_navbar {
   vertical-align: middle;
@@ -32,7 +32,7 @@ body {
   font-size: 26px;
 }
 .icon, .icon_navbar {
-  margin-right: 5px;
+  margin-right: 25px;
 }
 
 /* Navbar */
@@ -48,6 +48,30 @@ body {
 
 .menu-icon {
   display: none;
+}
+
+.dropDownProfile{
+  position: absolute;
+  top: 3rem;
+  right: 1rem;
+  width: 100px;
+  padding: 3px;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid grey;
+}
+
+.dropDownProfile::before{
+  content: '';
+  position: absolute;
+  /* top: -0.7rem; */
+  /* right: 1.1rem; */
+  width: 20px;
+  height: 1px;
+  background-color: white;
+  /* transform: rotate(180deg); */
+  border-left: 1px solid grey;
+  border-top: 1px solid grey;
 }
 /* End navbar */
 
