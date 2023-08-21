@@ -62,10 +62,30 @@ const getAllDrugs = (req,res,next) =>{
   
   };
 
+  const getDrug = (req,res,next) =>{
+    const id = req.params.id;
+    if (!id) {
+      next(ApiError.notFound("Doctor ID required"));
+      return;
+    }
+  
+    const response = getDrugByID();
+    response
+    .then((data) => {
+      if(!data){
+        next(ApiError.notFound('Drug details not found'));
+        return;
+      }
+      res.status(200).send({data: data})
+    });
+    
+  };
+
 
 
 
 module.exports ={
     createDrugs: createaDrug,
     getDrugs: getAllDrugs,
+    getDrug: getDrug,
 };
