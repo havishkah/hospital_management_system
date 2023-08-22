@@ -1,4 +1,4 @@
-const apiErrorHandler = require("./utilities/Error/errorHandler");
+const apiErrorHandler = require("./utilities/Errors/errorHandler");
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
