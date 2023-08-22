@@ -1,122 +1,104 @@
-const ApiError = require("../../utilities/Errors/errors");
+//const ApiError = require("../../utilities/Errors/errors");
+const mongoose = require('mongoose')
+const Doctor = require('../models/doctor');
+//const {
+  //  createDoctor,
+  //  getAlldoctors,
+  //  deleteDoctorrByID,
+  //  getDoctorByID,
+  //  updateDoctorbyID,
+//} = require('../services/doctor_services');
 
-const {
-    createDoctor,
-    getAlldoctors,
-    deleteDoctorrByID,
-    getDoctorByID
-
-} = require('../services/doctor_services');
-
-const createDoctor = async (req, res, next)=>{
-    const data = req.body;
-
-    if(
-        !data.name||
-        !data.nic||
-        !data.contact||
-        !data.email||
-        !data
-    ){
-      next(
-        ApiError.notFound(
-          "User's name, nic, conact and email required"
-        )
-      );
-      return;
-    }
-    
-    const newValues = {
-        fulName: data.name,
-        Nic: data.nic,
-        email: data.email,
-        contact: data.contact,
-        
-      };
-    
-      const response = createDoctor(newValues);
-      response
-        .then((data) => {
-          if (!data) {
-            next(ApiError.notCreated(`Doctor is not created.`));
-            return;
-          }
-          res.status(200).send({ message: "User registered successfully!" });
-        })
-        .catch((err) => {
-          next(err);
-        });
-};
-
-const getAlldoctordetails = (req,res,next) =>{
-  const response = getAlldoctors();
-  response
-  .then((data) => {
-    if(!data){
-      next(ApiError.notFound('Doctor Details not found'));
-      return;
+const createaDoctor = (req, res)=>{
+  try {
+    data = req.body
+  
+  let fullName = data.fullName;
+    let nic = data.nic;
+    let email = data.email;
+    let contact = data.contact;
+  
+    const doctor = new Doctor({
+      fullName,
+      email,
+      nic,
+      contact
+     
+    });
+    return doctor.save().then(()=>{
+      res.json(200)
+    })
+  } catch (error) {
+    res.status(500).json(error)
   }
-  res.status(200).send({ data: data });
+}
 
-})
-.catch((err) => {
-  next(err);
-});
 
-};
+const getAlldoctordetails = async(req,res)=>{
+  const doctor = await Doctor.find({})
+  res.status(200).json(doctor)
+}
 
-const getDoctor = (req,res,next) =>{
-  const id = req.params.id;
-  if (!id) {
-    next(ApiError.notFound("Doctor ID required"));
-    return;
-  }
 
-  const response = getDoctorByID();
-  response
-  .then((data) => {
-    if(!data){
-      next(ApiError.notFound('Doctor details not found'));
-      return;
+const getDoctor = async (req,res) =>{
+
+ const { id }= req.params
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error:'No such workout'})
     }
-    res.status(200).send({data: data})
-  });
+
+    const doctor = await Doctor.findbyid(id)
+
+    if(!doctor){
+        return res.status(404).json({error:'No such workout'})
+    }
+
+    res.status(200).json(doctor)    
+   
   
 };
 
 
-const deleteDoctorr = (req,res,next) =>{
-  const id = req.params.id;
-  if (!id) {
-    next(ApiError.notFound("Doctor ID required"));
-    return;
+const deleteDoctorr = async (req,res) =>{
+  const { id } = req.params
+
+  if(!mongoose.Types.ObjectId.isValid(id)){
+      return res.status(404).json({error:'No such Doctor details'})
   }
 
-  const response = deleteDoctorrByID(id);
-  response
-    .then((data) =>{
-      if(!data.acknowledged==true){
-        next(ApiError.notFound(`Doctor details not found`));
-        return;
-      }
-      if(data.deletedCout == 0){
-        res.status(200).send({message:"User already deleted!"});
-        return;
-      }
-    })
-    .catch((err)=>{
-      next(err);
-    })
+  const doctor = await Doctor.findOneAndDelete({_id:id})
+
+  if(!doctor){
+      return res.status(404).json({error:'No such Doctor details'})
+  }
+
+  res.status(200).json(doctor)  
+
 }
 
-const updateDoctorbyID = (req,res,next) =>{
+const updateaDoctorbyID = async (req,res) =>{
+  const { id } = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error:'No such workout'})
+    }
+
+    const doctor = await Doctor.findOneAndUpdate({_id:id},{
+        ...req.body
+    })
+
+    if(!doctor){
+        return res.status(404).json({error:'No such workout'})
+    }
+
+    res.status(200).json(doctor)
 
 }
 
 module.exports ={
-  createDoctor: createDoctor,
+  createDoctor: createaDoctor,
   getAlldoctors: getAlldoctordetails,
   deleteDoctor: deleteDoctorr,
-  updatedoctor: updateDoctorbyID,
+  updatedoctor: updateaDoctorbyID,
   getDoctor: getDoctor
 }

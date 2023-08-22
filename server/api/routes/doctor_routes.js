@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.router();
+const router = express.Router();
 const{
     createDoctor,
   getAlldoctors,
@@ -12,7 +12,7 @@ router.get('/', getAlldoctors)
 
 router.get('/:id', getDoctor)
 
-router.post('/', createDoctor)
+router.post('/add', createDoctor)
 
 router.patch('/:id',updatedoctor)
 

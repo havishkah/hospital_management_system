@@ -1,71 +1,83 @@
-const ApiError = require("../../utilities/Errors/errors");
+const mongoose = require('mongoose')
+const Doctor = require('../models/doctor');
 
-const {
-    createDrugs,
-    getDrugs,
-    getDrugByID,
-    UpdateDoctorbyID,
-    deleteDrugByID
-} = require('../services/drugs_services');
+const createaDrug = async (req, res)=>{
+  const {name, type, qty} = req.body
 
-const createaDrug = async (res,req,next) =>{
+  try {
+      const drugs = await Drug.create({name, type, qty}) 
+      res.status(200).json(drugs)
+  } catch (err) {
+      res.status(400)
+  }
+}
 
-    const data = req.body;
 
-    if(
-        !data.drugname,
-        !data.type,
-        !data.qty,
-        !data
-    ){
-        next(
-            ApiError("required to fill all the fields")
-        );
-        return;
+const getAlldoctordetails = async(req,res)=>{
+  const drugs = await Drug.find({})
+  res.status(200).json(doctor)
+}
+
+
+const getDoctor = async (req,res) =>{
+
+ const { id }= req.params
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error:'No such workout'})
     }
 
-    const newValues = {
-        drugname:data.drugname,
-        type:data.type,
-        qty:data.qty
-    };
+    const doctor = await Doctor.findById(id)
 
-    const response = createDrugs(newValues);
-        response
-            .then((data) => {
-                if (!data) {
-                  next(ApiError.notCreated(`Doctor is not created.`));
-                  return;
-                }
-                res.status(200).send({ message: "User registered successfully!" });
-              })
-              .catch((err) => {
-                next(err);
-              });       
-    
+    if(!doctor){
+        return res.status(404).json({error:'No such workout'})
+    }
+
+    res.status(200).json(doctor)    
+   
+  
 };
 
-const getAllDrugs = (req,res,next) =>{
-    const response = getDrugs();
-    response
-    .then((data) => {
-      if(!data){
-        next(ApiError.notFound('Doctor Details not found'));
-        return;
+
+const deleteDoctorr = async (req,res) =>{
+  const { id } = req.params
+
+  if(!mongoose.Types.ObjectId.isValid(id)){
+      return res.status(404).json({error:'No such Doctor details'})
+  }
+
+  const doctor = await Doctor.findOneAndDelete({_id:id})
+
+  if(!doctor){
+      return res.status(404).json({error:'No such Doctor details'})
+  }
+
+  res.status(200).json(doctor)  
+
+}
+
+const updateaDoctorbyID = async (req,res) =>{
+  const { id } = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error:'No such workout'})
     }
-    res.status(200).send({ data: data });
-  
-  })
-  .catch((err) => {
-    next(err);
-  });
-  
-  };
 
+    const doctor = await Doctor.findOneAndUpdate({_id:id},{
+        ...req.body
+    })
 
+    if(!doctor){
+        return res.status(404).json({error:'No such workout'})
+    }
 
+    res.status(200).json(doctor)
+
+}
 
 module.exports ={
-    createDrugs: createaDrug,
-    getDrugs: getAllDrugs,
-};
+  createDoctor: createaDrug,
+  getAlldoctors: getAlldoctordetails,
+  deleteDoctor: deleteDoctorr,
+  updatedoctor: updateaDoctorbyID,
+  getDoctor: getDoctor
+}
