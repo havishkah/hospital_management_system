@@ -38,8 +38,8 @@ function App() {
   return (
     <div className='grid-container'>
     <BrowserRouter>
-     <NavBar OpenSidebar={OpenSidebar}/>
-     <SideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar}/>
+      <NavBar OpenSidebar={OpenSidebar}/>
+     <SideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar}/> 
       <Routes>
          <Route path='/admin' element={<AdminDashboard/>}></Route>
          <Route path='/alldoc' element={<ViewDoctors/>}></Route>
