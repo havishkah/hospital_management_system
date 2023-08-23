@@ -1,20 +1,76 @@
-//const ApiError = require("../../utilities/Errors/errors");
-const mongoose = require('mongoose')
-const Doctor = require('../models/doctor');
-const { escapeLeadingUnderscores } = require('typescript');
-//const {
-  //  createDoctor,
-  //  getAlldoctors,
-  //  deleteDoctorrByID,
-  //  getDoctorByID,
-  //  updateDoctorbyID,
-//} = require('../services/doctor_services');
 
-const createaDoctor = (req, res,next)=>{
+const ApiError = require("../../utilities/Errors/errors");
+const mongoose = require("mongoose");
+const Doctor = require("../models/doctor");
+const {
+    verifyInputs,
+    validateInputs,
+} = require("../../utilities/data_validation")
+
+const createaDoctor = (req, res) => {
   try {
-    const data = req.body
-    console.log(data)
-  
+    data = req.body;
+
+    const verifiedResult = verifyInputs(
+
+      [
+
+        "firstName",
+        "lastName",
+        "initials",
+        "Dob",
+        "Gender",
+        "nic",
+        "contact",
+        "email",
+        "specialist",
+      ],
+
+      data
+
+    );
+
+    if (verifiedResult == false) {
+
+      next(
+        ApiError.badRequest(
+
+          "The request parameters are not properly formatted or are missing required fields."
+
+        )
+
+      );
+
+      return;
+
+    }
+    const validatedResult = validateInputs(
+
+      [
+        "firstName",
+        "lastName",
+        "initials",
+        "Dob",
+        "Gender",
+        "nic",
+        "contact",
+        "email",
+        "specialist",
+      ],
+
+      data
+
+    );
+
+    if (validatedResult == false) {
+
+      next(ApiError.badRequest("The request is missing required data."));
+
+      return;
+
+    }
+    console.log(data);
+   
     const doctor = new Doctor({
       firstName:data.firstName,
       lastName:data.lastName,
@@ -37,74 +93,69 @@ const createaDoctor = (req, res,next)=>{
   } catch (error) {
     next(error);
   }
-}
-
-
-const getAlldoctordetails = async(req,res)=>{
-  const doctor = await Doctor.find({})
-  res.status(200).json(doctor)
-}
-
-
-const getDoctor = async (req,res) =>{
-
- const { id }= req.params
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error:'No such workout'})
-    }
-
-    const doctor = await Doctor.findbyid(id)
-
-    if(!doctor){
-        return res.status(404).json({error:'No such workout'})
-    }
-
-    res.status(200).json(doctor)    
-   
-  
 };
 
+const getAlldoctordetails = async (req, res) => {
+  const doctor = await Doctor.find({});
+  res.status(200).json(doctor);
+};
 
-const deleteDoctorr = async (req,res) =>{
-  const { id } = req.params
-
-  if(!mongoose.Types.ObjectId.isValid(id)){
-      return res.status(404).json({error:'No such Doctor details'})
+const getDoctor = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such workout" });
   }
 
-  const doctor = await Doctor.findOneAndDelete({_id:id})
+  const doctor = await Doctor.findbyid(id);
 
-  if(!doctor){
-      return res.status(404).json({error:'No such Doctor details'})
+  if (!doctor) {
+    return res.status(404).json({ error: "No such workout" });
   }
 
-  res.status(200).json(doctor)  
+  res.status(200).json(doctor);
+};
 
-}
+const deleteDoctorr = async (req, res) => {
+  const { id } = req.params;
 
-const updateaDoctorbyID = async (req,res) =>{
-  const { id } = req.params
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Doctor details" });
+  }
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error:'No such workout'})
+  const doctor = await Doctor.findByIdAndDelete({ _id: id });
+
+  if (!doctor) {
+    return res.status(404).json({ error: "No such Doctor details" });
+  }
+
+  res.status(200).json(doctor);
+};
+
+const updateaDoctorbyID = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such workout" });
+  }
+
+  const doctor = await Doctor.findByIdAndUpdate(
+    { _id: id },
+    {
+      ...req.body,
     }
+  );
 
-    const doctor = await Doctor.findOneAndUpdate({_id:id},{
-        ...req.body
-    })
+  if (!doctor) {
+    return res.status(404).json({ error: "No such workout" });
+  }
 
-    if(!doctor){
-        return res.status(404).json({error:'No such workout'})
-    }
+  res.status(200).json(doctor);
+};
 
-    res.status(200).json(doctor)
-
-}
-
-module.exports ={
+module.exports = {
   createDoctor: createaDoctor,
   getAlldoctors: getAlldoctordetails,
   deleteDoctor: deleteDoctorr,
   updatedoctor: updateaDoctorbyID,
-  getDoctor: getDoctor
-}
+  getDoctor: getDoctor,
+};
