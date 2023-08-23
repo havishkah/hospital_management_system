@@ -1,20 +1,38 @@
 const mongoose = require('mongoose')
 const Doctor = require('../models/doctor');
 
-const createaDrug = async (req, res)=>{
-  const {name, type, qty} = req.body
-
+const createaDoctor = (req, res)=>{
   try {
-      const drugs = await Drug.create({name, type, qty}) 
-      res.status(200).json(drugs)
-  } catch (err) {
-      res.status(400)
+    data = req.body
+  
+    let firstName = data.firstName;
+    let lastName = data.lastName;
+    let dob = data.Dob;
+    let gender = data.Gender
+    let nic = data.nic;
+    let contact = data.contact;
+  
+    const doctor = new Doctor({
+      firstName,
+      lastName,
+      dob,
+      gender,
+      email,
+      nic,
+      contact
+     
+    });
+    return doctor.save().then(()=>{
+      res.json(200)
+    })
+  } catch (error) {
+    res.status(500).json(error)
   }
 }
 
 
 const getAlldoctordetails = async(req,res)=>{
-  const drugs = await Drug.find({})
+  const doctor = await Doctor.find({})
   res.status(200).json(doctor)
 }
 
@@ -26,7 +44,7 @@ const getDoctor = async (req,res) =>{
         return res.status(404).json({error:'No such workout'})
     }
 
-    const doctor = await Doctor.findById(id)
+    const doctor = await Doctor.findbyid(id)
 
     if(!doctor){
         return res.status(404).json({error:'No such workout'})
@@ -75,7 +93,7 @@ const updateaDoctorbyID = async (req,res) =>{
 }
 
 module.exports ={
-  createDoctor: createaDrug,
+  createDoctor: createaDoctor,
   getAlldoctors: getAlldoctordetails,
   deleteDoctor: deleteDoctorr,
   updatedoctor: updateaDoctorbyID,
