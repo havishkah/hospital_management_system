@@ -14,12 +14,19 @@ const createaDoctor = (req, res)=>{
     data = req.body
   
    let fullName = data.fullName;
+    let firstName = data.firstName;
+    let lastName = data.lastName;
+    let initials = data.initials;
+    let dob = data.Dob;
+    let gender = data.Gender
     let nic = data.nic;
-    let email = data.email;
     let contact = data.contact;
   
     const doctor = new Doctor({
-      fullName,
+      firstName,
+      lastName,
+      dob,
+      gender,
       email,
       nic,
       contact

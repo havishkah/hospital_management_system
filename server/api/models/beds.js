@@ -14,5 +14,4 @@ const bedSchema = new mongoose.Schema({
 });
 
 const Bed = new mongoose.model("bed", bedSchema);
-
 module.exports = Bed;
