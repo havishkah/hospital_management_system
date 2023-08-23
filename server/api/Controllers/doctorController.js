@@ -13,7 +13,7 @@ const createaDoctor = (req, res)=>{
   try {
     data = req.body
   
-  let fullName = data.fullName;
+   let fullName = data.fullName;
     let nic = data.nic;
     let email = data.email;
     let contact = data.contact;
