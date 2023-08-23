@@ -12,6 +12,7 @@ app.use(cors());
 // Middleware
 app.use(bodyParser.json());
 
+
 const port = process.env.PORT || 5000;
 const DB_URL=process.env.DB_URL;
 
@@ -29,7 +30,8 @@ const doctorRoutes = require('./api/routes/doctor_routes')
 // Use main routes file
 app.use('/api/adminDashboard', adminDashboardRoutes);
 app.use('/api/doctor', doctorRoutes);
-
+//Error handle function
+app.use(apiErrorHandler);
 app.listen(port, ()=>{
     console.log('App is running on:',{port})
 });

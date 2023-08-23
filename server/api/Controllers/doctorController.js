@@ -1,6 +1,7 @@
 //const ApiError = require("../../utilities/Errors/errors");
 const mongoose = require('mongoose')
 const Doctor = require('../models/doctor');
+const { escapeLeadingUnderscores } = require('typescript');
 //const {
   //  createDoctor,
   //  getAlldoctors,
@@ -9,34 +10,32 @@ const Doctor = require('../models/doctor');
   //  updateDoctorbyID,
 //} = require('../services/doctor_services');
 
-const createaDoctor = (req, res)=>{
+const createaDoctor = (req, res,next)=>{
   try {
-    data = req.body
-  
-   let fullName = data.fullName;
-    let firstName = data.firstName;
-    let lastName = data.lastName;
-    let initials = data.initials;
-    let dob = data.Dob;
-    let gender = data.Gender
-    let nic = data.nic;
-    let contact = data.contact;
+    const data = req.body
+    console.log(data)
   
     const doctor = new Doctor({
-      firstName,
-      lastName,
-      dob,
-      gender,
-      email,
-      nic,
-      contact
+      firstName:data.firstName,
+      lastName:data.lastName,
+      initials:data.initials,
+      Dob:data.Dob,
+      email:data.email,
+      Gender:data.Gender,
+      nic:data.nic,
+      contact:data.contact,
+      specialist:data.specialist,
+      ward:data.ward
      
     });
-    return doctor.save().then(()=>{
+    doctor.save().then(()=>{
       res.json(200)
+    }).catch((e) => {
+       console.log(e)
+       next(e)
     })
   } catch (error) {
-    res.status(500).json(error)
+    next(error);
   }
 }
 

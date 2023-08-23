@@ -24,6 +24,7 @@ const doctorSchema = new mongoose.Schema({
     nic:{
         type:String,
         required:true,
+        unique:true
     },
     email:{
         type:String,
@@ -33,6 +34,14 @@ const doctorSchema = new mongoose.Schema({
         type:Number,
         required:true,
     },
+    specialist:{
+        type:String,
+        required:true
+    },
+    ward:{
+        type:String,
+        required:true
+    }
     
 });
 
