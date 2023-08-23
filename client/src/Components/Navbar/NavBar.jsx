@@ -1,7 +1,11 @@
-import React from 'react'
-import {BsPersonCircle, BsSearch, BsJustify} from 'react-icons/bs'
+import React, { useState } from 'react'
+import {BsSearch, BsJustify, BsPersonCircle} from 'react-icons/bs'
+import { ProfileDropdown } from './ProfileDropdown'
 
 export const NavBar = ({OpenSidebar}) => {
+
+  const[openProfile,setOpenProfile] = useState(false);
+
   return (
     <header className='navbar'>
       <div className="menu-icon">
@@ -11,8 +15,15 @@ export const NavBar = ({OpenSidebar}) => {
          <BsSearch className='icon' />
       </div>
       <div className="navbar-right">
-         <BsPersonCircle className='icon' />
+         <BsPersonCircle className='icon' onClick={() => setOpenProfile(
+          (prev) => !prev)} />
+         
       </div>
+
+         {
+           openProfile && <ProfileDropdown/>
+         }
+      
     </header>
     
   )

@@ -8,11 +8,10 @@ function AddBeds () {
                 <div className="row">
                     <div className="col-md-12">
                     <h5 className="mt-2">Add Beds</h5>
-                    <p className="mt-3" style={{color:'grey'}}>Ward & Bed Infromation</p>
                     <form>
                         <div className="row">
                             
-                            <p className="mt-3" style={{color:'grey'}}>Other Infromation</p>
+                            <p className="mt-3" style={{color:'grey'}}>Ward & Bed Infromation</p>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Ward Specialist</label>

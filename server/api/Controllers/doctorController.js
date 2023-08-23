@@ -13,6 +13,7 @@ const createaDoctor = (req, res)=>{
   try {
     data = req.body
   
+   let fullName = data.fullName;
     let firstName = data.firstName;
     let lastName = data.lastName;
     let initials = data.initials;
