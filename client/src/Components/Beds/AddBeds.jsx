@@ -37,22 +37,17 @@ function AddBeds () {
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Bed Category</label>
                                     <select className="form-control" name="status" >
-                                        <option value="">--Select Assigned Ward--</option>
-                                        <option value="1">Bed 01</option>
-                                        <option value="1">Bed 02</option>
-                                        <option value="1">Bed 03</option>
+                                        <option value="">--Select Bed Category--</option>
+                                        <option value="1">Electrict</option>
+                                        <option value="1">Semi-electrict</option>
+                                        <option value="1">Manual</option>
                                     </select>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Description About Bed</label>
-                                    <select className="form-control" name="status" >
-                                        <option value="">--Select Assigned Ward--</option>
-                                        <option value="1">Bed 01</option>
-                                        <option value="1">Bed 02</option>
-                                        <option value="1">Bed 03</option>
-                                    </select>
+                                    <textarea rows="1" cols="50" type="text" name="bed_descrip" className="form-control" />
                                 </div>
                             </div>
                             
