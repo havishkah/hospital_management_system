@@ -11,6 +11,7 @@ const createaDoctor = (req, res)=>{
       let gender = data.Gender
       let nic = data.nic;
       let contact = data.contact;
+      let specialist
     
       const paitent = new Patient({
         firstName,
