@@ -14,7 +14,15 @@ const reportSchema = new mongoose.Schema({
    file:{
     type:String,
     required:true
-   }
+   },
+   patientid:{
+      type:String,
+      required:true
+   },
+   doctorid:{
+      type:String,
+      required:true
+   },
     
 },{timestamps:true});
 
