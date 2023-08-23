@@ -51,9 +51,18 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
             <br />
             <i class="fa-solid fa-pills fs-6 me-3 my-2"></i>
             <a href="/alldrug" className='text-decoration-none text-black'><span className='fs-6'>View Drugs</span></a>
-          </a>
+          </a> <a href="" className="list-group-item py-3">
+          <small>Reports</small><br />
+          <i class="fa-solid fa-file fs-6 me-3 my-2"></i>
+          <a href="/addpatients" className='text-decoration-none text-black'><span className='fs-6 my-2'>Diagnosis Report</span></a>
+          <br />
+          <i class="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
+          <a href="/allpatient" className='text-decoration-none text-black'><span className='fs-6'>Medical Report</span></a>
+        </a>
+
       </div>
       </Auth>
+      
       {/* customer sidebar */}
       <Auth position="2">
     <hr className="text-dark" />
@@ -92,6 +101,15 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
           <br />
           <i class="fa-solid fa-user-group fs-6 me-3 my-2"></i>
           <a href="/allpatient" className='text-decoration-none text-black'><span className='fs-6'>View Patients</span></a>
+        </a>
+
+        <a href="" className="list-group-item py-3">
+          <small>Reports</small><br />
+          <i class="fa-solid fa-file fs-6 me-3 my-2"></i>
+          <a href="/addpatients" className='text-decoration-none text-black'><span className='fs-6 my-2'>Diagnosis Report</span></a>
+          <br />
+          <i class="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
+          <a href="/allpatient" className='text-decoration-none text-black'><span className='fs-6'>Medical Report</span></a>
         </a>
         
     </div>
