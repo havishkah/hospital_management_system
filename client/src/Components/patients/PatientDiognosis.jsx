@@ -21,7 +21,7 @@ function PatientDiognosis () {
                                 </div>
                                 <div className="col-md-6">
                                 <div className="mb-3">
-                                <button type="submit" className="btn btn-primary btn-lg">Submit</button>  
+                                <button style={{height:'40px',fontSize:'16px'}} type="submit" className="btn btn-primary btn-lg">Submit</button>  
                                 </div>
                             </div>
             

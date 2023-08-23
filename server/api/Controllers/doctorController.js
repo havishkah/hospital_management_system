@@ -1,3 +1,4 @@
+
 const ApiError = require("../../utilities/Errors/errors");
 const mongoose = require("mongoose");
 const Doctor = require("../models/doctor");
@@ -5,14 +6,6 @@ const {
     verifyInputs,
     validateInputs,
 } = require("../../utilities/data_validation")
-
-//const {
-//  createDoctor,
-//  getAlldoctors,
-//  deleteDoctorrByID,
-//  getDoctorByID,
-//  updateDoctorbyID,
-//} = require('../services/doctor_services');
 
 const createaDoctor = (req, res) => {
   try {
@@ -76,34 +69,29 @@ const createaDoctor = (req, res) => {
       return;
 
     }
-
     console.log(data);
-    let firstName = data.firstName;
-    let lastName = data.lastName;
-    let initials = data.initials;
-    let Dob = data.Dob;
-    let Gender = data.Gender;
-    let nic = data.nic;
-    let email = data.email;
-    let contact = data.contact;
-    let specialist = data.specialist;
-
+   
     const doctor = new Doctor({
-      firstName,
-      lastName,
-      Dob,
-      initials,
-      Gender,
-      nic,
-      email,
-      contact,
-      specialist,
+      firstName:data.firstName,
+      lastName:data.lastName,
+      initials:data.initials,
+      Dob:data.Dob,
+      email:data.email,
+      Gender:data.Gender,
+      nic:data.nic,
+      contact:data.contact,
+      specialist:data.specialist,
+      ward:data.ward
+     
     });
-    return doctor.save().then(() => {
-      res.json(200).json('Data Saved Successfully');
-    });
+    doctor.save().then(()=>{
+      res.json(200)
+    }).catch((e) => {
+       console.log(e)
+       next(e)
+    })
   } catch (error) {
-    res.status(500).json(error);
+    next(error);
   }
 };
 

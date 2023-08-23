@@ -24,6 +24,7 @@ const doctorSchema = new mongoose.Schema({
     nic:{
         type:String,
         required:true,
+        unique:true
     },
     email:{
         type:String,
@@ -36,8 +37,8 @@ const doctorSchema = new mongoose.Schema({
     specialist:{
         type:String,
         required:true,
-    }
-    
+    },
+        
 });
 
 const Doctor = mongoose.model("doctor", doctorSchema);

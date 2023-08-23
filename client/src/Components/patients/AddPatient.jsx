@@ -32,7 +32,7 @@ function AddPatient () {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Date of Birth</label>
-                                    <input type="text" name="address" className="form-control" />
+                                    <input type="date" name="address" className="form-control" />
                                 </div>
                             </div>
                             <div className="col-md-6">
