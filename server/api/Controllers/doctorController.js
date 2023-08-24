@@ -3,17 +3,6 @@ const ApiError = require("../../utilities/Errors/errors");
 const mongoose = require('mongoose')
 const Doctor = require('../models/doctor');
 
-//const {
-  //  createDoctor,
-  //  getAlldoctors,
-  //  deleteDoctorrByID,
-  //  getDoctorByID,
-  //  updateDoctorbyID,
-//} = require('../services/doctor_services');
-
-const ApiError = require("../../utilities/Errors/errors");
-const mongoose = require("mongoose");
-const Doctor = require("../models/doctor");
 const {
     verifyInputs,
     validateInputs,
