@@ -37,6 +37,7 @@ app.use('/api/patient',patientRoutes);
 
 //Error handle function
 app.use(apiErrorHandler);
+
 app.listen(port, ()=>{
     console.log('App is running on:',{port})
 });
