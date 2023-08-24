@@ -85,7 +85,7 @@ const createaDoctor = (req, res) => {
      
     });
     doctor.save().then(()=>{
-      res.json(200)
+      res.json(200).send({error:'Added new doctor'})
     }).catch((e) => {
        console.log(e)
        next(e)
@@ -103,13 +103,13 @@ const getAlldoctordetails = async (req, res) => {
 const getDoctor = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such workout" });
+    return res.status(404).json({ error: "No such Doctor" });
   }
 
   const doctor = await Doctor.findbyid(id);
 
   if (!doctor) {
-    return res.status(404).json({ error: "No such workout" });
+    return res.status(404).json({ error: "No such Doctor" });
   }
 
   res.status(200).json(doctor);
@@ -135,7 +135,7 @@ const updateaDoctorbyID = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such workout" });
+    return res.status(404).json({ error: "No such doctor" });
   }
 
   const doctor = await Doctor.findByIdAndUpdate(
@@ -146,7 +146,7 @@ const updateaDoctorbyID = async (req, res) => {
   );
 
   if (!doctor) {
-    return res.status(404).json({ error: "No such workout" });
+    return res.status(404).json({ error: "No such doctro" });
   }
 
   res.status(200).json(doctor);

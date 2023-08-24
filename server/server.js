@@ -25,11 +25,16 @@ mongoose.connect(DB_URL)
 
 // Import route files
 const adminDashboardRoutes = require('./api/routes/adminDashboardRoutes');
-const doctorRoutes = require('./api/routes/doctor_routes')
+const doctorRoutes = require('./api/routes/doctor_routes');
+const drugRoutes = require('./api/routes/drug_routes');
+const patientRoutes = require ('./api/routes/patient_routes');
 
 // Use main routes file
 app.use('/api/adminDashboard', adminDashboardRoutes);
 app.use('/api/doctor', doctorRoutes);
+app.use('/api/drugs',drugRoutes);
+app.use('/api/patient',patientRoutes);
+
 //Error handle function
 app.use(apiErrorHandler);
 app.listen(port, ()=>{
