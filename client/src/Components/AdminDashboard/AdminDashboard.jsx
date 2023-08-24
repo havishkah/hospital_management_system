@@ -12,7 +12,7 @@ export const AdminDashboard = () => {
     const respone = service.get ('adminDashboard/data') 
     respone.then((response) => {
       console.log (response)
-      setDashboardData(response.data);
+      // setDashboardData(response.data);
     })
     .catch((error) => {
       console.error('Error fetching data:', error);

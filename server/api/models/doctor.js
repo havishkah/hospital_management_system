@@ -36,13 +36,9 @@ const doctorSchema = new mongoose.Schema({
     },
     specialist:{
         type:String,
-        required:true
+        required:true,
     },
-    ward:{
-        type:String,
-        required:true
-    }
-    
+        
 });
 
 const Doctor = mongoose.model("doctor", doctorSchema);
