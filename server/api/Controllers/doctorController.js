@@ -1,7 +1,7 @@
 //const ApiError = require("../../utilities/Errors/errors");
 const mongoose = require('mongoose')
 const Doctor = require('../models/doctor');
-const { escapeLeadingUnderscores } = require('typescript');
+// const { escapeLeadingUnderscores } = require('typescript');
 //const {
   //  createDoctor,
   //  getAlldoctors,
