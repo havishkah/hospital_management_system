@@ -104,7 +104,7 @@ const getPatient = async (req, res) => {
     return res.status(404).json({ error: "No such workout" });
   }
 
-  const patient = await patient.findbyid(id);
+  const patient = await Patient.findbyid(id);
 
   if (!patient) {
     return res.status(404).json({ error: "No such workout" });
@@ -112,6 +112,22 @@ const getPatient = async (req, res) => {
 
   res.status(200).json(patient);
 };
+
+const getbyNic = async (req,res) => {
+  const { nic } = req.params;
+
+  try{
+    const paitent = await Patient.find({ nic: nic});
+
+    if(!paitent){
+      return res.status(404).json({error : "paitent records not found"});
+    }
+
+    res.status(200).json(paitent);
+  }catch(err){
+    res.status(500).json({err: "Internal Server Error"})
+  }
+}
 
 const deletePatient = async (req, res) => {
   const { id } = req.params;
@@ -150,10 +166,12 @@ const updateaPatientbyID = async (req, res) => {
   res.status(200).json(patient);
 };
 
+
 module.exports = {
   createPatient: createaPatient,
   getAllpatients: getAllpatientsdetails,
   deletePatient: deletePatient,
   updatePatient: updateaPatientbyID,
+  getPatientbyNic: getbyNic,
   getPatient: getPatient,
 };
