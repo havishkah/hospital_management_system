@@ -24,12 +24,9 @@ import { ViewBeds } from './Components/Beds/ViewBeds'
 import { MedicalReport } from './Components/patients/MedicalReport'
 import AddBeds from './Components/Beds/AddBeds'
 import ViewPatientDetail  from './Components/patients/ViewPatientDetail'
-<<<<<<< HEAD
 import { ViewDrugs } from './Components/Drugs/ViewDrugs'
 
-=======
 import ViewDiagnosis from './Components/doctors/ViewDiagnosis'
->>>>>>> da991e2f1eafe27db6fdebf3145bec10a0befa3d
 
 
 function App() {
@@ -54,7 +51,6 @@ function App() {
          <Route path='/patientdiognosis' element={<PatientDiognosis/>}></Route>
          <Route path='/doc_pa_priscripd' element={<DocPatientPrescrip/>}></Route>
          <Route path='/adddoc' element={<AddDoc/>}></Route>
-<<<<<<< HEAD
          <Route path='/viewdocd' element={<ViewDocd/>}></Route>
          <Route path='/viewdocpde' element={<Viewdocpde/>}></Route>
          <Route path='/addpatients' element={<AddPatients/>}></Route>
@@ -68,14 +64,12 @@ function App() {
          <Route path='/addbeds' element={<AddBeds/>}></Route>
          <Route path='/viewpatientdetail' element={<ViewPatientDetail/>}></Route>
          <Route path='/alldrug' element={<ViewDrugs/>}></Route>
-=======
         <Route path='/viewdocd' element={<ViewDocd/>}></Route>
         <Route path='/viewdocpde' element={<Viewdocpde/>}></Route>
         <Route path='/addpatients' element={<AddPatients/>}></Route>
         <Route path='/addbeds' element={<AddBeds/>}></Route>
         <Route path='/viewpatientdetail' element={<ViewPatientDetail/>}></Route>
         <Route path='/viewdiagnosis' element={<ViewDiagnosis/>}></Route>
->>>>>>> da991e2f1eafe27db6fdebf3145bec10a0befa3d
       </Routes>
     </BrowserRouter>
   </div>
