@@ -21,6 +21,10 @@ const patientSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    Age:{
+        type:Number,
+        required:true,
+    },
     nic:{
         type:String,
         required:true,
@@ -30,6 +34,10 @@ const patientSchema = new mongoose.Schema({
         required:true,
     },
     email:{
+        type:String,
+        required:true,
+    },
+    address:{
         type:String,
         required:true,
     },
