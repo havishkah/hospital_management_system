@@ -88,8 +88,8 @@ const createaPatient = (req, res) => {
 };
 
 const getAllpatientsdetails = async (req, res) => {
-  const doctor = await Doctor.find({});
-  res.status(200).json(doctor);
+  const patient = await Patient.find({});
+  res.status(200).json(patient);
 };
 
 const getPatient = async (req, res) => {

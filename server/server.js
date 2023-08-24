@@ -28,12 +28,14 @@ const adminDashboardRoutes = require('./api/routes/adminDashboardRoutes');
 const doctorRoutes = require('./api/routes/doctor_routes');
 const drugRoutes = require('./api/routes/drug_routes');
 const patientRoutes = require ('./api/routes/patient_routes');
+const bedRoutes = require('./api/routes/bed_routes');
 
 // Use main routes file
 app.use('/api/adminDashboard', adminDashboardRoutes);
 app.use('/api/doctor', doctorRoutes);
 app.use('/api/drugs',drugRoutes);
 app.use('/api/patient',patientRoutes);
+app.use('/api/bed',bedRoutes)
 
 //Error handle function
 app.use(apiErrorHandler);

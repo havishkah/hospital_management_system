@@ -58,6 +58,10 @@ const createabed = (req, res) =>{
     }
 };
 
+const getAllbeds = async (req,res) =>{
+    
+}
+
 module.exports = {
     createBed: createabed,
 }
