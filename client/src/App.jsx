@@ -26,6 +26,7 @@ import AddBeds from './Components/Beds/AddBeds'
 import ViewPatientDetail  from './Components/patients/ViewPatientDetail'
 import { ViewDrugs } from './Components/Drugs/ViewDrugs'
 
+import ViewDiagnosis from './Components/doctors/ViewDiagnosis'
 
 
 function App() {
@@ -63,6 +64,12 @@ function App() {
          <Route path='/addbeds' element={<AddBeds/>}></Route>
          <Route path='/viewpatientdetail' element={<ViewPatientDetail/>}></Route>
          <Route path='/alldrug' element={<ViewDrugs/>}></Route>
+        <Route path='/viewdocd' element={<ViewDocd/>}></Route>
+        <Route path='/viewdocpde' element={<Viewdocpde/>}></Route>
+        <Route path='/addpatients' element={<AddPatients/>}></Route>
+        <Route path='/addbeds' element={<AddBeds/>}></Route>
+        <Route path='/viewpatientdetail' element={<ViewPatientDetail/>}></Route>
+        <Route path='/viewdiagnosis' element={<ViewDiagnosis/>}></Route>
       </Routes>
     </BrowserRouter>
   </div>

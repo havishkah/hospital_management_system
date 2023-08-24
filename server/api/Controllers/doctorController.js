@@ -1,4 +1,19 @@
 
+//const ApiError = require("../../utilities/Errors/errors");
+const mongoose = require('mongoose')
+const Doctor = require('../models/doctor');
+// const { escapeLeadingUnderscores } = require('typescript');
+//const {
+  //  createDoctor,
+  //  getAlldoctors,
+  //  deleteDoctorrByID,
+  //  getDoctorByID,
+  //  updateDoctorbyID,
+//} = require('../services/doctor_services');
+
+const createaDoctor = (req, res,next)=>{
+
+
 const ApiError = require("../../utilities/Errors/errors");
 const mongoose = require("mongoose");
 const Doctor = require("../models/doctor");
@@ -8,6 +23,7 @@ const {
 } = require("../../utilities/data_validation")
 
 const createaDoctor = (req, res) => {
+
   try {
     data = req.body;
 
@@ -159,3 +175,6 @@ module.exports = {
   updatedoctor: updateaDoctorbyID,
   getDoctor: getDoctor,
 };
+}
+
+

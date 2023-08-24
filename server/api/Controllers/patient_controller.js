@@ -18,9 +18,11 @@ const createaPatient = (req, res) => {
           "initials",
           "Dob",
           "Gender",
+          "Age",
           "nic",
           "contact",
           "email",
+          "address",
           "emergencycont"
         ],
   
@@ -50,9 +52,11 @@ const createaPatient = (req, res) => {
           "initials",
           "Dob",
           "Gender",
+          "Age",
           "nic",
           "contact",
           "email",
+          "address",
           "emergencycont",
         ],
   
@@ -74,9 +78,11 @@ const createaPatient = (req, res) => {
       initials: data.initials,
       Dob: data.Dob,
       Gender: data.Gender,
+      Age : data.Age,
       nic: data.nic,
       contact: data.contact,
       email : data.email,
+      address : data.address,
       emergencycont : data.emergencycont
     });
     return patient.save().then(() => {
