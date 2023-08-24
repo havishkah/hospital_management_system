@@ -46,8 +46,8 @@ function AddPatient () {
                                     <label style={{fontSize:'14px'}} className="form-lable">Gender</label>
                                     <select className="form-control" name="status" >
                                         <option value="">--Select Gender--</option>
-                                        <option value="1">Male</option>
-                                        <option value="1">Female</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
                                     </select>
                                 </div>
                             </div>

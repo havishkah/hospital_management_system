@@ -14,7 +14,7 @@ function AddDocs() {
     const [nic, setNic] = useState('');
     const [contact, setContact] = useState('');
     const [specialist, setSpecialist] = useState('');
-    const [ward,setWard] = useState('');
+    // const [ward,setWard] = useState('');
     const service = new Service();
 
     const handleSubmit = () => {
@@ -32,7 +32,7 @@ function AddDocs() {
             email: email,
             contact: contact,
             specialist: specialist,
-            ward:ward
+            // ward:ward
         }
 
         const respone =  service.post('doctor/add', newDoctor)
@@ -127,7 +127,7 @@ function AddDocs() {
                                     <select className="form-control" name="status" onChange={(e) => {
                                         setSpecialist(e.target.value);}}>
                                         <option value="">--Select Ward Specialist--</option>
-                                        <option value="1">Cardiology Specialist</option>
+                                        <option value="Cardiology Specialist">Cardiology Specialist</option>
 
                                     </select>
                                 </div>
