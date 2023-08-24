@@ -1,113 +1,166 @@
+
 const ApiError = require("../../utilities/Errors/errors");
+const mongoose = require('mongoose')
+const Doctor = require('../models/doctor');
 
 const {
-    createDoctor,
-    getAlldoctors,
-    deleteDoctorrByID,
-    getDoctorByID
+    verifyInputs,
+    validateInputs,
+} = require("../../utilities/data_validation")
 
-} = require('../services/doctor_services');
+const createaDoctor = (req, res) => {
 
-const createDoctor = async (req, res, next)=>{
-    const data = req.body;
+  try {
+    data = req.body;
 
-    if(
-        !data.name||
-        !data.nic||
-        !data.contact||
-        !data.email||
-        !data
-    ){
+    const verifiedResult = verifyInputs(
+
+      [
+
+        "firstName",
+        "lastName",
+        "initials",
+        "Dob",
+        "Gender",
+        "nic",
+        "contact",
+        "email",
+        "specialist",
+      ],
+
+      data
+
+    );
+
+    if (verifiedResult == false) {
+
       next(
-        ApiError.notFound(
-          "User's name, nic, conact and email required"
+        ApiError.badRequest(
+
+          "The request parameters are not properly formatted or are missing required fields."
+
         )
+
       );
+
       return;
+
     }
-    
-    const newValues = {
-        fulName: data.name,
-        Nic: data.nic,
-        email: data.email,
-        contact: data.contact,
-        
-      };
-    
-      const response = createDoctor(newValues);
-      response
-        .then((data) => {
-          if (!data) {
-            next(ApiError.notCreated(`User not created.`));
-            return;
-          }
-          res.status(200).send({ message: "User registered successfully!" });
-        })
-        .catch((err) => {
-          next(err);
-        });
-};
+    const validatedResult = validateInputs(
 
-const getAlldoctordetails = (req,res,next) =>{
-  const response = getAlldoctors();
-  response
-  .then((data) => {
-    if(!data){
-      next(ApiError.notFound('Doctor Details not found'));
+      [
+        "firstName",
+        "lastName",
+        "initials",
+        "Dob",
+        "Gender",
+        "nic",
+        "contact",
+        "email",
+        "specialist",
+      ],
+
+      data
+
+    );
+
+    if (validatedResult == false) {
+
+      next(ApiError.badRequest("The request is missing required data."));
+
       return;
+
+    }
+    console.log(data);
+   
+    const doctor = new Doctor({
+      firstName:data.firstName,
+      lastName:data.lastName,
+      initials:data.initials,
+      Dob:data.Dob,
+      email:data.email,
+      Gender:data.Gender,
+      nic:data.nic,
+      contact:data.contact,
+      specialist:data.specialist,
+      ward:data.ward
+     
+    });
+    doctor.save().then(()=>{
+      res.json(200).send({error:'Added new doctor'})
+    }).catch((e) => {
+       console.log(e)
+       next(e)
+    })
+  } catch (error) {
+    next(error);
   }
-  res.status(200).send({ data: data });
-
-})
-.catch((err) => {
-  next(err);
-});
-
 };
 
-const getDoctor = (req,res,next) =>{
-  const id = req.params.id;
-  if (!id) {
-    next(ApiError.notFound("Doctor ID required"));
-    return;
+const getAlldoctordetails = async (req, res) => {
+  const doctor = await Doctor.find({});
+  res.status(200).json(doctor);
+};
+
+const getDoctor = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Doctor" });
   }
 
-  const response = getDoctorByID();
-  
-}
+  const doctor = await Doctor.findbyid(id);
 
-
-const deleteDoctorr = (req,res,next) =>{
-  const id = req.params.id;
-  if (!id) {
-    next(ApiError.notFound("Doctor ID required"));
-    return;
+  if (!doctor) {
+    return res.status(404).json({ error: "No such Doctor" });
   }
 
-  const response = deleteDoctorrByID(id);
-  response
-    .then((data) =>{
-      if(!data.acknowledged==true){
-        next(ApiError.notFound(`Doctor details not found`));
-        return;
-      }
-      if(data.deletedCout == 0){
-        res.status(200).send({message:"User already deleted!"});
-        return;
-      }
-    })
-    .catch((err)=>{
-      next(err);
-    })
-}
+  res.status(200).json(doctor);
+};
 
-const updateDoctorbyID = (req,res,next) =>{
+const deleteDoctorr = async (req, res) => {
+  const { id } = req.params;
 
-}
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Doctor details" });
+  }
 
-module.exports ={
-  createDoctor: createDoctor,
+  const doctor = await Doctor.findByIdAndDelete({ _id: id });
+
+  if (!doctor) {
+    return res.status(404).json({ error: "No such Doctor details" });
+  }
+
+  res.status(200).json(doctor);
+};
+
+const updateaDoctorbyID = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such doctor" });
+  }
+
+  const doctor = await Doctor.findByIdAndUpdate(
+    { _id: id },
+    {
+      ...req.body,
+    }
+  );
+
+  if (!doctor) {
+    return res.status(404).json({ error: "No such doctro" });
+  }
+
+  res.status(200).json(doctor);
+};
+
+module.exports = {
+  createDoctor: createaDoctor,
   getAlldoctors: getAlldoctordetails,
   deleteDoctor: deleteDoctorr,
-  updatedoctor: updateDoctorbyID
-}
+  updatedoctor: updateaDoctorbyID,
+  getDoctor: getDoctor,
+};
+
+
+

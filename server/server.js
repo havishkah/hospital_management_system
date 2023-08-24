@@ -1,3 +1,4 @@
+const apiErrorHandler = require("./utilities/Errors/errorHandler");
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -11,6 +12,7 @@ app.use(cors());
 // Middleware
 app.use(bodyParser.json());
 
+
 const port = process.env.PORT || 5000;
 const DB_URL=process.env.DB_URL;
 
@@ -23,9 +25,20 @@ mongoose.connect(DB_URL)
 
 // Import route files
 const adminDashboardRoutes = require('./api/routes/adminDashboardRoutes');
+const doctorRoutes = require('./api/routes/doctor_routes');
+const drugRoutes = require('./api/routes/drug_routes');
+const patientRoutes = require ('./api/routes/patient_routes');
+const bedRoutes = require('./api/routes/bed_routes');
 
 // Use main routes file
 app.use('/api/adminDashboard', adminDashboardRoutes);
+app.use('/api/doctor', doctorRoutes);
+app.use('/api/drugs',drugRoutes);
+app.use('/api/patient',patientRoutes);
+app.use('/api/bed',bedRoutes)
+
+//Error handle function
+app.use(apiErrorHandler);
 
 app.listen(port, ()=>{
     console.log('App is running on:',{port})
