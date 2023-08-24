@@ -1,21 +1,22 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const{
-    createDoctor,
+
+const {
+  createDoctor,
   getAlldoctors,
   deleteDoctor,
   updatedoctor,
-  getDoctor
+  getDoctor,
 } = require("../Controllers/doctorController");
 
-router.get('/', getAlldoctors)
+router.get("/", getAlldoctors);
 
-router.get('/:id', getDoctor)
+router.get("/:id", getDoctor);
 
-router.post('/add', createDoctor)
+router.post("/add", createDoctor);
 
-router.patch('/:id',updatedoctor)
+router.patch("/:id", updatedoctor);
 
-router.delete('/:id',deleteDoctor)
+router.delete("/:id", deleteDoctor);
 
-module.exports = router
+module.exports = router;
