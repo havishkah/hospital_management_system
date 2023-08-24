@@ -5,8 +5,8 @@ const createaDrug = (req, res)=>{
   try {
     data = req.body
   
-    let drugtName = data.drugName;
-    let type = data.typer;
+    let drugName = data.drugName;
+    let type = data.type;
     let qty = data.qty;
     
   
@@ -57,7 +57,7 @@ const deleteDrugbyid = async (req,res) =>{
       return res.status(404).json({error:'No such Drug details'})
   }
 
-  const doctor = await Doctor.findOneAndDelete({_id:id})
+  const drug = await Doctor.findOneAndDelete({_id:id})
 
   if(!drug){
       return res.status(404).json({error:'No such Drug details'})

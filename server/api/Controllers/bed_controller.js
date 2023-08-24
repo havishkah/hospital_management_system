@@ -59,9 +59,65 @@ const createabed = (req, res) =>{
 };
 
 const getAllbeds = async (req,res) =>{
-    
+    const bed = await Bed.find({});
+    res.status(200).json(bed);
+};
+
+const getBedbyID = async (req,res) => {
+  const { id } = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error : "No bed Available"});
+  }
+
+  const bed = await Bed.findById(id);
+
+  if(!bed){
+    return res.status(404).json({ error : "No bed Available"});
+  }
+
+  res.status(200).json(bed);
+};
+
+const filterbed = async (req, res) => {
+  const { status } = req.params;
+ 
+ try {
+  const bed = await Bed.find({status:status});
+
+  if(!bed){
+    return res.status(404).json({error: "beds are not found"})
+  }
+  res.status(200).json(bed);
+
+ } catch (error) {
+  return res.status(500).json(error)
+ }
+
 }
+
+const deletebed = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Doctor details" });
+  }
+
+  const bed = await Bed.findByIdAndDelete({ _id: id });
+
+  if (!bed) {
+    return res.status(404).json({ error: "No such Doctor details" });
+  }
+
+  res.status(200).json("Bed deleted");
+};
+
+
+
 
 module.exports = {
     createBed: createabed,
+    getAllbedsdetails: getAllbeds,
+    getBedbyid : getBedbyID,
+    getBedbyStatus: filterbed,
+    deleteBedbyId: deletebed
 }
