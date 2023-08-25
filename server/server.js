@@ -29,7 +29,7 @@ const doctorRoutes = require('./api/routes/doctor_routes');
 const drugRoutes = require('./api/routes/drug_routes');
 const patientRoutes = require ('./api/routes/patient_routes');
 const bedRoutes = require('./api/routes/bed_routes');
-const userRoutes = require('./api/routes/user_Routes')
+const userRoutes = require('./api/routes/admin_Routes');
 
 // Use main routes file
 app.use('/api/adminDashboard', adminDashboardRoutes);
