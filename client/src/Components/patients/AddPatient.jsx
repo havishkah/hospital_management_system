@@ -109,8 +109,8 @@ function AddPatient () {
                                         setGender(e.target.value);
                                     }} name="status" >
                                         <option value="">--Select Gender--</option>
-                                        <option value="1">Male</option>
-                                        <option value="1">Female</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
                                     </select>
                                 </div>
                             </div>

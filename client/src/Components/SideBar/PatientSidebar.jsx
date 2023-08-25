@@ -18,7 +18,11 @@ export const PatientSidebar = ({openSidebarToggle,OpenSidebar}) => {
         <a href="" className="list-group-item py-3">
           <small>Reports</small><br />
           <i class="fa-solid fa-file fs-6 me-3 my-2"></i>
+<<<<<<< HEAD
+          <a href="/patientdiognosis" className='text-decoration-none text-black'><span className='fs-6 my-2'>Diagnosis Report</span></a>
+=======
           <a href="/patientdiagnosis" className='text-decoration-none text-black'><span className='fs-6 my-2'>Diagnosis Report</span></a>
+>>>>>>> 9e6dd256b2e286caf016110458e16827cce37f63
           <br />
           <i class="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
           <a href="#" className='text-decoration-none text-black'><span className='fs-6'>Medical Report</span></a>
