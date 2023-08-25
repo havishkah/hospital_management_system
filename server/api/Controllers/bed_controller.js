@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Patient = require("../models/beds");
 const {
   verifyInputs,
   validateInputs,
@@ -43,6 +42,13 @@ const createabed = (req, res) =>{
           data
     
         );
+        if (validatedResult == false) {
+
+          next(ApiError.badRequest("The request is missing required data."));
+    
+          return;
+    
+        }
 
         const bed = new Bed({
             status:data.status,
