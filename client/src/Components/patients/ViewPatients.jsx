@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
+import Service from '../../../utilities/http';
 
 export const ViewPatients = () => {
+
+  const [patients,setPatients] = useState([]);
+  const service=new Service();
+
+  useEffect(() => {
+    const respone = service.get ('patient/') 
+    respone.then((res) => {
+      console.log (res.data)
+      setPatients(res.data);
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+ 
+  }, []);
+
   return (
     <main className='main-container'>
         <div className="main-title">
@@ -23,71 +40,19 @@ export const ViewPatients = () => {
                     </tr>
                     </thead>
                     <tbody>
-                            <tr>
-                            <td>1</td>
-                            <td>Thivanka</td>
+                    {patients.map((patient,index) => (
+                            <tr key={patient._id}>
+                            <td>{index+1}</td>
+                            <td>{patient.firstName} {patient.lastName}</td>
                             <td>Cardiology Specialist</td>
                             <td>Cardiology Ward 03</td>
-                            <td>Male</td>
+                            <td>{patient.Gender}</td>
                             <td>
                             <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
                             </td>
                             </tr> 
-
-                            <tr>
-                            <td>2</td>
-                            <td>Thilini</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 01</td>
-                            <td>Female</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>3</td>
-                            <td>Thivanka</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 03</td>
-                            <td>Male</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>4</td>
-                            <td>Thilini</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 01</td>
-                            <td>Female</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>5</td>
-                            <td>Thivanka</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 03</td>
-                            <td>Male</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>6</td>
-                            <td>Thilini</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 01</td>
-                            <td>Female</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
+                    ))
+}
 
                     </tbody>
                 </table>
