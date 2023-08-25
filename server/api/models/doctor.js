@@ -28,6 +28,7 @@ const doctorSchema = new mongoose.Schema({
     },
     email:{
         type:String,
+        unique:true,
         required:true,
     },
     contact:{
@@ -38,6 +39,10 @@ const doctorSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    password:{
+        type:String,
+        required:true
+    }
         
 });
 
