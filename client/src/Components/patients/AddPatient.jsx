@@ -16,6 +16,12 @@ function AddPatient () {
     const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
+    const [docName, setDocName] = useState('');
+    const [bht, setBht] = useState('');
+    const [specialist, setSpecialist] = useState('');
+    const [ward, setWard] = useState('');
+    const [bed, setBed] = useState('');
+    const [diagnosis, setDiagnosis] = useState('');
     const service = new Service();
 
     const handleSubmit = () => {
@@ -35,6 +41,12 @@ function AddPatient () {
             address: address,
             contact: contact,
             emergencycont: emergencycont,
+            docName:docName,
+            bht:bht,
+            specialist:specialist,
+            ward:ward,
+            bed:bed,
+            diagnosis:diagnosis
           
         }
 
@@ -155,13 +167,15 @@ function AddPatient () {
                                     }} />
                                 </div>
                             </div>
-                            {/* <p className="mt-3" style={{color:'grey'}}>Other Infromation</p>
+                             <p className="mt-3" style={{color:'grey'}}>Other Infromation</p>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Doctor Name</label>
-                                    <select className="form-control"  name="status" >
+                                    <select className="form-control"  name="status" onChange={(e) => {
+                                        setDocName(e.target.value);
+                                    }}>
                                         <option value="">--Select Doctor Name--</option>
-                                        <option value="1">Dr. Kamal</option>
+                                        <option value="Dr. Kamal">Dr. Kamal</option>
                                      
                                     </select>
                                 </div>
@@ -169,26 +183,30 @@ function AddPatient () {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">BHT No</label>
-                                    <input type="text" name="address" className="form-control"  />
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setBht(e.target.value);
+                                    }} />
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Ward Specialist</label>
-                                    <select className="form-control"  name="status" >
+                                    <select className="form-control"  name="status" onChange={(e) => {
+                                        setSpecialist(e.target.value);
+                                    }}>
                                         <option value="">--Select Ward Specialist--</option>
-                                        <option value="1">Cardiology Ward 01</option>
-                                        <option value="1">Cardiology Ward 02</option>
-                                        <option value="1">Cardiology Ward 02</option>
+                                        <option value="Cardiology Specialist">Cardiology Specialist</option>
                                     </select>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Assigned Ward</label>
-                                    <select className="form-control"  name="status" >
+                                    <select className="form-control"  name="status" onChange={(e) => {
+                                        setWard(e.target.value);
+                                    }}>
                                         <option value="">--Select Assigned Ward--</option>
-                                        <option value="1">Cardiology Ward 01</option>
+                                        <option value="Cardiology Ward 01">Cardiology Ward 01</option>
                                         <option value="1">Cardiology Ward 02</option>
                                         <option value="1">Cardiology Ward 02</option>
                                     </select>
@@ -197,20 +215,24 @@ function AddPatient () {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable"> Ward Bed</label>
-                                    <select className="form-control"  name="status" >
+                                    <select className="form-control"  name="status" onChange={(e) => {
+                                        setBed(e.target.value);
+                                    }} >
                                         <option value="">--Select Ward Bed--</option>
-                                        <option value="1">Cardiology Ward 01</option>
-                                        <option value="1">Cardiology Ward 02</option>
-                                        <option value="1">Cardiology Ward 02</option>
+                                        <option value="Electrical">Cardiology Ward 01-Electrical</option>
+                                        <option value="Semi-Electrical">Cardiology Ward 01-Semi-Electrical</option>
+                                        <option value="Non-Electrical">Cardiology Ward 01-Non-Electrical</option>
                                     </select>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Diagnosis</label>
-                                    <textarea rows="4" cols="50" type="text" name="address" className="form-control"  />
+                                    <textarea rows="4" cols="50" type="text" name="address" className="form-control" onChange={(e) => {
+                                        setDiagnosis(e.target.value);
+                                    }} />
                                 </div>
-                            </div> */}
+                            </div>
                             
                             <div className="col-md-6">
                                

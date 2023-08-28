@@ -9,7 +9,23 @@ const bedSchema = new mongoose.Schema({
    catagory:{
     type:String,
     required:true
+   },
+
+   description:{
+      type:String,
+      required:true
+   },
+
+   specialist:{
+      type:String,
+      required:true
+   },
+
+   ward:{
+      type:String,
+      required:true
    }
+
     
 });
 
