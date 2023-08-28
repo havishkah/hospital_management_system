@@ -26,7 +26,7 @@ export const useSignup = () => {
     if (respone.ok) {
       //save the user to local storage
       localStorage.setItem("admin", JSON.stringify(json));
-
+      console.log(respone)
       // update the auth context
       dispatch({ type: "LOGIN", payload: json });
 

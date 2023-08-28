@@ -11,8 +11,9 @@ body {
     font-family: 'Montserrat', sans-serif;
   }
 
+  
 .grid-container {
-    display: grid;
+    display: flex;
     grid-template-columns: 260px 1fr 1fr 1fr;
     grid-template-rows: 0.2fr 3fr;
     grid-template-areas:
@@ -20,6 +21,10 @@ body {
       'sidebar main main main';
     height: 100vh;
 } 
+
+.page-content{
+  flex: 6;
+}
 
 .icon {
   vertical-align: middle;
@@ -78,6 +83,7 @@ body {
 
 /* Sidebar */
 #sidebar {
+  flex:1;
   grid-area: sidebar;
   height: 100%;
   background-color: #ffffff;

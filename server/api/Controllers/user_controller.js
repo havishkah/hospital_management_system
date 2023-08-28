@@ -26,9 +26,9 @@ const signupUser = async (req, res) =>{
     try{
         const admin = await Admin.signup(username,email,contact, password)
 
-        const token = createToken(admin._id)
+       // const token = createToken(admin._id)
 
-        res.status(200).json({username, token})
+        res.status(200).json({username})
     }catch(error){
         res.status(400).json({error: error.message})
     }
