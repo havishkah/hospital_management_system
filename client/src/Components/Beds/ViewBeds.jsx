@@ -44,8 +44,8 @@ export const ViewBeds = () => {
                             <tr key={bed._id}>
                             <td>{index+1}</td>
                             <td>{bed.category}</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 01</td>
+                            <td>{bed.specialist}</td>
+                            <td>{bed.ward}</td>
                             <td>{bed.status}</td>
                             <td>
                             <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
