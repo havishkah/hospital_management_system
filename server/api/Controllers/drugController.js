@@ -13,7 +13,7 @@ const createaDrug = (req, res)=>{
     const drug = new Drug({
       drugName,
       type,
-      qty,
+      qty
      
     });
     return drug.save().then(()=>{
