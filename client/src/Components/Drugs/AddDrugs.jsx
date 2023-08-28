@@ -8,6 +8,7 @@ function AddDrugs () {
     const [drugName, setDrugName] = useState('');
     const [type, setType] = useState('');
     const [qty, setQty] = useState('');
+    const [status, setStatus] = useState('');
     const service = new Service();
 
     const handleSubmit = () => {
@@ -17,7 +18,8 @@ function AddDrugs () {
         const newDrug = {
             drugName:drugName,
             type:type,
-            qty:qty
+            qty:qty,
+            status:status
         }
 
         const respone =  service.post('drugs/add', newDrug)
@@ -68,7 +70,18 @@ function AddDrugs () {
                                     }} />
                                 </div>
                             </div>
-                            <div className="col-md-6"></div>
+                            <div className="col-md-6">
+                            <div className="mb-3">
+                                    <label style={{fontSize:'14px'}} className="form-lable">Status</label>
+                                     <select className="form-control" name="status" onChange={(e) => {
+                                        setStatus(e.target.value);
+                                    }}  >
+                                        <option value="">--Select Status--</option>
+                                        <option value="In Stock">In Stock</option>
+                                        <option value="Out of Stock">Out of Stock</option>
+                                    </select>
+                                </div>
+                            </div>
                             
                             <div className="col-md-6"></div>
                         

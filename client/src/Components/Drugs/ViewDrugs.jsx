@@ -1,6 +1,62 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
+import Service from '../../../utilities/http';
 
 export const ViewDrugs = () => {
+
+  const [drugs,setDrugs] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const service=new Service();
+
+  useEffect(() => {
+      getDrugs();
+  }, []);
+
+  function getDrugs(){
+    const respone = service.get ('drugs/') 
+    respone.then((res) => {
+      console.log (res.data)
+      setDrugs(res.data);
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+  }
+
+  //Delete a drug
+  function drugDelete(id){
+    
+        const confirmDelete = window.confirm('Are you confirm to delete drug??');
+        if(confirmDelete){
+          service.delete(`drugs/${id}`)
+         .then(() => {
+          getDrugs();
+        })
+        .catch((err) =>{
+           alert(err);
+        })
+}
+  }
+
+  const handlesearchArea = value => {
+    setSearchText(value);
+    filterData(value);   
+  }
+
+const filterData = value => {
+    const lowerCaseValue = value.toLowerCase().trim();
+    if(!lowerCaseValue){
+        getDrugs();
+    }
+    else{      
+        const filteredData = drugs.filter(item => {
+            return Object.keys(item).some(key => {
+                return item[key].toString().toLowerCase().includes(lowerCaseValue);
+            })
+        });
+        setDrugs(filteredData);
+    }
+}
+
   return (
     <main className='main-container'>
         <div className="main-title">
@@ -8,7 +64,7 @@ export const ViewDrugs = () => {
         </div>
 
         <div className="col-lg-3 mt-2 mb-2">
-          <input style={{marginLeft:'715px'}} type="search" className="form-control"  placeholder="Search.."/>
+          <input style={{marginLeft:'715px'}} type="search" className="form-control"  placeholder="Search.." onChange={ e => handlesearchArea(e.target.value)}/>
         </div> <br />
         <div>
         <table class="table" celled>
@@ -22,66 +78,19 @@ export const ViewDrugs = () => {
                     </tr>
                     </thead>
                     <tbody>
-                            <tr>
-                            <td>1</td>
-                            <td>Paracetamol</td>
-                            <td>100</td>
-                            <td>In stock</td>
+                    {drugs.map((drug,index) => (
+                            <tr key={drug._id}>
+                            <td>{index+1}</td>
+                            <td>{drug.drugName}</td>
+                            <td>{drug.qty}</td>
+                            <td>{drug.status}</td>
                             <td>
-                            <a href='#'><button type="submit" className="btn btn-danger" style={{color:'white'}}><i class="fa-solid fa-trash-can"></i>&nbsp;Delete</button></a>
+                            <button type="submit" onClick={() => drugDelete(drug._id)} className="btn btn-danger" style={{color:'white'}}><i class="fa-solid fa-trash-can"></i>&nbsp;Delete</button>
                             </td>
                             </tr> 
 
-                            <tr>
-                            <td>2</td>
-                            <td>Paracetamol</td>
-                            <td>100</td>
-                            <td>Out of stock</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-danger" style={{color:'white'}}><i class="fa-solid fa-trash-can"></i>&nbsp;Delete</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>3</td>
-                            <td>Paracetamol</td>
-                            <td>500</td>
-                            <td>In stock</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-danger" style={{color:'white'}}><i class="fa-solid fa-trash-can"></i>&nbsp;Delete</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>4</td>
-                            <td>Paracetamol</td>
-                            <td>100</td>
-                            <td>Out of stock</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-danger" style={{color:'white'}}><i class="fa-solid fa-trash-can"></i>&nbsp;Delete</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>5</td>
-                            <td>Paracetamol</td>
-                            <td>20</td>
-                            <td>In stock</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-danger" style={{color:'white'}}><i class="fa-solid fa-trash-can"></i>&nbsp;Delete</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>6</td>
-                            <td>Paracetamol</td>
-                            <td>100</td>
-                            <td>Out of stock</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-danger" style={{color:'white'}}><i class="fa-solid fa-trash-can"></i>&nbsp;Delete</button></a>
-                            </td>
-                            </tr> 
-
+                    ))
+                    }
                     </tbody>
                 </table>
             </div>

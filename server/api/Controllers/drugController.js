@@ -11,7 +11,7 @@ const createDrug = (req, res) => {
     data = req.body;
 
     const verifiedResult = verifyInputs(
-      ["drugName", "type", "qty"],
+      ["drugName", "type", "qty","status"],
 
       data
     );
@@ -26,7 +26,7 @@ const createDrug = (req, res) => {
       return;
     }
     const validatedResult = validateInputs(
-      ["drugName", "type", "qty"],
+      ["drugName", "type", "qty","status"],
 
       data
     );
@@ -40,6 +40,7 @@ const createDrug = (req, res) => {
       drugName:data.drugName,
       type:data.type,
       qty:data.qty,
+      status:data.status
     });
     return drug.save().then(() => {
       res.json(200).json({ error: "Adding new drug failed" });
