@@ -19,7 +19,7 @@ export const Signup = () => {
         <main className="main-container">
         <div className="row">
             <div className="col-md-12 w-50 m-auto">
-            <h5 className="mt-2">Add Patients</h5>
+            <h5 className="mt-2"><i className="fa fa-user-plus"> </i> Add User</h5>
             <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
             <form>
                 <div className="row">
