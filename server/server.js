@@ -37,7 +37,7 @@ app.use('/api/doctor', doctorRoutes);
 app.use('/api/drugs',drugRoutes);
 app.use('/api/patient',patientRoutes);
 app.use('/api/bed',bedRoutes);
-app.use('/api/user',userRoutes);
+app.use('/api/admin',userRoutes);
 
 //Error handle function
 app.use(apiErrorHandler);

@@ -25,8 +25,10 @@ import { MedicalReport } from './Components/patients/MedicalReport'
 import AddBeds from './Components/Beds/AddBeds'
 import ViewPatientDetail  from './Components/patients/ViewPatientDetail'
 import { ViewDrugs } from './Components/Drugs/ViewDrugs'
-
+import { Signup } from './Components/User/Signup'
 import ViewDiagnosis from './Components/doctors/ViewDiagnosis'
+import Home from './Home'
+import Login from './Login'
 
 
 function App() {
@@ -39,11 +41,14 @@ function App() {
 
   return (
     <div className='grid-container'>
-    <BrowserRouter>
+    <Login/>
+    {/* <BrowserRouter>
       <NavBar OpenSidebar={OpenSidebar}/>
      <SideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar}/> 
       <Routes>
+
          <Route path='/admin' element={<AdminDashboard/>}></Route>
+         <Route path='/addadmin' element={<Signup/>}></Route>
          <Route path='/alldoc' element={<ViewDoctors/>}></Route>
          <Route path='/doctor' element={<DoctorDashboard/>}></Route>
          <Route path='/patientdashboard' element={<PatientDashboard/>}></Route>
@@ -71,7 +76,7 @@ function App() {
         <Route path='/viewpatientdetail' element={<ViewPatientDetail/>}></Route>
         <Route path='/viewdiagnosis' element={<ViewDiagnosis/>}></Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter> */}
   </div>
   )
 }
