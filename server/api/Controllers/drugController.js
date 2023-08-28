@@ -1,95 +1,119 @@
-const mongoose = require('mongoose')
-const Drug = require('../models/drugs');
+const mongoose = require("mongoose");
+const Drug = require("../models/drugs");
 
-const createaDrug = (req, res)=>{
+const createaDrug = (req, res) => {
   try {
-    data = req.body
-  
+    data = req.body;
+
+    const verifiedResult = verifyInputs(
+      ["drugName", "type", "qty"],
+
+      data
+    );
+
+    if (verifiedResult == false) {
+      next(
+        ApiError.badRequest(
+          "The request parameters are not properly formatted or are missing required fields."
+        )
+      );
+
+      return;
+    }
+    const validatedResult = validateInputs(
+      ["drugName", "type", "qty"],
+
+      data
+    );
+    if (validatedResult == false) {
+      next(ApiError.badRequest("The request is missing required data."));
+
+      return;
+    }
+
     let drugName = data.drugName;
     let type = data.type;
     let qty = data.qty;
-    
-  
+
     const drug = new Drug({
       drugName,
       type,
+
       qty
      
+
+     
+
     });
-    return drug.save().then(()=>{
-      res.json(200).json({error:'Adding new doctor failed'})
-    })
+    return drug.save().then(() => {
+      res.json(200).json({ error: "Adding new doctor failed" });
+    });
   } catch (error) {
-    res.status(500).json(error)
+    res.status(500).json(error);
   }
-}
-
-
-const getAlldrugdetails = async(req,res)=>{
-  const drug = await Drug.find({})
-  res.status(200).json(drug)
-}
-
-
-const getDrug = async (req,res) =>{
-
- const { id }= req.params
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error:'No such drug'})
-    }
-
-    const drug = await Drug.findbyid(id)
-
-    if(!drug){
-        return res.status(404).json({error:'No such drug'})
-    }
-
-    res.status(200).json(drug)    
-   
-  
 };
 
+const getAlldrugdetails = async (req, res) => {
+  const drug = await Drug.find({});
+  res.status(200).json(drug);
+};
 
-const deleteDrugbyid = async (req,res) =>{
-  const { id } = req.params
-
-  if(!mongoose.Types.ObjectId.isValid(id)){
-      return res.status(404).json({error:'No such Drug details'})
+const getDrug = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such drug" });
   }
 
-  const drug = await Doctor.findOneAndDelete({_id:id})
+  const drug = await Drug.findbyid(id);
 
-  if(!drug){
-      return res.status(404).json({error:'No such Drug details'})
+  if (!drug) {
+    return res.status(404).json({ error: "No such drug" });
   }
 
-  res.status(200).json(drug)  
+  res.status(200).json(drug);
+};
 
-}
+const deleteDrugbyid = async (req, res) => {
+  const { id } = req.params;
 
-const updateaDoctorbyID = async (req,res) =>{
-  const { id } = req.params
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Drug details" });
+  }
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error:'No such drug'})
+  const drug = await Doctor.findOneAndDelete({ _id: id });
+
+  if (!drug) {
+    return res.status(404).json({ error: "No such Drug details" });
+  }
+
+  res.status(200).json(drug);
+};
+
+const updateaDoctorbyID = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such drug" });
+  }
+
+  const drug = await Doctor.findOneAndUpdate(
+    { _id: id },
+    {
+      ...req.body,
     }
+  );
 
-    const drug = await Doctor.findOneAndUpdate({_id:id},{
-        ...req.body
-    })
+  if (!drug) {
+    return res.status(404).json({ error: "No such rug" });
+  }
 
-    if(!drug){
-        return res.status(404).json({error:'No such rug'})
-    }
+  res.status(200).json(drug);
+};
 
-    res.status(200).json(drug)
-
-}
-
-module.exports ={
+module.exports = {
   createDrug: createaDrug,
   getAlldrugs: getAlldrugdetails,
   deleteDrug: deleteDrugbyid,
   updatedrug: updateaDoctorbyID,
-  getDrug: getDrug
-}
+  getDrug: getDrug,
+};
