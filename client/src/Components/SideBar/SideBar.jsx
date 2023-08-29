@@ -62,7 +62,7 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
         </a>
         <a href="/addadmin" className="list-group-item py-1">
             <small>Manage Users</small><br />
-            <i className="fa-solid fa-house fs-6 me-3 my-2"></i>
+            <i className="fa-solid fa-user-plus fs-6 me-3 my-2"></i>
             <span className='fs-6 my-2'>Add user</span>
           </a>
 

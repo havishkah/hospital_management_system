@@ -6,22 +6,23 @@ function AddDrugs () {
 
     const navigate = useNavigate();
     const [drugName, setDrugName] = useState('');
+    const [type, setType] = useState('');
     const [qty, setQty] = useState('');
+    const [status, setStatus] = useState('');
     const service = new Service();
 
     const handleSubmit = () => {
 
         // e.preventDefault();
 
-
-        const newDrugs = {
-            drugName: drugName,
-            qty: qty
-            
-          
+        const newDrug = {
+            drugName:drugName,
+            type:type,
+            qty:qty,
+            status:status
         }
 
-        const respone =  service.post('drugs/add', newDrugs)
+        const respone =  service.post('drugs/add', newDrug)
         respone.then((res) => {
             console.log(res);
             alert('Drug added Successfully');
@@ -35,7 +36,6 @@ function AddDrugs () {
 
   return (
 
-
       <main className="main-container">
                 <div className="row">
                     <div className="col-md-12">
@@ -48,7 +48,8 @@ function AddDrugs () {
                                     <label style={{fontSize:'14px'}} className="form-lable">Drug name</label>
                                     <input type="text" name="username" className="form-control" onChange={(e) => {
                                         setDrugName(e.target.value);
-                                    }} />
+
+                                    }}/>
                                 </div>
                             </div>
                            
@@ -60,18 +61,38 @@ function AddDrugs () {
                                     }} />
                                 </div>
                             </div>
-                            
-                              <div className="col-md-6">
-                               
-                             
+
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{fontSize:'14px'}} className="form-lable">Drug Type</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setType(e.target.value);
+                                    }} />
+                                </div>
                             </div>
+                            <div className="col-md-6">
+                            <div className="mb-3">
+                                    <label style={{fontSize:'14px'}} className="form-lable">Status</label>
+                                     <select className="form-control" name="status" onChange={(e) => {
+                                        setStatus(e.target.value);
+                                    }}  >
+                                        <option value="">--Select Status--</option>
+                                        <option value="In Stock">In Stock</option>
+                                        <option value="Out of Stock">Out of Stock</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            
+                            <div className="col-md-6"></div>
                         
                             <div className="col-md-6">
                                 <div className="mb-3">
                                 <label className="form-lable"></label>
-                                    <button style={{marginLeft:'320px',height:'40px',fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
+                                    <button style={{marginLeft:'330px',height:'40px',fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
                                     
-                                    <button style={{height:'40px',fontSize:'16px'}} type="button"  onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
+                                    <button style={{height:'40px',fontSize:'16px'}} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
+
                                 </div>
                                
                             </div>

@@ -1,12 +1,17 @@
 const mongoose = require("mongoose");
-const Drug = require("../models/drugs");
+const Drug = require('../models/drugs')
 
-const createaDrug = (req, res) => {
+const {
+  verifyInputs,
+  validateInputs,
+} = require("../../utilities/data_validation")
+
+const createDrug = (req, res) => {
   try {
     data = req.body;
 
     const verifiedResult = verifyInputs(
-      ["drugName", "type", "qty"],
+      ["drugName", "type", "qty","status"],
 
       data
     );
@@ -21,7 +26,7 @@ const createaDrug = (req, res) => {
       return;
     }
     const validatedResult = validateInputs(
-      ["drugName", "type", "qty"],
+      ["drugName", "type", "qty","status"],
 
       data
     );
@@ -31,22 +36,16 @@ const createaDrug = (req, res) => {
       return;
     }
 
-    let drugName = data.drugName;
-    let type = data.type;
-    let qty = data.qty;
-
     const drug = new Drug({
-      drugName,
-      type,
 
-      qty
-     
-
-     
+      drugName:data.drugName,
+      type:data.type,
+      qty:data.qty,
+      status:data.status     
 
     });
     return drug.save().then(() => {
-      res.json(200).json({ error: "Adding new doctor failed" });
+      res.json(200).json({ error: "Adding new drug failed" });
     });
   } catch (error) {
     res.status(500).json(error);
@@ -111,7 +110,7 @@ const updateaDoctorbyID = async (req, res) => {
 };
 
 module.exports = {
-  createDrug: createaDrug,
+  createDrug: createDrug,
   getAlldrugs: getAlldrugdetails,
   deleteDrug: deleteDrugbyid,
   updatedrug: updateaDoctorbyID,
