@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import Service from '../../../utilities/http';
 import { useNavigate } from "react-router-dom";
 
@@ -34,7 +34,6 @@ function AddDrugs () {
     }
 
 
-
   return (
 
       <main className="main-container">
@@ -49,6 +48,7 @@ function AddDrugs () {
                                     <label style={{fontSize:'14px'}} className="form-lable">Drug name</label>
                                     <input type="text" name="username" className="form-control" onChange={(e) => {
                                         setDrugName(e.target.value);
+
                                     }}/>
                                 </div>
                             </div>
@@ -80,6 +80,7 @@ function AddDrugs () {
                                         <option value="In Stock">In Stock</option>
                                         <option value="Out of Stock">Out of Stock</option>
                                     </select>
+
                                 </div>
                             </div>
                             
@@ -91,6 +92,7 @@ function AddDrugs () {
                                     <button style={{marginLeft:'330px',height:'40px',fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
                                     
                                     <button style={{height:'40px',fontSize:'16px'}} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
+
                                 </div>
                                
                             </div>
