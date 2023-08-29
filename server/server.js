@@ -30,6 +30,7 @@ const drugRoutes = require('./api/routes/drug_routes');
 const patientRoutes = require ('./api/routes/patient_routes');
 const bedRoutes = require('./api/routes/bed_routes');
 const userRoutes = require('./api/routes/admin_Routes');
+const reportRoutes = require ('./api/routes/reports_router')
 
 // Use main routes file
 app.use('/api/adminDashboard', adminDashboardRoutes);
@@ -38,6 +39,7 @@ app.use('/api/drugs',drugRoutes);
 app.use('/api/patient',patientRoutes);
 app.use('/api/bed',bedRoutes);
 app.use('/api/admin',userRoutes);
+app.use('/api/reports')
 
 //Error handle function
 app.use(apiErrorHandler);
