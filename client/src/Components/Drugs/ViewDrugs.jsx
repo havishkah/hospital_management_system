@@ -37,6 +37,8 @@ export const ViewDrugs = () => {
 }
   }
 
+//Search function
+
   const handlesearchArea = value => {
     setSearchText(value);
     filterData(value);   
@@ -56,6 +58,8 @@ const filterData = value => {
         setDrugs(filteredData);
     }
 }
+
+//End of search function
 
   return (
     <main className='main-container'>
