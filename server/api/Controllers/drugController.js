@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const Drug = require('../models/drugs')
+const Drug = require('../models/drugs');
+const ApiError = require("../../utilities/Errors/errors");
 
 const {
   verifyInputs,
@@ -46,9 +47,12 @@ const createDrug = (req, res) => {
     });
     return drug.save().then(() => {
       res.json(200).json({ error: "Adding new drug failed" });
+    }).catch((e) => {
+       console.log(e)
+       next(e)
     });
   } catch (error) {
-    res.status(500).json(error);
+    next(error)
   }
 };
 
@@ -73,13 +77,13 @@ const getDrug = async (req, res) => {
 };
 
 const deleteDrugbyid = async (req, res) => {
-  const { id } = req.params;
-
+  const id  = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such Drug details" });
   }
 
-  const drug = await Drug.findOneAndDelete({ _id: id });
+
+  const drug = await Drug.findByIdAndDelete( id );
 
   if (!drug) {
     return res.status(404).json({ error: "No such Drug details" });

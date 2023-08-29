@@ -31,7 +31,6 @@ function ViewDocDetail () {
     ward:ward
   }
 
-  
   //loading existing data to form
   useEffect(() =>{
     loadDoctor();
@@ -82,7 +81,6 @@ function doctorUpdate(){
       });
   };
 
-
   return (
 
       <main className="main-container">
@@ -94,14 +92,15 @@ function doctorUpdate(){
                     </div>
                    
                     <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
-                   
+
                     <form onSubmit={(e) => doctorUpdate(e)}>
+
                         <div className="row">
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">First name</label>
-                                    <input type="text" name="username" className="form-control"  value={firstName} onChange={(e) => {
-                                        setFirstName(e.target.value);
+                                    <input type="text" name="username" className="form-control" value={firstName} onChange={(e) => {
+                                     setFirstName(e.target.value);
                                     }} />
                                 </div>
                             </div>
@@ -221,7 +220,7 @@ function doctorUpdate(){
                     </div> <br />
                     <div>
 
-        <table class="table" celled>
+                    <table class="table" celled>
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
