@@ -95,7 +95,7 @@ const updateaDoctorbyID = async (req, res) => {
     return res.status(404).json({ error: "No such drug" });
   }
 
-  const drug = await Doctor.findOneAndUpdate(
+  const drug = await Drug.findOneAndUpdate(
     { _id: id },
     {
       ...req.body,
