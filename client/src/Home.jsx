@@ -10,7 +10,6 @@ import { AdminDashboard } from "./Components/AdminDashboard/AdminDashboard";
 import { ViewDoctors } from "./Components/doctors/ViewDoctors";
 import { DoctorDashboard } from "./Components/doctors/DoctorDashboard";
 import { PatientDashboard } from "./Components/patients/PatientDashboard";
-import AddDrugs from "./Components/drugs/AddDrugs";
 import PatientDiognosis from "./Components/patients/PatientDiognosis";
 import { DocPatientPrescrip } from "./Components/doctors/DocPatientPrescrip";
 import { DocPatientHistoryd } from "./Components/doctors/DocPatientHistoryd";
@@ -27,6 +26,7 @@ import ViewPatientDetail from "./Components/patients/ViewPatientDetail";
 import { ViewDrugs } from "./Components/Drugs/ViewDrugs";
 import { Signup } from "./Components/User/Signup";
 import ViewDiagnosis from "./Components/doctors/ViewDiagnosis";
+import AddDrugs from "./Components/Drugs/AddDrugs";
 
 function Home() {
   const [openSidebarToggle, setOpenSidebarToggle] = React.useState(false);
@@ -56,7 +56,7 @@ function Home() {
             path="/patientdashboard"
             element={<PatientDashboard />}
           ></Route>
-          <Route path="/adddrugs" element={<AddDrugs />}></Route>
+          <Route path="/adddrugs" element={<AddDrugs/>}></Route>
           <Route
             path="/patientdiognosis"
             element={<PatientDiognosis />}
@@ -66,7 +66,7 @@ function Home() {
             element={<DocPatientPrescrip />}
           ></Route>
           <Route path="/adddoc" element={<AddDoc />}></Route>
-          <Route path="/viewdocd" element={<ViewDocd />}></Route>
+          <Route path="/viewdocd/:id" element={<ViewDocd />}></Route>
           <Route path="/viewdocpde" element={<Viewdocpde />}></Route>
           <Route path="/addpatients" element={<AddPatients />}></Route>
           <Route

@@ -42,6 +42,12 @@ const filterData = value => {
     }
 }
 
+//View details function
+function doctorView(id){
+  console.log(id);
+  navigate(`/viewdocd/${id}`);
+}
+
   return (
     <main className='main-container'>
        <div className="main-title">
@@ -71,7 +77,7 @@ const filterData = value => {
                             <td>Cardiology Ward 01</td>
                             <td className='text-center'>03</td>
                             <td>
-                            <a href='/viewdocd'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
+                            <a href={`/viewdocd/${doctor._id}`}><button type="button" onClick={() => doctorView(doctor._id)} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
                             </td>
                             </tr> 
 
