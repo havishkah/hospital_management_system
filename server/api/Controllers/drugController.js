@@ -73,13 +73,12 @@ const getDrug = async (req, res) => {
 };
 
 const deleteDrugbyid = async (req, res) => {
-  const { id } = req.params;
-
+  const id  = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such Drug details" });
   }
 
-  const drug = await Doctor.findOneAndDelete({ _id: id });
+  const drug = await Drug.findByIdAndDelete( id );
 
   if (!drug) {
     return res.status(404).json({ error: "No such Drug details" });
