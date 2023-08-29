@@ -110,7 +110,7 @@ const getDoctor = async (req, res) => {
     return res.status(404).json({ error: "No such Doctor" });
   }
 
-  const doctor = await Doctor.findbyid(id);
+  const doctor = await Doctor.findById(id);
 
   if (!doctor) {
     return res.status(404).json({ error: "No such Doctor" });

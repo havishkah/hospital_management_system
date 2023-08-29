@@ -1,8 +1,10 @@
 import React, { useState,useEffect } from 'react'
 import Service from '../../../utilities/http';
+import { useParams } from 'react-router-dom';
 
 export const ViewDrugs = () => {
 
+  const {id} = useParams();
   const [drugs,setDrugs] = useState([]);
   const [searchText, setSearchText] = useState('');
   const service=new Service();
@@ -23,7 +25,7 @@ export const ViewDrugs = () => {
   }
 
   //Delete a drug
-  function drugDelete(id){
+  function drugDelete(){
     
         const confirmDelete = window.confirm('Are you confirm to delete drug??');
         if(confirmDelete){
@@ -89,7 +91,7 @@ const filterData = value => {
                             <td>{drug.qty}</td>
                             <td>{drug.status}</td>
                             <td>
-                            <button type="submit" onClick={() => drugDelete(drug._id)} className="btn btn-danger" style={{color:'white'}}><i class="fa-solid fa-trash-can"></i>&nbsp;Delete</button>
+                            <button type="button" onClick={() => drugDelete(drug._id)} className="btn btn-danger" style={{color:'white'}}><i class="fa-solid fa-trash-can"></i>&nbsp;Delete</button>
                             </td>
                             </tr> 
 
