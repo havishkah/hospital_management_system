@@ -25,8 +25,9 @@ export const ViewDrugs = () => {
   }
 
   //Delete a drug
-  function drugDelete(){
-    
+  function drugDelete(id){
+     
+
         const confirmDelete = window.confirm('Are you confirm to delete drug??');
         if(confirmDelete){
           service.delete(`drugs/${id}`)
