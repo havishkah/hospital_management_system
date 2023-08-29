@@ -12,7 +12,7 @@ const drugsSchema = new mongoose.Schema({
     qty:{
         type:Number,
         required:true,
-    },
+    }
     
 });
 

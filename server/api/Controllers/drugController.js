@@ -38,7 +38,12 @@ const createaDrug = (req, res) => {
     const drug = new Drug({
       drugName,
       type,
-      qty,
+
+      qty
+     
+
+     
+
     });
     return drug.save().then(() => {
       res.json(200).json({ error: "Adding new doctor failed" });
