@@ -30,7 +30,7 @@ function AddDrugs () {
         }).catch((error) => {
             console.error('Error with adding data:', error);
         });
-
+        
     }
 
 
