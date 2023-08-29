@@ -26,6 +26,7 @@ const createaDoctor = (req, res) => {
         "contact",
         "email",
         "specialist",
+        "ward"
       ],
 
       data
@@ -58,6 +59,7 @@ const createaDoctor = (req, res) => {
         "contact",
         "email",
         "specialist",
+        "ward"
       ],
 
       data
@@ -83,7 +85,7 @@ const createaDoctor = (req, res) => {
       nic:data.nic,
       contact:data.contact,
       specialist:data.specialist,
-      // ward:data.ward
+      ward:data.ward
      
     });
     doctor.save().then(()=>{

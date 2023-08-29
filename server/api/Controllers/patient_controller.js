@@ -23,7 +23,13 @@ const createaPatient = (req, res) => {
           "contact",
           "email",
           "address",
-          "emergencycont"
+          "emergencycont",
+          "docName",
+          "bht",
+          "specialist",
+          "ward",
+          "bed",
+          "diagnosis"
         ],
   
         data
@@ -58,6 +64,12 @@ const createaPatient = (req, res) => {
           "email",
           "address",
           "emergencycont",
+          "docName",
+          "bht",
+          "specialist",
+          "ward",
+          "bed",
+          "diagnosis"
         ],
   
         data
@@ -83,7 +95,13 @@ const createaPatient = (req, res) => {
       contact: data.contact,
       email : data.email,
       address : data.address,
-      emergencycont : data.emergencycont
+      emergencycont : data.emergencycont,
+      docName:data.docName,
+      bht:data.bht,
+      specialist:data.specialist,
+      ward:data.ward,
+      bed:data.bed,
+      diagnosis:data.diagnosis
     });
     return patient.save().then(() => {
       res.json(200);

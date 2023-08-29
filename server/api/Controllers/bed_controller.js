@@ -13,7 +13,10 @@ const createabed = (req, res) =>{
     
           [
            "status",
-           "catagory"
+           "catagory",
+           "description",
+           "specialist",
+           "ward"
           ],
     
           data
@@ -36,7 +39,10 @@ const createabed = (req, res) =>{
     
           [
             "status",
-           "catagory"
+           "catagory",
+           "description",
+           "specialist",
+           "ward"
           ],
     
           data
@@ -52,7 +58,10 @@ const createabed = (req, res) =>{
 
         const bed = new Bed({
             status:data.status,
-            catagory:data.catagory
+            catagory:data.catagory,
+            discription:data.description,
+            specialist:data.specialist,
+            ward:data.ward
         });
 
         return bed.save().then(()=>{

@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
+import Service from '../../../utilities/http';
 
 export const ViewBeds = () => {
+
+  const [beds,setBeds] = useState([]);
+  const service=new Service();
+
+  useEffect(() => {
+    const respone = service.get ('bed/') 
+    respone.then((res) => {
+      console.log (res.data)
+      setBeds(res.data);
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+ 
+  }, []);
+
   return (
     <main className='main-container'>
         <div className="main-title">
@@ -23,72 +40,19 @@ export const ViewBeds = () => {
                     </tr>
                     </thead>
                     <tbody>
-                            <tr>
-                            <td>1</td>
-                            <td>Cardiology-Ward01-Electrical</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 01</td>
-                            <td>Occupied</td>
+                    {beds.map((bed,index) => (
+                            <tr key={bed._id}>
+                            <td>{index+1}</td>
+                            <td>{bed.category}</td>
+                            <td>{bed.specialist}</td>
+                            <td>{bed.ward}</td>
+                            <td>{bed.status}</td>
                             <td>
                             <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
                             </td>
                             </tr> 
-
-                            <tr>
-                            <td>2</td>
-                            <td>Cardiology-Ward01-Electrical</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 01</td>
-                            <td>Available</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>3</td>
-                            <td>Cardiology-Ward01-Electrical</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 01</td>
-                            <td>Occupied</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>4</td>
-                            <td>Cardiology-Ward01-Electrical</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 01</td>
-                            <td>Available</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>5</td>
-                            <td>Cardiology-Ward01-Electrical</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 01</td>
-                            <td>Occupied</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>6</td>
-                            <td>Cardiology-Ward01-Electrical</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 01</td>
-                            <td>Available</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
-
+                    ))
+}
                     </tbody>
                 </table>
             </div>
