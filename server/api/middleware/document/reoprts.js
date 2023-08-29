@@ -20,7 +20,7 @@ var upload = multer({
     fileSize: 5000000,
   },
   fileFilter: function (req, file, callback) {
-    if (!file.originalname.match(/\.(pdf|png|jpg|jpeg)$/)) {
+    if (!file.originalname.match(/\.(pdf|png|jpg|jpeg|PNG)$/)) {
       return callback(new Error("FileFormatError"));
     }
     callback(undefined, true);

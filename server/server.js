@@ -1,5 +1,6 @@
 const apiErrorHandler = require("./utilities/Errors/errorHandler");
 const express = require('express');
+var cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require("cors");
@@ -11,7 +12,7 @@ const app = express();
 app.use(cors());
 // Middleware
 app.use(bodyParser.json());
-
+app.use(cookieParser())
 
 const port = process.env.PORT || 5000;
 const DB_URL=process.env.DB_URL;
@@ -39,7 +40,7 @@ app.use('/api/drugs',drugRoutes);
 app.use('/api/patient',patientRoutes);
 app.use('/api/bed',bedRoutes);
 app.use('/api/admin',userRoutes);
-app.use('/api/reports')
+app.use('/api/reports',reportRoutes)
 
 //Error handle function
 app.use(apiErrorHandler);

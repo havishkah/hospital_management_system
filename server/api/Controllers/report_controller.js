@@ -1,4 +1,4 @@
-const ApiError = require("../../utilities/Error/errors");
+const ApiError = require("../../utilities/Errors/errors");
 const logger = require("../../utilities/logger");
 const path = require("path");
 const fs = require("fs");

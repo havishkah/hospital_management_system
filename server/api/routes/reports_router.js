@@ -4,12 +4,11 @@ const Report = require('../middleware/document/reoprts');
 
 const{
    reportUpload,
-   reportRetrive 
 } = require('../Controllers/report_controller')
 
-router.post('/report/:nic', Report.single("profile-image"), reportUpload)
+router.post('/report/:nic', Report.single("report"), reportUpload)
 
-router.get('/report/:nic')
+//router.get('/report/:nic')
 
 
 
