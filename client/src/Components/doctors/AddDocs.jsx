@@ -10,6 +10,7 @@ function AddDocs() {
     const [initials, setInitials] = useState('');
     const [dob, setDob] = useState('');
     const [email, setEmail] = useState('');
+    const [password,setPassword] = useState('');
     const [gender, setGender] = useState('');
     const [nic, setNic] = useState('');
     const [contact, setContact] = useState('');
@@ -27,6 +28,7 @@ function AddDocs() {
             lastName: lastName,
             initials: initials,
             Dob: dob,
+            password:password,
             Gender: gender,
             nic: nic,
             email: email,
@@ -98,8 +100,20 @@ function AddDocs() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Gender</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                    <select className="form-control" onChange={(e) => {
                                         setGender(e.target.value);
+                                    }} name="status" >
+                                        <option value="">--Select Gender--</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Password</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setPassword(e.target.value);
                                     }} />
                                 </div>
                             </div>

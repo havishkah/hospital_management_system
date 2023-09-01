@@ -14,12 +14,13 @@ function AddDrugs () {
     const handleSubmit = () => {
 
         // e.preventDefault();
-
+          
         const newDrug = {
             drugName:drugName,
             type:type,
             qty:qty,
             status:status
+
         }
 
         const respone =  service.post('drugs/add', newDrug)
@@ -62,6 +63,9 @@ function AddDrugs () {
                                 </div>
                             </div>
 
+
+                        
+
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Drug Type</label>
@@ -70,6 +74,10 @@ function AddDrugs () {
                                     }} />
                                 </div>
                             </div>
+                            
+                              <div className="col-md-6">
+                               
+                             
                             <div className="col-md-6">
                             <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Status</label>
@@ -82,6 +90,7 @@ function AddDrugs () {
                                     </select>
 
                                 </div>
+
                             </div>
                             
                             <div className="col-md-6"></div>
@@ -96,15 +105,19 @@ function AddDrugs () {
                                 </div>
                                
                             </div>
-
+                            </div>
                         </div>
                     </form>
                     </div>
                 </div>
+            
             </main>
         
-
+                                                     
+  
   )
 }
+
+
 
 export default AddDrugs

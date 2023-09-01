@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from "react";
 import Service from '../../../utilities/http';
-import {useParams,useNavigate} from "react-router-dom";
+import {useParams,useNavigate,Link} from "react-router-dom";
 
 function ViewDocDetail () {
 
   const service=new Service(); 
   const navigate = useNavigate();
+  const [searchText, setSearchText] = useState('');
+
+  //view doctor details
   const {id} = useParams();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -22,9 +25,9 @@ function ViewDocDetail () {
     firstName:firstName,
     lastName:lastName,
     initials:initials,
-    dob:dob,
+    Dob:dob,
+    Gender:gender,
     email:email,
-    gender:gender,
     nic:nic,
     contact:contact,
     specialist:specialist,
@@ -34,6 +37,7 @@ function ViewDocDetail () {
   //loading existing data to form
   useEffect(() =>{
     loadDoctor();
+    getPatients();
   },[])
 
 function loadDoctor(){
@@ -43,9 +47,9 @@ function loadDoctor(){
       setFirstName(res.data.firstName);
       setLastName(res.data.lastName);
       setInitials(res.data.initials);
-      setDob(res.data.dob);
+      setDob(res.data.Dob);
       setEmail(res.data.email);
-      setGender(res.data.gender);
+      setGender(res.data.Gender);
       setNic(res.data.nic);
       setContact(res.data.contact);
       setSpecialist(res.data.specialist);
@@ -54,6 +58,19 @@ function loadDoctor(){
       alert(err);
   })
 }
+
+//    //Delete doctor
+//    function doctorDelete(){
+    
+//     const respose = service.delete(`doctor/${id}`)
+//     respose.then(() => {
+//       alert('Are you confirm to remove doctor??');
+//       navigate('/alldoc');
+//     })
+//     .catch((err) =>{
+//        alert(err);
+//     })
+// } 
 
 //update function
 function doctorUpdate(){
@@ -68,6 +85,44 @@ function doctorUpdate(){
       });
   };
 
+
+  //view patients
+
+  const [patients,setPatients] = useState([]);
+
+  function getPatients(){
+        const respone = service.get ('patient/') 
+        respone.then((res) => {
+          console.log (res.data)
+          setPatients(res.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    
+  }
+
+  //search function
+  const handlesearchArea = value => {
+    setSearchText(value);
+    filterData(value);   
+}
+
+const filterData = value => {
+    const lowerCaseValue = value.toLowerCase().trim();
+    if(!lowerCaseValue){
+        getPatients();
+    }
+    else{      
+        const filteredData = patients.filter(item => {
+            return Object.keys(item).some(key => {
+                return item[key].toString().toLowerCase().includes(lowerCaseValue);
+            })
+        });
+        setPatients(filteredData);
+    }
+}
+
   return (
 
       <main className="main-container">
@@ -75,18 +130,19 @@ function doctorUpdate(){
                     <div className="col-md-12">
                     <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
                     <h5>Doctor Details</h5>
-                    <button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-danger text-white btn-lg">Delete</button> 
+                    <button style={{height:'40px', fontSize:'16px'}} type="button" className="btn btn-danger text-white btn-lg">Delete</button> 
                     </div>
                    
                     <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
-                   
-                    <form onSubmit={(e) => doctorUpdate(e)}> 
+
+                    <form>
+
                         <div className="row">
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">First name</label>
                                     <input type="text" name="username" className="form-control" value={firstName} onChange={(e) => {
-                                        setFirstName(e.target.value);
+                                     setFirstName(e.target.value);
                                     }} />
                                 </div>
                             </div>
@@ -119,15 +175,19 @@ function doctorUpdate(){
                                     <label style={{fontSize:'14px'}} className="form-lable">Nic</label>
                                     <input type="text" name="address" className="form-control" value={nic} onChange={(e) => {
                                         setNic(e.target.value);
-                                    }} />
+                                    }}/>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Gender</label>
-                                    <input type="text" name="address" className="form-control" value={gender} onChange={(e) => {
+                                    <select className="form-control" value={gender} onChange={(e) => {
                                         setGender(e.target.value);
-                                    }} />
+                                    }} name="status" >
+                                        <option value="">--Select Gender--</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
                                 </div>
                             </div>
                             <p className="mt-3" style={{color:'grey'}}>Contact Infromation</p>
@@ -136,7 +196,7 @@ function doctorUpdate(){
                                     <label style={{fontSize:'14px'}} className="form-lable">Contact Number</label>
                                     <input type="text" name="address" className="form-control" value={contact} onChange={(e) => {
                                         setContact(e.target.value);
-                                    }}/>
+                                    }} />
                                 </div>
                             </div>
                             <div className="col-md-6">
@@ -144,7 +204,7 @@ function doctorUpdate(){
                                     <label style={{fontSize:'14px'}} className="form-lable">Email</label>
                                     <input type="text" name="address" className="form-control" value={email} onChange={(e) => {
                                         setEmail(e.target.value);
-                                    }}/>
+                                    }} />
                                 </div>
                             </div>
                             <p className="mt-3" style={{color:'grey'}}>Other Infromation</p>
@@ -153,7 +213,7 @@ function doctorUpdate(){
                                     <label style={{fontSize:'14px'}} className="form-lable">Ward Specialist</label>
                                     <select className="form-control" name="status" value={specialist} onChange={(e) => {
                                         setSpecialist(e.target.value);
-                                     }} >
+                                    }} >
                                         <option value="">--Select Ward Specialist--</option>
                                         <option value="Cardiology Specialist">Cardiology Specialist</option>
                                     </select>
@@ -164,7 +224,7 @@ function doctorUpdate(){
                                     <label style={{fontSize:'14px'}} className="form-lable">Assigned Ward</label>
                                     <select className="form-control" name="status" value={ward} onChange={(e) => {
                                         setWard(e.target.value);
-                                     }} >
+                                    }} >
                                         <option value="">--Select Assigned Ward--</option>
                                         <option value="Cardiology Ward 01">Cardiology Ward 01</option>
                                         <option value="0">Cardiology Ward 02</option>
@@ -180,9 +240,9 @@ function doctorUpdate(){
                             <div className="col-md-6">
                                 <div className="mb-3">
                                 {/* <label className="form-lable"></label> */}
-                                    <a href="/alldoc"><button style={{marginLeft:'280px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></a> &nbsp;
+                                    <Link to='/alldoc'><button style={{marginLeft:'280px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp; 
                                     
-                                    <button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary btn-lg">Update</button>
+                                    <button style={{height:'40px', fontSize:'16px'}} type="button" onClick={() => doctorUpdate(id)}className="btn btn-primary btn-lg">Update</button>
                                 </div>
                                
                             </div>
@@ -191,18 +251,15 @@ function doctorUpdate(){
                     </form>
                     </div>
 
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div className="main-title">
-                     <h4>Dr kamals Patients</h4>
-                         </div>
+                    <div className="main-title mt-5">
+                    <h4 className="mt-4">Dr. {firstName}'s Patients</h4>
+                    </div>
                     <div className="col-lg-3 mt-2 mb-2">
-                     <input style={{marginLeft:'715px'}} type="search" className="form-control"  placeholder="Search.."/>
+                     <input style={{marginLeft:'715px'}} type="search" className="form-control"  placeholder="Search.." onChange={ e => handlesearchArea(e.target.value)}/>
                     </div> <br />
                     <div>
 
-        <table class="table" celled>
+                    <table class="table" celled>
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -215,31 +272,21 @@ function doctorUpdate(){
                     </tr>
                     </thead>
                     <tbody>
-                            <tr>
-                            <td>1</td>
-                            <td>Nimal</td>
-                            <td>999999999V</td>
-                            <td>Cardiology Specialist</td>
-                            <td>Cardiology Ward 01</td>
+                      {patients.map((patient,index) => (
+                            <tr key={patient._id}>
+                            <td>{index+1}</td>
+                            <td>{patient.firstName}</td>
+                            <td>{patient.nic}</td>
+                            <td>{patient.specialist}</td>
+                            <td>{patient.ward}</td>
                             <td>Onboard</td>
                             <td>
                             <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
                             </td>
                             </tr> 
 
-                            <tr>
-                            <td>2</td>
-                            <td>Amal</td>
-                            <td>888888888V</td>
-                            <td>Cardiology Specialist</td>
-                            <td> Cardiology Ward 01</td>
-                            <td>Discharged</td>
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
-
-
+                      ))
+}
                     </tbody>
                 </table>
             </div>
