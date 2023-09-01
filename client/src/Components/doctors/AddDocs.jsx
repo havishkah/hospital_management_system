@@ -84,7 +84,7 @@ function AddDocs() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Date of Birth</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                    <input type="date" name="address" className="form-control" onChange={(e) => {
                                         setDob(e.target.value);
                                     }} />
                                 </div>
