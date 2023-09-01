@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
 const prescriptionSchema = new mongoose.Schema({
-   date:{
-    type:String,
-    required:true
-   },
+   
    patientid:{
       type:String,
       required:true
