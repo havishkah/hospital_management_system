@@ -4,9 +4,14 @@ import Service from '../../../utilities/http';
 export const ViewBeds = () => {
 
   const [beds,setBeds] = useState([]);
+  const [searchText, setSearchText] = useState('');
   const service=new Service();
 
   useEffect(() => {
+      getBeds();
+  }, []);
+
+  function getBeds(){
     const respone = service.get ('bed/') 
     respone.then((res) => {
       console.log (res.data)
@@ -15,8 +20,27 @@ export const ViewBeds = () => {
     .catch((error) => {
       console.error('Error fetching data:', error);
     });
- 
-  }, []);
+  }
+
+  const handlesearchArea = value => {
+    setSearchText(value);
+    filterData(value);   
+}
+
+const filterData = value => {
+    const lowerCaseValue = value.toLowerCase().trim();
+    if(!lowerCaseValue){
+        getBeds();
+    }
+    else{      
+        const filteredData = beds.filter(item => {
+            return Object.keys(item).some(key => {
+                return item[key].toString().toLowerCase().includes(lowerCaseValue);
+            })
+        });
+        setBeds(filteredData);
+    }
+}
 
   return (
     <main className='main-container'>
@@ -25,7 +49,7 @@ export const ViewBeds = () => {
         </div>
 
         <div className="col-lg-3 mt-2 mb-2">
-          <input style={{marginLeft:'715px'}} type="search" className="form-control"  placeholder="Search.."/>
+          <input style={{marginLeft:'715px'}} type="search" className="form-control"  placeholder="Search.." onChange={ e => handlesearchArea(e.target.value)}/>
         </div> <br />
         <div>
         <table class="table" celled>

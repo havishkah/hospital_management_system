@@ -1,8 +1,87 @@
-import React from 'react'
+import React, {useState, useEffect} from "react";
+import Service from '../../../utilities/http';
+import {useParams,useNavigate} from "react-router-dom";
 
 function ViewDocDetail () {
-  return (
 
+  const service=new Service(); 
+  const navigate = useNavigate();
+  const {id} = useParams();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [initials, setInitials] = useState('');
+  const [dob, setDob] = useState('');
+  const [email, setEmail] = useState('');
+  const [gender, setGender] = useState('');
+  const [nic, setNic] = useState('');
+  const [contact, setContact] = useState('');
+  const [specialist, setSpecialist] = useState('');
+  const [ward,setWard] = useState('');
+
+  const data = {
+    firstName:firstName,
+    lastName:lastName,
+    initials:initials,
+    Dob:dob,
+    Gender:gender,
+    email:email,
+    nic:nic,
+    contact:contact,
+    specialist:specialist,
+    ward:ward
+  }
+
+  //loading existing data to form
+  useEffect(() =>{
+    loadDoctor();
+  },[])
+
+function loadDoctor(){
+    const respone =  service.get(`doctor/${id}`)
+    respone.then((res) =>{
+      console.log(res.data)
+      setFirstName(res.data.firstName);
+      setLastName(res.data.lastName);
+      setInitials(res.data.initials);
+      setDob(res.data.dob);
+      setEmail(res.data.email);
+      setGender(res.data.gender);
+      setNic(res.data.nic);
+      setContact(res.data.contact);
+      setSpecialist(res.data.specialist);
+      setWard(res.data.ward);
+  }).catch((err) =>{
+      alert(err);
+  })
+}
+
+//    //Delete doctor
+//    function doctorDelete(){
+    
+//     const respose = service.delete(`doctor/${id}`)
+//     respose.then(() => {
+//       alert('Are you confirm to remove doctor??');
+//       navigate('/alldoc');
+//     })
+//     .catch((err) =>{
+//        alert(err);
+//     })
+// } 
+
+//update function
+function doctorUpdate(){
+    const respone =  service.patch(`doctor/${id}`,data)
+      respone.then((res) => {
+        console.log(res.data);
+        navigate('/alldoc');
+        alert("Doctor updated successfully");
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+
+  return (
 
       <main className="main-container">
                 <div className="row">
@@ -13,76 +92,100 @@ function ViewDocDetail () {
                     </div>
                    
                     <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
-                   
-                    <form>
+
+                    <form onSubmit={(e) => doctorUpdate(e)}>
+
                         <div className="row">
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">First name</label>
-                                    <input type="text" name="username" className="form-control" />
+                                    <input type="text" name="username" className="form-control" value={firstName} onChange={(e) => {
+                                     setFirstName(e.target.value);
+                                    }} />
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Last Name</label>
-                                    <input type="text" name="email" className="form-control" />
+                                    <input type="text" name="email" className="form-control" value={lastName} onChange={(e) => {
+                                        setLastName(e.target.value);
+                                    }}/>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Name with Initials</label>
-                                    <input type="text" name="phone" className="form-control" />
+                                    <input type="text" name="phone" className="form-control" value={initials} onChange={(e) => {
+                                        setInitials(e.target.value);
+                                    }}/>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Date of Birth</label>
-                                    <input type="text" name="address" className="form-control" />
+                                    <input type="text" name="address" className="form-control" value={dob} onChange={(e) => {
+                                        setDob(e.target.value);
+                                    }}/>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Nic</label>
-                                    <input type="text" name="address" className="form-control" />
+                                    <input type="text" name="address" className="form-control" value={nic} onChange={(e) => {
+                                        setNic(e.target.value);
+                                    }}/>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Gender</label>
-                                    <input type="text" name="address" className="form-control" />
+                                    <select className="form-control" value={gender} onChange={(e) => {
+                                        setGender(e.target.value);
+                                    }} name="status" >
+                                        <option value="">--Select Gender--</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
                                 </div>
                             </div>
                             <p className="mt-3" style={{color:'grey'}}>Contact Infromation</p>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Contact Number</label>
-                                    <input type="text" name="address" className="form-control" />
+                                    <input type="text" name="address" className="form-control" value={contact} onChange={(e) => {
+                                        setContact(e.target.value);
+                                    }} />
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Email</label>
-                                    <input type="text" name="address" className="form-control" />
+                                    <input type="text" name="address" className="form-control" value={email} onChange={(e) => {
+                                        setEmail(e.target.value);
+                                    }} />
                                 </div>
                             </div>
                             <p className="mt-3" style={{color:'grey'}}>Other Infromation</p>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Ward Specialist</label>
-                                    <select className="form-control" name="status" >
+                                    <select className="form-control" name="status" value={specialist} onChange={(e) => {
+                                        setSpecialist(e.target.value);
+                                    }} >
                                         <option value="">--Select Ward Specialist--</option>
-                                        <option value="1">Cardiology Specialist</option>
-                                        <option value="0">Cardiology Specialist</option>
+                                        <option value="Cardiology Specialist">Cardiology Specialist</option>
                                     </select>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Assigned Ward</label>
-                                    <select className="form-control" name="status" >
+                                    <select className="form-control" name="status" value={ward} onChange={(e) => {
+                                        setWard(e.target.value);
+                                    }} >
                                         <option value="">--Select Assigned Ward--</option>
-                                        <option value="1">Cardiology Ward o1</option>
-                                        <option value="0">Cardiology Ward o2</option>
+                                        <option value="Cardiology Ward 01">Cardiology Ward 01</option>
+                                        <option value="0">Cardiology Ward 02</option>
                                     </select>
                                 </div>
                             </div>
@@ -95,7 +198,7 @@ function ViewDocDetail () {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                 {/* <label className="form-lable"></label> */}
-                                    <button style={{marginLeft:'280px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
+                                    <a href="/alldoc"><button style={{marginLeft:'280px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></a> &nbsp;
                                     
                                     <button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary btn-lg">Update</button>
                                 </div>
@@ -117,7 +220,7 @@ function ViewDocDetail () {
                     </div> <br />
                     <div>
 
-        <table class="table" celled>
+                    <table class="table" celled>
                     <thead>
                     <tr>
                         <th scope="col">ID</th>

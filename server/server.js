@@ -1,5 +1,6 @@
 const apiErrorHandler = require("./utilities/Errors/errorHandler");
 const express = require('express');
+var cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require("cors");
@@ -11,7 +12,7 @@ const app = express();
 app.use(cors());
 // Middleware
 app.use(bodyParser.json());
-
+app.use(cookieParser())
 
 const port = process.env.PORT || 5000;
 const DB_URL=process.env.DB_URL;
@@ -30,6 +31,7 @@ const drugRoutes = require('./api/routes/drug_routes');
 const patientRoutes = require ('./api/routes/patient_routes');
 const bedRoutes = require('./api/routes/bed_routes');
 const userRoutes = require('./api/routes/admin_Routes');
+const reportRoutes = require ('./api/routes/reports_router')
 
 // Use main routes file
 app.use('/api/adminDashboard', adminDashboardRoutes);
@@ -38,6 +40,7 @@ app.use('/api/drugs',drugRoutes);
 app.use('/api/patient',patientRoutes);
 app.use('/api/bed',bedRoutes);
 app.use('/api/admin',userRoutes);
+app.use('/api/reports',reportRoutes)
 
 //Error handle function
 app.use(apiErrorHandler);

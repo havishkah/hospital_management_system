@@ -1,12 +1,18 @@
 const mongoose = require("mongoose");
-const Drug = require("../models/drugs");
+const Drug = require('../models/drugs');
+const ApiError = require("../../utilities/Errors/errors");
 
-const createaDrug = (req, res) => {
+const {
+  verifyInputs,
+  validateInputs,
+} = require("../../utilities/data_validation")
+
+const createDrug = (req, res) => {
   try {
     data = req.body;
 
     const verifiedResult = verifyInputs(
-      ["drugName", "type", "qty"],
+      ["drugName", "type", "qty","status"],
 
       data
     );
@@ -21,7 +27,7 @@ const createaDrug = (req, res) => {
       return;
     }
     const validatedResult = validateInputs(
-      ["drugName", "type", "qty"],
+      ["drugName", "type", "qty","status"],
 
       data
     );
@@ -31,25 +37,22 @@ const createaDrug = (req, res) => {
       return;
     }
 
-    let drugName = data.drugName;
-    let type = data.type;
-    let qty = data.qty;
-
     const drug = new Drug({
-      drugName,
-      type,
 
-      qty
-     
-
-     
+      drugName:data.drugName,
+      type:data.type,
+      qty:data.qty,
+      status:data.status     
 
     });
     return drug.save().then(() => {
-      res.json(200).json({ error: "Adding new doctor failed" });
+      res.json(200).json({ error: "Adding new drug failed" });
+    }).catch((e) => {
+       console.log(e)
+       next(e)
     });
   } catch (error) {
-    res.status(500).json(error);
+    next(error)
   }
 };
 
@@ -64,7 +67,7 @@ const getDrug = async (req, res) => {
     return res.status(404).json({ error: "No such drug" });
   }
 
-  const drug = await Drug.findbyid(id);
+  const drug = await Drug.findById(id);
 
   if (!drug) {
     return res.status(404).json({ error: "No such drug" });
@@ -74,13 +77,13 @@ const getDrug = async (req, res) => {
 };
 
 const deleteDrugbyid = async (req, res) => {
-  const { id } = req.params;
-
+  const id  = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such Drug details" });
   }
 
-  const drug = await Doctor.findOneAndDelete({ _id: id });
+
+  const drug = await Drug.findByIdAndDelete( id );
 
   if (!drug) {
     return res.status(404).json({ error: "No such Drug details" });
@@ -96,7 +99,7 @@ const updateaDoctorbyID = async (req, res) => {
     return res.status(404).json({ error: "No such drug" });
   }
 
-  const drug = await Doctor.findOneAndUpdate(
+  const drug = await Drug.findOneAndUpdate(
     { _id: id },
     {
       ...req.body,
@@ -111,7 +114,7 @@ const updateaDoctorbyID = async (req, res) => {
 };
 
 module.exports = {
-  createDrug: createaDrug,
+  createDrug: createDrug,
   getAlldrugs: getAlldrugdetails,
   deleteDrug: deleteDrugbyid,
   updatedrug: updateaDoctorbyID,
