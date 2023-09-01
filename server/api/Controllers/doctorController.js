@@ -1,4 +1,3 @@
-
 const ApiError = require("../../utilities/Errors/errors");
 const mongoose = require('mongoose')
 const Doctor = require('../models/doctor');
@@ -8,7 +7,7 @@ const {
     validateInputs,
 } = require("../../utilities/data_validation")
 
-const createaDoctor = (req, res) => {
+const createaDoctor = (req, res,next) => {
 
   try {
     data = req.body;
@@ -92,7 +91,7 @@ const createaDoctor = (req, res) => {
      
     });
     doctor.save().then(()=>{
-      res.json(200).send({error:'Added new doctor'})
+      res.status(200).json({ message: 'Added new doctor' });
     }).catch((e) => {
        console.log(e)
        next(e)
@@ -140,7 +139,7 @@ const deleteDoctorr = async (req, res) => {
 };
 
 const updateaDoctorbyID = async (req, res) => {
-  const { id } = req.params;
+  const  id  = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such doctor" });
