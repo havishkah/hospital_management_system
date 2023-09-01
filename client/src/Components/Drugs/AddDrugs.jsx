@@ -7,6 +7,7 @@ function AddDrugs () {
     const navigate = useNavigate();
     const [drugName, setDrugName] = useState('');
     const [qty, setQty] = useState('');
+    const [type, setType] = useState('');
     const service = new Service();
 
     const handleSubmit = () => {
@@ -16,7 +17,8 @@ function AddDrugs () {
 
         const newDrugs = {
             drugName: drugName,
-            qty: qty
+            qty: qty,
+            type: type
             
           
         }
@@ -57,6 +59,16 @@ function AddDrugs () {
                                     <label style={{fontSize:'14px'}} className="form-lable">Drug Amount</label>
                                     <input type="text" name="address" className="form-control" onChange={(e) => {
                                         setQty(e.target.value);
+                                    }} />
+                                </div>
+                            </div>
+
+                            
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{fontSize:'14px'}} className="form-lable">Drug Type</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setType(e.target.value);
                                     }} />
                                 </div>
                             </div>
