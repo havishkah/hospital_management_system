@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Patient = require("../models/patient");
+const ApiError = require("../../utilities/Errors/errors");
 const {
   verifyInputs,
   validateInputs,
