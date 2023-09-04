@@ -95,11 +95,11 @@ class Service {
     return res;
   }
 
-  async patch(url, id, data) {
+  async put(url, id, data) {
     if (id) {
       url = `${url}/${id}`;
     }
-    const res = await axiosInstance.patch(url, data);
+    const res = await axiosInstance.put(url, data);
     return res;
   }
 }

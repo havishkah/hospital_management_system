@@ -1,20 +1,25 @@
 import React from 'react'
 import { useState } from "react"
-import { useSignup } from "./hooks/useSignup"
+import { useLogin } from './hooks/useLogin'
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
-    const [username, setUsername] = useState('')
-    const [contact, setcontact] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const {addAdmin, isLoading, error} = useSignup()
+    const navigate = useNavigate();
 
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const {login, isLoading, error} = useLogin()
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-
-        await addAdmin(username,email,contact,password)
+       // const response=await login(username,password)
+       
+        .response(
+            alert('Logged in Successfully'))
+            navigate('/admin');
+        
+  
     }
 
 
