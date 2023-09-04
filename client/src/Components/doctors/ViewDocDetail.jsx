@@ -74,8 +74,9 @@ function loadDoctor(){
 
 //update function
 function doctorUpdate(){
-    console.log(data);
-    const respone =  service.patch(`doctor/${id}`,data)
+
+    const respone =  service.put(`doctor`,id,data)
+
       respone.then((res) => {
         console.log(res.data);
         navigate('/alldoc');

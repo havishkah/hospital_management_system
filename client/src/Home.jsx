@@ -27,6 +27,7 @@ import { ViewDrugs } from "./Components/Drugs/ViewDrugs";
 import { Signup } from "./Components/User/Signup";
 import ViewDiagnosis from "./Components/doctors/ViewDiagnosis";
 import AddDrugs from "./Components/Drugs/AddDrugs";
+import Login from "./Login";
 
 function Home() {
   const [openSidebarToggle, setOpenSidebarToggle] = React.useState(false);
@@ -42,11 +43,10 @@ function Home() {
         OpenSidebar={OpenSidebar}
       />
       </div>
-
       <div className="page-content">
         <NavBar OpenSidebar={OpenSidebar} />
-
         <Routes>
+        <Route path="/login" element={<Login />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/admin" element={<AdminDashboard />}></Route>
           <Route path="/addadmin" element={<Signup />}></Route>
@@ -56,7 +56,7 @@ function Home() {
             path="/patientdashboard"
             element={<PatientDashboard />}
           ></Route>
-          <Route path="/adddrugs" element={<AddDrugs/>}></Route>
+          <Route path="/adddrugs" element={<AddDrugs />}></Route>
           <Route
             path="/patientdiognosis"
             element={<PatientDiognosis />}
@@ -94,7 +94,7 @@ function Home() {
             element={<ViewPatientDetail />}
           ></Route>
           <Route path="/viewdiagnosis" element={<ViewDiagnosis />}></Route>
-        </Routes>
+          </Routes>
       </div>
     </div>
   );
