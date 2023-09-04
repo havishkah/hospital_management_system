@@ -74,6 +74,7 @@ function loadDoctor(){
 
 //update function
 function doctorUpdate(){
+    console.log(data);
     const respone =  service.patch(`doctor/${id}`,data)
       respone.then((res) => {
         console.log(res.data);
@@ -242,7 +243,7 @@ const filterData = value => {
                                 {/* <label className="form-lable"></label> */}
                                     <Link to='/alldoc'><button style={{marginLeft:'280px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp; 
                                     
-                                    <button style={{height:'40px', fontSize:'16px'}} type="button" onClick={() => doctorUpdate(id)}className="btn btn-primary btn-lg">Update</button>
+                                    <button style={{height:'40px', fontSize:'16px'}} type="button" onClick={doctorUpdate}className="btn btn-primary btn-lg">Update</button>
                                 </div>
                                
                             </div>
