@@ -27,6 +27,7 @@ import { ViewDrugs } from "./Components/Drugs/ViewDrugs";
 import { Signup } from "./Components/User/Signup";
 import ViewDiagnosis from "./Components/doctors/ViewDiagnosis";
 import AddDrugs from "./Components/Drugs/AddDrugs";
+import { BedDetails } from "./Components/Beds/BedDetails";
 
 function Home() {
   const [openSidebarToggle, setOpenSidebarToggle] = React.useState(false);
@@ -89,6 +90,7 @@ function Home() {
           <Route path="/viewdocpde" element={<Viewdocpde />}></Route>
           <Route path="/addpatients" element={<AddPatients />}></Route>
           <Route path="/addbeds" element={<AddBeds />}></Route>
+          <Route path="/beddetails" element={<BedDetails />}></Route>
           <Route
             path="/viewpatientdetail"
             element={<ViewPatientDetail />}
