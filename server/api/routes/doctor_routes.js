@@ -15,7 +15,7 @@ router.get("/:id", getDoctor);
 
 router.post("/add", createDoctor);
 
-router.patch("/:id", updatedoctor);
+router.put("/:id", updatedoctor);
 
 router.delete("/:id", deleteDoctor);
 
