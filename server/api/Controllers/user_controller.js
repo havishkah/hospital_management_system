@@ -29,7 +29,7 @@ const signupUser = async (req, res) =>{
 
        // const token = createToken(admin._id)
 
-        res.status(200).json({username})
+        res.status(200).json({admin})
     }catch(error){
         res.status(400).json({error: error.message})
     }
