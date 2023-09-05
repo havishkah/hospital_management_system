@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {BsSearch, BsJustify, BsPersonCircle} from 'react-icons/bs'
-import { ProfileDropdown } from './ProfileDropdown'
+// import { ProfileDropdown } from './ProfileDropdown'
 import { useLogout } from '../../hooks/useLogouthook'
 import { useNavigate } from "react-router-dom";
 
@@ -22,12 +22,11 @@ export const NavBar = ({OpenSidebar}) => {
       <div className="menu-icon">
          <BsJustify className='icon' onClick={OpenSidebar}/>
       </div>
-      <div className="navbar-left">
+      {/*<div className="navbar-left">
          <BsSearch className='icon' />
-      </div>
+  </div>*/}
       <div className="navbar-right">
-         <BsPersonCircle className='icon' onClick={() => setOpenProfile(
-          (prev) => !prev)} />
+         <BsPersonCircle className='icon'/>
          
       </div>
       <div>
@@ -35,10 +34,10 @@ export const NavBar = ({OpenSidebar}) => {
         <button className="lgoutbutton" onClick={handleLogout}> Logout </button>
       </div>
 
-         {
+         {/* {
            openProfile && <ProfileDropdown/>
          }
-      
+       */}
     </header>
     
   )

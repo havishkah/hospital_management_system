@@ -63,9 +63,6 @@ function AddDrugs () {
                                 </div>
                             </div>
 
-
-                        
-
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Drug Type</label>
@@ -75,7 +72,7 @@ function AddDrugs () {
                                 </div>
                             </div>
                             
-                              <div className="col-md-6">
+                            {/* <div className="col-md-6"> */}
                                
                              
                             <div className="col-md-6">
@@ -89,16 +86,14 @@ function AddDrugs () {
                                         <option value="Out of Stock">Out of Stock</option>
                                     </select>
 
-                                </div>
-
                             </div>
                             
                             <div className="col-md-6"></div>
                         
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                <label className="form-lable"></label>
-                                    <button style={{marginLeft:'330px',height:'40px',fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
+                                {/* <label className="form-lable"></label> */}
+                                    <button style={{marginLeft:'280px',height:'40px',fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
                                     
                                     <button style={{height:'40px',fontSize:'16px'}} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
 

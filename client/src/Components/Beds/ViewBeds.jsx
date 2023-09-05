@@ -22,6 +22,12 @@ export const ViewBeds = () => {
     });
   }
 
+  //View details function
+  function bedView(id){
+  console.log(id);
+  navigate(`/beddetails/${id}`);
+}
+
   const handlesearchArea = value => {
     setSearchText(value);
     filterData(value);   
@@ -67,12 +73,12 @@ const filterData = value => {
                     {beds.map((bed,index) => (
                             <tr key={bed._id}>
                             <td>{index+1}</td>
-                            <td>{bed.category}</td>
+                            <td>{bed.catagory}</td>
                             <td>{bed.specialist}</td>
                             <td>{bed.ward}</td>
                             <td>{bed.status}</td>
                             <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
+                            <a href={`/beddetails/${bed._id}`}><button type="button" className="btn btn-primary" onClick={() => bedView(bed._id)} style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
                             </td>
                             </tr> 
                     ))

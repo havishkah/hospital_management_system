@@ -1,11 +1,13 @@
 import React, { useState,useEffect } from 'react'
 import Service from '../../../utilities/http';
+import {Link,useNavigate} from 'react-router-dom'
 
 export const ViewPatients = () => {
 
   const [patients,setPatients] = useState([]);
   const [searchText, setSearchText] = useState('');
   const service=new Service();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getPatients();
@@ -42,6 +44,12 @@ const filterData = value => {
     }
 }
 
+//View details function
+function patientView(id){
+  console.log(id);
+  navigate(`/viewpatientdetail/${id}`)
+}
+
   return (
     <main className='main-container'>
         <div className="main-title">
@@ -57,8 +65,8 @@ const filterData = value => {
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Patient Name</th>
-                        <th scope="col">Ward Specialist</th>
-                        <th scope="col">Assigned Ward</th>
+                        <th scope="col">NIC</th>
+                        <th scope="col">Contact</th>
                         <th scope="col">Gender</th>
                         <th scope="col"></th>
                     </tr>
@@ -68,11 +76,11 @@ const filterData = value => {
                             <tr key={patient._id}>
                             <td>{index+1}</td>
                             <td>{patient.firstName} {patient.lastName}</td>
-                            <td>{patient.specialist}</td>
-                            <td>{patient.ward}</td>
+                            <td>{patient.nic}</td>
+                            <td>{patient.contact}</td>
                             <td>{patient.Gender}</td>
                             <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
+                            <Link to={`/viewpatientdetail/${patient._id}`}><button type="button" onClick={() => patientView(patient._id)} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></Link>
                             </td>
                             </tr> 
                     ))
