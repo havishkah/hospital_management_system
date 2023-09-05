@@ -59,7 +59,7 @@ const createabed = (req, res) =>{
         const bed = new Bed({
             status:data.status,
             catagory:data.catagory,
-            discription:data.description,
+            description:data.description,
             specialist:data.specialist,
             ward:data.ward
         });
@@ -110,6 +110,44 @@ const filterbed = async (req, res) => {
 
 }
 
+const updateaBedbyID = (req, res) => {
+  const id = req.params.id;
+
+  console.log(req.params);
+  const data = req.body;
+  // if (!mongoose.Types.ObjectId.isValid(id)) {
+  //   return res.status(404).json({ error: "No such doctor" });
+  // }
+
+
+  const bed = Bed.findOneAndUpdate(
+    { _id: id },
+    {
+      
+        specialist: data.specialist,
+        ward:data.ward,
+        catagory:data.catagory,
+        description:data.description,
+        status:data.status
+        
+      }
+   
+  );
+
+  bed.then((data) => {
+    console.log(data);
+    if (!data) {
+      return res.status(404).json({ error: "Unable to process" });
+    }
+    
+    res.status(201).json(data);
+  })
+  .catch((error) => {
+    console.log(error.message)
+  })
+
+};
+
 const deletebed = async (req, res) => {
   const { id } = req.params;
 
@@ -134,5 +172,6 @@ module.exports = {
     getAllbedsdetails: getAllbeds,
     getBedbyid : getBedbyID,
     getBedbyStatus: filterbed,
+    updateBed: updateaBedbyID,
     deleteBedbyId: deletebed
 }

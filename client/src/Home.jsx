@@ -90,7 +90,7 @@ function Home() {
           <Route path="/viewdocpde" element={<Viewdocpde />}></Route>
           <Route path="/addpatients" element={<AddPatients />}></Route>
           <Route path="/addbeds" element={<AddBeds />}></Route>
-          <Route path="/beddetails" element={<BedDetails />}></Route>
+          <Route path="/beddetails/:id" element={<BedDetails />}></Route>
           <Route
             path="/viewpatientdetail"
             element={<ViewPatientDetail />}

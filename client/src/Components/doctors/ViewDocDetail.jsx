@@ -59,18 +59,18 @@ function loadDoctor(){
   })
 }
 
-//    //Delete doctor
-//    function doctorDelete(){
+   //Delete doctor
+   function doctorDelete(){
     
-//     const respose = service.delete(`doctor/${id}`)
-//     respose.then(() => {
-//       alert('Are you confirm to remove doctor??');
-//       navigate('/alldoc');
-//     })
-//     .catch((err) =>{
-//        alert(err);
-//     })
-// } 
+    const respose = service.delete(`doctor`,id)
+    respose.then(() => {
+      alert('Are you confirm to remove doctor??');
+      navigate('/alldoc');
+    })
+    .catch((err) =>{
+       alert(err);
+    })
+} 
 
 //update function
 function doctorUpdate(){
@@ -98,7 +98,8 @@ function doctorUpdate(){
           console.log (res.data)
           setPatients(res.data);
         })
-        .catch((error) => {
+        .
+        catch((error) => {
           console.error('Error fetching data:', error);
         });
     
@@ -132,7 +133,7 @@ const filterData = value => {
                     <div className="col-md-12">
                     <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
                     <h5>Doctor Details</h5>
-                    <button style={{height:'40px', fontSize:'16px'}} type="button" className="btn btn-danger text-white btn-lg">Delete</button> 
+                    <button style={{height:'40px', fontSize:'16px'}} type="button" onClick={doctorDelete} className="btn btn-danger text-white btn-lg">Delete</button> 
                     </div>
                    
                     <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
