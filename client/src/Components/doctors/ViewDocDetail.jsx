@@ -93,7 +93,7 @@ function doctorUpdate(){
   const [patients,setPatients] = useState([]);
 
   function getPatients(){
-        const respone = service.get ('patient/') 
+        const respone = service.get (`patient/details/doctor/${id}`) 
         respone.then((res) => {
           console.log (res.data)
           setPatients(res.data);

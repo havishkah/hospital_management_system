@@ -82,7 +82,7 @@ function Home() {
           <Route path="/medical_rprt" element={<MedicalReport />}></Route>
           <Route path="/addbeds" element={<AddBeds />}></Route>
           <Route
-            path="/viewpatientdetail"
+            path="/viewpatientdetail/:id"
             element={<ViewPatientDetail />}
           ></Route>
           <Route path="/alldrug" element={<ViewDrugs />}></Route>
