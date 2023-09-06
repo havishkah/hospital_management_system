@@ -268,8 +268,8 @@ const filterData = value => {
                         <th scope="col">ID</th>
                         <th scope="col">Patient Name</th>
                         <th scope="col">NIC</th>
-                        <th scope="col">Word Specialist</th>
-                        <th scope="col">Assigned Wards</th>
+                        <th scope="col">Ward Specialist</th>
+                        <th scope="col">Assigned Ward</th>
                         <th scope="col">Status</th>
                         <th scope="col"></th>
                     </tr>
