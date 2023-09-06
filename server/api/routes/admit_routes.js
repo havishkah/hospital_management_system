@@ -7,7 +7,7 @@ const {
   getAdmit,
 } = require("../Controllers/admit_controller");
 
-router.post("/", admitapatient);
+router.post("/add", admitapatient);
 router.get("/", viewAdmits);
 router.get("/:id", getAdmit);
 
