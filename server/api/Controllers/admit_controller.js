@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const ApiError = require('../../utilities/Errors/errors')
 const {
   verifyInputs,
   validateInputs,
@@ -10,8 +11,19 @@ const createAdmit = (req, res) => {
   try {
     const data = req.body;
 
+    console.log(data)
+
     const verifiedResult = verifyInputs(
-      ["docName", "status", "bht", "specialist", "ward", "bed", "diagnosis"],
+      [
+        "patientid",
+        "docName", 
+        "status", 
+        "bht", 
+        "specialist", 
+        "ward", 
+        "bed", 
+        "diagnosis"
+      ],
 
       data
     );
@@ -26,7 +38,7 @@ const createAdmit = (req, res) => {
       return;
     }
     const validatedResult = validateInputs(
-      ["docName", "status", "bht", "specialist", "ward", "bed", "diagnosis"],
+      ["patientid","docName", "status", "bht", "specialist", "ward", "bed", "diagnosis"],
 
       data
     );
@@ -47,14 +59,11 @@ const createAdmit = (req, res) => {
       diagnosis: data.diagnosis,
     });
 
-    admit.then((data) => {
-      console.log(data);
-      if (!data) {
-        return res.status(404).json({ error: "Unable to process" });
-      }
-      
-      res.status(201).json(data);
+     return admit.save().then(()=>{
+      res.status(200).json('record added successfully');
     })
+      
+    
   } catch (error) {
     res.status(500).json(error);
   }
