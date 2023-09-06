@@ -67,6 +67,7 @@ function patientView(id){
                         <th scope="col">Patient Name</th>
                         <th scope="col">NIC</th>
                         <th scope="col">Contact</th>
+                        <th scope="col">DOB</th>
                         <th scope="col">Gender</th>
                         <th scope="col"></th>
                     </tr>
@@ -78,6 +79,7 @@ function patientView(id){
                             <td>{patient.firstName} {patient.lastName}</td>
                             <td>{patient.nic}</td>
                             <td>{patient.contact}</td>
+                            <td>{patient.Dob}</td>
                             <td>{patient.Gender}</td>
                             <td>
                             <Link to={`/viewpatientdetail/${patient._id}`}><button type="button" onClick={() => patientView(patient._id)} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></Link>
