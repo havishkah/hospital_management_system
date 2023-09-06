@@ -13,11 +13,15 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-       // const response=await login(username,password)
+       const response= login(username,password)
        
-        .response(
-            alert('Logged in Successfully'))
-            navigate('/admin');
+        response.then(() =>{
+            localStorage.setItem("role",1)
+            alert('Logged in Successfully')
+            navigate('/admin')
+        }).catch((error) => {
+            console.log(error);
+        });
         
   
     }
