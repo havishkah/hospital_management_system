@@ -105,10 +105,27 @@ const getByDoctor = async (req, res) => {
   }
 };
 
+const deletePrescription = async (req, res) => {
+  const id = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Doctor details" });
+  }
+
+  const prescription = await Prescription.findByIdAndDelete({ _id: id });
+
+  if (!prescription) {
+    return res.status(404).json({ error: "No such Doctor details" });
+  }
+
+  res.status(201).json(prescription)
+}
+
 module.exports = {
   addPrescription: createPrescription,
   getaPrescription: getPrescriptionbyid,
   viewPrescription: getAllprescriptionsdetails,
-  viewbyPatent: getAllprescriptionsbypatient,
+  viewbyPatient: getAllprescriptionsbypatient,
   viewbyDoctor: getByDoctor,
+  removePrescription: deletePrescription
 };

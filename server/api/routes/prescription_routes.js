@@ -5,11 +5,16 @@ const {
     addPrescription,
     getaPrescription,
     viewPrescription,
-    viewbyPatent,
-    viewbyDoctor
+    viewbyPatient,
+    viewbyDoctor,
+    removePrescription
   } = require('../Controllers/prescription_controller');
 
 router.post('/add', addPrescription)
-
-router.get()
+router.get('/',viewPrescription)
+router.get('/:id', getaPrescription)
+router.get('/:patientid', viewbyPatient)
+router.get('/:doctorid',viewbyDoctor)
+router.delete('/:id',removePrescription)
   
+module.exports = router
