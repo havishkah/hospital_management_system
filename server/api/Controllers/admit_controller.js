@@ -94,6 +94,18 @@ const deleteAdmit = async (req, res) => {
   }
 
   res.status(200).json(admit);
+};
+
+const viewAdmitsbystatus = async (req,res) =>{
+  const status = req.body
+
+  const admit = await Admit.find({status: status});
+  res.status(200).json(admit);
+
+  if (!admit) {
+    return res.status(404).json({ error: "no prescriptions found" });
+  }
+
 }
 
 const updateaAdmitbyID = (req, res) => {
