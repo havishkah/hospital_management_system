@@ -21,33 +21,21 @@ function ViewPatientDetail() {
     const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
-    // const [docName, setDocName] = useState('');
-    // const [bht, setBht] = useState('');
-    // const [specialist, setSpecialist] = useState('');
-    // const [ward, setWard] = useState('');
-    // const [bed, setBed] = useState('');
-    // const [diagnosis, setDiagnosis] = useState('');
 
-    const data = {
-        firstName: firstName,
-        lastName: lastName,
-        initials: initials,
-        Dob: dob,
-        Gender: gender,
-        Age: age,
-        nic: nic,
-        email: email,
-        address: address,
-        contact: contact,
-        emergencycont: emergencycont,
-        // docName:docName,
-        // bht:bht,
-        // specialist:specialist,
-        // ward:ward,
-        // bed:bed,
-        // diagnosis:diagnosis
+    // const data = {
+    //     firstName: firstName,
+    //     lastName: lastName,
+    //     initials: initials,
+    //     Dob: dob,
+    //     Gender: gender,
+    //     Age: age,
+    //     nic: nic,
+    //     email: email,
+    //     address: address,
+    //     contact: contact,
+    //     emergencycont: emergencycont,
       
-    }
+    // }
 
     //loading existing data to form
     useEffect(() =>{
@@ -69,12 +57,6 @@ function ViewPatientDetail() {
                  setAddress(res.data.address);
                  setContact(res.data.contact);
                  setEmergencycont(res.data.emergencycont);
-                //  setDocName(res.data.docName);
-                //  setBht(res.data.bht)
-                //  setSpecialist(res.data.specialist);
-                //  setWard(res.data.ward);
-                //  setBed(res.data.bed);
-                //  setDiagnosis(res.data.diagnosis);
 
          }).catch((err) =>{
                alert(err);
@@ -109,6 +91,37 @@ function ViewPatientDetail() {
         })
     } 
 
+    //admit a patient
+    const [docName, setDocName] = useState('');
+    const [bht, setBht] = useState('');
+    const [specialist, setSpecialist] = useState('');
+    const [ward, setWard] = useState('');
+    const [bed, setBed] = useState('');
+    const [status, setStatus] = useState('');
+    const [diagnosis, setDiagnosis] = useState('');
+
+    const handleSubmit = () => {
+
+    const admitedPatient = {
+        docName:docName,
+        bht:bht,
+        specialist:specialist,
+        ward:ward,
+        bed:bed,
+        status:status,
+        diagnosis:diagnosis
+    }
+
+    const respone = service.post(`admit/add`, admitedPatient)
+        respone.then((res) => {
+            console.log(res);
+            alert('Patient admited Successfully');
+            navigate('/admitpatient');
+        }).catch((error) => {
+            console.error('Error with adding data:', error);
+        });
+
+    }
 
   return (
 
@@ -230,7 +243,9 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Doctor Name</label>
-                                    <select className="form-control" name="status">
+                                    <select className="form-control" name="status" onChange={(e) => {
+                                        setDocName(e.target.value);
+                                    }}>
                                         <option value="">--Select Doctor Name--</option>
                                         {doctors.map((doctor) => (
                                             <option value={doctor._id}>Dr. {doctor.firstName + " " + doctor.lastName}</option>
@@ -242,13 +257,17 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">BHT No</label>
-                                    <input type="text" name="address" className="form-control"/>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setBht(e.target.value);
+                                    }}/>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Ward Specialist</label>
-                                    <select className="form-control" name="status">
+                                    <select className="form-control" name="status" onChange={(e) => {
+                                        setSpecialist(e.target.value);
+                                    }}>
                                         <option value="">--Select Ward Specialist--</option>
                                         <option value="Cardiology Specialist">Cardiology Specialist</option>
                                     </select>
@@ -257,7 +276,9 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Assigned Ward</label>
-                                    <select className="form-control" name="status">
+                                    <select className="form-control" name="status" onChange={(e) => {
+                                        setWard(e.target.value);
+                                    }}>
                                         <option value="">--Select Assigned Ward--</option>
                                         <option value="Cardiology Ward 01">Cardiology Ward 01</option>
                                         <option value="1">Cardiology Ward 02</option>
@@ -268,7 +289,9 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable"> Ward Bed</label>
-                                    <select className="form-control" name="status">
+                                    <select className="form-control" name="status" onChange={(e) => {
+                                        setBed(e.target.value);
+                                    }}>
                                         <option value="">--Select Ward Bed--</option>
                                         <option value="Electrical">Cardiology Ward 01-Electrical</option>
                                         <option value="Semi-Electrical">Cardiology Ward 01-Semi-Electrical</option>
@@ -278,14 +301,25 @@ function ViewPatientDetail() {
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Status</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setStatus(e.target.value);
+                                    }}/>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Diagnosis</label>
-                                    <textarea rows="4" cols="50" type="text" name="address" className="form-control" />
+                                    <textarea rows="4" cols="50" type="text" name="address" className="form-control" onChange={(e) => {
+                                        setDiagnosis(e.target.value);
+                                    }} />
                                 </div>
                             </div>
                             
                             <div className="col-md-6">
-                               
-                             
+                            </div>
+
+                            <div className="col-md-6">
                             </div>
                          
                             <div className="col-md-6">
@@ -293,7 +327,7 @@ function ViewPatientDetail() {
                                 <label className="form-lable"></label>
                                     <Link to='/allpatient'><button style={{marginLeft:'320px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
                                     
-                                    <button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary btn-lg">Admit</button>
+                                    <button style={{height:'40px', fontSize:'16px'}} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Admit</button>
                                 </div>
                                
                             </div>

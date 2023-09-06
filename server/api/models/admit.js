@@ -39,5 +39,5 @@ const admitSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Admit = new mongoose.model("bed", bedSchema);
+const Admit = new mongoose.model("admit", admitSchema);
 module.exports = Admit;
