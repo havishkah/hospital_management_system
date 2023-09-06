@@ -92,6 +92,7 @@ function ViewPatientDetail() {
     } 
 
     //admit a patient
+    const [patientid,setPatientid] = useState('');
     const [docName, setDocName] = useState('');
     const [bht, setBht] = useState('');
     const [specialist, setSpecialist] = useState('');
@@ -103,6 +104,7 @@ function ViewPatientDetail() {
     const handleSubmit = () => {
 
     const admitedPatient = {
+        patientid:patientid,
         docName:docName,
         bht:bht,
         specialist:specialist,
