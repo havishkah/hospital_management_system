@@ -22,6 +22,8 @@ export const ViewDoctors = () => {
     });
   }
 
+
+  //search function
   const handlesearchArea = value => {
     setSearchText(value);
     filterData(value);   
@@ -74,7 +76,7 @@ function doctorView(id){
                             <td>{index+1}</td>
                             <td>{doctor.firstName} {doctor.lastName}</td>
                             <td>{doctor.specialist}</td>
-                            <td>Cardiology Ward 01</td>
+                            <td>{doctor.ward}</td>
                             <td className='text-center'>03</td>
                             <td>
                             <a href={`/viewdocd/${doctor._id}`}><button type="button" onClick={() => doctorView(doctor._id)} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>

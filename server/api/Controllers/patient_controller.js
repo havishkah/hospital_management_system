@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Patient = require("../models/patient");
+const ApiError = require("../../utilities/Errors/errors");
 const {
   verifyInputs,
   validateInputs,
@@ -23,13 +24,7 @@ const createaPatient = (req, res) => {
           "contact",
           "email",
           "address",
-          "emergencycont",
-          "docName",
-          "bht",
-          "specialist",
-          "ward",
-          "bed",
-          "diagnosis"
+          "emergencycont"
         ],
   
         data
@@ -63,13 +58,7 @@ const createaPatient = (req, res) => {
           "contact",
           "email",
           "address",
-          "emergencycont",
-          "docName",
-          "bht",
-          "specialist",
-          "ward",
-          "bed",
-          "diagnosis"
+          "emergencycont"
         ],
   
         data
@@ -95,13 +84,7 @@ const createaPatient = (req, res) => {
       contact: data.contact,
       email : data.email,
       address : data.address,
-      emergencycont : data.emergencycont,
-      docName:data.docName,
-      bht:data.bht,
-      specialist:data.specialist,
-      ward:data.ward,
-      bed:data.bed,
-      diagnosis:data.diagnosis
+      emergencycont : data.emergencycont
     });
     return patient.save().then(() => {
       res.json(200);
@@ -122,7 +105,7 @@ const getPatient = async (req, res) => {
     return res.status(404).json({ error: "No such workout" });
   }
 
-  const patient = await Patient.findbyid(id);
+  const patient = await Patient.findById(id);
 
   if (!patient) {
     return res.status(404).json({ error: "No such workout" });
@@ -160,7 +143,7 @@ const deletePatient = async (req, res) => {
     return res.status(404).json({ error: "No such Patient details" });
   }
 
-  res.status(200).json(doctor);
+  res.status(200).json(patient);
 };
 
 const updateaPatientbyID = async (req, res) => {
@@ -184,6 +167,24 @@ const updateaPatientbyID = async (req, res) => {
   res.status(200).json(patient);
 };
 
+const getPatientbyDoctorID =  (req, res) => {
+  const { id } = req.params;
+
+
+  const patient =  Patient.find(
+    { docName: id },
+  
+  );
+  patient.then((data) => {
+
+     console.log(data);
+     res.status(200).json(data);
+
+  }).catch((e)=>{
+     console.log(e);
+  })
+
+};
 
 module.exports = {
   createPatient: createaPatient,
@@ -191,5 +192,6 @@ module.exports = {
   deletePatient: deletePatient,
   updatePatient: updateaPatientbyID,
   getPatientbyNic: getbyNic,
+  getPatientbyDoctorID,
   getPatient: getPatient,
 };

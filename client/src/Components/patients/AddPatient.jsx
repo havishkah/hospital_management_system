@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Service from '../../../utilities/http';
 import { useNavigate } from "react-router-dom";
 
-function AddPatient () {
+function AddPatient() {
 
     const navigate = useNavigate();
+    const [doctors, setDoctors] = useState([]);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [initials, setInitials] = useState('');
@@ -16,12 +17,7 @@ function AddPatient () {
     const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
-    const [docName, setDocName] = useState('');
-    const [bht, setBht] = useState('');
-    const [specialist, setSpecialist] = useState('');
-    const [ward, setWard] = useState('');
-    const [bed, setBed] = useState('');
-    const [diagnosis, setDiagnosis] = useState('');
+    
     const service = new Service();
 
     const handleSubmit = () => {
@@ -40,17 +36,11 @@ function AddPatient () {
             email: email,
             address: address,
             contact: contact,
-            emergencycont: emergencycont,
-            docName:docName,
-            bht:bht,
-            specialist:specialist,
-            ward:ward,
-            bed:bed,
-            diagnosis:diagnosis
-          
+            emergencycont: emergencycont
+
         }
 
-        const respone =  service.post('patient/add', newPatient)
+        const respone = service.post('patient/add', newPatient)
         respone.then((res) => {
             console.log(res);
             alert('Patient added Successfully');
@@ -61,22 +51,37 @@ function AddPatient () {
 
     }
 
+    React.useEffect(() => {
+        getDoctors();
+    }, []);
+
+    function getDoctors() {
+        const respone = service.get('doctor/')
+        respone.then((res) => {
+            console.log(res.data)
+            setDoctors(res.data);
+        })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }
 
 
 
-  return (
+
+    return (
 
 
-      <main className="main-container">
-                <div className="row">
-                    <div className="col-md-12">
+        <main className="main-container">
+            <div className="row">
+                <div className="col-md-12">
                     <h5 className="mt-2">Add Patients</h5>
-                    <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
+                    <p className="mt-3" style={{ color: 'grey' }}>Basic Infromation</p>
                     <form>
                         <div className="row">
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">First name</label>
+                                    <label style={{ fontSize: '14px' }} className="form-lable">First name</label>
                                     <input type="text" name="username" className="form-control" onChange={(e) => {
                                         setFirstName(e.target.value);
                                     }} />
@@ -84,7 +89,7 @@ function AddPatient () {
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Last Name</label>
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Last Name</label>
                                     <input type="text" name="email" className="form-control" onChange={(e) => {
                                         setLastName(e.target.value);
                                     }} />
@@ -92,15 +97,15 @@ function AddPatient () {
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}}className="form-lable">Name with Initials</label>
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Name with Initials</label>
                                     <input type="text" name="phone" className="form-control" onChange={(e) => {
                                         setInitials(e.target.value);
-                                    }}/>
+                                    }} />
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Date of Birth</label>
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Date of Birth</label>
                                     <input type="date" name="address" className="form-control" onChange={(e) => {
                                         setDob(e.target.value);
                                     }} />
@@ -108,7 +113,7 @@ function AddPatient () {
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Nic</label>
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Nic</label>
                                     <input type="text" name="address" className="form-control" onChange={(e) => {
                                         setNic(e.target.value);
                                     }} />
@@ -116,7 +121,7 @@ function AddPatient () {
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Gender</label>
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Gender</label>
                                     <select className="form-control" onChange={(e) => {
                                         setGender(e.target.value);
                                     }} name="status" >
@@ -128,16 +133,16 @@ function AddPatient () {
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Age</label>
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Age</label>
                                     <input type="text" name="address" className="form-control" onChange={(e) => {
                                         setAge(e.target.value);
                                     }} />
                                 </div>
                             </div>
-                            <p className="mt-3" style={{color:'grey'}}>Contact Infromation</p>
+                            <p className="mt-3" style={{ color: 'grey' }}>Contact Infromation</p>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Contact Number</label>
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Contact Number</label>
                                     <input type="text" name="address" className="form-control" onChange={(e) => {
                                         setContact(e.target.value);
                                     }} />
@@ -145,7 +150,7 @@ function AddPatient () {
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Email</label>
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Email</label>
                                     <input type="text" name="address" className="form-control" onChange={(e) => {
                                         setEmail(e.target.value);
                                     }} />
@@ -153,7 +158,7 @@ function AddPatient () {
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Address</label>
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Address</label>
                                     <input type="text" name="address" className="form-control" onChange={(e) => {
                                         setAddress(e.target.value);
                                     }} />
@@ -161,102 +166,36 @@ function AddPatient () {
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Emergency Contact Number</label>
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Emergency Contact Number</label>
                                     <input type="text" name="address" className="form-control" onChange={(e) => {
                                         setEmergencycont(e.target.value);
                                     }} />
                                 </div>
                             </div>
-                             <p className="mt-3" style={{color:'grey'}}>Other Infromation</p>
+                           
+                            <div className="col-md-6">
+
+
+                            </div>
+
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Doctor Name</label>
-                                    <select className="form-control"  name="status" onChange={(e) => {
-                                        setDocName(e.target.value);
-                                    }}>
-                                        <option value="">--Select Doctor Name--</option>
-                                        <option value="Dr. Kamal">Dr. Kamal</option>
-                                     
-                                    </select>
+                                    <label className="form-lable"></label>
+                                    <button style={{ marginLeft: '320px', height: '40px', fontSize: '16px' }} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
+
+                                    <button style={{ height: '40px', fontSize: '16px' }} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
                                 </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">BHT No</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
-                                        setBht(e.target.value);
-                                    }} />
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Ward Specialist</label>
-                                    <select className="form-control"  name="status" onChange={(e) => {
-                                        setSpecialist(e.target.value);
-                                    }}>
-                                        <option value="">--Select Ward Specialist--</option>
-                                        <option value="Cardiology Specialist">Cardiology Specialist</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Assigned Ward</label>
-                                    <select className="form-control"  name="status" onChange={(e) => {
-                                        setWard(e.target.value);
-                                    }}>
-                                        <option value="">--Select Assigned Ward--</option>
-                                        <option value="Cardiology Ward 01">Cardiology Ward 01</option>
-                                        <option value="1">Cardiology Ward 02</option>
-                                        <option value="1">Cardiology Ward 02</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable"> Ward Bed</label>
-                                    <select className="form-control"  name="status" onChange={(e) => {
-                                        setBed(e.target.value);
-                                    }} >
-                                        <option value="">--Select Ward Bed--</option>
-                                        <option value="Electrical">Cardiology Ward 01-Electrical</option>
-                                        <option value="Semi-Electrical">Cardiology Ward 01-Semi-Electrical</option>
-                                        <option value="Non-Electrical">Cardiology Ward 01-Non-Electrical</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Diagnosis</label>
-                                    <textarea rows="4" cols="50" type="text" name="address" className="form-control" onChange={(e) => {
-                                        setDiagnosis(e.target.value);
-                                    }} />
-                                </div>
-                            </div>
-                            
-                            <div className="col-md-6">
-                               
-                             
-                            </div>
-                        
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                <label className="form-lable"></label>
-                                    <button style={{marginLeft:'320px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
-                                    
-                                    <button style={{height:'40px', fontSize:'16px'}} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
-                                </div>
-                               
+
                             </div>
 
                         </div>
                     </form>
-                    </div>
                 </div>
-            </main>
-        
+            </div>
+        </main>
 
-  )
+
+    )
 }
 
 export default AddPatient

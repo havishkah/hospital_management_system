@@ -1,5 +1,6 @@
 const Admin = require('../models/admin')
 const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser');
 
 const createToken = (_id) =>{
    return jwt.sign({_id}, process.env.JWTSECRETE, {expiresIn: '1d'})
@@ -12,19 +13,19 @@ const loginUser = async (req, res) =>{
     try {
         const admin = await Admin.login(username, password)
 
-        const token = createToken(admin._id)
+        const token = createToken(admin._id,admin.accesType)
         res.cookie("token", token);
-        res.status(200).json({username, token})
+        res.status(200).json({username, cokkie})
     } catch (error) {
         res.status(400).send(error)
     }
 };
 
 const signupUser = async (req, res) =>{
-    const { username,email,contact, password } = req.body
+    const { username,email,accesType, contact, password } = req.body
 
     try{
-        const admin = await Admin.signup(username,email,contact, password, )
+        const admin = await Admin.signup(username,email,accesType, contact, password, )
 
        // const token = createToken(admin._id)
 
@@ -35,7 +36,15 @@ const signupUser = async (req, res) =>{
     
 };
 
+const getUsers = async (req,res) =>{
+    const admin = await Admin.find({});
+    res.status(200).json(admin);
+};
+
+
+
 module.exports = {
     signup: signupUser,
-    login: loginUser
+    login: loginUser,
+    viewUsers: getUsers
 }
