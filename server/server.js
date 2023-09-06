@@ -34,7 +34,6 @@ const userRoutes = require('./api/routes/admin_Routes');
 const reportRoutes = require ('./api/routes/reports_router');
 const prescriptionRoutes = require ('./api/routes/prescription_routes');
 const admitRoutes = require('./api/routes/admit_routes')
-//const admitRoutes = require('./api/routes/admit_routes')
 
 // Use main routes file
 app.use('/api/adminDashboard', adminDashboardRoutes);
