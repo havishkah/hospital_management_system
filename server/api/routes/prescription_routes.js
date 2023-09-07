@@ -7,7 +7,8 @@ const {
     viewPrescription,
     viewbyPatient,
     viewbyDoctor,
-    removePrescription
+    removePrescription,
+    editPrescription
   } = require('../Controllers/prescription_controller');
 
 router.post('/add', addPrescription)
@@ -16,5 +17,6 @@ router.get('/:id', getaPrescription)
 router.get('/:patientid', viewbyPatient)
 router.get('/:doctorid',viewbyDoctor)
 router.delete('/:id',removePrescription)
+router.put('/:id',editPrescription)
   
 module.exports = router
