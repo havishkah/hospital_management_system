@@ -29,6 +29,8 @@ import ViewDiagnosis from "./Components/doctors/ViewDiagnosis";
 import AddDrugs from "./Components/Drugs/AddDrugs";
 import { BedDetails } from "./Components/Beds/BedDetails";
 import Login from "./Login";
+import { AdmitPatient } from "./Components/patients/AdmitPatient";
+import { DischargePatientd } from "./Components/patients/DischargePatientd";
 
 function Home() {
   const [openSidebarToggle, setOpenSidebarToggle] = React.useState(false);
@@ -53,6 +55,8 @@ function Home() {
           <Route path="/addadmin" element={<Signup />}></Route>
           <Route path="/alldoc" element={<ViewDoctors />}></Route>
           <Route path="/doctor" element={<DoctorDashboard />}></Route>
+          <Route path="/admitpatients" element={<AdmitPatient/>}></Route>
+          <Route path="/dischargepatientsd" element={<DischargePatientd/>}></Route>
           <Route
             path="/patientdashboard"
             element={<PatientDashboard />}
