@@ -1,6 +1,4 @@
-const ApiError = require("../../utilities/Errors/errors");
-const logger = require("../../utilities/logger");
-const path = require("path");
+const mongoose = require('mongoose')
 const Report = require("../models/reports");
 const fs = require("fs");
 
@@ -9,85 +7,96 @@ const {
   validateInputs,
 } = require("../../utilities/data_validation");
 
-const reportUpload = (req, res, next) => {
-  try {
-    logger.info(`Report uploaded. ${(req.file.filename, req.file.path)}`);
-    return res.status(201).json({
-      message: "report uploaded successfully",
-    });
-  } catch (error) {
-    next(error);
-  }
-};
 
 const createReport = (req, res, next) => {
-  const data = req.body;
+  const { title, type, patientid,doctorid} = req.body;
+  
+  
+   if (!req.file) {
+    return res.status(400).json({ message: 'No file uploaded' });
+   }
 
-  reportUpload()
+  const originalname = req.file.originalname;
+  const file = `documents/${req.file.filename}`;
 
-  const verifiedResult = verifyInputs(
-    ["title", "type", "file", "patientid", "doctorid"],
-    data
-  );
+  // const verifiedResult = verifyInputs(
+  //   ["title", "type", "file", "patientid", "doctorid"],
+       // data
+  // );
 
-  if (verifiedResult == false) {
-    next(
-      ApiError.badRequest(
-        "The request parameters are not properly formatted or are missing required fields."
-      )
-    );
-    return;
-  }
+  // if (verifiedResult == false) {
+  //   next(
+  //     ApiError.badRequest(
+  //       "The request parameters are not properly formatted or are missing required fields."
+  //     )
+  //   );
+  //   return;
+  // }
 
-  const validatedResult = validateInputs(
-    ["title", "type", "file", "patientid", "doctorid"],
-    data
-  );
+  // const validatedResult = validateInputs(
+  //   ["title", "type", "file", "patientid", "doctorid"],
+  // );
 
-  if (validatedResult == false) {
-    next(ApiError.badRequest("The request is missing required data."));
-    return;
-  }
+  // if (validatedResult == false) {
+  //   next(ApiError.badRequest("The request is missing required data."));
+  //   return;
+  // }
 
   const report = new Report({
-    title: data.title,
-    type: data.type,
-    file: data.file,
-    patientid: data.patientid,
-    doctorid: data.doctorid,
+    title ,
+    type ,
+    file,
+    patientid,
+    doctorid,
   });
   return report.save().then(() => {
-    res.json(200);
+    res.status(200).json("Report Saved Successfully");
   });
 };
 
-const reportRetrieve = (req, res, next) => {
-  const nic = req.params.nic;
+const getAllReoprts = async (req,res) =>{
+  const report = await Report.find({}).sort({createdAt: -1});
+  res.status(200).json(report);
+};
 
-  const Path = path.resolve(__dirname, `../../documents/reports/${nic}.png`);
-  const Path2 = path.resolve(__dirname, `../../documents/reports/${nic}.jpg`);
-  const Path3 = path.resolve(__dirname, `../../documents/reports/${nic}.pdf`);
-  const Path4 = path.resolve(__dirname, `../../documents/reports/${nic}.jpeg`);
+const getByPaitent = async (req, res) => {
+  const { patientid } = req.params;
 
-  fs.readFile(Path, function (err, data) {
-    if (err) {
-      fs.readFile(Path2, function (err, data) {
-        if (err) {
-          next(err);
-        } else {
-          res.writeHead(200, { ContentType: "image/jpg" });
-          res.end(data);
-        }
-      });
-    } else {
-      res.writeHead(200, { ContentType: "image/png" });
-      res.end(data);
+  try {
+    const report = await Report.find({patientid:patientid})
+
+    if(!report){
+      return res.status(404).json({error: "No such Report found"})
     }
-  });
+
+    res.status(200).json(report)
+  } catch (error) {
+    res.status(500).json({error: "internal Server error"})
+  }
+
 };
+
+const deleteRepotsByid = async (req,res) => {
+  try {
+    const id = req.params.id;
+    const report = await Report.findByIdAndDelete(id);
+
+    if (!report) {
+      return res.status(404).json({ message: 'File not found' });
+    }
+
+    res.json({ message: 'File deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting file:', error);
+    res.status(500).json({ message: 'Error deleting file' });
+  }
+}
+
 
 module.exports = {
   addReport: createReport,
-  reportUpload: reportUpload,
-  reportRetrieve: reportRetrieve,
+  viewAllreports: getAllReoprts,
+  viewPaitentReports: getByPaitent,
+  removeReport: deleteRepotsByid
+  //reportRetrieve: reportRetrieve,
 };

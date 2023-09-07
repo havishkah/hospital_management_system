@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
-const Prescription = require("mongoose");
+const Prescription = require("../models/prescription");
 const ApiError = require("../../utilities/Errors/errors");
 const {
   verifyInputs,
   validateInputs,
 } = require("../../utilities/data_validation");
+const Admit = require("../models/admit");
 
 const createPrescription = (req, res) => {
   try {
@@ -54,8 +55,8 @@ const createPrescription = (req, res) => {
 };
 
 const getAllprescriptionsdetails = async (req, res) => {
-  const prescription = await Patient.find({});
-  res.status(200).json(patient);
+  const prescription = await Prescription.find({}).sort({createdAt: -1});
+  res.status(200).json(prescription);
 };
 
 const getPrescriptionbyid = async (req, res) => {
@@ -118,8 +119,41 @@ const deletePrescription = async (req, res) => {
     return res.status(404).json({ error: "No such Doctor details" });
   }
 
-  res.status(201).json(prescription)
-}
+  res.status(201).json(prescription);
+};
+
+const updateprescripByID = (req, res) => {
+  const id = req.params.id;
+
+  console.log(req.params);
+  const data = req.body;
+  // if (!mongoose.Types.ObjectId.isValid(id)) {
+  //   return res.status(404).json({ error: "No such doctor" });
+  // }
+
+  const admit = Admit.findOneAndUpdate(
+    { _id: id },
+    {
+      diagnosis: data.diagnosis,
+      frequency: data.frequency,
+      dosage: data.dosage,
+      qty: data.qty,
+    }
+  );
+
+  admit
+    .then((data) => {
+      console.log(data);
+      if (!data) {
+        return res.status(404).json({ error: "Unable to process" });
+      }
+
+      res.status(201).json(data);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
 
 module.exports = {
   addPrescription: createPrescription,
@@ -127,5 +161,6 @@ module.exports = {
   viewPrescription: getAllprescriptionsdetails,
   viewbyPatient: getAllprescriptionsbypatient,
   viewbyDoctor: getByDoctor,
-  removePrescription: deletePrescription
+  removePrescription: deletePrescription,
+  editPrescription: updateprescripByID
 };

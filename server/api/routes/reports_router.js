@@ -1,14 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const Report = require('../middleware/document/reoprts');
+const Report = require('../middleware/document/reports');
 
 const{
-   reportUpload,
-   addReport
+  addReport,
+  viewAllreports,
+  viewPaitentReports,
+  removeReport
 } = require('../Controllers/report_controller')
 
-router.post('/report/:nic', Report.single("report"), reportUpload)
-router.post('/addreport',addReport)
+router.post('/', Report.single("report"), addReport)
+router.get('/',viewAllreports)
+router.delete('/:id',removeReport)
+router.get('/:patientid',viewPaitentReports)
 
 //router.get('/report/:nic')
 
