@@ -126,6 +126,12 @@ const filterData = value => {
     }
 }
 
+//View details function
+function patientView(id){
+    console.log(id);
+    navigate(`/viewdocpde/${id}`)
+  }
+
   return (
 
       <main className="main-container">
@@ -270,7 +276,7 @@ const filterData = value => {
                         <th scope="col">NIC</th>
                         <th scope="col">Ward Specialist</th>
                         <th scope="col">Assigned Ward</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Gender</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -282,9 +288,9 @@ const filterData = value => {
                             <td>{patient.nic}</td>
                             <td>{patient.specialist}</td>
                             <td>{patient.ward}</td>
-                            <td>Onboard</td>
+                            <td>{patient.Gender}</td>
                             <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
+                            <a href={`/viewdocpde/${patient._id}`}><button type="button" onClick={() => patientView(patient._id)} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
                             </td>
                             </tr> 
 
