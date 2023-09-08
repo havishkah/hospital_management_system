@@ -167,24 +167,24 @@ const updateaPatientbyID = async (req, res) => {
   res.status(200).json(patient);
 };
 
-const getPatientbyDoctorID =  (req, res) => {
-  const { id } = req.params;
+// const getPatientbyDoctorID =  (req, res) => {
+//   const { id } = req.params;
 
 
-  const patient =  Patient.find(
-    { docName: id },
+//   const patient =  Patient.find(
+//     { docName: id },
   
-  );
-  patient.then((data) => {
+//   );
+//   patient.then((data) => {
 
-     console.log(data);
-     res.status(200).json(data);
+//      console.log(data);
+//      res.status(200).json(data);
 
-  }).catch((e)=>{
-     console.log(e);
-  })
+//   }).catch((e)=>{
+//      console.log(e);
+//   })
 
-};
+// };
 
 module.exports = {
   createPatient: createaPatient,
@@ -192,6 +192,5 @@ module.exports = {
   deletePatient: deletePatient,
   updatePatient: updateaPatientbyID,
   getPatientbyNic: getbyNic,
-  getPatientbyDoctorID,
-  getPatient: getPatient,
+  getPatient: getPatient
 };

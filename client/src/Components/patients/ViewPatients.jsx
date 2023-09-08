@@ -90,6 +90,13 @@ function patientView(id){
 
                     </tbody>
                 </table>
+
+                <div className="col-md-12">
+                <div className="mb-3">
+                <Link to='/admitpatients'><button type="submit" className="btn btn-success" style={{marginLeft:'665px',color:'white'}}>Onboard Patients</button>&nbsp;</Link>
+                <Link to='/dischargepatientsd'><button type="submit" className="btn btn-danger" style={{color:'white'}}>Discharged Patients</button></Link>
+                </div>
+                </div>
             </div>
     </main>
   )
