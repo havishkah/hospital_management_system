@@ -59,7 +59,7 @@ const createAdmit = (req, res) => {
       diagnosis: data.diagnosis,
     });
 
-     return admit.save().then(()=>{
+     return admit .save().then(()=>{
       res.status(200).json('record added successfully');
     })
       
@@ -130,7 +130,6 @@ const updateaAdmitbyID = (req, res) => {
   const admit = Admit.findOneAndUpdate(
     { _id: id },
     {
-      docName:data.docName,
       status: data.status,
       bht: data.bht,
       bed: data.bed,
@@ -160,5 +159,6 @@ module.exports = {
   viewAdmits: getAlladmits,
   getAdmit: getAdmitsbyID,
   removeAdmit: deleteAdmit,
-  updateAdmit: updateaAdmitbyID
+  updateAdmit: updateaAdmitbyID,
+  viewAdmitsonly:viewAdmitsbystatus
 }
