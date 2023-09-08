@@ -6,17 +6,14 @@ const{
   addReport,
   viewAllreports,
   viewPaitentReports,
-  removeReport
+  removeReport,
+  editReports
 } = require('../Controllers/report_controller')
 
 router.post('/', Report.single("report"), addReport)
 router.get('/',viewAllreports)
 router.delete('/:id',removeReport)
 router.get('/:patientid',viewPaitentReports)
-
-//router.get('/report/:nic')
-
-
-
+router.put('/:id',editReports)
 
 module.exports = router;
