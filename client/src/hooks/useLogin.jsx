@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
-//import { Cookie } from "js-cookie"
+//import { Cookies } from "js-cookie";
+//import { Service } from "../../utilities/http"
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
@@ -25,14 +26,11 @@ export const useLogin = () => {
     }
 
     if (respone.ok) {
-      //save the user to local storage
-     //Cookie.setItem("admon", JSON.stringify(json))
       localStorage.setItem("admin", JSON.stringify(json));
       console.log(respone)
       // update the auth context
       localStorage.setItem("role",1)
       dispatch({ type: "LOGIN", payload: json });
-
       setIsLoading(false);
     }
   }
