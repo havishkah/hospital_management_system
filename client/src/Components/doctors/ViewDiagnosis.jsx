@@ -117,9 +117,7 @@ function ViewDiagnosis () {
                                 <div className="mb-3">
                                 {/* <label className="form-lable"></label> */}
                                     <Link to='/#'><button style={{marginLeft:'280px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp; 
-                                    <button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary text-white btn-lg">Generate Report</button> &nbsp;
-                                    
-                                    
+                                    <button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary text-white btn-lg">Generate Report</button> &nbsp;      
                                 </div>
                                
                             </div>

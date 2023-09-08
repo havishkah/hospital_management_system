@@ -11,6 +11,16 @@ const prescriptionSchema = new mongoose.Schema({
       required:true
    },
 
+   catagory:{
+      type:String,
+      required:true
+   },
+
+   drug:{
+      type:String,
+      required:true
+   },
+
    diagnosis:{
     type:String,
     required:true
@@ -33,6 +43,6 @@ const prescriptionSchema = new mongoose.Schema({
     
 },{timestamps:true});
 
-const Prescription = new mongoose.model("prescription", prescriptionSchema);
+const Prescription = new mongoose.model("Prescription", prescriptionSchema);
 
 module.exports = Prescription;

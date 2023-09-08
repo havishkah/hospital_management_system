@@ -118,7 +118,7 @@ function ViewPatientDetail() {
         respone.then((res) => {
             console.log(res);
             alert('Patient admited Successfully');
-            navigate('/admitpatient');
+            navigate('/admitpatients');
         }).catch((error) => {
             console.error('Error with adding data:', error);
         });
