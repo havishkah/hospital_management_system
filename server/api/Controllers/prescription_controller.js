@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Prescription = require("mongoose");
+const Prescription = require("../models/prescription");
 const ApiError = require("../../utilities/Errors/errors");
 const {
   verifyInputs,
@@ -11,7 +11,7 @@ const createPrescription = (req, res) => {
     data = req.body;
 
     const verifiedResult = verifyInputs(
-      ["doctorid", "patientid", "diagnosis", "frequency", "dosage", "qty"],
+      ["doctorid", "patientid","catagory", "diagnosis","drug", "frequency", "dosage", "qty"],
 
       data
     );
@@ -26,7 +26,7 @@ const createPrescription = (req, res) => {
       return;
     }
     const validatedResult = validateInputs(
-      ["doctorid", "patientid", "diagnosis", "frequency", "dosage", "qty"],
+      ["doctorid", "patientid", "catagory", "diagnosis", "drug", "frequency", "dosage", "qty"],
 
       data
     );
@@ -40,7 +40,9 @@ const createPrescription = (req, res) => {
     const prescription = new Prescription({
       doctorid: data.doctorid,
       patientid: data.patientid,
+      catagory:data.catagory,
       diagnosis: data.diagnosis,
+      drug:data.drug,
       frequency: data.frequency,
       dosage: data.dosage,
       qty: data.qty,
@@ -54,8 +56,8 @@ const createPrescription = (req, res) => {
 };
 
 const getAllprescriptionsdetails = async (req, res) => {
-  const prescription = await Patient.find({});
-  res.status(200).json(patient);
+  const prescription = await Prescription.find({});
+  res.status(200).json(prescription);
 };
 
 const getPrescriptionbyid = async (req, res) => {
@@ -119,7 +121,8 @@ const deletePrescription = async (req, res) => {
   }
 
   res.status(201).json(prescription)
-}
+};
+
 
 module.exports = {
   addPrescription: createPrescription,
