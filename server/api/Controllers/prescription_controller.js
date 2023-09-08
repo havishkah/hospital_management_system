@@ -57,11 +57,8 @@ const createPrescription = (req, res) => {
 };
 
 const getAllprescriptionsdetails = async (req, res) => {
-<<<<<<< HEAD
-  const prescription = await Prescription.find({});
-=======
+
   const prescription = await Prescription.find({}).sort({createdAt: -1});
->>>>>>> fa587c8932729be1a863e3253637988c7f25e198
   res.status(200).json(prescription);
 };
 
@@ -125,12 +122,7 @@ const deletePrescription = async (req, res) => {
     return res.status(404).json({ error: "No such Doctor details" });
   }
 
-<<<<<<< HEAD
   res.status(201).json(prescription)
-};
-
-=======
-  res.status(201).json(prescription);
 };
 
 const updateprescripByID = (req, res) => {
@@ -165,7 +157,7 @@ const updateprescripByID = (req, res) => {
       console.log(error.message);
     });
 };
->>>>>>> fa587c8932729be1a863e3253637988c7f25e198
+
 
 module.exports = {
   addPrescription: createPrescription,
