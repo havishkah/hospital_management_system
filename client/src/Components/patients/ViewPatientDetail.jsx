@@ -21,6 +21,7 @@ function ViewPatientDetail() {
     const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
+    const [patientid,setPatientid] = useState('');
 
     // const data = {
     //     firstName: firstName,
@@ -46,6 +47,7 @@ function ViewPatientDetail() {
          const respone =  service.get(`patient/${id}`)
          respone.then((res) =>{
                  console.log(res.data)
+                 setPatientid(res.data._id);
                  setFirstName(res.data.firstName);
                  setLastName(res.data.lastName);
                  setInitials(res.data.initials);
@@ -92,8 +94,9 @@ function ViewPatientDetail() {
     } 
 
     //admit a patient
-    const [patientid,setPatientid] = useState('');
+    // const [patientid,setPatientid] = useState('');
     const [docName, setDocName] = useState('');
+    const [name, setName] = useState('');
     const [bht, setBht] = useState('');
     const [specialist, setSpecialist] = useState('');
     const [ward, setWard] = useState('');
@@ -106,6 +109,7 @@ function ViewPatientDetail() {
     const admitedPatient = {
         patientid:_id,
         docName:docName,
+        name:name,
         bht:bht,
         specialist:specialist,
         ward:ward,
@@ -118,7 +122,7 @@ function ViewPatientDetail() {
         respone.then((res) => {
             console.log(res);
             alert('Patient admited Successfully');
-            navigate('/admitpatient');
+            navigate('/admitpatients');
         }).catch((error) => {
             console.error('Error with adding data:', error);
         });
@@ -258,6 +262,14 @@ function ViewPatientDetail() {
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Patient Name</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setName(e.target.value);
+                                    }}/>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">BHT No</label>
                                     <input type="text" name="address" className="form-control" onChange={(e) => {
                                         setBht(e.target.value);
@@ -317,16 +329,13 @@ function ViewPatientDetail() {
                                     }} />
                                 </div>
                             </div>
-                            
-                            <div className="col-md-6">
-                            </div>
 
                             <div className="col-md-6">
                             </div>
                          
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                <label className="form-lable"></label>
+                                {/* <label className="form-lable"></label> */}
                                     <Link to='/allpatient'><button style={{marginLeft:'320px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
                                     
                                     <button style={{height:'40px', fontSize:'16px'}} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Admit</button>

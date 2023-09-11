@@ -1,8 +1,54 @@
 import React, { useState,useEffect } from 'react'
-// import Service from '../../../utilities/http';
+import Service from '../../../utilities/http';
 import {Link,useNavigate} from 'react-router-dom'
 
 export const AdmitPatient = () => {
+
+  const [admits,setAdmits] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const service=new Service();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getAdmitPatients();
+  }, []);
+
+  function getAdmitPatients(){
+    const respone = service.get ('admit/') 
+    respone.then((res) => {
+      console.log (res.data)
+      setAdmits(res.data);
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+  }
+
+  const handlesearchArea = value => {
+    setSearchText(value);
+    filterData(value);   
+}
+
+const filterData = value => {
+    const lowerCaseValue = value.toLowerCase().trim();
+    if(!lowerCaseValue){
+        getAdmitPatients();
+    }
+    else{      
+        const filteredData = admits.filter(item => {
+            return Object.keys(item).some(key => {
+                return item[key].toString().toLowerCase().includes(lowerCaseValue);
+            })
+        });
+        setAdmits(filteredData);
+    }
+}
+
+//View details function
+function patientView(id){
+  console.log(id);
+  navigate(`/viewpatientdetail/${id}`)
+}
 
   return (
     <main className='main-container'>
@@ -19,39 +65,30 @@ export const AdmitPatient = () => {
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Patient Name</th>
-                        <th scope="col">NIC</th>
-                        <th scope="col">Contact</th>
-                        <th scope="col">Gender</th>
+                        <th scope="col">Patient Bed</th>
+                        <th scope="col">BHT</th>
+                        <th scope="col">Ward</th>
+                        <th scope="col">Diagnosis</th>
+                        <th scope="col">Admit Date & Time</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
-                   
-                            <tr>
-                            <td>1</td>
-                            <td>Hashan</td>
-                            <td>9834562873V</td>
-                            <td>0773426373</td>
-                            <td>Male</td>
-                            <td>
-                              
-                            <button type="button" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>1</td>
-                            <td>Ashan</td>
-                            <td>9834562673V</td>
-                            <td>0773426377</td>
-                            <td>Male</td>
-                            <td>
-                              
-                            <button type="button" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button>
-                            </td>
-                            </tr> 
-                  
-
+                      {admits.map((admit,index) => (
+                           <tr key={admit._id}>
+                           <td>{index+1}</td>
+                           <td>{admit.name}</td>
+                           <td>{admit.bed}</td>
+                           <td>{admit.bht}</td>
+                           <td>{admit.ward}</td>
+                           <td>{admit.diagnosis}</td>
+                           <td>{admit.timestamps}</td>
+                           <td>
+                             
+                           <button type="button" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button>
+                           </td>
+                           </tr>
+                      ))}
 
                     </tbody>
                 </table>

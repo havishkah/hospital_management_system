@@ -153,8 +153,8 @@ function AddDocs() {
                                         setWard(e.target.value);}} >
                                         <option value="">--Select Assigned Ward--</option>
                                         <option value="Cardiology Ward 01">Cardiology Ward 01</option>
-                                        <option value="1">Cardiology Ward 02</option>
-                                        <option value="1">Cardiology Ward 03</option>
+                                        <option value="Cardiology Ward 02">Cardiology Ward 02</option>
+                                        <option value="Cardiology Ward 03">Cardiology Ward 03</option>
                                     </select>
                                 </div>
                             </div>

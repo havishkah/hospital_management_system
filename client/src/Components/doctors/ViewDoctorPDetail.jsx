@@ -6,6 +6,7 @@ function ViewDoctorPDetail() {
 
     const service = new Service()
     const navigate = useNavigate();
+    const [doctors,setDoctors] = useState([]);
     const {id} = useParams();
 
     //view patient details
@@ -20,21 +21,7 @@ function ViewDoctorPDetail() {
     const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
-
-    // const data = {
-    //     firstName: firstName,
-    //     lastName: lastName,
-    //     initials: initials,
-    //     Dob: dob,
-    //     Gender: gender,
-    //     Age: age,
-    //     nic: nic,
-    //     email: email,
-    //     address: address,
-    //     contact: contact,
-    //     emergencycont: emergencycont,
-      
-    // }
+    const [patientid,setPatientid] = useState('');
 
     //loading existing data to form
     useEffect(() =>{
@@ -45,6 +32,7 @@ function ViewDoctorPDetail() {
          const respone =  service.get(`patient/${id}`)
          respone.then((res) =>{
                  console.log(res.data)
+                 setPatientid(res.data._id)
                  setFirstName(res.data.firstName);
                  setLastName(res.data.lastName);
                  setInitials(res.data.initials);
@@ -74,6 +62,8 @@ function ViewDoctorPDetail() {
      //loading existing data to form
      useEffect(() =>{
         loadAdmitPatient();
+        getDoctors();
+        getPrescriptions();
      },[])
  
      function loadAdmitPatient(){
@@ -91,6 +81,38 @@ function ViewDoctorPDetail() {
                 alert(err);
       })
      }
+
+
+    //load doctors
+    function getDoctors() {
+        const respone = service.get('doctor/')
+        respone.then((res) => {
+            console.log(res.data)
+            setDoctors(res.data);
+        })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }
+
+    //view prescriptions
+     //view patients
+
+  const [prescriptions,setPrescriptions] = useState([]);
+
+  function getPrescriptions(){
+
+        const respone = service.get (`prescription`,id) 
+        respone.then((res) => {
+          console.log (res.data)
+          setPrescriptions(res.data);
+        })
+        .
+        catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    
+  }
 
   return (
 
@@ -206,7 +228,20 @@ function ViewDoctorPDetail() {
                             
                            
                         
-                            <p className="mt-3" style={{color:'grey'}}>Other Infromation</p>
+                            <p className="mt-3" style={{color:'grey'}}>Ward Infromation</p>
+                            <div className="col-md-6">
+                               <div className="mb-3">
+                                   <label style={{fontSize:'14px'}} className="form-lable">Doctor</label>
+                                   <select className="form-control" name="status" value={docName} onChange={(e) => {
+                                        setDocName(e.target.value);
+                                    }}>
+                                      <option value="">--Select Doctor--</option>
+                                        {doctors.map((doctor) => (
+                                            <option value={doctor._id}>Dr. {doctor.firstName + " " + doctor.lastName}</option>
+                                        ))}
+                                   </select>
+                               </div>
+                           </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label label style={{fontSize:'14px'}} className="form-lable">Ward Specialist</label>
@@ -248,8 +283,6 @@ function ViewDoctorPDetail() {
                                 </div>
                             </div>
                             
-                            <div className="col-md-6">
-                            </div>
 
                             <div className="col-md-6">
                             </div>
@@ -279,38 +312,31 @@ function ViewDoctorPDetail() {
                     </div> <br />
                     <div>
 
-        <table class="table" celled>
+                    <table class="table" celled>
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        
                         <th scope="col">Issue Date</th>
-                        <th scope="col">Category</th>
-                        
+                        <th scope="col">Diagnosis</th>
+                        <th scope="col">Drug</th>
+                        <th scope="col">Frequency</th>
                         <th scope="col"></th>
                         
                     </tr>
                     </thead>
                     <tbody>
-                            <tr>
-                            <td>001</td>
-                            <td>2023-10-12</td>
-                            <td>Cardiology Prescription</td>
-                            
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
-
-                            <tr>
-                            <td>002</td>
-                            <td>2023-10-12</td>
-                            <td>Cardiology Prescription</td>
-                            
-                            <td>
-                            <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
-                            </td>
-                            </tr> 
+                        {prescriptions.map((prescription,index) => (
+                              <tr key={prescription._id}>
+                              <td>{index+1}</td>
+                              <td>{prescription.timestamps}</td>
+                              <td>{prescription.diagnosis}</td>
+                              <td>{prescription.drug}</td>
+                              <td>{prescription.frequency}</td>
+                              <td>
+                              <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
+                              </td>
+                              </tr> 
+                        ))}
 
 
                     </tbody>

@@ -16,7 +16,8 @@ const createAdmit = (req, res) => {
     const verifiedResult = verifyInputs(
       [
         "patientid",
-        "docName", 
+        "docName",
+        "name",
         "status", 
         "bht", 
         "specialist", 
@@ -38,7 +39,7 @@ const createAdmit = (req, res) => {
       return;
     }
     const validatedResult = validateInputs(
-      ["patientid","docName", "status", "bht", "specialist", "ward", "bed", "diagnosis"],
+      ["patientid","docName","name", "status", "bht", "specialist", "ward", "bed", "diagnosis"],
 
       data
     );
@@ -51,6 +52,7 @@ const createAdmit = (req, res) => {
     const admit = new Admit({
       patientid: data.patientid,
       docName:data.docName,
+      name:data.name,
       status: data.status,
       bht: data.bht,
       bed: data.bed,
@@ -154,11 +156,31 @@ const updateaAdmitbyID = (req, res) => {
 
 };
 
+const getPatientbyDoctorID =  (req, res) => {
+  const { id } = req.params;
+
+
+  const admit =  Admit.find(
+    { docName: id },
+  
+  );
+  admit.then((data) => {
+
+     console.log(data);
+     res.status(200).json(data);
+
+  }).catch((e)=>{
+     console.log(e);
+  })
+
+};
+
 module.exports = {
   admitapatient: createAdmit,
   viewAdmits: getAlladmits,
   getAdmit: getAdmitsbyID,
   removeAdmit: deleteAdmit,
   updateAdmit: updateaAdmitbyID,
-  viewAdmitsonly:viewAdmitsbystatus
+  viewAdmitsonly:viewAdmitsbystatus,
+  getPatientbyDoctorID
 }

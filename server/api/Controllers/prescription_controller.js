@@ -12,7 +12,7 @@ const createPrescription = (req, res) => {
     data = req.body;
 
     const verifiedResult = verifyInputs(
-      ["doctorid", "patientid", "diagnosis", "frequency", "dosage", "qty"],
+      ["doctorid", "patientid","catagory", "diagnosis","drug", "frequency", "dosage", "qty"],
 
       data
     );
@@ -27,7 +27,7 @@ const createPrescription = (req, res) => {
       return;
     }
     const validatedResult = validateInputs(
-      ["doctorid", "patientid", "diagnosis", "frequency", "dosage", "qty"],
+      ["doctorid", "patientid", "catagory", "diagnosis", "drug", "frequency", "dosage", "qty"],
 
       data
     );
@@ -41,7 +41,9 @@ const createPrescription = (req, res) => {
     const prescription = new Prescription({
       doctorid: data.doctorid,
       patientid: data.patientid,
+      catagory:data.catagory,
       diagnosis: data.diagnosis,
+      drug:data.drug,
       frequency: data.frequency,
       dosage: data.dosage,
       qty: data.qty,
@@ -55,6 +57,7 @@ const createPrescription = (req, res) => {
 };
 
 const getAllprescriptionsdetails = async (req, res) => {
+
   const prescription = await Prescription.find({}).sort({createdAt: -1});
   res.status(200).json(prescription);
 };
@@ -119,7 +122,7 @@ const deletePrescription = async (req, res) => {
     return res.status(404).json({ error: "No such Doctor details" });
   }
 
-  res.status(201).json(prescription);
+  res.status(201).json(prescription)
 };
 
 const updateprescripByID = (req, res) => {
@@ -154,6 +157,7 @@ const updateprescripByID = (req, res) => {
       console.log(error.message);
     });
 };
+
 
 module.exports = {
   addPrescription: createPrescription,
