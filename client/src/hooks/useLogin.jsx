@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
-//import { Cookies } from "js-cookie";
+import { Cookies } from "js-cookies";
+import { useNavigate } from "react-router-dom";
 //import { Service } from "../../utilities/http"
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
+  const navigate = useNavigate();
 
   const login = async (username, password) => {
     setIsLoading(true);
@@ -26,10 +28,11 @@ export const useLogin = () => {
     }
 
     if (respone.ok) {
-      localStorage.setItem("admin", JSON.stringify(json));
+      Cookies.set("admin", JSON.stringify(json),{ expires: 10 });
       console.log(respone)
+      alert('Logged in Successfully')
+            navigate('/home')
       // update the auth context
-      localStorage.setItem("role",1)
       dispatch({ type: "LOGIN", payload: json });
       setIsLoading(false);
     }

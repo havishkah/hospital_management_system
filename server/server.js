@@ -51,7 +51,7 @@ app.use('/api/admit',admitRoutes)
 app.use(apiErrorHandler);
 
 app.listen(port, ()=>{
-    console.log('App is running on:',{port})
+    console.log(`App is running on:',${port}`)
 });
 
 
