@@ -21,6 +21,7 @@ function ViewDoctorPDetail() {
     const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
+    const [patientid,setPatientid] = useState('');
 
     //loading existing data to form
     useEffect(() =>{
@@ -31,6 +32,7 @@ function ViewDoctorPDetail() {
          const respone =  service.get(`patient/${id}`)
          respone.then((res) =>{
                  console.log(res.data)
+                 setPatientid(res.data._id)
                  setFirstName(res.data.firstName);
                  setLastName(res.data.lastName);
                  setInitials(res.data.initials);

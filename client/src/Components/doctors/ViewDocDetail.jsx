@@ -90,13 +90,13 @@ function doctorUpdate(){
 
   //view patients
 
-  const [patients,setPatients] = useState([]);
+  const [admits,setAdmits] = useState([]);
 
   function getPatients(){
-        const respone = service.get (`patient/details/doctor/${id}`) 
+        const respone = service.get (`admit/details/doctor/${id}`) 
         respone.then((res) => {
           console.log (res.data)
-          setPatients(res.data);
+          setAdmits(res.data);
         })
         .
         catch((error) => {
@@ -117,12 +117,12 @@ const filterData = value => {
         getPatients();
     }
     else{      
-        const filteredData = patients.filter(item => {
+        const filteredData = admits.filter(item => {
             return Object.keys(item).some(key => {
                 return item[key].toString().toLowerCase().includes(lowerCaseValue);
             })
         });
-        setPatients(filteredData);
+        setAdmits(filteredData);
     }
 }
 
@@ -273,22 +273,24 @@ function patientView(id){
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Patient Name</th>
-                        <th scope="col">NIC</th>
+                        <th scope="col">Bed</th>
+                        <th scope="col">BHT</th>
                         <th scope="col">Ward Specialist</th>
                         <th scope="col">Assigned Ward</th>
-                        <th scope="col">Gender</th>
+                        <th scope="col">Admit Date & Time</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
-                      {patients.map((patient,index) => (
+                      {admits.map((patient,index) => (
                             <tr key={patient._id}>
                             <td>{index+1}</td>
-                            <td>{patient.firstName}</td>
-                            <td>{patient.nic}</td>
+                            <td>{patient.name}</td>
+                            <td>{patient.bed}</td>
+                            <td>{patient.bht}</td>
                             <td>{patient.specialist}</td>
                             <td>{patient.ward}</td>
-                            <td>{patient.Gender}</td>
+                            <td>{patient.timestamps}</td>
                             <td>
                             <a href={`/viewdocpde/${patient._id}`}><button type="button" onClick={() => patientView(patient._id)} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
                             </td>
@@ -308,3 +310,4 @@ function patientView(id){
 }
 
 export default ViewDocDetail
+

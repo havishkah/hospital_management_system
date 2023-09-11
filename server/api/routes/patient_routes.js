@@ -14,7 +14,7 @@ const {
 router.get("/", getAllpatients);
 router.get("/:id", getPatient);
 router.get("/nic/:nic",getPatientbyNic)
-router.get("/details/doctor/:id",getPatientbyDoctorID);
+// router.get("/details/doctor/:id",getPatientbyDoctorID);
 router.post("/add", createPatient);
 router.delete("/:id",deletePatient);
 router.patch("/:id",updatePatient);
