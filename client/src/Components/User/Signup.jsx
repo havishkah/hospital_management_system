@@ -11,7 +11,6 @@ export const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-
         await addAdmin(username,email,contact,password)
     }
 

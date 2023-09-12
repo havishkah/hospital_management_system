@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {BsSearch, BsJustify, BsPersonCircle} from 'react-icons/bs'
 // import { ProfileDropdown } from './ProfileDropdown'
 import { useLogout } from '../../hooks/useLogouthook'
@@ -10,9 +10,11 @@ export const NavBar = ({OpenSidebar}) => {
   const { logout } = useLogout()
 
   const handleLogout = () =>{
-    logout()
-    alert('Logged out');
-    navigate('/login')
+    
+      logout()
+      alert('Logged out');
+      navigate('/login')
+    
   }
 
   const[openProfile,setOpenProfile] = useState(false);
