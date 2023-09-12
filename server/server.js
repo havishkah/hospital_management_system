@@ -34,6 +34,7 @@ const userRoutes = require('./api/routes/admin_Routes');
 const reportRoutes = require ('./api/routes/reports_router');
 const prescriptionRoutes = require ('./api/routes/prescription_routes');
 const admitRoutes = require('./api/routes/admit_routes')
+const userlogRoutes = require('./api/routes/userlogins_routes');
 
 // Use main routes file
 app.use('/api/adminDashboard', adminDashboardRoutes);
@@ -45,6 +46,7 @@ app.use('/api/admin',userRoutes);
 app.use('/api/reports',reportRoutes)
 app.use('/api/prescription',prescriptionRoutes)
 app.use('/api/admit',admitRoutes)
+app.use('/api/userlog', userlogRoutes)
 
 
 //Error handle function

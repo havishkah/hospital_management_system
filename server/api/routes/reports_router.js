@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Report = require('../middleware/document/reports');
+const Report = require('../middleware/document/reoprts');
 
 const{
   addReport,
