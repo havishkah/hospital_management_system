@@ -7,7 +7,9 @@ function ViewDoctorPDetail() {
     const service = new Service()
     const navigate = useNavigate();
     const [doctors,setDoctors] = useState([]);
-    const {id} = useParams();
+    const [searchText, setSearchText] = useState('');
+    const Param = useParams();
+    const id = Param.id
 
     //view patient details
     const [firstName, setFirstName] = useState('');
@@ -21,7 +23,6 @@ function ViewDoctorPDetail() {
     const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
-    const [patientid,setPatientid] = useState('');
 
     //loading existing data to form
     useEffect(() =>{
@@ -29,21 +30,19 @@ function ViewDoctorPDetail() {
     },[])
 
     function loadPatient(){
-         const respone =  service.get(`patient/${id}`)
+         const respone =  service.get(`/patient/${id}`)
          respone.then((res) =>{
-                 console.log(res.data)
-                 setPatientid(res.data._id)
-                 setFirstName(res.data.firstName);
-                 setLastName(res.data.lastName);
-                 setInitials(res.data.initials);
-                 setDob(res.data.Dob);
-                 setGender(res.data.Gender);
-                 setAge(res.data.Age);
-                 setNic(res.data.nic);
-                 setEmail(res.data.email);
-                 setAddress(res.data.address);
-                 setContact(res.data.contact);
-                 setEmergencycont(res.data.emergencycont);
+                 setFirstName(res.data[0].firstName);
+                 setLastName(res.data[0].lastName);
+                 setInitials(res.data[0].initials);
+                 setDob(res.data[0].Dob);
+                 setGender(res.data[0].Gender);
+                 setAge(res.data[0].Age);
+                 setNic(res.data[0].nic);
+                 setEmail(res.data[0].email);
+                 setAddress(res.data[0].address);
+                 setContact(res.data[0].contact);
+                 setEmergencycont(res.data[0].emergencycont);
 
          }).catch((err) =>{
                alert(err);
@@ -69,13 +68,12 @@ function ViewDoctorPDetail() {
      function loadAdmitPatient(){
           const respone =  service.get(`admit/${id}`)
           respone.then((res) =>{
-                  console.log(res.data)
-                  setDocName(res.data.docName);
-                  setBht(res.data.bht);
-                  setSpecialist(res.data.specialist);
-                  setWard(res.data.ward);
-                  setBed(res.data.bed);
-                  setStatus(res.data.status);
+                  setDocName(res.data[0].docName);
+                  setBht(res.data[0].bht);
+                  setSpecialist(res.data[0].specialist);
+                  setWard(res.data[0].ward);
+                  setBed(res.data[0].bed);
+                  setStatus(res.data[0].status);
  
           }).catch((err) =>{
                 alert(err);
@@ -96,23 +94,45 @@ function ViewDoctorPDetail() {
     }
 
     //view prescriptions
-     //view patients
 
   const [prescriptions,setPrescriptions] = useState([]);
 
   function getPrescriptions(){
-
-        const respone = service.get (`prescription`,id) 
+    console.log(id);
+        const respone = service.get(`prescription/p_detail`,id) 
         respone.then((res) => {
+          
           console.log (res.data)
           setPrescriptions(res.data);
         })
-        .
-        catch((error) => {
+        .catch((error) => {
           console.error('Error fetching data:', error);
         });
     
   }
+
+  //search function
+  const handlesearchArea = value => {
+    setSearchText(value);
+    filterData(value);   
+}
+
+const filterData = value => {
+    const lowerCaseValue = value.toLowerCase().trim();
+    if(!lowerCaseValue){
+        getPrescriptions();
+    }
+    else{      
+        const filteredData = prescriptions.filter(item => {
+            return Object.keys(item).some(key => {
+                return item[key].toString().toLowerCase().includes(lowerCaseValue);
+            })
+        });
+        setPrescriptions(filteredData);
+    }
+}
+
+
 
   return (
 
@@ -122,7 +142,7 @@ function ViewDoctorPDetail() {
                     <div className="col-md-12">
                     <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
                     <h5>Patient {firstName}'s Details</h5>
-                    <Link to='/addprescrip'><button style={{marginLeft:'550px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Add Prescription</button></Link> &nbsp;
+                    <Link to={`/addprescrip/${id}`}><button style={{marginLeft:'550px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Add Prescription</button></Link> &nbsp;
                     <button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-danger text-white btn-lg">Discharge</button> 
                     </div>
                    
@@ -308,7 +328,7 @@ function ViewDoctorPDetail() {
                      <h4>Patient {firstName}'s Prescription Details</h4>
                          </div>
                     <div className="col-lg-3 mt-2 mb-2">
-                     <input style={{marginLeft:'715px'}} type="search" className="form-control"  placeholder="Search.."/>
+                     <input style={{marginLeft:'715px'}} type="search" className="form-control"  placeholder="Search.." onChange={ e => handlesearchArea(e.target.value)}/>
                     </div> <br />
                     <div>
 
@@ -328,12 +348,12 @@ function ViewDoctorPDetail() {
                         {prescriptions.map((prescription,index) => (
                               <tr key={prescription._id}>
                               <td>{index+1}</td>
-                              <td>{prescription.timestamps}</td>
+                              <td>{prescription.createdAt}</td>
                               <td>{prescription.diagnosis}</td>
                               <td>{prescription.drug}</td>
                               <td>{prescription.frequency}</td>
                               <td>
-                              <a href='#'><button type="submit" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
+                              <a href={`/doc_pa_priscripd/${prescription.patientid}`}><button type="button" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
                               </td>
                               </tr> 
                         ))}

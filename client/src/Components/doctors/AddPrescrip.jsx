@@ -9,10 +9,10 @@ export const AddPrescrip = () => {
    const {id} = useParams();
    const [drugs,setDrugs] = useState([]);
    const [doctors,setDoctors] = useState([]);
-   const [patients,setPatients] = useState([]);
+   //const [patients,setPatients] = useState([]);
 
    //add prescription
-   const [patientid,setPatientid] = useState('');
+//    const [patientid,setPatientid] = useState('');
    const [doctorid,setDoctorid] = useState('');
    const [catagory, setCatagory] = useState('');
    const [drug, setDrug] = useState('');
@@ -26,7 +26,7 @@ export const AddPrescrip = () => {
     // e.preventDefault();
       
     const newPrescription = {
-        patientid:patientid,
+        patientid:id,
         doctorid:doctorid,
         catagory:catagory,
         drug:drug,
@@ -41,7 +41,7 @@ export const AddPrescrip = () => {
     respone.then((res) => {
         console.log(res);
         alert('Prescription added Successfully');
-        // navigate('/alldrug');
+        navigate(`/viewdocpde/${id}`);
     }).catch((error) => {
         console.error('Error with adding data:', error);
     });
@@ -52,6 +52,8 @@ export const AddPrescrip = () => {
    //load drugs
     useEffect(() => {
         getDrugs();
+        getDoctors();
+        // getPatients();
     }, []);
   
     function getDrugs(){
@@ -65,10 +67,6 @@ export const AddPrescrip = () => {
       });
     }
 
-    useEffect(() => {
-        getDoctors();
-        getPatients();
-       }, []);
 
     //load doctors
     function getDoctors() {
@@ -81,20 +79,6 @@ export const AddPrescrip = () => {
                 console.error('Error fetching data:', error);
             });
     }
-
-    //load assigned patients
-    function getPatients(){
-        const respone = service.get (`patient/details/doctor/${id}`) 
-        respone.then((res) => {
-          console.log (res.data)
-          setPatients(res.data);
-        })
-        .
-        catch((error) => {
-          console.error('Error fetching data:', error);
-        });
-    
-  }
 
   return (
     <main className='main-container'>
@@ -138,7 +122,7 @@ export const AddPrescrip = () => {
                                     }}>
                                        <option value="">--Select Drug Type--</option>
                                        {drugs.map((drug) => (
-                                            <option value={drug._id}>{drug.drugName}</option>
+                                            <option value={drug.drugName}>{drug.drugName}</option>
                                         ))}
                                    </select>
                                </div>

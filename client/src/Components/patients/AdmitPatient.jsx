@@ -82,7 +82,7 @@ function patientView(id){
                            <td>{admit.bht}</td>
                            <td>{admit.ward}</td>
                            <td>{admit.diagnosis}</td>
-                           <td>{admit.timestamps}</td>
+                           <td>{admit.createdAt}</td>
                            <td>
                              
                            <button type="button" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button>
