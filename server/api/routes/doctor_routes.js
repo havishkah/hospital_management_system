@@ -9,6 +9,10 @@ const {
   getDoctor,
 } = require("../Controllers/doctorController");
 
+const requireAuth = require('../middleware/Auth/requireauth')
+
+router.use(requireAuth)
+
 router.get("/", getAlldoctors);
 
 router.get("/:id", getDoctor);

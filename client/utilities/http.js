@@ -79,6 +79,10 @@ class Service {
     return res;
   }
 
+  async fetch(url, data){
+    
+  }
+
   async get(url, id) {
     if (id) {
       url = `${url}/${id}`;

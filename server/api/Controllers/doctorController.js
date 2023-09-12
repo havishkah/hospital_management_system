@@ -1,94 +1,61 @@
-const ApiError = require("../../utilities/Errors/errors");
 const mongoose = require("mongoose");
 const Doctor = require("../models/doctor");
+const jwt = require("jsonwebtoken");
 
-const {
-  verifyInputs,
-  validateInputs,
-} = require("../../utilities/data_validation");
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.JWT_TOKEN, { expiresIn: "3d" });
+};
 
-const createaDoctor = (req, res, next) => {
+const createaDoctor = async (req, res, next) => {
+  const {
+    firstName,
+    lastName,
+    initials,
+    username,
+    Dob,
+    Gender,
+    nic,
+    contact,
+    specialist,
+    ward,
+    email,
+    password,
+  } = req.body;
+
   try {
-    data = req.body;
-
-    const verifiedResult = verifyInputs(
-      [
-        "firstName",
-        "lastName",
-        "initials",
-        "Dob",
-        "Gender",
-        "nic",
-        "contact",
-        "email",
-        "specialist",
-        "ward",
-        "password",
-      ],
-
-      data
+    const doctor = await Doctor.addDoctor(
+      firstName,
+      lastName,
+      initials,
+      username,
+      Dob,
+      Gender,
+      nic,
+      contact,
+      specialist,
+      ward,
+      email,
+      password
     );
 
-    if (verifiedResult == false) {
-      next(
-        ApiError.badRequest(
-          "The request parameters are not properly formatted or are missing required fields."
-        )
-      );
-
-      return;
-    }
-    const validatedResult = validateInputs(
-      [
-        "firstName",
-        "lastName",
-        "initials",
-        "Dob",
-        "Gender",
-        "nic",
-        "contact",
-        "email",
-        "specialist",
-        "ward",
-        "password",
-      ],
-
-      data
-    );
-
-    if (validatedResult == false) {
-      next(ApiError.badRequest("The request is missing required data."));
-
-      return;
-    }
-    console.log(data);
-
-    const doctor = new Doctor({
-      firstName: data.firstName,
-      lastName: data.lastName,
-      initials: data.initials,
-      Dob: data.Dob,
-      email: data.email,
-      Gender: data.Gender,
-      nic: data.nic,
-      contact: data.contact,
-      specialist: data.specialist,
-      ward: data.ward,
-      password: data.password,
-    });
-    doctor
-      .save()
-      .then(() => {
-        res.status(200).json({ message: "Added new doctor" });
-      })
-      .catch((e) => {
-        console.log(e);
-        next(e);
-      });
+      res.status(200).json(doctor)
   } catch (error) {
-    next(error);
+    res.status(400).json({ error: error.message });
   }
 };
+
+const loginDoctor = async (req, res) => {
+  const {username, password} =req.body
+
+  try {
+      const doctor = await Doctor.login(username, password)
+
+      const token = createToken(doctor._id)
+      res.status(200).json({username, token})
+  } catch (error) {
+      res.status(400).json({error: error.message})
+  }
+}
 
 const getAlldoctordetails = async (req, res) => {
   const doctor = await Doctor.find({});
@@ -136,33 +103,30 @@ const updateaDoctorbyID = (req, res) => {
   //   return res.status(404).json({ error: "No such doctor" });
   // }
 
-
   const doctor = Doctor.findOneAndUpdate(
     { _id: id },
     {
-      
-        firstName: data.firstName,
-        lastName: data.lastName,
-        initials: data.initials,
-        Dob: data.Dob,
-        Gender: data.Gender,
-        contact: data.contact,
-      }
-   
+      firstName: data.firstName,
+      lastName: data.lastName,
+      initials: data.initials,
+      Dob: data.Dob,
+      Gender: data.Gender,
+      contact: data.contact,
+    }
   );
 
-  doctor.then((data) => {
-    console.log(data);
-    if (!data) {
-      return res.status(404).json({ error: "Unable to process" });
-    }
-    
-    res.status(201).json(data);
-  })
-  .catch((error) => {
-    console.log(error.message)
-  })
+  doctor
+    .then((data) => {
+      console.log(data);
+      if (!data) {
+        return res.status(404).json({ error: "Unable to process" });
+      }
 
+      res.status(201).json(data);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
 };
 
 module.exports = {
@@ -171,4 +135,5 @@ module.exports = {
   deleteDoctor: deleteDoctorr,
   updatedoctor: updateaDoctorbyID,
   getDoctor: getDoctor,
+  logDoctor: loginDoctor
 };

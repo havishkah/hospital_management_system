@@ -1,11 +1,11 @@
 import React from 'react'
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { useLogin } from './hooks/useLogin'
-import { useNavigate } from "react-router-dom";
+import { Cookies } from "js-cookies";
 
 function Login() {
 
-    const navigate = useNavigate();
+    
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -13,16 +13,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-       const response= login(username,password)
-       
-        response.then(() =>{
-            localStorage.setItem("role",1)
-            alert('Logged in Successfully')
-            navigate('/admin')
-        }).catch((error) => {
-            console.log(error);
-        });
-        
+       login()
   
     }
 

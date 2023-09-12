@@ -5,30 +5,63 @@ import {BsPeopleFill} from 'react-icons/bs'
 import doctor from '../../assets/doctor.png'
 
 export const AdminDashboard = () => {
+  const [doctorCount, setDoctorCount] = useState(0);
+  const [patientCount, setPatientCount] = useState(0); 
+  const [availableBeds, setAvailableBeds] = useState(0);
+  const service = new Service();
 
-  const [dashboardData, setDashboardData] = useState([]);
-  const service=new Service();
   useEffect(() => {
-    const respone = service.get ('adminDashboard/data') 
-    respone.then((response) => {
-      console.log (response)
-      // setDashboardData(response.data);
-    })
-    .catch((error) => {
-      console.error('Error fetching data:', error);
-    });
-
-    // // Fetch data from the server
-    // axios.get('http://localhost:8000/api/adminDashboard/data')
- 
+    getDoctorCount();
+    getPatientCount(); 
+    getAvailableBeds();
   }, []);
+
+  function getDoctorCount() {
+    const response = service.get('doctor/');
+    response
+      .then((res) => {
+        const count = res.data.length;
+        setDoctorCount(count);
+      })
+      .catch((error) => {
+        console.error('Error fetching doctor count:', error);
+      });
+  }
+
+  function getPatientCount() {
+    const response = service.get('patient/'); 
+    response
+      .then((res) => {
+        const count = res.data.length;
+        setPatientCount(count);
+      })
+      .catch((error) => {
+        console.error('Error fetching patient count:', error);
+      });
+  }
+
+  function getAvailableBeds() {
+    const response = service.get('bed/');
+    response
+      .then((res) => {
+        const bedsData = res.data;
+        const unoccupiedBeds = bedsData.filter((bed) => bed.status === 'Unoccupied');
+        setAvailableBeds({
+          total: bedsData.length,
+          unoccupied: unoccupiedBeds.length, 
+        });
+      })
+      .catch((error) => {
+        console.error('Error fetching bed data:', error);
+      });
+  }
 
   return (
     <main className='main-container'>
        <div className='main-title'>
           <h4>DASHBOARD</h4>
           <div>
-          <pre>{JSON.stringify(dashboardData, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(dashboardData, null, 2)}</pre> */}
           </div>
        </div> 
 
@@ -36,7 +69,7 @@ export const AdminDashboard = () => {
           <div style={{height:'150px'}} className="card">
             <h5 style={{color:'blue'}}>Total Patients Onboard</h5>
             <div className='card-inner'>
-              <h2>56</h2>
+            <h2>{patientCount}</h2>
               <BsPeopleFill className='card_icon'/>
             </div>  
           </div>
@@ -52,7 +85,7 @@ export const AdminDashboard = () => {
           <div style={{height:'150px'}} className="card">
             <h5 style={{color:'green'}}>Available Beds</h5>
             <div className='card-inner'>
-              <h2>50/100</h2>
+            <h2>{availableBeds.unoccupied}/{availableBeds.total}</h2>
               <i class="fa-solid fa-bed card_icon"></i>
             </div>
           </div>
@@ -74,7 +107,7 @@ export const AdminDashboard = () => {
           <div style={{height:'246px',backgroundColor:'rgb(248, 204, 204)'}} className="card">
             <h5 style={{color:'red',fontSize:'25px'}}>Available Doctors</h5>
             <div className="card-inner">
-               <h2 style={{fontSize:'50px'}}>05</h2>
+            <h2 style={{ fontSize: '50px' }}>{doctorCount}</h2>
                <i style={{fontSize:'80px'}} class="fa-solid fa-user-doctor card_icon"></i>
             </div> 
           </div>

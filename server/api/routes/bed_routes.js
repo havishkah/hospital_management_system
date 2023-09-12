@@ -10,6 +10,10 @@ const {
     deleteBedbyId
 } = require('../Controllers/bed_controller');
 
+const requireAuth = require('../middleware/Auth/requireauth')
+
+router.use(requireAuth)
+
 router.post("/add",createBed);
 router.get("/",getAllbedsdetails);
 router.get("/:id",getBedbyid);
