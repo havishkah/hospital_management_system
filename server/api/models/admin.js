@@ -15,12 +15,6 @@ const adminSchema = new mongoose.Schema(
       unique: true,
       required: true,
     },
-
-    accessType: {
-      type: Number,
-      required: true,
-    },
-
     contact: {
       type: Number,
       required: true,
@@ -38,7 +32,6 @@ const adminSchema = new mongoose.Schema(
 adminSchema.statics.signup = async function (
   username,
   email,
-  accessType,
   contact,
   password
 ) {
@@ -46,7 +39,7 @@ adminSchema.statics.signup = async function (
   const existsUn = await this.findOne({ username });
 
   //Validation
-  if (!username || !email || !contact || !password || accessType) {
+  if (!username || !email || !contact || !password ) {
     throw Error("All Fields must be filled");
   }
 
@@ -68,7 +61,7 @@ adminSchema.statics.signup = async function (
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const admin = await this.create({ username, email,accessType, contact, password: hash });
+  const admin = await this.create({ username, email,contact, password: hash });
 
   return admin;
 };
