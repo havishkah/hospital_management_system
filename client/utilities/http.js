@@ -86,9 +86,13 @@ class Service {
 		} else {
 			res = await axiosInstance.post(url, data);
 		}
-
 		return res;
 	}
+
+  async fetch(url, data){
+    
+  }
+
 
 	async get(url, id) {
 		if (id) {

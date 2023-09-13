@@ -7,7 +7,6 @@ const {
   deletePatient,
   updatePatient,
   getPatient,
-  getPatientbyDoctorID,
   getPatientbyNic
 } = require("../Controllers/patient_controller");
 

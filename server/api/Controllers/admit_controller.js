@@ -18,6 +18,7 @@ const createAdmit = (req, res) => {
         "patientid",
         "docName",
         "name",
+        "nic",
         "status", 
         "bht", 
         "specialist", 
@@ -39,7 +40,7 @@ const createAdmit = (req, res) => {
       return;
     }
     const validatedResult = validateInputs(
-      ["patientid","docName","name", "status", "bht", "specialist", "ward", "bed", "diagnosis"],
+      ["patientid","docName","name","nic", "status", "bht", "specialist", "ward", "bed", "diagnosis"],
 
       data
     );
@@ -53,6 +54,7 @@ const createAdmit = (req, res) => {
       patientid: data.patientid,
       docName:data.docName,
       name:data.name,
+      nic:data.nic,
       status: data.status,
       bht: data.bht,
       bed: data.bed,
@@ -78,14 +80,15 @@ const getAlladmits = async (req, res) =>{
 
 const getAdmitsbyID = async (req,res) => {
   const { id } = req.params;
-  if(!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error : "No bed Available"});
-  }
+  // console.log();
+  // if(!mongoose.Types.ObjectId.isValid(nic)) {
+  //   return res.status(404).json({ error : "No patient Available12"});
+  // }
 
-  const admit = await Admit.findById(id);
+  const admit = await Admit.find({patientid:id});
 
   if(!admit){
-    return res.status(404).json({ error : "No bed Available"});
+    return res.status(404).json({ error : "No patient Available"});
   }
 
   res.status(200).json(admit);

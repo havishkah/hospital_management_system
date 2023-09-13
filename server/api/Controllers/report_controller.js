@@ -89,9 +89,10 @@ const deleteRepotsByid = async (req, res) => {
 };
 
 module.exports = {
-	addReport: createReport,
-	viewAllreports: getAllReoprts,
-	viewPaitentReports: getByPaitent,
-	removeReport: deleteRepotsByid,
-	//reportRetrieve: reportRetrieve,
+  addReport: createReport,
+  viewAllreports: getAllReoprts,
+  viewPaitentReports: getByPaitent,
+  removeReport: deleteRepotsByid,
+  editReports: updateaReportbyID
+  //reportRetrieve: reportRetrieve,
 };

@@ -116,15 +116,10 @@ const updateaBedbyID = (req, res) => {
 
   console.log(req.params);
   const data = req.body;
-  // if (!mongoose.Types.ObjectId.isValid(id)) {
-  //   return res.status(404).json({ error: "No such doctor" });
-  // }
-
-
+ 
   const bed = Bed.findOneAndUpdate(
     { _id: id },
-    {
-      
+    {    
         specialist: data.specialist,
         ward:data.ward,
         catagory:data.catagory,

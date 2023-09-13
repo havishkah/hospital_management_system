@@ -14,8 +14,8 @@ const {
 router.post('/add', addPrescription)
 router.get('/',viewPrescription)
 router.get('/:id', getaPrescription)
-router.get('/:patientid', viewbyPatient)
-router.get('/:doctorid',viewbyDoctor)
+router.get('/p_detail/:patientid', viewbyPatient)
+router.get('/d_detail/:doctorid',viewbyDoctor)
 router.delete('/:id',removePrescription)
 router.put('/:id',editPrescription)
   
