@@ -88,6 +88,36 @@ const deleteRepotsByid = async (req, res) => {
 	}
 };
 
+const updateaReportbyID = (req, res) => {
+	const id = req.params.id;
+	console.log(req.params);
+	const data = req.body;
+	// if (!mongoose.Types.ObjectId.isValid(id)) {
+	//   return res.status(404).json({ error: "No such doctor" });
+	// }
+	const report = Report.findOneAndUpdate(
+	  { _id: id },
+	  {
+		  specialist: data.specialist,
+		  ward:data.ward,
+		  catagory:data.catagory,
+		  description:data.description, 
+		  status:data.status
+		}
+	);
+	report.then((data) => {
+	  console.log(data);
+	  if (!data) {
+		return res.status(404).json({ error: "Unable to process" });  
+	  }
+	  res.status(201).json(data);
+	})
+	.catch((error) => {
+	  console.log(error.message)
+  
+	})
+  };
+
 module.exports = {
   addReport: createReport,
   viewAllreports: getAllReoprts,
