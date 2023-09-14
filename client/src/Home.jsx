@@ -50,7 +50,6 @@ function Home() {
         <NavBar OpenSidebar={OpenSidebar} />
         <Routes>
         <Route path="/login" element={<Login />}></Route>
-          <Route path="/home" element={<Home />}></Route>
           <Route path="/admin" element={<AdminDashboard />}></Route>
           <Route path="/addadmin" element={<Signup />}></Route>
           <Route path="/alldoc" element={<ViewDoctors />}></Route>

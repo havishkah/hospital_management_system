@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useSignup } from "../../hooks/useSignup"
+//import { useSignup } from "../../hooks/useSignup"
 
 export const Signup = () => {
     const [username, setUsername] = useState('')
@@ -7,11 +7,12 @@ export const Signup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const {addAdmin, isLoading, error} = useSignup()
+    const role = "Admin"
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        await addAdmin(username,email,contact,password)
+        await addAdmin(username,email,contact,password, role)
     }
 
     return(

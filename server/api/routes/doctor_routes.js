@@ -7,16 +7,16 @@ const {
   deleteDoctor,
   updatedoctor,
   getDoctor,
+  logDoctor
 } = require("../Controllers/doctorController");
 
 const requireAuth = require('../middleware/Auth/requireauth')
 
-router.use(requireAuth)
+//router.use(requireAuth)
 
 router.get("/", getAlldoctors);
-
 router.get("/:id", getDoctor);
-
+router.post('/doclog', logDoctor )
 router.post("/add", createDoctor);
 
 router.put("/:id", updatedoctor);

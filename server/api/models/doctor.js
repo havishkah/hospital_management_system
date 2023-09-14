@@ -14,7 +14,7 @@ const doctorSchema = new mongoose.Schema({
   username: {
     type: String,
     unique: true,
-    required: true,
+    required:true
   },
   initials: {
     type: String,
@@ -56,71 +56,74 @@ const doctorSchema = new mongoose.Schema({
   },
 });
 
+doctorSchema.statics.signDoctor = async function (
+    firstName,
+    lastName,
+    initials,
+    username,
+    Gender,
+    Dob,
+    nic,
+    email,
+    contact,
+    specialist,
+    ward,
+    password
+  ) {
+    const exists = await this.findOne({ username });
+    if (
+      !firstName ||
+      !lastName ||
+      !Dob ||
+      !username ||
+      !initials ||
+      !email ||
+      !password ||
+      !Gender ||
+      !nic ||
+      !contact ||
+      !specialist ||
+      !ward
+    ) {
+      throw Error("All Fields must be filled");
+    }
+    if (!validator.isEmail(email)) {
+      throw Error("Email is not valid");
+    }
+    if (exists) {
+      throw Error("username already in use");
+    }
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+  
+    const doctor = await this.create({ firstName, lastName, initials,username, Dob, Gender, nic, contact, specialist, ward, email, password: hash });
+  
+    return doctor;
+  };
+  
+  doctorSchema.statics.login =  async function (username, password) {
+      if(!username || !password){
+          throw Error("All fields must be filled");
+      }
+  
+      const doctor = await this.findOne({ username });
+  
+      if (!doctor) {
+          throw Error("Incrorrect username or password");
+        }
+      
+        const match = await bcrypt.compare(password, doctor.password);
+      
+        if (!match) {
+          throw Error("Incorrect username or password");
+        }
+      
+        return doctor;
+      
+  }
+
 const Doctor = mongoose.model("doctor", doctorSchema);
 
-doctorSchema.statics.addDoctor = async function (
-  firstName,
-  lastName,
-  initials,
-  username,
-  Gender,
-  Dob,
-  nic,
-  email,
-  contact,
-  specialist,
-  ward,
-  password
-) {
-  const exists = await this.findOne({ username });
-  if (
-    !firstName ||
-    !lastName ||
-    !Dob ||
-    !initials ||
-    !email ||
-    !password ||
-    !Gender ||
-    !nic ||
-    !contact ||
-    !specialist ||
-    !ward
-  ) {
-    throw Error("All Fields must be filled");
-  }
-  if (!validator.isEmail(email)) {
-    throw Error("Email is not valid");
-  }
-  if (exists) {
-    throw Error("username already in use");
-  }
-  const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(password, salt);
 
-  const doctor = await this.create({ firstName, lastName, initials, Dob, Gender, nic, contact, specialist, ward, email, password: hash });
-
-  return doctor;
-};
-
-doctorSchema.statics.login =  async function (username, password) {
-    if(!username || !password){
-        throw Error("All fields must be filled");
-    }
-
-    const doctor = await this.findOne({ username });
-
-    if (!doctor) {
-        throw Error("Incrorrect username or password");
-      }
-    
-      const match = await bcrypt.compare(password, doctor.password);
-    
-      if (!match) {
-        throw Error("Incorrect username or password");
-      }
-    
-      return doctor;
-    
-}
 
 module.exports = Doctor;
