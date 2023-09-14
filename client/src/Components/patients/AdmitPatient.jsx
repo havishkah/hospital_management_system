@@ -85,7 +85,7 @@ function patientView(id){
                            <td>{admit.createdAt}</td>
                            <td>
                              
-                           <button type="button" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button>
+                           <a href={`/viewdocpde/${admit._id}`}><button type="button" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
                            </td>
                            </tr>
                       ))}

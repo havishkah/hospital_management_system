@@ -21,7 +21,6 @@ mongoose.connect(DB_URL)
 .then(()=>{
     console.log('DB connected')
 })
-
 .catch((err)=>console.log("DB connection error", err))
 
 // Import route files
@@ -53,7 +52,7 @@ app.use('/api/userlog', userlogRoutes)
 app.use(apiErrorHandler);
 
 app.listen(port, ()=>{
-    console.log(`App is running on:',${port}`)
+    console.log(`App is running on: `,{port})
 });
 
 

@@ -14,7 +14,7 @@ const requireAuth = require('../middleware/Auth/requireauth')
 
 router.use(requireAuth)
 
-router.post('/', Report.single("report"), addReport)
+router.post('/', Report.single("file"), addReport)
 router.get('/',viewAllreports)
 router.delete('/:id',removeReport)
 router.get('/:patientid',viewPaitentReports)
