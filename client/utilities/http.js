@@ -89,18 +89,18 @@ class Service {
 		return res;
 	}
 
+
   async fetch(url, data){
     
   }
 
-
-	async get(url, id) {
-		if (id) {
-			url = `${url}/${id}`;
-		}
-		const res = await axiosInstance.get(url);
-		return res;
-	}
+   async get(url, id) {
+    if (id) {
+      url = `${url}/${id}`;
+    }
+    const res = await axiosInstance.get(url);
+    return res;
+  }
 
 	async delete(url, id) {
 		if (id) {

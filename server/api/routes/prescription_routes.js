@@ -11,7 +11,9 @@ const {
     editPrescription
   } = require('../Controllers/prescription_controller');
 
-router.post('/add', addPrescription)
+const doctorAuth = require('../middleware/Auth/doctorAuth')
+
+router.post('/add',doctorAuth, addPrescription)
 router.get('/',viewPrescription)
 router.get('/:id', getaPrescription)
 router.get('/p_detail/:patientid', viewbyPatient)

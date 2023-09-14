@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
-const Admin = require('../../models/admin')
+const Doctor = require('../../models/doctor')
 
-const requireAuth = async (req, res, next) => {
+const doctorAuth = async (req, res, next) => {
     const { authorization } = req.headers
 
     if (!authorization){
@@ -11,9 +11,9 @@ const requireAuth = async (req, res, next) => {
     const token = authorization.split(' ')[1]
 
     try {
-        const { _id } = jwt.verify(token, process.env.JWTSECRETE )
+        const { _id } = jwt.verify(token, process.env.JWT_TOKEN)
 
-        req.admin = await Admin.findOne({_id}).select('_id')
+        req.doctor = await Doctor.findOne({_id}).select('_id')
         next()
     } catch (error) {
         console.log(error)
@@ -23,4 +23,4 @@ const requireAuth = async (req, res, next) => {
 
 }
 
-module.exports = requireAuth;
+module.exports = doctorAuth;
