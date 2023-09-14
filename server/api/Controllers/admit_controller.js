@@ -117,7 +117,7 @@ const viewAdmitsbystatus = async (req,res) =>{
   res.status(200).json(admit);
 
   if (!admit) {
-    return res.status(404).json({ error: "no prescriptions found" });
+    return res.status(404).json({ error: "no patients found" });
   }
 
 }

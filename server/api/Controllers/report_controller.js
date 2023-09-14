@@ -14,32 +14,6 @@ const createReport = (req, res, next) => {
 		return res.status(400).json({ message: "No file uploaded" });
 	}
 
-	const originalname = req.file.originalname;
-	const file = `documents/${req.file.filename}`;
-
-	// const verifiedResult = verifyInputs(
-	//   ["title", "type", "file", "patientid", "doctorid"],
-	// data
-	// );
-
-	// if (verifiedResult == false) {
-	//   next(
-	//     ApiError.badRequest(
-	//       "The request parameters are not properly formatted or are missing required fields."
-	//     )
-	//   );
-	//   return;
-	// }
-
-	// const validatedResult = validateInputs(
-	//   ["title", "type", "file", "patientid", "doctorid"],
-	// );
-
-	// if (validatedResult == false) {
-	//   next(ApiError.badRequest("The request is missing required data."));
-	//   return;
-	// }
-
 	const report = new Report({
 		nic,
 		title,
@@ -49,6 +23,7 @@ const createReport = (req, res, next) => {
 	return report.save().then(() => {
 		res.status(200).json("Report Saved Successfully");
 	});
+
 };
 
 const getAllReoprts = async (req, res) => {
