@@ -1,15 +1,61 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React,{useState,useEffect} from 'react'
+import Service from '../../../utilities/http';
+import {Link,useNavigate,useParams} from 'react-router-dom'
 
 function ViewDiagnosis () {
-  return (
 
+    const service = new Service()
+    const navigate = useNavigate();
+    const Param = useParams();
+    const id = Param.id
+
+    //view patient details
+    const [gender, setGender] = useState('');
+    const [age, setAge] = useState('');
+
+    //loading existing data to form
+    useEffect(() =>{
+       loadPatient();
+       loadAdmitPatient();
+    },[])
+
+    function loadPatient(){
+         const respone =  service.get(`/patient/${id}`)
+         respone.then((res) =>{
+                 setGender(res.data[0].Gender);
+                 setAge(res.data[0].Age);
+
+         }).catch((err) =>{
+               alert(err);
+     })
+    }
+
+    //view admit patients
+    const [name, setName] = useState('');
+    const [bht, setBht] = useState('');
+    const [createdAt, setCreatedAt] = useState('');
+ 
+ 
+     function loadAdmitPatient(){
+          const respone =  service.get(`admit/${id}`)
+          respone.then((res) =>{
+                  setName(res.data[0].name);
+                  setBht(res.data[0].bht);
+                  setCreatedAt(res.data[0].createdAt);
+ 
+          }).catch((err) =>{
+                alert(err);
+      })
+     }
+
+
+  return (
 
       <main className="main-container">
                 <div className="row">
                     <div className="col-md-12">
                     <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
-                    <h5>Diagnosi Card Details</h5>
+                    <h5>Diagnosis Card Details</h5>
                      
                     </div>
                    
@@ -20,31 +66,45 @@ function ViewDiagnosis () {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Name</label>
-                                    <input type="text" name="username" className="form-control" input value="Nimal"/>
+                                    <input type="text" name="username" className="form-control" value={name} onChange={(e) => {
+                                        setName(e.target.value);
+                                    }}/>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Age</label>
-                                    <input type="text" name="email" className="form-control" input value="34" />
+                                    <input type="text" name="email" className="form-control" value={age} onChange={(e) => {
+                                        setAge(e.target.value);
+                                    }}/>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Gender</label>
-                                    <input type="text" name="phone" className="form-control" input value="Male" />
+                                    <select className="form-control" onChange={(e) => {
+                                        setGender(e.target.value);
+                                    }} name="status" value={gender}>
+                                        <option value="">--Select Gender--</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">BHT No</label>
-                                    <input type="text" name="address" className="form-control" input value="21" />
+                                    <input type="text" name="address" className="form-control" value={bht} onChange={(e) => {
+                                        setBht(e.target.value);
+                                    }}/>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Admitted Date</label>
-                                    <input type="text" name="address" className="form-control" input value="2023-10-23" />
+                                    <input type="text" name="address" className="form-control" value={createdAt} onChange={(e) => {
+                                        setCreatedAt(e.target.value);
+                                    }}/>
                                 </div>
                             </div>
                             <div className="col-md-6">
@@ -53,9 +113,10 @@ function ViewDiagnosis () {
                                     <input type="text" name="address" className="form-control" input value="2023-12-23" />
                                 </div>
                             </div>
+                            
                             <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
                             <p className="mt-3" style={{color:'grey'}}>Other Infromation</p>
-                            <button style={{marginRight:'40px', height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg"><b>Edit</b></button> 
+                            {/* <button style={{marginRight:'40px', height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Edit</button>  */}
                             </div>  
                             
                             <div className="col-md-6">
@@ -115,8 +176,8 @@ function ViewDiagnosis () {
                         
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                {/* <label className="form-lable"></label> */}
-                                    <Link to='/#'><button style={{marginLeft:'280px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp; 
+                                    <button style={{marginLeft:'180px', height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button>&nbsp;
+                                    <Link to='/#'><button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Edit</button></Link>&nbsp; 
                                     <button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary text-white btn-lg">Generate Report</button> &nbsp;      
                                 </div>
                                
