@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const requireAuth = require('../middleware/Auth/requireauth')
 
 const {
   admitapatient,
@@ -10,6 +11,8 @@ const {
   removeAdmit,
   getPatientbyDoctorID
 } = require("../Controllers/admit_controller");
+
+router.use(requireAuth)
 
 router.post("/add", admitapatient);
 router.get("/", viewAdmits);

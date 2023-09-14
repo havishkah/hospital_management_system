@@ -110,6 +110,7 @@ function ViewPatientDetail() {
         patientid:_id,
         docName:docName,
         name:name,
+        nic:nic,
         bht:bht,
         specialist:specialist,
         ward:ward,

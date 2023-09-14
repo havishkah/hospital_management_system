@@ -290,9 +290,9 @@ function patientView(id){
                             <td>{patient.bht}</td>
                             <td>{patient.specialist}</td>
                             <td>{patient.ward}</td>
-                            <td>{patient.timestamps}</td>
+                            <td>{patient.createdAt}</td>
                             <td>
-                            <a href={`/viewdocpde/${patient._id}`}><button type="button" onClick={() => patientView(patient._id)} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
+                            <a href={`/viewdocpde/${patient.patientid}`}><button type="button" onClick={() => patientView(patient._id)} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
                             </td>
                             </tr> 
 

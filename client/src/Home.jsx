@@ -50,7 +50,6 @@ function Home() {
         <NavBar OpenSidebar={OpenSidebar} />
         <Routes>
         <Route path="/login" element={<Login />}></Route>
-          <Route path="/home" element={<Home />}></Route>
           <Route path="/admin" element={<AdminDashboard />}></Route>
           <Route path="/addadmin" element={<Signup />}></Route>
           <Route path="/alldoc" element={<ViewDoctors />}></Route>
@@ -67,7 +66,7 @@ function Home() {
             element={<PatientDiognosis />}
           ></Route>
           <Route
-            path="/doc_pa_priscripd"
+            path="/doc_pa_priscripd/:id"
             element={<DocPatientPrescrip />}
           ></Route>
           <Route path="/adddoc" element={<AddDoc />}></Route>
@@ -81,7 +80,7 @@ function Home() {
           <Route path="/allpatient" element={<ViewPatients />}></Route>
           <Route path="/pa_priscrpd" element={<PatientPrescripd />}></Route>
           <Route path="/doc_pa_history" element={<DocPatientHistory />}></Route>
-          <Route path="/addprescrip" element={<AddPrescrip />}></Route>
+          <Route path="/addprescrip/:id" element={<AddPrescrip />}></Route>
           <Route path="/allbed" element={<ViewBeds />}></Route>
           <Route path="/medical_rprt" element={<MedicalReport />}></Route>
           <Route path="/addbeds" element={<AddBeds />}></Route>

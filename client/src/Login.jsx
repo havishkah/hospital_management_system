@@ -1,67 +1,39 @@
-import React from 'react'
-import { useState,useEffect } from "react"
-import { useLogin } from './hooks/useLogin'
-import { Cookies } from "js-cookies";
+import { useState } from "react"
+import "./login.css"
 
-function Login() {
-
-    
-
+ const Login = () =>{
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const {login, isLoading, error} = useLogin()
-    const handleSubmit = async (e) => {
-        e.preventDefault()
 
-       login()
-  
-    }
-
-
-  return (
-    <div className='main-container'>
-       
-       <main className="main-container">
-        <div className="row">
-            <div className="col-md-12 w-50 m-auto">
-            <h5 className="mt-2"><i className="fa fa-user-plus"> </i> Login User</h5>
-            <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
-            <form>
-                <div className="row">
-                    <div className="col-md-12">
-                        <div className="mb-3">
-                            <label style={{fontSize:'14px'}} className="form-lable">Username</label>
-                            <input type="text" name="username" className="form-control" onChange={(e) => {
-                                setUsername(e.target.value);
-                            }} />
-                        </div>
-                    </div>
-                    
-                    <div className="col-md-12">
-                        <div className="mb-3">
-                            <label style={{fontSize:'14px'}} className="form-lable">Password</label>
-                            <input type="password" name="address" className="form-control" onChange={(e) => {
-                                setPassword(e.target.value);
-                            }} />
-                        </div>
-                    </div>
-                    
-                    <div className="col-md-12">
-                        <div className="mb-3">
-                        <label className="form-lable"></label>
-                            <button  style={{height:'40px', fontSize:'16px'}} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Login</button>
-                        </div>
-                       
-                    </div>
-                            {error && <div className="error">{error}</div>}
+    return(
+        <div className="logpage">
+            <div className="logo">
+                <h1><span>Coronory </span> Care Unit</h1>
+            </div>
+            <div className="form-log">
+                <form className="login">
+                <h1>Login Admin</h1>
+                <div>
+                    <label>Username</label>
+                    <input
+                        type="text"
+                        onChange={(e) => setUsername(e.target.value)}
+                        value={username} 
+                    />
                 </div>
-            </form>
+                <div>
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password} 
+                    />
+                </div>
+                <button className="logbutton">Login</button>
+                </form>
             </div>
         </div>
-    </main>
-        
-    </div>
-  )
-}
+    )
+ }
 
-export default Login
+ export default Login;
