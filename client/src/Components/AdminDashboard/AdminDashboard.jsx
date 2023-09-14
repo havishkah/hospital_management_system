@@ -6,14 +6,15 @@ import doctor from '../../assets/doctor.png'
 
 export const AdminDashboard = () => {
   const [doctorCount, setDoctorCount] = useState(0);
-  const [patientCount, setPatientCount] = useState(0); 
   const [availableBeds, setAvailableBeds] = useState(0);
+  const [onboardPatientsCount, setOnboardPatientsCount] = useState(0);
   const service = new Service();
 
   useEffect(() => {
-    getDoctorCount();
-    getPatientCount(); 
+    getDoctorCount(); 
     getAvailableBeds();
+    //getPatients();
+    getOnboardPatientsCount(); // Call this function to get the count
   }, []);
 
   function getDoctorCount() {
@@ -28,17 +29,6 @@ export const AdminDashboard = () => {
       });
   }
 
-  function getPatientCount() {
-    const response = service.get('patient/'); 
-    response
-      .then((res) => {
-        const count = res.data.length;
-        setPatientCount(count);
-      })
-      .catch((error) => {
-        console.error('Error fetching patient count:', error);
-      });
-  }
 
   function getAvailableBeds() {
     const response = service.get('bed/');
@@ -56,6 +46,18 @@ export const AdminDashboard = () => {
       });
   }
 
+  function getOnboardPatientsCount() {
+    const response = service.get('admit/'); // Assuming you are getting onboard patients from the 'admit' endpoint
+    response
+      .then((res) => {
+        const count = res.data.length;
+        setOnboardPatientsCount(count);
+      })
+      .catch((error) => {
+        console.error('Error fetching onboard patients count:', error);
+      });
+  }
+
   return (
     <main className='main-container'>
        <div className='main-title'>
@@ -69,7 +71,7 @@ export const AdminDashboard = () => {
           <div style={{height:'150px'}} className="card">
             <h5 style={{color:'blue'}}>Total Patients Onboard</h5>
             <div className='card-inner'>
-            <h2>{patientCount}</h2>
+            <h2>{onboardPatientsCount}</h2>
               <BsPeopleFill className='card_icon'/>
             </div>  
           </div>

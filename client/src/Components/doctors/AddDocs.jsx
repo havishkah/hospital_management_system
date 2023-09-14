@@ -17,6 +17,7 @@ function AddDocs() {
     const [contact, setContact] = useState('');
     const [specialist, setSpecialist] = useState('');
     const [ward,setWard] = useState('');
+    const role = "doctor"
     const service = new Service();
 
     const handleSubmit = () => {
@@ -36,8 +37,10 @@ function AddDocs() {
             email: email,
             contact: contact,
             specialist: specialist,
-            ward:ward
+            ward:ward,
+            
         }
+        
 
         const respone =  service.post('doctor/add', newDoctor)
         respone.then((res) => {

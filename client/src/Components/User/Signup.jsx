@@ -59,7 +59,7 @@ export const Signup = () => {
                     <div className="col-md-12">
                         <div className="mb-3">
                         <label className="form-lable"></label>
-                            <button  style={{height:'40px', fontSize:'16px'}} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
+                            <button type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
                         </div>
                        
                     </div>

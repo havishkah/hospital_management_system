@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 
 const reportSchema = new mongoose.Schema({
+   
+
+     nic:{
+      type:String,
+      required:true
+     },
+   
    title:{
     type:String,
     required:true
@@ -15,14 +22,14 @@ const reportSchema = new mongoose.Schema({
     type:String,
     required:true
    },
-   patientid:{
-      type:String,
-      required:true
-   },
-   doctorid:{
-      type:String,
-      required:true
-   },
+   // patientid:{
+   //    type:String,
+   //    required:true
+   // },
+   // doctorid:{
+   //    type:String,
+   //    required:true
+   // },
     
 },{timestamps:true});
 

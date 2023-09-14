@@ -29,7 +29,6 @@ const signupUser = async (req, res) =>{
     console.log(username);
     try{
         const admin = await Admin.signup(username,email, contact, password, role)
-
        // const token = createToken(admin._id)
 
         res.status(200).json({admin})
