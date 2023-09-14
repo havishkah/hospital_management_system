@@ -8,6 +8,7 @@ function AddPatient() {
     const [doctors, setDoctors] = useState([]);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [username, setUsername] = useState('');
     const [initials, setInitials] = useState('');
     const [dob, setDob] = useState('');
     const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ function AddPatient() {
     const [nic, setNic] = useState('');
     const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
+    const [password, setPassword] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
     
     const service = new Service();
@@ -28,6 +30,7 @@ function AddPatient() {
         const newPatient = {
             firstName: firstName,
             lastName: lastName,
+            username:username,
             initials: initials,
             Dob: dob,
             Gender: gender,
@@ -36,6 +39,7 @@ function AddPatient() {
             email: email,
             address: address,
             contact: contact,
+            password:password,
             emergencycont: emergencycont
 
         }
@@ -136,6 +140,22 @@ function AddPatient() {
                                     <label style={{ fontSize: '14px' }} className="form-lable">Age</label>
                                     <input type="text" name="address" className="form-control" onChange={(e) => {
                                         setAge(e.target.value);
+                                    }} />
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">UserName</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setUsername(e.target.value);
+                                    }} />
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Password</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setPassword(e.target.value);
                                     }} />
                                 </div>
                             </div>

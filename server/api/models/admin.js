@@ -73,6 +73,7 @@ adminSchema.statics.signup = async function (
 
 // static login method
 adminSchema.statics.login = async function (username, password) {
+  
   if (!username || !password) {
     throw Error("All Fields must be filled");
   }

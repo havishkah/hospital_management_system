@@ -7,6 +7,7 @@ function AddDocs() {
     const navigate = useNavigate();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [username, setUsername] = useState('');
     const [initials, setInitials] = useState('');
     const [dob, setDob] = useState('');
     const [email, setEmail] = useState('');
@@ -26,6 +27,7 @@ function AddDocs() {
         const newDoctor = {
             firstName: firstName,
             lastName: lastName,
+            username:username,
             initials: initials,
             Dob: dob,
             password:password,
@@ -107,6 +109,14 @@ function AddDocs() {
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">UserName</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setUsername(e.target.value);
+                                    }} />
                                 </div>
                             </div>
                             <div className="col-md-6">

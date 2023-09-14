@@ -11,6 +11,10 @@ const patientSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  username: {
+    type: String,
+    required: true,
+  },
   initials: {
     type: String,
     required: true,
