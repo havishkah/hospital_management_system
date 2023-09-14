@@ -6,7 +6,7 @@ export const Signup = () => {
     const [contact, setcontact] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const {signup, error, isLoading} = useSignup()
+    const {signup, isLoading, error} = useSignup()
     const role = "Admin"
 
     const handleSubmit = async (e) => {

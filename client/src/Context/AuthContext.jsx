@@ -18,11 +18,13 @@ export const AuthContextProvider = ({ children }) =>{
         admin: null
     })
 
-    console.log('AuthContext state', state)
-
     return (
+
         <AuthContext.Provider value = { {...state, dispatch}}>
+
             { children }
+
         </AuthContext.Provider>
+
     )
 }
