@@ -12,6 +12,10 @@ const {
   logpatient
 } = require("../Controllers/patient_controller");
 
+const requireAuth = require('../middleware/Auth/requireauth')
+
+router.use(requireAuth)
+
 router.get("/", getAllpatients);
 router.get("/:id", getPatientByID);
 router.get("/nic/:nic",getPatientbyNic)
