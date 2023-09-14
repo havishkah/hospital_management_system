@@ -1,47 +1,34 @@
+const ApiError = require("../../utilities/Errors/errors");
 const mongoose = require("mongoose");
 const Doctor = require("../models/doctor");
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
-const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.JWT_TOKEN, { expiresIn: "3d" });
-};
+const createToken = (_id) =>{
+  return jwt.sign({_id}, process.env.JWTSECRETE, {expiresIn: '3d'})
+}
 
 const createaDoctor = async (req, res, next) => {
-  const {
-    firstName,
-    lastName,
-    initials,
-    username,
-    Dob,
-    Gender,
-    nic,
-    contact,
-    specialist,
-    ward,
-    email,
-    password,
-  } = req.body;
+  const data =req.body;
 
-  try {
-    const doctor = await Doctor.addDoctor(
-      firstName,
-      lastName,
-      initials,
-      username,
-      Dob,
-      Gender,
-      nic,
-      contact,
-      specialist,
-      ward,
-      email,
-      password
-    );
+    try{
+      const doctor = await Doctor.signDoctor(
+        firstName = data.firstName,
+        lastName = data.lastName,
+        initials = data.initials,
+        username= data.username,
+        Gender=data.Gender,
+        Dob = data.Dob,
+        nic = data.nic,
+        email = data.email,
+        contact = data.contact,
+        specialist = data.specialist,
+        ward = data.ward,
+        password = data.password);
 
-      res.status(200).json(doctor)
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
+      res.status(200).json({doctor})
+    }catch(error){
+      res.status(400).json({error: error.message})
+    }
 };
 
 const loginDoctor = async (req, res) => {
@@ -103,30 +90,33 @@ const updateaDoctorbyID = (req, res) => {
   //   return res.status(404).json({ error: "No such doctor" });
   // }
 
+
   const doctor = Doctor.findOneAndUpdate(
     { _id: id },
     {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      initials: data.initials,
-      Dob: data.Dob,
-      Gender: data.Gender,
-      contact: data.contact,
-    }
+      
+        firstName: data.firstName,
+        lastName: data.lastName,
+        initials: data.initials,
+        Dob: data.Dob,
+        Gender: data.Gender,
+        contact: data.contact,
+      }
+   
   );
 
-  doctor
-    .then((data) => {
-      console.log(data);
-      if (!data) {
-        return res.status(404).json({ error: "Unable to process" });
-      }
+  doctor.then((data) => {
+    console.log(data);
+    if (!data) {
+      return res.status(404).json({ error: "Unable to process" });
+    }
+    
+    res.status(201).json(data);
+  })
+  .catch((error) => {
+    console.log(error.message)
+  })
 
-      res.status(201).json(data);
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
 };
 
 module.exports = {
@@ -135,5 +125,5 @@ module.exports = {
   deleteDoctor: deleteDoctorr,
   updatedoctor: updateaDoctorbyID,
   getDoctor: getDoctor,
-  logDoctor: loginDoctor
+  logDoctor:loginDoctor
 };

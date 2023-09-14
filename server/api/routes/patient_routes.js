@@ -6,16 +6,19 @@ const {
   getAllpatients,
   deletePatient,
   updatePatient,
-  getPatient,
-  getPatientbyNic
+  getPatientByID,
+  getDoctorsPaitent,
+  getPatientbyNic,
+  logpatient
 } = require("../Controllers/patient_controller");
 
 router.get("/", getAllpatients);
-router.get("/:id", getPatient);
+router.get("/:id", getPatientByID);
 router.get("/nic/:nic",getPatientbyNic)
-// router.get("/details/doctor/:id",getPatientbyDoctorID);
+router.get("/details/doctor/:id",getDoctorsPaitent);
 router.post("/add", createPatient);
 router.delete("/:id",deletePatient);
 router.patch("/:id",updatePatient);
+router.post('/patientlog', logpatient)
 
 module.exports = router;
