@@ -42,34 +42,21 @@ export const useSignup = () =>{
             console.log(err);
         })
         
-
-        // const json = await respone.json()
-
- 
-
-        // if(!respone.ok){
-
-        //     setError(json.error)
-
-        //     setIsLoading(false)
-
-        // }
+         const json = await respone.json()
+         if(!respone.ok){
+             setError(json.error)
+             setIsLoading(false)
+         }
 
  
 
-        // if(respone.ok){
+         if(respone.ok){
 
-        //     localStorage.setItem('user', JSON.stringify(json))
+            localStorage.setItem('admin', JSON.stringify(json))
+            dispatch({type: 'LOGIN', payload: json})
+            isLoading(false)
 
- 
-
-        //     dispatch({type: 'LOGIN', payload: json})
-
- 
-
-        //     isLoading(false)
-
-        // }
+        }
 
     }
 

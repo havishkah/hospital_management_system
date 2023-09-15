@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import {BsSearch, BsJustify, BsPersonCircle} from 'react-icons/bs'
 // import { ProfileDropdown } from './ProfileDropdown'
-//import { useLogout } from '../../hooks/useLogouthook'
+import { useLogout } from '../../hooks/useLogouthook'
 import { useNavigate , Link} from "react-router-dom";
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 export const NavBar = ({OpenSidebar}) => {
 
- // const navigate = useNavigate();
- // const { logout } = useLogout()
-
+ const navigate = useNavigate();
+ const { logout } = useLogout()
+ const { admin } = useAuthContext()
+ //console.log(admin)
   const handleLogout = () =>{
     
-     // logout()
+     logout()
      // alert('Logged out');
      // navigate('/login')
     
@@ -31,13 +33,12 @@ export const NavBar = ({OpenSidebar}) => {
          <BsPersonCircle className='icon'/>
          
       </div>
-      <div>
-        <nav>
-          <Link to ="">Doctor Login</Link>
-          <Link to ="">Patient Login</Link>
-        </nav>
+      
+        <div>
+       
         <button className="lgoutbutton" onClick={handleLogout}> Logout </button>
       </div>
+      
 
          {/* {
            openProfile && <ProfileDropdown/>

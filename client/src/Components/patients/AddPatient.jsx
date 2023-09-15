@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import Service from '../../../utilities/http';
 import { useNavigate } from "react-router-dom";
+import { useSignup } from "../../hooks/useSignup"
 
 function AddPatient() {
+
+    const  {signup, error, isLoading} = useSignup()
 
     const navigate = useNavigate();
     const [doctors, setDoctors] = useState([]);
@@ -19,12 +22,13 @@ function AddPatient() {
     const [contact, setContact] = useState('');
     const [password, setPassword] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
+    const role = 'patient'
     
     const service = new Service();
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
 
-        // e.preventDefault();
+        e.preventDefault();
 
 
         const newPatient = {
@@ -52,6 +56,8 @@ function AddPatient() {
         }).catch((error) => {
             console.error('Error with adding data:', error);
         });
+
+        await signup(username,email,contact,password, role)
 
     }
 
@@ -204,6 +210,8 @@ function AddPatient() {
                                     <button style={{ marginLeft: '320px', height: '40px', fontSize: '16px' }} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
 
                                     <button style={{ height: '40px', fontSize: '16px' }} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
+
+                                    {error && <div className="error">{error}</div>}
                                 </div>
 
                             </div>
