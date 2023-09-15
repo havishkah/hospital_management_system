@@ -43,6 +43,7 @@ function ViewDoctorPDetail() {
                  setAddress(res.data[0].address);
                  setContact(res.data[0].contact);
                  setEmergencycont(res.data[0].emergencycont);
+                 
 
          }).catch((err) =>{
                alert(err);
@@ -57,6 +58,7 @@ function ViewDoctorPDetail() {
     const [ward, setWard] = useState('');
     const [bed, setBed] = useState('');
     const [status, setStatus] = useState('');
+    const discharge = "Discharge"
 
      //loading existing data to form
      useEffect(() =>{
@@ -80,7 +82,27 @@ function ViewDoctorPDetail() {
       })
      }
 
+     const data1 = {
+    
+        status:discharge
+    
+      }
 
+     const handleDischarge = () => {
+        setStatus('Discharge');
+        // const url = `admit/update/${id}`;
+        service.put(`admit/update`,id,data1)
+          .then((res) => {
+            console.log(res);
+            alert("Patient discharged successfully.");
+            navigate('/admitpatients');
+          })
+          .catch((error) => {
+            console.error("Error with updating status:", error);
+            // Handle error here
+          });
+      };
+      
     //load doctors
     function getDoctors() {
         const respone = service.get('doctor/')
@@ -141,9 +163,9 @@ const filterData = value => {
                 <div className="row">
                     <div className="col-md-12">
                     <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
-                    <h5>Patient {firstName}'s Details</h5>
-                    <Link to={`/addprescrip/${id}`}><button style={{marginLeft:'500px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Add Prescription</button></Link> &nbsp;
-                    <Link to={`/discharge/${id}`}><button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-danger text-white btn-lg">Discharge</button></Link>
+                    <h5>Patient {firstName} 's Details</h5>
+                    <Link to={`/addprescrip/${id}`}><button style={{marginLeft:'550px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Add Prescription</button></Link> &nbsp;
+                    <button style={{height:'40px', fontSize:'16px'}} type="submit" onClick={handleDischarge} className="btn btn-danger text-white btn-lg">Discharge</button>
                     </div>
                    
                     <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>

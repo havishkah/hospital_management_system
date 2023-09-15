@@ -138,17 +138,14 @@ const viewAdmitsbystatus = async (req,res) =>{
 }
 
 const updateaAdmitbyID = (req, res) => {
-  const id = req.params.id;
-
+  const patientid = req.params.patientid;
   console.log(req.params);
   const data = req.body;
   // if (!mongoose.Types.ObjectId.isValid(id)) {
   //   return res.status(404).json({ error: "No such doctor" });
   // }
-
-
   const admit = Admit.findOneAndUpdate(
-    { _id: id },
+    { patientid: patientid },
     {
       docName:data.docName,
       name:data.name,
@@ -159,7 +156,6 @@ const updateaAdmitbyID = (req, res) => {
       ward: data.ward,
       diagnosis: data.diagnosis,
     }
-   
   );
 
   admit.then((data) => {
@@ -167,15 +163,12 @@ const updateaAdmitbyID = (req, res) => {
     if (!data) {
       return res.status(404).json({ error: "Unable to process" });
     }
-    
     res.status(201).json(data);
   })
   .catch((error) => {
     console.log(error.message)
   })
-
 };
-
 const getPatientbyDoctorID =  (req, res) => {
   const { id } = req.params;
 
