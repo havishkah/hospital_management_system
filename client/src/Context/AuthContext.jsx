@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { createContext, useReducer, useEffect } from "react";
 export const AuthContext = createContext()
 
@@ -19,7 +20,7 @@ export const AuthContextProvider = ({ children }) =>{
     })
 
     useEffect(() =>{
-        const admin = JSON.parse(localStorage.getItem('admin'))
+        const admin = Cookies.get('admin')
 
         if(admin){
             dispatch({type: 'LOGIN', payload: admin})

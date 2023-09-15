@@ -43,6 +43,7 @@ function ViewDoctorPDetail() {
                  setAddress(res.data[0].address);
                  setContact(res.data[0].contact);
                  setEmergencycont(res.data[0].emergencycont);
+                 
 
          }).catch((err) =>{
                alert(err);
@@ -57,6 +58,7 @@ function ViewDoctorPDetail() {
     const [ward, setWard] = useState('');
     const [bed, setBed] = useState('');
     const [status, setStatus] = useState('');
+    const discharge = "Discharge"
 
      //loading existing data to form
      useEffect(() =>{
@@ -80,7 +82,27 @@ function ViewDoctorPDetail() {
       })
      }
 
+     const data1 = {
+    
+        status:discharge
+    
+      }
 
+     const handleDischarge = () => {
+        setStatus('Discharge');
+        // const url = `admit/update/${id}`;
+        service.put(`admit/update`,id,data1)
+          .then((res) => {
+            console.log(res);
+            alert("Patient discharged successfully.");
+            navigate('/admitpatients');
+          })
+          .catch((error) => {
+            console.error("Error with updating status:", error);
+            // Handle error here
+          });
+      };
+      
     //load doctors
     function getDoctors() {
         const respone = service.get('doctor/')
