@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Service from '../../../utilities/http';
 import { useNavigate } from "react-router-dom";
+import { useSignup } from "../../hooks/useSignup"
 
 function AddDocs() {
 
@@ -20,9 +21,9 @@ function AddDocs() {
     const role = "doctor"
     const service = new Service();
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
 
-        // e.preventDefault();
+         e.preventDefault();
 
 
         const newDoctor = {
@@ -50,6 +51,8 @@ function AddDocs() {
         }).catch((error) => {
             console.error('Error with adding data:', error);
         });
+
+        await signup(username,email,contact,password, role)
 
     }
 

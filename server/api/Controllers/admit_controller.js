@@ -94,6 +94,21 @@ const getAdmitsbyID = async (req,res) => {
   res.status(200).json(admit);
 };
 
+const getadmitbyID = async (req,res) => {
+  const { id } = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error : "No bed Available"});
+  }
+
+  const doctor = await Doctor.findById(id);
+
+  if (!doctor) {
+    return res.status(404).json({ error: "No such Doctor" });
+  }
+
+  res.status(200).json(doctor);
+};
+
 const deleteAdmit = async (req, res) => {
   const id = req.params;
 
