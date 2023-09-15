@@ -20,7 +20,7 @@ export const AuthContextProvider = ({ children }) =>{
     })
 
     useEffect(() =>{
-        const admin = Cookies.get('usename')
+        const admin = Cookies.get('admin')
 
         if(admin){
             dispatch({type: 'LOGIN', payload: admin})
