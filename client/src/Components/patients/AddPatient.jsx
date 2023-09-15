@@ -5,6 +5,8 @@ import { useSignup } from "../../hooks/useSignup"
 
 function AddPatient() {
 
+    const  {signup, error, isLoading} = useSignup()
+
     const navigate = useNavigate();
     const [doctors, setDoctors] = useState([]);
     const [firstName, setFirstName] = useState('');
@@ -208,6 +210,8 @@ function AddPatient() {
                                     <button style={{ marginLeft: '320px', height: '40px', fontSize: '16px' }} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
 
                                     <button style={{ height: '40px', fontSize: '16px' }} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
+
+                                    {error && <div className="error">{error}</div>}
                                 </div>
 
                             </div>
