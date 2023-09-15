@@ -143,7 +143,7 @@ const filterData = value => {
                     <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
                     <h5>Patient {firstName}'s Details</h5>
                     <Link to={`/addprescrip/${id}`}><button style={{marginLeft:'550px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Add Prescription</button></Link> &nbsp;
-                    <button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-danger text-white btn-lg">Discharge</button> 
+                    <Link to={`/discharge/${id}`}><button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-danger text-white btn-lg">Discharge</button></Link>
                     </div>
                    
                     <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>

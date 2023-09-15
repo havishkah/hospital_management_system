@@ -150,6 +150,8 @@ const updateaAdmitbyID = (req, res) => {
   const admit = Admit.findOneAndUpdate(
     { _id: id },
     {
+      docName:data.docName,
+      name:data.name,
       status: data.status,
       bht: data.bht,
       bed: data.bed,
