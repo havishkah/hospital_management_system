@@ -100,7 +100,7 @@ const getadmitbyID = async (req,res) => {
     return res.status(404).json({ error : "No bed Available"});
   }
 
-  const doctor = await Doctor.findById(id);
+  const admit = await Admit0.findById(id);
 
   if (!doctor) {
     return res.status(404).json({ error: "No such Doctor" });

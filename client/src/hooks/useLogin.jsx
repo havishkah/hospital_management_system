@@ -26,24 +26,19 @@ export const useLogin = () => {
             setIsLoading(false)
             setError(json.error)
         }
-
         if(response.ok){
             
             //save the user to local storage
             console.log(json);
-            //console.log(json.role);
-            localStorage.setItem('admin', JSON.stringify(json))
-            Cookies.set('username', json.username, {expires:1})
-            Cookies.set('role', json.role, {expires:1})
-            Cookies.set('token',json.token,{expires:1})
+            
+            Cookies.set('username', json.username, {expires:7})
+            Cookies.set('role', json.role, {expires:7, secure: true})
+            Cookies.set('token',json.token,{expires:7, secure: true})
             dispatch({type: 'LOGIN', payload: json})
 
             setIsLoading(false)
 
         }
-
-       
-
     }
 
     return {login, isLoading, error}
