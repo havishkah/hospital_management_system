@@ -3,7 +3,6 @@ import Cookies from "js-cookie";
 // import jwt_decode from "jwt-decode";
 const token =Cookies.get('token')
 
-// const token = localStorage.getItem("token");
 // let refresh = localStorage.getItem("refreshToken");
 
 const headers = {
@@ -11,6 +10,7 @@ const headers = {
 	"Content-Type": "application/json",
 	"Authorization": `Bearer ${token}`
 	// "x-access-token": token,
+	
 };
 
 // async function requestNewToken() {
