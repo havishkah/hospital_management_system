@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Service from "../../../utilities/http";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 export const MedicalReport = () => {
 	const navigate = useNavigate();
@@ -136,10 +136,10 @@ export const MedicalReport = () => {
 						</div>
 					</div>
 					<div className="col-md-6"></div>
-					<div className="col-md-6"></div>
+					{/* <div className="col-md-6"></div> */}
 					<div className="col-md-6">
 						<div className="mb-3">
-							<button
+						   <Link to='/'><button
 								style={{
 									marginLeft: "280px",
 									width: "100px",
@@ -149,7 +149,7 @@ export const MedicalReport = () => {
 								type="button"
 								className="btn btn-primary bg-white text-primary btn-lg">
 								Back
-							</button>
+							</button></Link>
 							&nbsp;
 							<button
 								style={{

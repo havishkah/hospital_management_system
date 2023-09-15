@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import Service from '../../../utilities/http';
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate,useParams,Link} from "react-router-dom";
 
 export const AddPrescrip = () => {
 
@@ -164,7 +164,7 @@ export const AddPrescrip = () => {
                            <div className="col-md-6">
                                <div className="mb-3">
                                {/* <label className="form-lable"></label> */}
-                                   <button style={{marginLeft:'280px',width:'100px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button>&nbsp;
+                                   <Link to={`/viewdocpde/${id}`}><button style={{marginLeft:'270px',width:'100px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
                                    <button style={{width:'100px',height:'40px', fontSize:'16px'}} type="button" onClick={handleSubmit} className="btn btn-primary text-white btn-lg">Submit</button>
                                </div>
                               
