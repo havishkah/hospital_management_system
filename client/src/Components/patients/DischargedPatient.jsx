@@ -30,6 +30,7 @@ export const DischargedPatient = () => {
         const respone =  service.get(`admit/${id}`)
         respone.then((res) =>{
                 setDocName(res.data[0].docName);
+                setName(res.data[0].name)
                 setBht(res.data[0].bht);
                 setSpecialist(res.data[0].specialist);
                 setWard(res.data[0].ward);
@@ -56,9 +57,7 @@ export const DischargedPatient = () => {
 
     //discharge function
   function dischargePatient(){
-
     const respone =  service.put(`admit`,id,data)
-
       respone.then((res) => {
         console.log(res.data);
         navigate('/admitpatients');
@@ -67,7 +66,7 @@ export const DischargedPatient = () => {
       .catch((err) => {
         alert(err);
       });
-  };
+  }
  
 
   //load doctors
@@ -180,9 +179,9 @@ export const DischargedPatient = () => {
      <div className="col-md-6">
          <div className="mb-3">
          {/* <label className="form-lable"></label> */}
-             <Link to='/allpatient'><button style={{marginLeft:'320px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-danger bg-white text-danger btn-lg">Back</button></Link>&nbsp;
+             <Link to='/allpatient'><button style={{marginLeft:'320px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
              
-             <button style={{height:'40px', fontSize:'16px'}} type="button" onClick={dischargePatient} className="btn btn-danger btn-lg">Discharge</button>
+             <button style={{height:'40px', fontSize:'16px'}} type="button" onClick={dischargePatient} className="btn btn-primary btn-lg">Discharge</button>
          </div>
         
      </div>

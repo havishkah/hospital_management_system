@@ -35,6 +35,7 @@ import { DischargePatientd } from "./Components/patients/DischargePatientd";
 import { DischargedPatient } from "./Components/patients/DischargedPatient";
 import Cookies from "js-cookie";
 
+
 function Home() {
   const [openSidebarToggle, setOpenSidebarToggle] = React.useState(false);
   const { admin } = useAuthContext();
@@ -87,7 +88,6 @@ function Home() {
           <Route path="/viewdocd/:id" element={<ViewDocd />}></Route>
           <Route path="/viewdocpde/:id" element={<Viewdocpde />}></Route>
           <Route path="/addpatients" element={<AddPatients />}></Route>
-          <Route path="/discharge/:id" element={<DischargedPatient />}></Route>
           <Route
             path="/doc_pa_historyd"
             element={<DocPatientHistoryd />}
@@ -113,7 +113,7 @@ function Home() {
             path="/viewpatientdetail"
             element={<ViewPatientDetail />}
           ></Route>
-          <Route path="/viewdiagnosis" element={<ViewDiagnosis />}></Route>
+          <Route path="/viewdiagnosis/:id" element={<ViewDiagnosis />}></Route>
         </Routes>
       </div>
     </div>
