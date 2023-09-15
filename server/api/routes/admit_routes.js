@@ -19,7 +19,7 @@ router.get("/", viewAdmits);
 router.get("/:id", getAdmit);
 router.get("/:status", viewAdmitsonly);
 router.get("/details/doctor/:id", getPatientbyDoctorID);
-router.put("/:id",updateAdmit);
+router.put("/update/:patientid",updateAdmit);
 router.delete("/:id",removeAdmit)
 
 module.exports = router
