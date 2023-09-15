@@ -31,10 +31,9 @@ export const useLogin = () => {
             
             //save the user to local storage
             console.log(json);
-            //console.log(json.role);
-            localStorage.setItem('admin', JSON.stringify(json))
+            
             Cookies.set('username', json.username, {expires:1})
-            Cookies.set('role', json.role, {expires:1})
+            Cookies.set('role', json.role, {expires:1},secure)
             Cookies.set('token',json.token,{expires:1})
             dispatch({type: 'LOGIN', payload: json})
 

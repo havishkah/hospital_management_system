@@ -5,8 +5,11 @@ export const useLogout = () => {
     const { dispatch }= useAuthContext()
 
     const logout = () => {
-        localStorage.removeItem('admin')
-        Cookies.remove('user')
+
+        Cookies.remove('username'),
+        Cookies.remove('token'),
+        Cookies.remove('role'),
+
 
         dispatch({type: 'LOGOUT'})
         
