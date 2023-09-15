@@ -30,7 +30,8 @@ export const useLogin = () => {
             
             //save the user to local storage
             console.log(json);
-            
+
+            Cookies.set('admin',json,{expires:7})
             Cookies.set('username', json.username, {expires:7})
             Cookies.set('role', json.role, {expires:7, secure: true})
             Cookies.set('token',json.token,{expires:7, secure: true})
