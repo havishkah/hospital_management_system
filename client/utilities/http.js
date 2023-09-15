@@ -1,14 +1,13 @@
 import axios from "axios";
 // import jwt_decode from "jwt-decode";
 
-// const token = localStorage.getItem("token");
 // let refresh = localStorage.getItem("refreshToken");
 
 const headers = {
 	Accept: "application/json",
 	"Content-Type": "application/json",
 	// "x-access-token": token,
-	"Authorization": `Bearer ${admin.token}`
+	
 };
 
 // async function requestNewToken() {
