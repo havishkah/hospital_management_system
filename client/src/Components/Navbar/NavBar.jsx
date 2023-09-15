@@ -15,7 +15,7 @@ export const NavBar = ({OpenSidebar}) => {
     
      logout()
      // alert('Logged out');
-     // navigate('/login')
+      navigate('/login')
     
   }
 
@@ -36,7 +36,7 @@ export const NavBar = ({OpenSidebar}) => {
       
         <div>
        
-        <button className="lgoutbutton" onClick={handleLogout}> Logout </button>
+        {!admin ? <button className="lgoutbutton" onClick={handleLogout}> Logout </button>: null }
       </div>
       
 
