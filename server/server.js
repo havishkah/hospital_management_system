@@ -1,6 +1,6 @@
 const apiErrorHandler = require("./utilities/Errors/errorHandler");
 const express = require('express');
-var cookieParser = require('cookie-parser')
+// var cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require("cors");
@@ -12,7 +12,7 @@ const app = express();
 app.use(cors());
 // Middleware
 app.use(bodyParser.json());
-app.use(cookieParser())
+// app.use(cookieParser())
 
 const port = process.env.PORT || 5000;
 const DB_URL=process.env.DB_URL;
@@ -21,7 +21,6 @@ mongoose.connect(DB_URL)
 .then(()=>{
     console.log('DB connected')
 })
-
 .catch((err)=>console.log("DB connection error", err))
 
 // Import route files
@@ -53,7 +52,7 @@ app.use('/api/userlog', userlogRoutes)
 app.use(apiErrorHandler);
 
 app.listen(port, ()=>{
-    console.log(`App is running on:',${port}`)
+    console.log(`App is running on: `,{port})
 });
 
 

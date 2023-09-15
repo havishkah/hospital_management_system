@@ -17,6 +17,7 @@ const createaPatient = async (req, res, next) => {
       firstName= data.firstName,
       lastName= data.lastName,
       initials= data.initials,
+      username= data.username,
       Dob= data.Dob,
       Gender= data.Gender,
       Age = data.Age,

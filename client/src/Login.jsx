@@ -1,16 +1,27 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useLogin } from "./hooks/useLogin";
 import "./login.css"
+import Cookies from "js-cookie";
 
  const Login = () =>{
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const {login, isLoading, error } = useLogin()
+
+    const handleSignup= async (e) => {
+        e.preventDefault()
+
+        await login(username,password)
+    }
+
+    const user = Cookies.get('user')
 
     return(
         <div className="logpage">
             <div className="logo">
                 <h1><span>Coronory </span> Care Unit</h1>
             </div>
-            <div className="form-log">
+            <div className="form-log" onSubmit={handleSignup}>
                 <form className="login">
                 <h1>Login Admin</h1>
                 <div>

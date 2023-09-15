@@ -8,4 +8,5 @@ router.post('/doclog', logDoctor )
 router.post('/patientlog', logpatient)
 
 
+
 module.exports = router;

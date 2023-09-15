@@ -1,8 +1,9 @@
 import React from "react";
+import { useAuthContext } from "./hooks/useAuthContext";
 
 import { NavBar } from "./Components/Navbar/NavBar";
 import { SideBar } from "./Components/SideBar/SideBar";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddDoc from "./Components/doctors/AddDocs";
 import ViewDocd from "./Components/doctors/ViewDocDetail";
@@ -31,32 +32,45 @@ import { BedDetails } from "./Components/Beds/BedDetails";
 import Login from "./Login";
 import { AdmitPatient } from "./Components/patients/AdmitPatient";
 import { DischargePatientd } from "./Components/patients/DischargePatientd";
-import { DischargedPatient } from "./Components/patients/DischargedPatient";
 
 function Home() {
   const [openSidebarToggle, setOpenSidebarToggle] = React.useState(false);
+  const { admin } = useAuthContext();
+  let user1="";
 
   const OpenSidebar = () => {
     setOpenSidebarToggle(!openSidebarToggle);
   };
+
+  if(admin){
+     user1= admin.username;
+  }else{
+    user1 ="REw";
+  }
   return (
     <div className="grid-container">
+      {user1}
       <div>
-      <SideBar
-        openSidebarToggle={openSidebarToggle}
-        OpenSidebar={OpenSidebar}
-      />
+        {admin ? <SideBar
+          openSidebarToggle={openSidebarToggle}
+          OpenSidebar={OpenSidebar}
+        /> : null}
       </div>
       <div className="page-content">
         <NavBar OpenSidebar={OpenSidebar} />
         <Routes>
-        <Route path="/login" element={<Login />}></Route>
-          <Route path="/admin" element={<AdminDashboard />}></Route>
+
+          <Route path="/login" element={<Login/>}></Route>
+
+          <Route path="/" element={<AdminDashboard />}></Route>
           <Route path="/addadmin" element={<Signup />}></Route>
           <Route path="/alldoc" element={<ViewDoctors />}></Route>
           <Route path="/doctor" element={<DoctorDashboard />}></Route>
-          <Route path="/admitpatients" element={<AdmitPatient/>}></Route>
-          <Route path="/dischargepatientsd" element={<DischargePatientd/>}></Route>
+          <Route path="/admitpatients" element={<AdmitPatient />}></Route>
+          <Route
+            path="/dischargepatientsd"
+            element={<DischargePatientd />}
+          ></Route>
           <Route
             path="/patientdashboard"
             element={<PatientDashboard />}
@@ -99,9 +113,8 @@ function Home() {
             path="/viewpatientdetail"
             element={<ViewPatientDetail />}
           ></Route>
-          <Route path="/viewdiagnosis" element={<ViewDiagnosis />}></Route>
-          <Route path="/discharge/:id" element={<DischargedPatient />}></Route>
-          </Routes>
+          <Route path="/viewdiagnosis/:id" element={<ViewDiagnosis />}></Route>
+        </Routes>
       </div>
     </div>
   );

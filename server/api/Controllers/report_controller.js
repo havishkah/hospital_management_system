@@ -1,128 +1,121 @@
 const mongoose = require("mongoose");
 const Report = require("../models/reports");
+const paths = require("path");
 const fs = require("fs");
 
 const {
-	verifyInputs,
-	validateInputs,
+  verifyInputs,
+  validateInputs,
 } = require("../../utilities/data_validation");
 
 const createReport = (req, res, next) => {
-	const { nic, title, type } = req.body;
+  const { nic, title, type } = req.body;
 
-	if (!req.file.path) {
-		return res.status(400).json({ message: "No file uploaded" });
-	}
+  if (!req.file.path) {
+    return res.status(400).json({ message: "No file uploaded" });
+  }
 
-	const originalname = req.file.originalname;
-	const file = `documents/${req.file.filename}`;
+  const report = new Report({
+    nic,
+    title,
+    type,
+    file,
+  });
+  return report.save().then(() => {
+    res.status(200).json("Report Saved Successfully");
+  });
+};
 
-	// const verifiedResult = verifyInputs(
-	//   ["title", "type", "file", "patientid", "doctorid"],
-	// data
-	// );
+const getReopts = (req, res, next) => {
+  const { file }= req.body;
+  const Path = paths.resolve(
+    __dirname,
+    `../../uploads/reports/${file}`
+  );
 
-	// if (verifiedResult == false) {
-	//   next(
-	//     ApiError.badRequest(
-	//       "The request parameters are not properly formatted or are missing required fields."
-	//     )
-	//   );
-	//   return;
-	// }
-
-	// const validatedResult = validateInputs(
-	//   ["title", "type", "file", "patientid", "doctorid"],
-	// );
-
-	// if (validatedResult == false) {
-	//   next(ApiError.badRequest("The request is missing required data."));
-	//   return;
-	// }
-
-	const report = new Report({
-		nic,
-		title,
-		type,
-		file
-	});
-	return report.save().then(() => {
-		res.status(200).json("Report Saved Successfully");
-	});
+  fs.readFile(Path, function (err, data) {
+    if (err) {
+      next(err);
+    } else {
+      res.writeHead(200, { ContentType: "image/jpg" });
+      res.end(data);
+    }
+  });
 };
 
 const getAllReoprts = async (req, res) => {
-	const report = await Report.find({}).sort({ createdAt: -1 });
-	res.status(200).json(report);
+  const report = await Report.find({}).sort({ createdAt: -1 });
+  res.status(200).json(report);
 };
 
 const getByPaitent = async (req, res) => {
-	const { patientid } = req.params;
+  const { patientid } = req.params;
 
-	try {
-		const report = await Report.find({ patientid: patientid });
+  try {
+    const report = await Report.find({ patientid: patientid });
 
-		if (!report) {
-			return res.status(404).json({ error: "No such Report found" });
-		}
+    if (!report) {
+      return res.status(404).json({ error: "No such Report found" });
+    }
 
-		res.status(200).json(report);
-	} catch (error) {
-		res.status(500).json({ error: "internal Server error" });
-	}
+    res.status(200).json(report);
+  } catch (error) {
+    res.status(500).json({ error: "internal Server error" });
+  }
 };
 
 const deleteRepotsByid = async (req, res) => {
-	try {
-		const id = req.params.id;
-		const report = await Report.findByIdAndDelete(id);
+  try {
+    const id = req.params.id;
+    const report = await Report.findByIdAndDelete(id);
 
-		if (!report) {
-			return res.status(404).json({ message: "File not found" });
-		}
+    if (!report) {
+      return res.status(404).json({ message: "File not found" });
+    }
 
-		res.json({ message: "File deleted successfully" });
-	} catch (error) {
-		console.error("Error deleting file:", error);
-		res.status(500).json({ message: "Error deleting file" });
-	}
+    res.json({ message: "File deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting file:", error);
+    res.status(500).json({ message: "Error deleting file" });
+  }
 };
 
 const updateaReportbyID = (req, res) => {
-	const id = req.params.id;
-	console.log(req.params);
-	const data = req.body;
-	// if (!mongoose.Types.ObjectId.isValid(id)) {
-	//   return res.status(404).json({ error: "No such doctor" });
-	// }
-	const report = Report.findOneAndUpdate(
-	  { _id: id },
-	  {
-		  specialist: data.specialist,
-		  ward:data.ward,
-		  catagory:data.catagory,
-		  description:data.description, 
-		  status:data.status
-		}
-	);
-	report.then((data) => {
-	  console.log(data);
-	  if (!data) {
-		return res.status(404).json({ error: "Unable to process" });  
-	  }
-	  res.status(201).json(data);
-	})
-	.catch((error) => {
-	  console.log(error.message)
-  
-	})
-  };
+  const id = req.params.id;
+  console.log(req.params);
+  const data = req.body;
+  // if (!mongoose.Types.ObjectId.isValid(id)) {
+  //   return res.status(404).json({ error: "No such doctor" });
+  // }
+  const report = Report.findOneAndUpdate(
+    { _id: id },
+    {
+      specialist: data.specialist,
+      ward: data.ward,
+      catagory: data.catagory,
+      description: data.description,
+      status: data.status,
+    }
+  );
+  report
+    .then((data) => {
+      console.log(data);
+      if (!data) {
+        return res.status(404).json({ error: "Unable to process" });
+      }
+      res.status(201).json(data);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
 
 module.exports = {
   addReport: createReport,
   viewAllreports: getAllReoprts,
   viewPaitentReports: getByPaitent,
   removeReport: deleteRepotsByid,
-  editReports: updateaReportbyID
+  editReports: updateaReportbyID,
+  getReopts,
   //reportRetrieve: reportRetrieve,
 };

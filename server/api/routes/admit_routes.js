@@ -12,7 +12,7 @@ const {
   getPatientbyDoctorID
 } = require("../Controllers/admit_controller");
 
-router.use(requireAuth)
+//router.use(requireAuth)
 
 router.post("/add", admitapatient);
 router.get("/", viewAdmits);

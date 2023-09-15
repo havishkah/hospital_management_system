@@ -334,7 +334,7 @@ const filterData = value => {
                                 {/* <label className="form-lable"></label> */}
                                     <button style={{marginLeft:'120px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">View Patient History</button> &nbsp;
                                     
-                                    <Link to='/viewdiagnosis'><button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary btn-lg">View Diagonosis Report</button></Link>
+                                    <Link to={`/viewdiagnosis/${id}`}><button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary btn-lg">View Diagonosis Report</button></Link>
                                 </div>
                                
                             </div>
@@ -368,7 +368,7 @@ const filterData = value => {
                     </thead>
                     <tbody>
                         {prescriptions.map((prescription,index) => (
-                              <tr key={prescription._id}>
+                              <tr key={prescription.patientid}>
                               <td>{index+1}</td>
                               <td>{prescription.createdAt}</td>
                               <td>{prescription.diagnosis}</td>

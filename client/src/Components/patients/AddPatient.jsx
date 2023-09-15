@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import Service from '../../../utilities/http';
 import { useNavigate } from "react-router-dom";
+import { useSignup } from "../../hooks/useSignup"
 
 function AddPatient() {
+
+    const  {signup, error, isLoading} = useSignup()
 
     const navigate = useNavigate();
     const [doctors, setDoctors] = useState([]);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [username, setUsername] = useState('');
     const [initials, setInitials] = useState('');
     const [dob, setDob] = useState('');
     const [email, setEmail] = useState('');
@@ -16,18 +20,21 @@ function AddPatient() {
     const [nic, setNic] = useState('');
     const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
+    const [password, setPassword] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
+    const role = 'patient'
     
     const service = new Service();
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
 
-        // e.preventDefault();
+        e.preventDefault();
 
 
         const newPatient = {
             firstName: firstName,
             lastName: lastName,
+            username:username,
             initials: initials,
             Dob: dob,
             Gender: gender,
@@ -36,6 +43,7 @@ function AddPatient() {
             email: email,
             address: address,
             contact: contact,
+            password:password,
             emergencycont: emergencycont
 
         }
@@ -48,6 +56,8 @@ function AddPatient() {
         }).catch((error) => {
             console.error('Error with adding data:', error);
         });
+
+        await signup(username,email,contact,password, role)
 
     }
 
@@ -139,6 +149,22 @@ function AddPatient() {
                                     }} />
                                 </div>
                             </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">UserName</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setUsername(e.target.value);
+                                    }} />
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Password</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setPassword(e.target.value);
+                                    }} />
+                                </div>
+                            </div>
                             <p className="mt-3" style={{ color: 'grey' }}>Contact Infromation</p>
                             <div className="col-md-6">
                                 <div className="mb-3">
@@ -184,6 +210,8 @@ function AddPatient() {
                                     <button style={{ marginLeft: '320px', height: '40px', fontSize: '16px' }} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
 
                                     <button style={{ height: '40px', fontSize: '16px' }} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
+
+                                    {error && <div className="error">{error}</div>}
                                 </div>
 
                             </div>

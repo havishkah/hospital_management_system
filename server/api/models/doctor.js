@@ -54,6 +54,7 @@ const doctorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  
 });
 
 doctorSchema.statics.signDoctor = async function (

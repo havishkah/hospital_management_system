@@ -1,13 +1,16 @@
 import React from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
 import Cookies from "js-cookie"
 
  
 
 function Auth({ position, children }) {
+  const un=Cookies.get('username')
+  const { admin } = useAuthContext()
   
-  const role = localStorage.getItem("role");
+  const role = Cookies.get('role');
     console.log(role)
-  return <div>{position === role && children }</div>;
+  return <div>{position == role && children }</div>;
 
 }
 

@@ -65,11 +65,11 @@ function patientView(id){
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Patient Name</th>
-                        <th scope="col">Patient Bed</th>
                         <th scope="col">BHT</th>
                         <th scope="col">Ward</th>
-                        <th scope="col">Diagnosis</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Admit Date & Time</th>
+                        <th scope="col">Discharged Date & Time</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -78,14 +78,14 @@ function patientView(id){
                            <tr key={admit._id}>
                            <td>{index+1}</td>
                            <td>{admit.name}</td>
-                           <td>{admit.bed}</td>
                            <td>{admit.bht}</td>
                            <td>{admit.ward}</td>
-                           <td>{admit.diagnosis}</td>
+                           <td>{admit.status}</td>
                            <td>{admit.createdAt}</td>
+                           <td>{admit.updatedAt}</td>
                            <td>
                              
-                           <button type="button" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button>
+                           <a href={`/viewdocpde/${admit.patientid}`}><button type="button" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
                            </td>
                            </tr>
                       ))}

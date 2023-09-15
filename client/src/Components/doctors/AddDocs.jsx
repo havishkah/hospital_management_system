@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import Service from '../../../utilities/http';
 import { useNavigate } from "react-router-dom";
+import { useSignup } from "../../hooks/useSignup"
 
 function AddDocs() {
 
     const navigate = useNavigate();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [username, setUsername] = useState('');
     const [initials, setInitials] = useState('');
     const [dob, setDob] = useState('');
     const [email, setEmail] = useState('');
@@ -16,16 +18,18 @@ function AddDocs() {
     const [contact, setContact] = useState('');
     const [specialist, setSpecialist] = useState('');
     const [ward,setWard] = useState('');
+    const role = "doctor"
     const service = new Service();
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
 
-        // e.preventDefault();
+         e.preventDefault();
 
 
         const newDoctor = {
             firstName: firstName,
             lastName: lastName,
+            username:username,
             initials: initials,
             Dob: dob,
             password:password,
@@ -34,8 +38,10 @@ function AddDocs() {
             email: email,
             contact: contact,
             specialist: specialist,
-            ward:ward
+            ward:ward,
+            
         }
+        
 
         const respone =  service.post('doctor/add', newDoctor)
         respone.then((res) => {
@@ -45,6 +51,8 @@ function AddDocs() {
         }).catch((error) => {
             console.error('Error with adding data:', error);
         });
+
+        await signup(username,email,contact,password, role)
 
     }
 
@@ -107,6 +115,14 @@ function AddDocs() {
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">UserName</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setUsername(e.target.value);
+                                    }} />
                                 </div>
                             </div>
                             <div className="col-md-6">
