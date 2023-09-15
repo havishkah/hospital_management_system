@@ -317,9 +317,12 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Status</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                    <select className="form-control" name="status" onChange={(e) => {
                                         setStatus(e.target.value);
-                                    }}/>
+                                    }}>
+                                        <option value="">--Select Status--</option>
+                                        <option value="Admitted">Admitted</option>
+                                    </select>
                                 </div>
                             </div>
                             <div className="col-md-6">

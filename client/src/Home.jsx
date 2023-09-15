@@ -32,7 +32,6 @@ import { BedDetails } from "./Components/Beds/BedDetails";
 import Login from "./Login";
 import { AdmitPatient } from "./Components/patients/AdmitPatient";
 import { DischargePatientd } from "./Components/patients/DischargePatientd";
-import { DischargedPatient } from "./Components/patients/DischargedPatient";
 
 function Home() {
   const [openSidebarToggle, setOpenSidebarToggle] = React.useState(false);
@@ -89,7 +88,6 @@ function Home() {
           <Route path="/viewdocd/:id" element={<ViewDocd />}></Route>
           <Route path="/viewdocpde/:id" element={<Viewdocpde />}></Route>
           <Route path="/addpatients" element={<AddPatients />}></Route>
-          <Route path="/discharge/:id" element={<DischargedPatient />}></Route>
           <Route
             path="/doc_pa_historyd"
             element={<DocPatientHistoryd />}

@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import Service from '../../../utilities/http';
-import {Link,useNavigate} from 'react-router-dom'
+import {Link,useNavigate, useParams} from 'react-router-dom'
 
 export const ViewPatients = () => {
 
@@ -8,6 +8,7 @@ export const ViewPatients = () => {
   const [searchText, setSearchText] = useState('');
   const service=new Service();
   const navigate = useNavigate();
+  const {id} = useParams()
 
   useEffect(() => {
     getPatients();
@@ -45,15 +46,14 @@ const filterData = value => {
 }
 
 //View details function
-function patientView(id){
-  console.log(id);
+function patientView(){
   navigate(`/viewpatientdetail/${id}`)
 }
 
   return (
     <main className='main-container'>
         <div className="main-title">
-            <h4>VIEW PATIENTS</h4>
+            <h4>REGISTERED PATIENTS</h4>
         </div>
 
         <div className="col-lg-3 mt-2 mb-2">
@@ -82,7 +82,7 @@ function patientView(id){
                             <td>{patient.Dob}</td>
                             <td>{patient.Gender}</td>
                             <td>
-                            <Link to={`/viewpatientdetail/${patient._id}`}><button type="button" onClick={() => patientView(patient._id)} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></Link>
+                            <Link to={`/viewpatientdetail/${patient._id}`}><button type="button" onClick={patientView} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></Link>
                             </td>
                             </tr> 
                     ))
@@ -93,8 +93,7 @@ function patientView(id){
 
                 <div className="col-md-12">
                 <div className="mb-3">
-                <Link to='/admitpatients'><button type="submit" className="btn btn-success" style={{marginLeft:'665px',color:'white'}}>Onboard Patients</button>&nbsp;</Link>
-                <Link to='/dischargepatientsd'><button type="submit" className="btn btn-danger" style={{color:'white'}}>Discharged Patients</button></Link>
+                <Link to='/admitpatients'><button type="submit" className="btn btn-success" style={{marginLeft:'680px',color:'white'}}>Onboard/Discharged Patients</button>&nbsp;</Link>
                 </div>
                 </div>
             </div>
