@@ -12,7 +12,7 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
          &nbsp;<span className='icon close_icon text-white' onClick={OpenSidebar}>X</span>
       </div>
       {/* Admin sidebar */}
-      <Auth position="1">
+      <Auth position="admin">
       <hr className="text-dark" />
       <div className='list-group list-group-flush'>
           <a href="/admin" className="list-group-item py-1">
@@ -70,7 +70,7 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
       </Auth>
       
       {/* customer sidebar */}
-      <Auth position="2">
+      <Auth position="doctor">
     <hr className="text-dark" />
     <div className='list-group list-group-flush'>
         <a href="/patientdashboard" className="list-group-item py-1">
@@ -92,7 +92,7 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
     </div>
     </Auth>
     {/*Doctor sidebar*/}
-    <Auth position="3">
+    <Auth position="patient">
     <hr className="text-dark" />
     <div className='list-group list-group-flush'>
         <a href="/doctor" className="list-group-item py-1">

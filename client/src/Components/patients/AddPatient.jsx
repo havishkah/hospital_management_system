@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Service from '../../../utilities/http';
 import { useNavigate } from "react-router-dom";
+import { useSignup } from "../../hooks/useSignup"
 
 function AddPatient() {
 
@@ -19,12 +20,13 @@ function AddPatient() {
     const [contact, setContact] = useState('');
     const [password, setPassword] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
+    const role = 'patient'
     
     const service = new Service();
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
 
-        // e.preventDefault();
+        e.preventDefault();
 
 
         const newPatient = {
@@ -52,6 +54,8 @@ function AddPatient() {
         }).catch((error) => {
             console.error('Error with adding data:', error);
         });
+
+        await signup(username,email,contact,password, role)
 
     }
 
