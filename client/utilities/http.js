@@ -1,5 +1,7 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 // import jwt_decode from "jwt-decode";
+const token =Cookies.get('token')
 
 // const token = localStorage.getItem("token");
 // let refresh = localStorage.getItem("refreshToken");
@@ -7,6 +9,7 @@ import axios from "axios";
 const headers = {
 	Accept: "application/json",
 	"Content-Type": "application/json",
+	"Authorization": `Bearer ${token}`
 	// "x-access-token": token,
 };
 
