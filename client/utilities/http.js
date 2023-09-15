@@ -8,6 +8,7 @@ const headers = {
 	Accept: "application/json",
 	"Content-Type": "application/json",
 	// "x-access-token": token,
+	"Authorization": `Bearer ${admin.token}`
 };
 
 // async function requestNewToken() {
