@@ -142,7 +142,7 @@ const filterData = value => {
                     <div className="col-md-12">
                     <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
                     <h5>Patient {firstName}'s Details</h5>
-                    <Link to={`/addprescrip/${id}`}><button style={{marginLeft:'550px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Add Prescription</button></Link> &nbsp;
+                    <Link to={`/addprescrip/${id}`}><button style={{marginLeft:'500px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Add Prescription</button></Link> &nbsp;
                     <Link to={`/discharge/${id}`}><button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-danger text-white btn-lg">Discharge</button></Link>
                     </div>
                    
@@ -346,7 +346,7 @@ const filterData = value => {
                     </thead>
                     <tbody>
                         {prescriptions.map((prescription,index) => (
-                              <tr key={prescription._id}>
+                              <tr key={prescription.patientid}>
                               <td>{index+1}</td>
                               <td>{prescription.createdAt}</td>
                               <td>{prescription.diagnosis}</td>

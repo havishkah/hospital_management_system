@@ -115,7 +115,7 @@ function Home() {
             path="/viewpatientdetail"
             element={<ViewPatientDetail />}
           ></Route>
-          <Route path="/viewdiagnosis" element={<ViewDiagnosis />}></Route>
+          <Route path="/viewdiagnosis/:id" element={<ViewDiagnosis />}></Route>
         </Routes>
       </div>
     </div>
