@@ -60,7 +60,9 @@ function Home() {
       <div className="page-content">
         <NavBar OpenSidebar={OpenSidebar} />
         <Routes>
-          <Route path="/login" element={<Login />}></Route>
+
+          <Route path="/login" element={<Login/>}></Route>
+
           <Route path="/" element={<AdminDashboard />}></Route>
           <Route path="/addadmin" element={<Signup />}></Route>
           <Route path="/alldoc" element={<ViewDoctors />}></Route>

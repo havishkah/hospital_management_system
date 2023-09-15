@@ -5,10 +5,10 @@ import Cookies from "js-cookie"
  
 
 function Auth({ position, children }) {
-
+  const un=Cookies.get('username')
   const { admin } = useAuthContext()
   
-  const role = admin.role;
+  const role = Cookies.get('role');
     console.log(role)
   return <div>{position == role && children }</div>;
 
