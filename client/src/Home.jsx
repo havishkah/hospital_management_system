@@ -33,24 +33,21 @@ import Login from "./Login";
 import { AdmitPatient } from "./Components/patients/AdmitPatient";
 import { DischargePatientd } from "./Components/patients/DischargePatientd";
 import { DischargedPatient } from "./Components/patients/DischargedPatient";
+import Cookies from "js-cookie";
 
 function Home() {
   const [openSidebarToggle, setOpenSidebarToggle] = React.useState(false);
   const { admin } = useAuthContext();
-  let user1="";
-
+  
+  const role = Cookies.get("role");
   const OpenSidebar = () => {
     setOpenSidebarToggle(!openSidebarToggle);
   };
 
-  if(admin){
-     user1= admin.username;
-  }else{
-    user1 ="REw";
-  }
+
   return (
     <div className="grid-container">
-      {user1}
+      
       <div>
         {admin ? <SideBar
           openSidebarToggle={openSidebarToggle}
@@ -61,10 +58,11 @@ function Home() {
         <NavBar OpenSidebar={OpenSidebar} />
         <Routes>
 
-          <Route path="/login" element={<Login/>}></Route>
+          <Route path="/login" element={!admin ? <Login/>: role==="admin"? <Navigate to="/"/>:
+               role==="doctor"? <Navigate to="/doctor"/>: <Navigate to="/patientdashboard"/>}></Route>
 
-          <Route path="/" element={<AdminDashboard />}></Route>
-          <Route path="/addadmin" element={<Signup />}></Route>
+          <Route path="/" element={admin ? <AdminDashboard />: <Navigate to="/login"/>}></Route>
+          <Route path="/addadmin" element={admin ? <Signup /> : <Navigate to="/login"/>}></Route>
           <Route path="/alldoc" element={<ViewDoctors />}></Route>
           <Route path="/doctor" element={<DoctorDashboard />}></Route>
           <Route path="/admitpatients" element={<AdmitPatient />}></Route>

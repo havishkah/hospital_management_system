@@ -4,9 +4,10 @@ import {BsSearch, BsJustify, BsPersonCircle} from 'react-icons/bs'
 import { useLogout } from '../../hooks/useLogouthook'
 import { useNavigate , Link} from "react-router-dom";
 import { useAuthContext } from '../../hooks/useAuthContext';
+import Cookies from 'js-cookie';
 
 export const NavBar = ({OpenSidebar}) => {
-
+  const role = Cookies.get("role");
  const navigate = useNavigate();
  const { logout } = useLogout()
  const { admin } = useAuthContext()
@@ -35,8 +36,8 @@ export const NavBar = ({OpenSidebar}) => {
       </div>
       
         <div>
-       
-        {!admin ? <button className="lgoutbutton" onClick={handleLogout}> Logout </button>: null }
+       {role}
+        {admin ? <button className="lgoutbutton" onClick={handleLogout}> Logout </button>: null }
       </div>
       
 
