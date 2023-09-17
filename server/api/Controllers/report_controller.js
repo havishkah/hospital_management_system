@@ -10,18 +10,19 @@ const {
 
 const createReport = (req, res, next) => {
   const { patientid, title, type } = req.body;
-  const path = req.file.filename
+  const filename = req.file.filename
+  const path = req.file.path
 
   if (!req.file.path) {
     return res.status(400).json({ message: "No file uploaded" });
   }
 
-
   const report = new Report({
     patientid,
     title,
     type,
-    file:path,
+    file:filename,
+    path: path
   });
   return report.save().then(() => {
     res.status(200).json("Report Saved Successfully");
