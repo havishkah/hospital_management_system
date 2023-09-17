@@ -62,7 +62,7 @@ const getPatient = async (req, res) => {
   //   return res.status(404).json({ error: "No such workout12" });
   // }
 
-  const patient = await Patient.find({_id: id});
+  const patient = await Patient.findOne({_id: id});
 
   if (!patient) {
     return res.status(404).json({ error: "No such workout" });

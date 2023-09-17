@@ -59,11 +59,11 @@ function Home() {
         <NavBar OpenSidebar={OpenSidebar} />
         <Routes>
 
-          <Route path="/login" element={!admin ? <Login/>: role==="admin"? <Navigate to="/"/>:
+          <Route path="/login" element={!admin ? <Login/>: role==="admin"? <Navigate to="/admin"/>:
                role==="doctor"? <Navigate to="/doctor"/>: <Navigate to="/patientdashboard"/>}></Route>
 
-          <Route path="/" element={admin ? <AdminDashboard />: <Navigate to="/login"/>}></Route>
-          <Route path="/addadmin" element={admin ? <Signup /> : <Navigate to="/login"/>}></Route>
+          <Route path="/admin" element={admin ? <AdminDashboard />: <Navigate to="/login"/>}></Route>
+          <Route path="/addadmin" element={ <Signup />}></Route>
           <Route path="/alldoc" element={<ViewDoctors />}></Route>
           <Route path="/doctor" element={<DoctorDashboard />}></Route>
           <Route path="/admitpatients" element={<AdmitPatient />}></Route>

@@ -7,7 +7,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import Cookies from 'js-cookie';
 
 export const NavBar = ({OpenSidebar}) => {
-  const role = Cookies.get("role");
+  const role = Cookies.get("username");
  const navigate = useNavigate();
  const { logout } = useLogout()
  const { admin } = useAuthContext()

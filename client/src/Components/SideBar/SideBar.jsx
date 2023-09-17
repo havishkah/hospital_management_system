@@ -70,7 +70,7 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
       </Auth>
       
       {/* customer sidebar */}
-      <Auth position="doctor">
+      <Auth position="patient">
     <hr className="text-dark" />
     <div className='list-group list-group-flush'>
         <a href="/patientdashboard" className="list-group-item py-1">
@@ -92,7 +92,7 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
     </div>
     </Auth>
     {/*Doctor sidebar*/}
-    <Auth position="patient">
+    <Auth position="doctor">
     <hr className="text-dark" />
     <div className='list-group list-group-flush'>
         <a href="/doctor" className="list-group-item py-1">
