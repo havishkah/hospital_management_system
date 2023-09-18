@@ -90,6 +90,7 @@ const getBedbyID = async (req,res) => {
 
   if(!bed){
     return res.status(404).json({ error : "No bed Available"});
+    
   }
 
   res.status(200).json(bed);

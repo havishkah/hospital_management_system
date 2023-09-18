@@ -32,17 +32,17 @@ function ViewDoctorPDetail() {
     function loadPatient(){
          const respone =  service.get(`/patient/${id}`)
          respone.then((res) =>{
-                 setFirstName(res.data[0].firstName);
-                 setLastName(res.data[0].lastName);
-                 setInitials(res.data[0].initials);
-                 setDob(res.data[0].Dob);
-                 setGender(res.data[0].Gender);
-                 setAge(res.data[0].Age);
-                 setNic(res.data[0].nic);
-                 setEmail(res.data[0].email);
-                 setAddress(res.data[0].address);
-                 setContact(res.data[0].contact);
-                 setEmergencycont(res.data[0].emergencycont);
+                 setFirstName(res.data.firstName);
+                 setLastName(res.data.lastName);
+                 setInitials(res.data.initials);
+                 setDob(res.data.Dob);
+                 setGender(res.data.Gender);
+                 setAge(res.data.Age);
+                 setNic(res.data.nic);
+                 setEmail(res.data.email);
+                 setAddress(res.data.address);
+                 setContact(res.data.contact);
+                 setEmergencycont(res.data.emergencycont);
                  
 
          }).catch((err) =>{

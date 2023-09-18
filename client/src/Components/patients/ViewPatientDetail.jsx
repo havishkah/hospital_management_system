@@ -47,7 +47,6 @@ function ViewPatientDetail() {
          const respone =  service.get(`patient/${id}`)
          respone.then((res) =>{
                  console.log(res.data)
-                 setPatientid(res.data._id);
                  setFirstName(res.data.firstName);
                  setLastName(res.data.lastName);
                  setInitials(res.data.initials);
@@ -67,6 +66,8 @@ function ViewPatientDetail() {
 
        useEffect(() => {
         getDoctors();
+
+        
        }, []);
 
     function getDoctors() {
@@ -150,9 +151,9 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">First name</label>
-                                    <input type="text" name="username" className="form-control" value={firstName} onChange={(e) => {
+                                    <input type="text" name="username" className="form-control" value={firstName}  onChange={(e) => {
                                      setFirstName(e.target.value);
-                                    }} />
+                                    }}/>
                                 </div>
                             </div>
                             <div className="col-md-6">
@@ -174,9 +175,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Date of Birth</label>
-                                    <input type="date" name="address" className="form-control" value={dob} onChange={(e) => {
-                                     setDob(e.target.value);
-                                    }}/>
+                                    <input type="date" name="address" className="form-control" value={dob} />
                                 </div>
                             </div>
                             <div className="col-md-6">
@@ -204,7 +203,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Age</label>
-                                    <input type="text" name="address" className="form-control" value={age} onChange={(e) => {
+                                    <input type="text" className="form-control" value={age} onChange={(e) => {
                                         setAge(e.target.value);
                                     }} />
                                 </div>
@@ -213,7 +212,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Contact Number</label>
-                                    <input type="text" name="address" className="form-control" value={contact} onChange={(e) => {
+                                    <input type="text" className="form-control" value={contact} onChange={(e) => {
                                         setContact(e.target.value);
                                     }}/>
                                 </div>
@@ -221,7 +220,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Email</label>
-                                    <input type="text" name="address" className="form-control" value={email} onChange={(e) => {
+                                    <input type="text" className="form-control" value={email} onChange={(e) => {
                                         setEmail(e.target.value);
                                     }} />
                                 </div>
@@ -229,7 +228,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Address</label>
-                                    <input type="text" name="address" className="form-control" input value={address} onChange={(e) => {
+                                    <input type="text" className="form-control" input value={address} onChange={(e) => {
                                         setAddress(e.target.value);
                                     }}/>
                                 </div>
@@ -237,7 +236,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Emergency Contact Number</label>
-                                    <input type="text" name="address" className="form-control" value={emergencycont} onChange={(e) => {
+                                    <input type="text" className="form-control" value={emergencycont} onChange={(e) => {
                                         setEmergencycont(e.target.value);
                                     }} />
                                 </div>
@@ -250,7 +249,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Doctor Name</label>
-                                    <select className="form-control" name="status" onChange={(e) => {
+                                    <select className="form-control" onChange={(e) => {
                                         setDocName(e.target.value);
                                     }}>
                                         <option value="">--Select Doctor Name--</option>
@@ -264,7 +263,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Patient Name</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                    <input type="text" className="form-control" onChange={(e) => {
                                         setName(e.target.value);
                                     }}/>
                                 </div>
@@ -272,7 +271,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">BHT No</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                    <input type="text" className="form-control" onChange={(e) => {
                                         setBht(e.target.value);
                                     }}/>
                                 </div>
@@ -280,7 +279,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Ward Specialist</label>
-                                    <select className="form-control" name="status" onChange={(e) => {
+                                    <select className="form-control" onChange={(e) => {
                                         setSpecialist(e.target.value);
                                     }}>
                                         <option value="">--Select Ward Specialist--</option>
@@ -291,7 +290,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Assigned Ward</label>
-                                    <select className="form-control" name="status" onChange={(e) => {
+                                    <select className="form-control" onChange={(e) => {
                                         setWard(e.target.value);
                                     }}>
                                         <option value="">--Select Assigned Ward--</option>
@@ -304,7 +303,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable"> Ward Bed</label>
-                                    <select className="form-control" name="status" onChange={(e) => {
+                                    <select className="form-control" onChange={(e) => {
                                         setBed(e.target.value);
                                     }}>
                                         <option value="">--Select Ward Bed--</option>
@@ -317,7 +316,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Status</label>
-                                    <select className="form-control" name="status" onChange={(e) => {
+                                    <select className="form-control" onChange={(e) => {
                                         setStatus(e.target.value);
                                     }}>
                                         <option value="">--Select Status--</option>
@@ -328,7 +327,7 @@ function ViewPatientDetail() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Diagnosis</label>
-                                    <textarea rows="4" cols="50" type="text" name="address" className="form-control" onChange={(e) => {
+                                    <textarea rows="4" cols="50" type="text" className="form-control" onChange={(e) => {
                                         setDiagnosis(e.target.value);
                                     }} />
                                 </div>

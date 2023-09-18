@@ -9,17 +9,20 @@ const {
 } = require("../../utilities/data_validation");
 
 const createReport = (req, res, next) => {
-  const { nic, title, type } = req.body;
+  const { patientid, title, type } = req.body;
+  const filename = req.file.filename
+  const path = req.file.path
 
   if (!req.file.path) {
     return res.status(400).json({ message: "No file uploaded" });
   }
 
   const report = new Report({
-    nic,
+    patientid,
     title,
     type,
-    file,
+    file:filename,
+    path: path
   });
   return report.save().then(() => {
     res.status(200).json("Report Saved Successfully");

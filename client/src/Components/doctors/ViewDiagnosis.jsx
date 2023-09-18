@@ -47,8 +47,8 @@ const ViewDiagnosis = () => {
     function loadPatient() {
         const respone = service.get(`/patient/${id}`)
         respone.then((res) => {
-            setGender(res.data[0].Gender);
-            setAge(res.data[0].Age);
+            setGender(res.data.Gender);
+            setAge(res.data.Age);
 
         }).catch((err) => {
             alert(err);
