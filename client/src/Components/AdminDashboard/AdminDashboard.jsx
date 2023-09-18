@@ -4,7 +4,7 @@ import Service from '../../../utilities/http';
 import {BsPeopleFill} from 'react-icons/bs'
 import doctor from '../../assets/doctor.png'
 
-export const AdminDashboard = () => {
+export const AdminDashboard= () =>{
   const [doctorCount, setDoctorCount] = useState(0);
   const [availableBeds, setAvailableBeds] = useState(0);
   const [dischargedPatientCount, setDischargedPatientCount] = useState(0);
@@ -134,3 +134,4 @@ export const AdminDashboard = () => {
 </main>
 
   )}
+

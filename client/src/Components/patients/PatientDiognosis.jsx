@@ -10,7 +10,7 @@ function PatientDiognosis () {
     const [nic,setNic] = useState('');
 
     useEffect(() =>{
-        handleClick();
+        
     },[])
 
     const handleClick = (e) => {

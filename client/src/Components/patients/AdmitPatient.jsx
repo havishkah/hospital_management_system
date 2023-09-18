@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import Service from '../../../utilities/http';
 import {Link,useNavigate} from 'react-router-dom'
 
-export const AdmitPatient = () => {
+function AdmitPatient() {
 
   const [admits,setAdmits] = useState([]);
   const [searchText, setSearchText] = useState('');
@@ -96,3 +96,5 @@ function patientView(id){
     </main>
   )
 }
+
+export default AdmitPatient;
