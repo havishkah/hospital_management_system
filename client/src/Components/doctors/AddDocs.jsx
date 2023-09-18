@@ -8,7 +8,6 @@ function AddDocs() {
     const  {signup, error, isLoading} = useSignup()
 
     const navigate = useNavigate();
-    const {signup, isLoading, error} = useSignup()
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
