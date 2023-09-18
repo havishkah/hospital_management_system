@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Service from '../../../utilities/http';
 import { useNavigate,useParams,Link} from "react-router-dom";
 
-export const AddPrescrip = () => {
+function AddPrescrip  ()  {
 
    const service = new Service();
    const navigate = useNavigate();
@@ -175,3 +175,5 @@ export const AddPrescrip = () => {
     </main>
   )
 }
+
+export default AddPrescrip;

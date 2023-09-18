@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import Service from '../../../utilities/http';
 import {Link,useNavigate, useParams} from 'react-router-dom'
-import { Signup } from '../User/Signup';
+import Cookies from "js-cookie";
 
 export const ViewPatients = () => {
 
@@ -10,6 +10,7 @@ export const ViewPatients = () => {
   const service=new Service();
   const navigate = useNavigate();
   const {id} = useParams()
+  const role = Cookies.get('role')
 
   useEffect(() => {
     getPatients();
@@ -84,7 +85,7 @@ function patientView(){
                             <td>{patient.Gender}</td>
                             <td>
                             <Link to={`/viewpatientdetail/${patient._id}`}><button type="button" onClick={patientView} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></Link>
-                            <Link className="btn btn-primary mx-1" to={`/addpatientuser/${patient._id}`}>Create a User Account</Link>
+                            {role ==="admin" ? <Link className="btn btn-primary mx-1" to={`/addpatientuser/${patient._id}`}>Create a User Account</Link>: null}
                             </td>
                             </tr> 
                     ))

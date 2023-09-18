@@ -1,69 +1,82 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Service from '../../../utilities/http';
 import { useNavigate,Link } from "react-router-dom";
-import { useSignup } from "../../hooks/useSignup"
 
-function AddDocs() {
+ export const AddNewPatient= () => {
 
     const navigate = useNavigate();
-    const {signup, isLoading, error} = useSignup()
-
+    const [doctors, setDoctors] = useState([]);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [username, setUsername] = useState('');
     const [initials, setInitials] = useState('');
     const [dob, setDob] = useState('');
     const [email, setEmail] = useState('');
-    const [password,setPassword] = useState('');
     const [gender, setGender] = useState('');
+    const [age, setAge] = useState('');
     const [nic, setNic] = useState('');
+    const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
-    const [specialist, setSpecialist] = useState('');
-    const [ward,setWard] = useState('');
-    const role = "doctor"
+    const [password, setPassword] = useState('');
+    const [emergencycont, setEmergencycont] = useState('');
+    
     const service = new Service();
 
     const handleSubmit = async (e) => {
 
-         e.preventDefault();
+        e.preventDefault();
 
 
-        const newDoctor = {
+        const newPatient = {
             firstName: firstName,
             lastName: lastName,
             username:username,
             initials: initials,
             Dob: dob,
-            password:password,
             Gender: gender,
+            Age: age,
             nic: nic,
             email: email,
+            address: address,
             contact: contact,
-            specialist: specialist,
-            ward:ward,
-            
-        }
-        
+            password:password,
+            emergencycont: emergencycont
 
-        const respone =  service.post('doctor/add', newDoctor)
+        }
+
+        const respone = service.post('patient/add', newPatient)
         respone.then((res) => {
             console.log(res);
-            alert('Doctor added Successfully');
-            navigate('/alldoc');
+            alert('Patient added Successfully');
+            navigate('/allpatient');
         }).catch((error) => {
             console.error('Error with adding data:', error);
         });
 
+
     }
 
+    useEffect(() => {
+        getDoctors();
+    }, []);
+
+    function getDoctors() {
+        const respone = service.get('doctor/')
+        respone.then((res) => {
+            setDoctors(res.data);
+        })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }
 
     return (
         <main className="main-container">
             <div className="row">
                 <div className="col-md-12">
-                    <h5 className="mt-2">Add Doctors</h5>
+                    <h5 className="mt-2">Add Patients</h5>
                     <p className="mt-3" style={{ color: 'grey' }}>Basic Infromation</p>
-                    <form >
+                    <form>
                         <div className="row">
                             <div className="col-md-6">
                                 <div className="mb-3">
@@ -119,6 +132,14 @@ function AddDocs() {
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Age</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setAge(e.target.value);
+                                    }} />
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">UserName</label>
                                     <input type="text" name="address" className="form-control" onChange={(e) => {
                                         setUsername(e.target.value);
@@ -150,31 +171,23 @@ function AddDocs() {
                                     }} />
                                 </div>
                             </div>
-                            <p className="mt-3" style={{ color: 'grey' }}>Other Infromation</p>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{ fontSize: '14px' }} className="form-lable">Ward Specialist</label>
-                                    <select className="form-control" name="status" onChange={(e) => {
-                                        setSpecialist(e.target.value);}}>
-                                        <option value="">--Select Ward Specialist--</option>
-                                        <option value="Cardiology Specialist">Cardiology Specialist</option>
-
-                                    </select>
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Address</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setAddress(e.target.value);
+                                    }} />
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Assigned Ward</label>
-                                    <select className="form-control" name="status" onChange={(e) => {
-                                        setWard(e.target.value);}} >
-                                        <option value="">--Select Assigned Ward--</option>
-                                        <option value="Cardiology Ward 01">Cardiology Ward 01</option>
-                                        <option value="Cardiology Ward 02">Cardiology Ward 02</option>
-                                        <option value="Cardiology Ward 03">Cardiology Ward 03</option>
-                                    </select>
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Emergency Contact Number</label>
+                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                        setEmergencycont(e.target.value);
+                                    }} />
                                 </div>
                             </div>
-
+                           
                             <div className="col-md-6">
 
 
@@ -183,11 +196,11 @@ function AddDocs() {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label className="form-lable"></label>
-                                    <Link to='/'><button style={{ marginLeft: '320px', height: '40px', fontSize: '16px' }} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
+                                    <Link to='/admin'><button style={{ marginLeft: '320px', height: '40px', fontSize: '16px' }} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
 
                                     <button style={{ height: '40px', fontSize: '16px' }} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
-                                    {error && <div className="error">{error}</div>}
 
+                                    
                                 </div>
 
                             </div>
@@ -197,9 +210,6 @@ function AddDocs() {
                 </div>
             </div>
         </main>
-
-
     )
-}
 
-export default AddDocs
+ }

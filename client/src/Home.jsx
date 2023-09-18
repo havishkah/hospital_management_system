@@ -1,41 +1,42 @@
 import React from "react";
 import { useAuthContext } from "./hooks/useAuthContext";
 
-import { NavBar } from "./Components/Navbar/NavBar";
-import { SideBar } from "./Components/SideBar/SideBar";
+import  {NavBar}  from "./Components/Navbar/NavBar";
+import {SideBar} from "./Components/SideBar/SideBar";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddDoc from "./Components/doctors/AddDocs";
 import ViewDocd from "./Components/doctors/ViewDocDetail";
-import { AdminDashboard } from "./Components/AdminDashboard/AdminDashboard";
-import { ViewDoctors } from "./Components/doctors/ViewDoctors";
-import { DoctorDashboard } from "./Components/doctors/DoctorDashboard";
-import { PatientDashboard } from "./Components/patients/PatientDashboard";
+import {AdminDashboard} from "./Components/AdminDashboard/AdminDashboard";
+import  {ViewDoctors}  from "./Components/doctors/ViewDoctors";
+import  {DoctorDashboard}  from "./Components/doctors/DoctorDashboard";
+import  {PatientDashboard}  from "./Components/patients/PatientDashboard";
 import PatientDiognosis from "./Components/patients/PatientDiognosis";
-import { DocPatientPrescrip } from "./Components/doctors/DocPatientPrescrip";
-import { DocPatientHistoryd } from "./Components/doctors/DocPatientHistoryd";
-import { ViewPatients } from "./Components/patients/ViewPatients";
-import { PatientPrescripd } from "./Components/patients/PatientPrescripd";
-import { DocPatientHistory } from "./Components/doctors/DocPatientHistory";
-import { AddPrescrip } from "./Components/doctors/AddPrescrip";
+import { DocPatientPrescrip}  from "./Components/doctors/DocPatientPrescrip";
+import  {DocPatientHistoryd } from "./Components/doctors/DocPatientHistoryd";
+import  {ViewPatients}  from "./Components/patients/ViewPatients";
+import  {PatientPrescripd}  from "./Components/patients/PatientPrescripd";
+import  {DocPatientHistory}  from "./Components/doctors/DocPatientHistory";
+import  AddPrescrip  from "./Components/doctors/AddPrescrip";
 import Viewdocpde from "./Components/doctors/ViewDoctorPDetail";
-import AddPatients from "./Components/patients/AddPatient";
-import { ViewBeds } from "./Components/Beds/ViewBeds";
-import { MedicalReport } from "./Components/patients/MedicalReport";
+import  AddPatients  from "./Components/patients/AddPatient";
+import  {ViewBeds}  from "./Components/Beds/ViewBeds";
+import MedicalReport from "./Components/patients/MedicalReport";
 import AddBeds from "./Components/Beds/AddBeds";
 import ViewPatientDetail from "./Components/patients/ViewPatientDetail";
-import { ViewDrugs } from "./Components/Drugs/ViewDrugs";
-import { Signup } from "./Components/User/Signup";
+import  {ViewDrugs}  from "./Components/Drugs/ViewDrugs";
+import  {Signup}  from "./Components/User/Signup";
 import ViewDiagnosis from "./Components/doctors/ViewDiagnosis";
 import AddDrugs from "./Components/Drugs/AddDrugs";
-import { BedDetails } from "./Components/Beds/BedDetails";
-import { AddPatientAccout } from "./Components/User/AddPatient";
-import { AddDoctorAccout } from "./Components/User/AddDoctors";
+import  BedDetails  from "./Components/Beds/BedDetails";
+import  AddPatientAccout  from "./Components/User/CreatePat";
+import  AddDoctorAccout  from "./Components/User/CreateDoc";
 import Login from "./Login";
-import { AdmitPatient } from "./Components/patients/AdmitPatient";
-import { DischargePatientd } from "./Components/patients/DischargePatientd";
-import { DischargedPatient } from "./Components/patients/DischargedPatient";
+import  AdmitPatient  from "./Components/patients/AdmitPatient";
+import { DischargePatientd}  from "./Components/patients/DischargePatientd";
+// import  DischargedPatient  from "./Components/patients/DischargedPatient";
 import Cookies from "js-cookie";
+
 
 
 function Home() {
@@ -63,7 +64,8 @@ function Home() {
 
           <Route path="/login" element={!admin ? <Login/>: role==="admin"? <Navigate to="/admin"/>:
                role==="doctor"? <Navigate to="/doctor"/>: <Navigate to="/patientdashboard"/>}></Route>
-
+          <Route path="/" element={!admin ? <Login/>: role==="admin"? <Navigate to="/admin"/>:
+               role==="doctor"? <Navigate to="/doctor"/>: <Navigate to="/patientdashboard"/>}></Route>
           <Route path="/admin" element={admin ? <AdminDashboard />: <Navigate to="/login"/>}></Route>
           <Route path="/addadmin" element={ <Signup />}></Route>
           <Route path="/addpatientuser/:id" element={ <AddPatientAccout />}></Route>
@@ -91,7 +93,7 @@ function Home() {
           <Route path="/adddoc" element={<AddDoc />}></Route>
           <Route path="/viewdocd/:id" element={<ViewDocd />}></Route>
           <Route path="/viewdocpde/:id" element={<Viewdocpde />}></Route>
-          <Route path="/addpatients" element={<AddPatients />}></Route>
+       
           <Route
             path="/doc_pa_historyd"
             element={<DocPatientHistoryd />}

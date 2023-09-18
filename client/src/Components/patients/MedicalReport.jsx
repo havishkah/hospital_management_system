@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Service from "../../../utilities/http";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-export const MedicalReport = () => {
+
+function MedicalReport() {
   const navigate = useNavigate();
   //const [name, setName] = useState('');
   const [patients, setPatients] = useState([]);
@@ -19,34 +20,25 @@ export const MedicalReport = () => {
   }
 
   useEffect(() => {
-      getPatients();
-	  console.log(patients)
-    }, []);
+    getPatients()
+  }, []);
 
-    function getPatients() {
-      const respone = service.get("patient/");
-      respone
-        .then((res) => {
-          console.log(res.data);
-          setPatients(res.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
-    }
+  function getPatients() {
+    const respone = service.get("patient");
+    respone
+      .then((res) => {
+        console.log(res.data);
+        setPatients(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const formData = new FormData();
-    // //formData.append('name', name);
-    // formData.append("nic", nic);
-    // formData.append("title", title);
-    // formData.append("type", type);
-    // formData.append("file", file);
-
     
-
     const newMed = {
       patientid: selectedPatient,
       title: title,
@@ -94,7 +86,7 @@ export const MedicalReport = () => {
               <select
                 className="form-control"
                 name="patirentid"
-				value={selectedPatient}
+                value={selectedPatient}
                 onChange={(e) => {
                   setSelectedPatient(e.target.value);
                 }}
@@ -186,10 +178,12 @@ export const MedicalReport = () => {
                 Upload
               </button>
             </div>
-
           </div>
         </div>
       </form>
     </main>
   );
-};
+}
+
+export default MedicalReport
+

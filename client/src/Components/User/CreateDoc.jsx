@@ -1,13 +1,48 @@
 import { useState } from "react"
 import { useSignup } from "../../hooks/useSignup"
 
-export const AddPatientAccout = () => {
+function AddDoctorAccout () {
     const [username, setUsername] = useState('')
-    const [contact, setcontact] = useState('')
+    const [contact, setContact] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const {signup, isLoading, error} = useSignup()
-    const role = "Patient"
+    const role = "Doctor"
+
+    const {id} = useParams();
+    
+  
+    // const data = {
+    //   firstName:firstName,
+    //   lastName:lastName,
+    //   initials:initials,
+    //   Dob:dob,
+    //   Gender:gender,
+    //   email:email,
+    //   nic:nic,
+    //   contact:contact,
+    //   specialist:specialist,
+    //   ward:ward
+    // }
+  
+    //loading existing data to form
+    useEffect(() =>{
+      loadDoctor();
+      getPatients();
+    },[])
+  
+  function loadDoctor(){
+      const respone =  service.get(`doctor/${id}`)
+      respone.then((res) =>{
+        console.log(res.data)
+        setEmail(res.data.email);
+        setContact(res.data.contact);
+        setUsername(res.data.username);
+        setPassword(res.data.password)
+    }).catch((err) =>{
+        alert(err);
+    })
+  }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -19,7 +54,7 @@ export const AddPatientAccout = () => {
         <main className="main-container">
         <div className="row">
             <div className="col-md-12 w-50 m-auto">
-            <h5 className="mt-2"><i className="fa fa-user-plus"> </i> Add Patient Acount</h5>
+            <h5 className="mt-2"><i className="fa fa-user-plus"> </i> Add Doctor Account</h5>
             <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
             <form>
                 <div className="row">
@@ -43,7 +78,7 @@ export const AddPatientAccout = () => {
                         <div className="mb-3">
                             <label style={{fontSize:'14px'}}className="form-lable">Contact</label>
                             <input type="number" name="phone" className="form-control" onChange={(e) => {
-                                setcontact(e.target.value);
+                                setContact(e.target.value);
                             }}/>
                         </div>
                     </div>
@@ -72,3 +107,5 @@ export const AddPatientAccout = () => {
 
     )
 }
+
+export default AddDoctorAccout;

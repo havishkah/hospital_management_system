@@ -51,9 +51,17 @@ const loginPatient = async (req, res) => {
   }
 }
 
-const getAllpatientsdetails = async (req, res) => {
-  const patient = await Patient.find({});
-  res.status(200).json(patient);
+const getAllpatientsdetails =  (req, res) => {
+  const patient =  Patient.find();
+  patient.then((data) =>{
+    console.log(data)
+    res.status(200).json(data);
+
+  }).catch((error)=> {
+    console.log(error);
+  })
+
+
 };
 
 const getPatient = async (req, res) => {
