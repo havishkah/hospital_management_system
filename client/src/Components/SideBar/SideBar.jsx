@@ -15,7 +15,7 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
       <Auth position="admin">
       <hr className="text-dark" />
       <div className='list-group list-group-flush'>
-          <a href="/" className="list-group-item py-1">
+          <a href="/admin" className="list-group-item py-1">
             <small>Menu</small><br />
             <i className="fa-solid fa-house fs-6 me-3 my-2"></i>
             <span className='fs-6 my-2'>Dashboard</span>
