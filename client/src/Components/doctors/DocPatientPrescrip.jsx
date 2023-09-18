@@ -186,7 +186,7 @@ export const DocPatientPrescrip = () => {
                        
                            <div className="col-md-6">
                                <div className="mb-3">
-                                   <a href='#'><button style={{marginLeft:'380px',width:'100px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></a>
+                                 <Link to={`/viewdocpde/${id}`}><button style={{marginLeft:'380px',width:'100px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link> 
                                </div>
                               
                            </div>

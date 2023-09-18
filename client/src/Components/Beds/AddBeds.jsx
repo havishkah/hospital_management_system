@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Service from '../../../utilities/http';
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 function AddBeds () {
 
@@ -114,7 +114,7 @@ function AddBeds () {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                 <label className="form-lable"></label>
-                                    <button style={{marginLeft:'320px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button> &nbsp;
+                                    <Link to='/'><button style={{marginLeft:'320px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
                                     
                                     <button style={{height:'40px', fontSize:'16px'}} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
                                 </div>

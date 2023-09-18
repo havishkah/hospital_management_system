@@ -7,14 +7,15 @@ import doctor from '../../assets/doctor.png'
 export const AdminDashboard = () => {
   const [doctorCount, setDoctorCount] = useState(0);
   const [availableBeds, setAvailableBeds] = useState(0);
-  const [onboardPatientsCount, setOnboardPatientsCount] = useState(0);
+  const [dischargedPatientCount, setDischargedPatientCount] = useState(0);
+  const [admittedPatientCount, setAdmittedPatientCount] = useState(0);
   const service = new Service();
 
   useEffect(() => {
     getDoctorCount(); 
+    getDischargedPatientCount();
+    getAdmittedPatientCount();
     getAvailableBeds();
-    //getPatients();
-    getOnboardPatientsCount(); // Call this function to get the count
   }, []);
 
   function getDoctorCount() {
@@ -46,17 +47,32 @@ export const AdminDashboard = () => {
       });
   }
 
-  function getOnboardPatientsCount() {
-    const response = service.get('admit/'); // Assuming you are getting onboard patients from the 'admit' endpoint
+  function getAdmittedPatientCount() {
+    const response = service.get('admit/'); 
     response
       .then((res) => {
-        const count = res.data.length;
-        setOnboardPatientsCount(count);
+        const admittedPatients = res.data.filter((patient) => patient.status === 'Admitted');
+        const count = admittedPatients.length;
+        setAdmittedPatientCount(count);
       })
       .catch((error) => {
-        console.error('Error fetching onboard patients count:', error);
+        console.error('Error fetching admitted patient count:', error);
       });
   }
+
+  function getDischargedPatientCount() {
+    const response = service.get('admit/'); 
+    response
+      .then((res) => {
+        const dischargedPatients = res.data.filter((patient) => patient.status === 'Discharge');
+        const count = dischargedPatients.length;
+        setDischargedPatientCount(count);
+      })
+      .catch((error) => {
+        console.error('Error fetching discharged patient count:', error);
+      });
+  }
+  
 
   return (
     <main className='main-container'>
@@ -71,7 +87,7 @@ export const AdminDashboard = () => {
           <div style={{height:'150px'}} className="card">
             <h5 style={{color:'blue'}}>Total Patients Onboard</h5>
             <div className='card-inner'>
-            <h2>{onboardPatientsCount}</h2>
+            <h2>{admittedPatientCount}</h2>
               <BsPeopleFill className='card_icon'/>
             </div>  
           </div>
@@ -79,7 +95,7 @@ export const AdminDashboard = () => {
           <div style={{height:'150px'}} className="card">
             <h5 style={{color:'orange'}}>Total Patients Discharged</h5>
             <div className='card-inner'>
-              <h2>100</h2>
+              <h2>{dischargedPatientCount}</h2>
               <BsPeopleFill className='card_icon'/>
             </div> 
           </div>

@@ -205,6 +205,7 @@ const ViewDiagnosis = () => {
 
                         </form>
                     </div>
+                    <div className="row">
                     <div className="col-md-6">
 
 
@@ -212,11 +213,11 @@ const ViewDiagnosis = () => {
 
                     <div className="col-md-6">
                         <div className="mb-3">
-                            <button style={{ marginLeft: '380px', height: '40px', fontSize: '16px' }} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button>&nbsp;
+                            <Link to={`/viewdocpde/${id}`}><button style={{ marginLeft: '250px', height: '40px', fontSize: '16px' }} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
                             <button style={{ height: '40px', fontSize: '16px' }} type="button" onClick={handleGeneratePdf} className="btn btn-primary text-white btn-lg">Generate Report</button> &nbsp;
                         </div>
                     </div>
-
+                    </div>
 
 
                 </div>

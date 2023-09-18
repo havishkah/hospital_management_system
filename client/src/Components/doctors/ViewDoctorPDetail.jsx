@@ -158,14 +158,13 @@ const filterData = value => {
 
   return (
 
-
       <main className="main-container">
                 <div className="row">
                     <div className="col-md-12">
+                    <h5>Patient {firstName}'s Details</h5>
                     <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
-                    <h5>Patient {firstName} 's Details</h5>
-                    <Link to={`/addprescrip/${id}`}><button style={{marginLeft:'550px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Add Prescription</button></Link> &nbsp;
-                    <button style={{height:'40px', fontSize:'16px'}} type="submit" onClick={handleDischarge} className="btn btn-danger text-white btn-lg">Discharge</button>
+                    <Link to={`/addprescrip/${id}`}><button style={{marginLeft:'730px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Add Prescription</button></Link>&nbsp;
+                    <Link to={`/discharge/${id}`}><button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-danger text-white btn-lg">Discharge</button></Link>
                     </div>
                    
                     <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
@@ -332,7 +331,7 @@ const filterData = value => {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                 {/* <label className="form-lable"></label> */}
-                                    <button style={{marginLeft:'120px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">View Patient History</button> &nbsp;
+                                    <button style={{marginLeft:'95px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">View Patient History</button> &nbsp;
                                     
                                     <Link to={`/viewdiagnosis/${id}`}><button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary btn-lg">View Diagonosis Report</button></Link>
                                 </div>
