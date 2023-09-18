@@ -108,7 +108,7 @@ function ViewPatientDetail() {
     const handleSubmit = () => {
 
     const admitedPatient = {
-        patientid:_id,
+        patientid:patientid,
         docName:docName,
         name:name,
         nic:nic,
