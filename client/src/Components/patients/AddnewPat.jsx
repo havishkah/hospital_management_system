@@ -17,7 +17,6 @@ import { useNavigate,Link } from "react-router-dom";
     const [nic, setNic] = useState('');
     const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
-    const [password, setPassword] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
     
     const service = new Service();
@@ -39,20 +38,21 @@ import { useNavigate,Link } from "react-router-dom";
             email: email,
             address: address,
             contact: contact,
-            password:password,
             emergencycont: emergencycont
 
         }
 
         const respone = service.post('patient/add', newPatient)
-        respone.then((res) => {
-            console.log(res);
-            alert('Patient added Successfully');
-            navigate('/allpatient');
-        }).catch((error) => {
-            console.error('Error with adding data:', error);
-        });
 
+        respone.then((res)=>{
+            console.log(res)
+        })
+            console.log(newPatient);
+
+
+            // alert('Patient added Successfully');
+            // navigate('/allpatient');
+       
 
     }
 
@@ -76,12 +76,12 @@ import { useNavigate,Link } from "react-router-dom";
                 <div className="col-md-12">
                     <h5 className="mt-2">Add Patients</h5>
                     <p className="mt-3" style={{ color: 'grey' }}>Basic Infromation</p>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="row">
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">First name</label>
-                                    <input type="text" name="username" className="form-control" onChange={(e) => {
+                                    <input type="text" name="fname" className="form-control" value={firstName} onChange={(e) => {
                                         setFirstName(e.target.value);
                                     }} />
                                 </div>
@@ -89,7 +89,7 @@ import { useNavigate,Link } from "react-router-dom";
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Last Name</label>
-                                    <input type="text" name="email" className="form-control" onChange={(e) => {
+                                    <input type="text" name="lname" className="form-control" value={lastName} onChange={(e) => {
                                         setLastName(e.target.value);
                                     }} />
                                 </div>
@@ -97,7 +97,7 @@ import { useNavigate,Link } from "react-router-dom";
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Name with Initials</label>
-                                    <input type="text" name="phone" className="form-control" onChange={(e) => {
+                                    <input type="text" name="phone" className="form-control" value={initials} onChange={(e) => {
                                         setInitials(e.target.value);
                                     }} />
                                 </div>
@@ -105,7 +105,7 @@ import { useNavigate,Link } from "react-router-dom";
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Date of Birth</label>
-                                    <input type="date" name="address" className="form-control" onChange={(e) => {
+                                    <input type="date" name="date" className="form-control" value={dob} onChange={(e) => {
                                         setDob(e.target.value);
                                     }} />
                                 </div>
@@ -113,7 +113,7 @@ import { useNavigate,Link } from "react-router-dom";
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Nic</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                    <input type="text" name="address" className="form-control" value={nic} onChange={(e) => {
                                         setNic(e.target.value);
                                     }} />
                                 </div>
@@ -121,7 +121,7 @@ import { useNavigate,Link } from "react-router-dom";
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Gender</label>
-                                    <select className="form-control" onChange={(e) => {
+                                    <select className="form-control" value={gender} onChange={(e) => {
                                         setGender(e.target.value);
                                     }} name="status" >
                                         <option value="">--Select Gender--</option>
@@ -133,7 +133,7 @@ import { useNavigate,Link } from "react-router-dom";
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Age</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                    <input type="text" name="age" className="form-control" value={age} onChange={(e) => {
                                         setAge(e.target.value);
                                     }} />
                                 </div>
@@ -141,24 +141,17 @@ import { useNavigate,Link } from "react-router-dom";
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">UserName</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                    <input type="text" name="user" className="form-control" value={username} onChange={(e) => {
                                         setUsername(e.target.value);
                                     }} />
                                 </div>
                             </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{ fontSize: '14px' }} className="form-lable">Password</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
-                                        setPassword(e.target.value);
-                                    }} />
-                                </div>
-                            </div>
+                            
                             <p className="mt-3" style={{ color: 'grey' }}>Contact Infromation</p>
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Contact Number</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                    <input type="text" name="cont" className="form-control" value={contact} onChange={(e) => {
                                         setContact(e.target.value);
                                     }} />
                                 </div>
@@ -166,7 +159,7 @@ import { useNavigate,Link } from "react-router-dom";
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Email</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                    <input type="email" name="email" className="form-control" value={email} onChange={(e) => {
                                         setEmail(e.target.value);
                                     }} />
                                 </div>
@@ -174,7 +167,7 @@ import { useNavigate,Link } from "react-router-dom";
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Address</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                    <input type="text" name="fewfe" className="form-control" value={address} onChange={(e) => {
                                         setAddress(e.target.value);
                                     }} />
                                 </div>
@@ -182,7 +175,7 @@ import { useNavigate,Link } from "react-router-dom";
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label style={{ fontSize: '14px' }} className="form-lable">Emergency Contact Number</label>
-                                    <input type="text" name="address" className="form-control" onChange={(e) => {
+                                    <input type="text" name="emer" className="form-control" value={emergencycont} onChange={(e) => {
                                         setEmergencycont(e.target.value);
                                     }} />
                                 </div>
@@ -196,9 +189,9 @@ import { useNavigate,Link } from "react-router-dom";
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label className="form-lable"></label>
-                                    <Link to='/admin'><button style={{ marginLeft: '320px', height: '40px', fontSize: '16px' }} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
+                                    <Link to='/admin'><button style={{ marginLeft: '320px', height: '40px', fontSize: '16px' }}  className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
 
-                                    <button style={{ height: '40px', fontSize: '16px' }} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
+                                    <button type="submit" style={{ height: '40px', fontSize: '16px' }} className="btn btn-primary btn-lg">Submit</button>
 
                                     
                                 </div>

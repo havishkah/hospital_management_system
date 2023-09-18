@@ -29,8 +29,9 @@ import  {Signup}  from "./Components/User/Signup";
 import ViewDiagnosis from "./Components/doctors/ViewDiagnosis";
 import AddDrugs from "./Components/Drugs/AddDrugs";
 import  BedDetails  from "./Components/Beds/BedDetails";
+import { AddNewPatient } from "./Components/patients/AddnewPat";
 import  AddPatientAccout  from "./Components/User/CreatePat";
-import  AddDoctorAccout  from "./Components/User/CreateDoc";
+import  {AddDoctorAccout}  from "./Components/User/CreateDoc";
 import Login from "./Login";
 import  AdmitPatient  from "./Components/patients/AdmitPatient";
 import { DischargePatientd}  from "./Components/patients/DischargePatientd";
@@ -112,7 +113,7 @@ function Home() {
           <Route path="/alldrug" element={<ViewDrugs />}></Route>
           <Route path="/viewdocd" element={<ViewDocd />}></Route>
           <Route path="/viewdocpde" element={<Viewdocpde />}></Route>
-          <Route path="/addpatients" element={<AddPatients />}></Route>
+          <Route path="/addpatients" element={<AddNewPatient />}></Route>
           <Route path="/addbeds" element={<AddBeds />}></Route>
           <Route path="/beddetails/:id" element={<BedDetails />}></Route>
           <Route

@@ -53,16 +53,13 @@ const patientSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  password: {
-    type: String,
-    required: true,
-  },
 });
 
 patientSchema.statics.addPatient = async function (
   firstName,
   lastName,
   initials,
+  username,
   Dob,
   Gender,
   Age,
@@ -71,16 +68,15 @@ patientSchema.statics.addPatient = async function (
   email,
   address,
   emergencycont,
-  password
 ) {
   const exists = await this.findOne({ nic });
     if (
       !firstName ||
       !lastName ||
+      !username ||
       !Dob ||
       !initials ||
       !email ||
-      !password ||
       !Gender ||
       !nic ||
       !contact ||
@@ -90,39 +86,18 @@ patientSchema.statics.addPatient = async function (
     ) {
       throw Error("All Fields must be filled");
     }
-    if (!validator.isEmail(email)) {
-      throw Error("Email is not valid");
-    }
+    // if (!validator.isEmail(email)) {
+    //   throw Error("Email is not valid");
+    // }
     if (exists) {
       throw Error("patient is already registered");
     }
     const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
   
-    const patient = await this.create({ firstName, lastName, initials, Dob, Gender, nic, contact, Age, address, emergencycont, email, password: hash });
+    const patient = await this.create({ firstName, lastName, initials,username, Dob, Gender, nic, contact, Age, address, emergencycont, email});
   
     return patient;
   };
-
-  patientSchema.statics.login = async function (nic, password){
-    if(!nic || !password ){
-      throw Error("All fields must be filled");
-    }
-
-    const patient = await this.findOne({ nic });
-  
-      if (!patient) {
-          throw Error("Incrorrect username or password");
-        }
-      
-        const match = await bcrypt.compare(password, patient.password);
-      
-        if (!match) {
-          throw Error("Incorrect username or password");
-        }
-      
-        return patient;
-  }
 
 
 const Patient = mongoose.model("patient", patientSchema);

@@ -26,7 +26,6 @@ const createaPatient = async (req, res, next) => {
       email = data.email,
       address = data.address,
       emergencycont = data.emergencycont,
-      password = data.password
     );
    
     res.status(200).json({patient})

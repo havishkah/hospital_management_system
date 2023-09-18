@@ -49,11 +49,7 @@ const doctorSchema = new mongoose.Schema({
   ward: {
     type: String,
     required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
+  }
   
 });
 
@@ -69,7 +65,6 @@ doctorSchema.statics.signDoctor = async function (
     contact,
     specialist,
     ward,
-    password
   ) {
     const exists = await this.findOne({ username });
     if (
@@ -79,7 +74,6 @@ doctorSchema.statics.signDoctor = async function (
       !username ||
       !initials ||
       !email ||
-      !password ||
       !Gender ||
       !nic ||
       !contact ||
@@ -95,33 +89,11 @@ doctorSchema.statics.signDoctor = async function (
       throw Error("username already in use");
     }
     const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
   
-    const doctor = await this.create({ firstName, lastName, initials,username, Dob, Gender, nic, contact, specialist, ward, email, password: hash });
+    const doctor = await this.create({ firstName, lastName, initials,username, Dob, Gender, nic, contact, specialist, ward, email});
   
     return doctor;
   };
-  
-  doctorSchema.statics.login =  async function (username, password) {
-      if(!username || !password){
-          throw Error("All fields must be filled");
-      }
-  
-      const doctor = await this.findOne({ username });
-  
-      if (!doctor) {
-          throw Error("Incrorrect username or password");
-        }
-      
-        const match = await bcrypt.compare(password, doctor.password);
-      
-        if (!match) {
-          throw Error("Incorrect username or password");
-        }
-      
-        return doctor;
-      
-  }
 
 const Doctor = mongoose.model("doctor", doctorSchema);
 

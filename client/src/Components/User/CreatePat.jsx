@@ -50,7 +50,7 @@ function AddPatientAccout  () {
                     <div className="col-md-12">
                         <div className="mb-3">
                             <label style={{fontSize:'14px'}} className="form-lable">Username</label>
-                            <input type="text" name="username" className="form-control" onChange={(e) => {
+                            <input type="text" name="username" className="form-control" value={username} onChange={(e) => {
                                 setUsername(e.target.value);
                             }} />
                         </div>
@@ -58,7 +58,7 @@ function AddPatientAccout  () {
                     <div className="col-md-12">
                         <div className="mb-3">
                             <label style={{fontSize:'14px'}} className="form-lable">Email</label>
-                            <input type="email" name="email" className="form-control" onChange={(e) => {
+                            <input type="email" name="email" className="form-control" value={email} onChange={(e) => {
                                 setEmail(e.target.value);
                             }} />
                         </div>
@@ -66,7 +66,7 @@ function AddPatientAccout  () {
                     <div className="col-md-12">
                         <div className="mb-3">
                             <label style={{fontSize:'14px'}}className="form-lable">Contact</label>
-                            <input type="number" name="phone" className="form-control" onChange={(e) => {
+                            <input type="number" name="phone" className="form-control" value={contact} onChange={(e) => {
                                 setContact(e.target.value);
                             }}/>
                         </div>

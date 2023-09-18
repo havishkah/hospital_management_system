@@ -60,10 +60,24 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
           <i class="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
           <a href="/medical_rprt" className='text-decoration-none text-black'><span className='fs-6'>Medical Report</span></a>
         </a>
-        <a href="/addadmin" className="list-group-item py-1">
+        <a href="" className="list-group-item py-3">
+          <small>Manage Users</small><br />
+          <i class="fa-solid fa-file fs-6 me-3 my-2"></i>
+          <a href="/addadmin" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Admin User</span></a>
+          <br />
+          <i class="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
+          <a href="/addAdmin" className='text-decoration-none text-black'><span className='fs-6'>View Users</span></a>
+        </a>
+        
+        
             <small>Manage Users</small><br />
-            <i className="fa-solid fa-user-plus fs-6 me-3 my-2"></i>
-            <span className='fs-6 my-2'>Add user</span>
+            <a href="/addadmin" className="list-group-item py-1">
+            <i className="fa-solid fa-user-plus fs-6 me-3 my-1"></i>
+            <span className='fs-6 my-1'>Add user</span>
+          </a>
+          <a href="/addadmin" className="list-group-item py-1">
+            <i className="fa-solid fa-user fs-6 me-3 my-1"></i>
+            <span className='fs-6 my-1'>View user</span>
           </a>
 
       </div>
