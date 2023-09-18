@@ -57,7 +57,19 @@ function AddPatient() {
             console.error('Error with adding data:', error);
         });
 
-        await signup(username,email,contact,password, role)
+        const addUser = {
+            
+            username:username,
+            email: email,
+            contact: contact,
+            password:password,
+            role:role
+        }
+
+        const adusr=await signup(addUser)
+        if(adusr){
+            console.log(addUser)
+        }
 
     }
 

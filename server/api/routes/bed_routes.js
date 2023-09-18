@@ -12,7 +12,7 @@ const {
 
 const requireAuth = require('../middleware/Auth/requireauth')
 
-router.use(requireAuth)
+//router.use(requireAuth)
 
 router.post("/add",createBed);
 router.get("/",getAllbedsdetails);

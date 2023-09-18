@@ -13,15 +13,9 @@ const requireAuth = require('../middleware/Auth/requireauth')
 
 router.use(requireAuth)
 
-
 router.get("/", getAlldrugs);
-
 router.get("/:id", getDrug);
-
 router.post("/add", createDrug);
-
 router.patch("/:id", updatedrug);
-
 router.delete("/:id", deleteDrug);
-
 module.exports = router;
