@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import Service from '../../../utilities/http';
 import {useParams,useNavigate,Link} from "react-router-dom";
 
-export const BedDetails = () => {
+function BedDetails ()  {
 
   const service = new Service()
   const navigate = useNavigate()
@@ -162,3 +162,5 @@ export const BedDetails = () => {
                     </main>
   )
 }
+
+export default BedDetails;

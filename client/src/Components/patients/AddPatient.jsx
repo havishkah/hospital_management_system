@@ -3,9 +3,7 @@ import Service from '../../../utilities/http';
 import { useNavigate } from "react-router-dom";
 import { useSignup } from "../../hooks/useSignup"
 
-function AddPatient() {
-
-    const  {signup, error, isLoading} = useSignup()
+function AddPatients() {
 
     const navigate = useNavigate();
     const [doctors, setDoctors] = useState([]);
@@ -22,7 +20,6 @@ function AddPatient() {
     const [contact, setContact] = useState('');
     const [password, setPassword] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
-    const role = 'patient'
     
     const service = new Service();
 
@@ -57,19 +54,6 @@ function AddPatient() {
             console.error('Error with adding data:', error);
         });
 
-        const addUser = {
-            
-            username:username,
-            email: email,
-            contact: contact,
-            password:password,
-            role:role
-        }
-
-        const adusr=await signup(addUser)
-        if(adusr){
-            console.log(addUser)
-        }
 
     }
 
@@ -237,4 +221,4 @@ function AddPatient() {
     )
 }
 
-export default AddPatient
+export default AddPatients
