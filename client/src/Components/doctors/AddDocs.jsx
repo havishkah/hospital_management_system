@@ -6,7 +6,6 @@ import { useSignup } from "../../hooks/useSignup"
 function AddDocs() {
 
     const navigate = useNavigate();
-    const {signup, isLoading, error} = useSignup()
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
