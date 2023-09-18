@@ -8,6 +8,8 @@ function AddDocs() {
     const  {signup, error, isLoading} = useSignup()
 
     const navigate = useNavigate();
+    const {signup, isLoading, error} = useSignup()
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [username, setUsername] = useState('');
@@ -54,7 +56,15 @@ function AddDocs() {
             console.error('Error with adding data:', error);
         });
 
-        await signup(username,email,contact,password, role)
+        const newUser = {
+            username:username,
+            password:password,
+            email: email,
+            contact: contact,
+            role:role
+        }
+
+        await signup(newUser)
 
     }
 
@@ -189,7 +199,7 @@ function AddDocs() {
 
                                     <button style={{ height: '40px', fontSize: '16px' }} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
                                     {error && <div className="error">{error}</div>}
-                               
+
                                 </div>
 
                             </div>

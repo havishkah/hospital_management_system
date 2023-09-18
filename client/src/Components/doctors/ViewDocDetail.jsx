@@ -159,7 +159,7 @@ function patientView(id){
                                 <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Last Name</label>
                                     <input type="text" name="email" className="form-control" value={lastName} onChange={(e) => {
-                                        setLastName(e.target.value);
+                                        setLastName(e.target.value); dissable
                                     }}/>
                                 </div>
                             </div>

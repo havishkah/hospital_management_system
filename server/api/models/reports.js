@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const reportSchema = new mongoose.Schema({
    
 
-     nic:{
+     patientid:{
       type:String,
       required:true
      },
@@ -22,6 +22,11 @@ const reportSchema = new mongoose.Schema({
     type:String,
     required:true
    },
+
+   path:{
+    type:String,
+    required:true
+   }
    // patientid:{
    //    type:String,
    //    required:true
