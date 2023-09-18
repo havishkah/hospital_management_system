@@ -7,7 +7,7 @@ const {
   validateInputs,
 } = require("../../utilities/data_validation")
 
-const createDrug = (req, res) => {
+const createDrug = (req, res, next) => {
   try {
     data = req.body;
 

@@ -29,6 +29,8 @@ import { Signup } from "./Components/User/Signup";
 import ViewDiagnosis from "./Components/doctors/ViewDiagnosis";
 import AddDrugs from "./Components/Drugs/AddDrugs";
 import { BedDetails } from "./Components/Beds/BedDetails";
+import { AddPatientAccout } from "./Components/User/AddPatient";
+import { AddDoctorAccout } from "./Components/User/AddDoctors";
 import Login from "./Login";
 import { AdmitPatient } from "./Components/patients/AdmitPatient";
 import { DischargePatientd } from "./Components/patients/DischargePatientd";
@@ -64,6 +66,8 @@ function Home() {
 
           <Route path="/admin" element={admin ? <AdminDashboard />: <Navigate to="/login"/>}></Route>
           <Route path="/addadmin" element={ <Signup />}></Route>
+          <Route path="/addpatientuser/:id" element={ <AddPatientAccout />}></Route>
+          <Route path="/adddoctoruser/:id" element={ <AddDoctorAccout/>}></Route>
           <Route path="/alldoc" element={<ViewDoctors />}></Route>
           <Route path="/doctor" element={<DoctorDashboard />}></Route>
           <Route path="/admitpatients" element={<AdmitPatient />}></Route>

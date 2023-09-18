@@ -26,10 +26,10 @@ export const DocPatientPrescrip = () => {
        function loadPatient(){
             const respone =  service.get(`/patient/${id}`)
             respone.then((res) =>{
-                    setFirstName(res.data[0].firstName);
-                    setDob(res.data[0].Dob);
-                    setGender(res.data[0].Gender);
-                    setAge(res.data[0].Age);
+                    setFirstName(res.data.firstName);
+                    setDob(res.data.Dob);
+                    setGender(res.data.Gender);
+                    setAge(res.data.Age);
    
             }).catch((err) =>{
                   alert(err);
@@ -48,12 +48,12 @@ export const DocPatientPrescrip = () => {
           function loadPrescription(){
                const respone =  service.get(`/prescription/p_detail/${id}`)
                respone.then((res) =>{
-                       setCatagory(res.data[0].catagory);
-                       setDrug(res.data[0].drug);
-                       setDiagnosis(res.data[0].diagnosis);
-                       setFrequency(res.data[0].frequency);
-                       setDosage(res.data[0].dosage);
-                       setQty(res.data[0].qty);
+                       setCatagory(res.data.catagory);
+                       setDrug(res.data.drug);
+                       setDiagnosis(res.data.diagnosis);
+                       setFrequency(res.data.frequency);
+                       setDosage(res.data.dosage);
+                       setQty(res.data.qty);
                }).catch((err) =>{
                      alert(err);
            })
