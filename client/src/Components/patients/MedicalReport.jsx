@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 import Service from "../../../utilities/http";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 export const MedicalReport = () => {
   const navigate = useNavigate();
@@ -84,6 +84,7 @@ export const MedicalReport = () => {
                             }} />
                         </div>
                     </div> */}
+
           <div className="col-md-6">
             <div className="mb-3">
               <label style={{ fontSize: "14px" }} className="form-lable">

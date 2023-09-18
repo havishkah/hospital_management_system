@@ -148,7 +148,7 @@ export const BedDetails = () => {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                 {/* <label className="form-lable"></label> */}
-                                    <Link to='/allbed'><button style={{marginLeft:'360px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp; 
+                                    <Link to='/allbed'><button style={{marginLeft:'330px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp; 
                                     
                                     <button style={{height:'40px', fontSize:'16px'}} type="button" onClick={bedUpdate} className="btn btn-primary btn-lg">Update</button>
                                 </div>
