@@ -16,7 +16,6 @@ const createReport = (req, res, next) => {
   if (!req.file.path) {
     return res.status(400).json({ message: "No file uploaded" });
   }
-
   const report = new Report({
     patientid,
     title,
@@ -27,6 +26,22 @@ const createReport = (req, res, next) => {
   return report.save().then(() => {
     res.status(200).json("Report Saved Successfully");
   });
+};
+
+const downloadFile = async (req, res) => {
+  const fileId = req.params;
+
+  // Find the file in MongoDB by its ID
+  const report = await Report.findOne({_id:fileId}) 
+    // Serve the file to the client
+    report.then(()=>{
+      res.download(file.storageLocation, file.originalName);
+    })
+    .catch((error) =>{
+      console.log(error);
+    })
+    
+  
 };
 
 const getReopts = (req, res, next) => {
@@ -137,6 +152,7 @@ module.exports = {
   removeReport: deleteRepotsByid,
   editReports: updateaReportbyID,
   getReopts,
-  getReportByID
+  getReportByID,
+  downloadFile
   //reportRetrieve: reportRetrieve,
 };

@@ -12,7 +12,7 @@ function AddPatientAccout  () {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const {signup, isLoading, error} = useSignup()
-    const role = "Patient"
+    const role = "patient"
     const { id } = useParams()
 
     useEffect(() =>{

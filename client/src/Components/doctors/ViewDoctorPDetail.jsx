@@ -70,12 +70,12 @@ function ViewDoctorPDetail() {
      function loadAdmitPatient(){
           const respone =  service.get(`admit/${id}`)
           respone.then((res) =>{
-                  setDocName(res.data[0].docName);
-                  setBht(res.data[0].bht);
-                  setSpecialist(res.data[0].specialist);
-                  setWard(res.data[0].ward);
-                  setBed(res.data[0].bed);
-                  setStatus(res.data[0].status);
+                //   setDocName(res.data.docName);
+                //   setBht(res.data.bht);
+                //   setSpecialist(res.data.specialist);
+                //   setWard(res.data.ward);
+                //   setBed(res.data.bed);
+                //   setStatus(res.data.status);
  
           }).catch((err) =>{
                 alert(err);

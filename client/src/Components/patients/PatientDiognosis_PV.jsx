@@ -2,16 +2,22 @@
 import React, { useState, useEffect } from 'react';
 import Service from '../../../utilities/http';
 import { useNavigate,Link } from 'react-router-dom';
+import Cookies from "js-cookie";
 import axios from 'axios';
 
-function PatientDiagnosis() {
+function PatientDiagnosis_PV() {
   const service = new Service();
-  const [patients, setPatients] = useState([]);
   const [patientid, setPatientid] = useState('');
   const [reports, setReports] = useState([]);
   const [files, setFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
  // const [file, setFile] = useState('')
+
+ const [firstName, setFirstName] = useState("")
+  const [lastName, setlastName] = useState("")
+  
+
+ const un = Cookies.get('username')
 
 
   useEffect(() => {
@@ -20,11 +26,12 @@ function PatientDiagnosis() {
 
   
   function getPatients() {
-    const response = service.get('patient');
+    const response = service.get(`patient/getby/${un}`);
     response
       .then((res) => {
-        console.log(res.data);
-        setPatients(res.data);
+        setPatientid(res.data._id);
+        setFirstName(res.data.firstName);
+        setlastName(res.data.lastName);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -80,6 +87,8 @@ function PatientDiagnosis() {
         alert('File download failed.');
       });
 
+      setSelectedFile(null)
+
   };
 
   
@@ -94,23 +103,9 @@ function PatientDiagnosis() {
             <div className="col-md-6">
               <div className="mb-3">
                 <label style={{ fontSize: '14px' }} className="form-lable">
-                  Patient Name
+                  Patient Name: 
                 </label>
-                <select
-                  className="form-control"
-                  name="patientid"
-                  value={patientid}
-                  onChange={(e) => {
-                    setPatientid(e.target.value);
-                  }}
-                >
-                  <option> --select Patient -- </option>
-                  {patients.map((patient) => (
-                    <option key={patient._id} value={patient._id}>
-                      {patient.firstName} {patient.lastName}
-                    </option>
-                  ))}
-                </select>
+                <div>{firstName} {lastName}</div>
               </div>
             </div>
             <div className="mb-3">
@@ -124,13 +119,12 @@ function PatientDiagnosis() {
                 onClick={handleClick}
                 className="btn btn-primary text-white btn-lg"
               >
-                Submit
+                View Reports
               </button>
             </div>
           </form>
         </div>
       </div>
-
       {/* Display Reports */}
       <div>
   {reports.length > 0 ? (
@@ -148,9 +142,9 @@ function PatientDiagnosis() {
       
           
             <td>{report.title}</td>
-            <td>{report.type}</td>
+            <td>{report.type === '01' ? <p>Blood Report</p>: report.type === '02' ?<p>Heart Report</p>: <p>BP Report</p>}</td>
             <td>
-            <button onClick={() => setSelectedFile(report.file)}>Download</button>
+            <button className='btn btn-primary' onClick={() => setSelectedFile(report.file)}>Select</button>
               </td>
             {/* {<td><button onClick={downloadReport(report.file)}>Download</button></td>} */}
             {/* <td>
@@ -166,14 +160,14 @@ function PatientDiagnosis() {
       </tbody>
     </table>
   ) : (
-    <p>No reports available for the selected patient.</p>
+    <p>Click View Button</p>
   )}
 </div>
  <div>
         {selectedFile && (
           <div>
             <p>Selected File: {selectedFile}</p>
-            <button onClick={downloadReport}>Download Selected File</button>
+            <button className='btn btn-danger' onClick={downloadReport}>Download Selected File</button>
           </div>
         )}
       </div>
@@ -181,4 +175,4 @@ function PatientDiagnosis() {
   );
 }
 
-export default PatientDiagnosis;
+export default PatientDiagnosis_PV;

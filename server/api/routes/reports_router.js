@@ -9,7 +9,8 @@ const{
   removeReport,
   editReports,
   getReopts,
-  getReportByID
+  getReportByID,
+  downloadFile
 } = require('../Controllers/report_controller')
 
 const requireAuth = require('../middleware/Auth/requireauth')
@@ -18,6 +19,7 @@ const requireAuth = require('../middleware/Auth/requireauth')
 
 router.post('/download',getReopts)
 router.get('/get/:id', getReportByID)
+router.get('/download/:id', downloadFile)
 router.post('/', Report.single("file"), addReport)
 router.get('/',viewAllreports)
 router.delete('/:id',removeReport)

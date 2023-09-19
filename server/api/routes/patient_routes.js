@@ -9,7 +9,7 @@ const {
   getPatientByID,
   getDoctorsPaitent,
   getPatientbyNic,
-  logpatient
+  getPatientByUN
 } = require("../Controllers/patient_controller");
 
 const requireAuth = require('../middleware/Auth/requireauth')
@@ -23,6 +23,6 @@ router.get("/details/doctor/:id",getDoctorsPaitent);
 router.post("/add", createPatient);
 router.delete("/:id",deletePatient);
 router.patch("/:id",updatePatient);
-router.post('/patientlog', logpatient)
+router.get('/getby/:username',  getPatientByUN)
 
 module.exports = router;

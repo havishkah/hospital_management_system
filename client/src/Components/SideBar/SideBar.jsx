@@ -97,10 +97,10 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
           <small>Reports</small><br />
 
           <i class="fa-solid fa-file fs-6 me-3 my-2"></i>
-          <a href="/patientdiognosis" className='text-decoration-none text-black'><span className='fs-6 my-2'>Diagnosis Report</span></a>
+          <a href="/patient_Report_view" className='text-decoration-none text-black'><span className='fs-6 my-2'>View Reports</span></a>
           <br />
           <i class="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
-          <a href="/medical_rprt" className='text-decoration-none text-black'><span className='fs-6'>Medical Report</span></a>
+          <a href="/patient_Report_upload" className='text-decoration-none text-black'><span className='fs-6'>Upload Report</span></a>
         </a>
         
     </div>
@@ -127,10 +127,10 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
         <a href="" className="list-group-item py-3">
           <small>Reports</small><br />
           <i class="fa-solid fa-file fs-6 me-3 my-2"></i>
-          <a href="/patientdiognosis" className='text-decoration-none text-black'><span className='fs-6 my-2'>Diagnosis Report</span></a>
+          <a href="/patientdiognosis" className='text-decoration-none text-black'><span className='fs-6 my-2'>View Reports</span></a>
           <br />
           <i class="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
-          <a href="/medical_rprt" className='text-decoration-none text-black'><span className='fs-6'>Medical Report</span></a>
+          <a href="/medical_rprt" className='text-decoration-none text-black'><span className='fs-6'>Upload Report</span></a>
         </a>
         
     </div>

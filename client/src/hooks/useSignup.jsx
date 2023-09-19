@@ -55,7 +55,7 @@ export const useSignup = () =>{
             localStorage.setItem('admin', JSON.stringify(json))
             dispatch({type: 'LOGIN', payload: json})
             isLoading(false)
-
+            alert('User Added')
         }
 
     }
