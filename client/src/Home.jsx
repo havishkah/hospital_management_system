@@ -37,6 +37,7 @@ import  AdmitPatient  from "./Components/patients/AdmitPatient";
 import { DischargePatientd}  from "./Components/patients/DischargePatientd";
 // import  DischargedPatient  from "./Components/patients/DischargedPatient";
 import Cookies from "js-cookie";
+import { ViewReoprt } from "./Components/patients/viewreportAdmin";
 
 
 
@@ -94,7 +95,8 @@ function Home() {
           <Route path="/adddoc" element={<AddDoc />}></Route>
           <Route path="/viewdocd/:id" element={<ViewDocd />}></Route>
           <Route path="/viewdocpde/:id" element={<Viewdocpde />}></Route>
-       
+          <Route path="/viewReport/:id" element={<ViewReoprt/>}></Route>
+          {/* <Route path="viewReport/:id">{<ViewReoprt/>}</Route> */}
           <Route
             path="/doc_pa_historyd"
             element={<DocPatientHistoryd />}
