@@ -43,9 +43,11 @@ import { useNavigate,Link } from "react-router-dom";
         }
 
         const respone = service.post('patient/add', newPatient)
-
+        const json = respone.json   
         respone.then((res)=>{
             console.log(res)
+        }).catch((error)=>{
+            alert(json.error)
         })
             console.log(newPatient);
 

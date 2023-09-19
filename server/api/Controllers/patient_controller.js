@@ -37,17 +37,17 @@ const createaPatient = async (req, res, next) => {
   }
 };
 
-const loginPatient = async (req, res) => {
-  const {nic, password} =req.body
+const getPatientByUN = async (req, res) => {
+  const { username } = req.params;
+  
 
-  try {
-      const patient = await Patient.login(nic, password)
+  const patient = await Patient.findOne({username: username});
 
-      const token = createToken(patient._id)
-      res.status(200).json({nic, token})
-  } catch (error) {
-      res.status(400).json({error: error.message})
+  if (!patient) {
+    return res.status(404).json({ error: "No such workout" });
   }
+
+  res.status(200).json(patient);
 }
 
 const getAllpatientsdetails =  (req, res) => {
@@ -59,7 +59,6 @@ const getAllpatientsdetails =  (req, res) => {
   }).catch((error)=> {
     console.log(error);
   })
-
 
 };
 
@@ -159,5 +158,5 @@ module.exports = {
   getPatientByID: getPatient,
   getDoctorsPaitent:getPatientbyDoctorID,
   getDocpaitent: getPatientbyDoctorID,
-  logpatient: loginPatient
+  getPatientByUN
 };

@@ -38,6 +38,9 @@ import { DischargePatientd}  from "./Components/patients/DischargePatientd";
 // import  DischargedPatient  from "./Components/patients/DischargedPatient";
 import Cookies from "js-cookie";
 import { ViewReoprt } from "./Components/patients/viewreportAdmin";
+import FileDownload from "./Components/patients/downloadFile";
+import PUMedicalReport from "./Components/patients/PU_MedicalReport";
+import PatientDiagnosis_PV from "./Components/patients/PatientDiognosis_PV";
 
 
 
@@ -75,6 +78,8 @@ function Home() {
           <Route path="/alldoc" element={<ViewDoctors />}></Route>
           <Route path="/doctor" element={<DoctorDashboard />}></Route>
           <Route path="/admitpatients" element={<AdmitPatient />}></Route>
+          <Route path="/patient_Report_upload" element={<PUMedicalReport />}></Route>
+          <Route path="/patient_Report_view" element={<PatientDiagnosis_PV />}></Route>
           <Route
             path="/dischargepatientsd"
             element={<DischargePatientd />}
@@ -84,6 +89,7 @@ function Home() {
             element={<PatientDashboard />}
           ></Route>
           <Route path="/adddrugs" element={<AddDrugs />}></Route>
+          <Route path="/downloadFile" element={<FileDownload/>}></Route>
           <Route
             path="/patientdiognosis"
             element={<PatientDiognosis />}

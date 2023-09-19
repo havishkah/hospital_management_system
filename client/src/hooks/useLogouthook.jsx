@@ -9,6 +9,7 @@ export const useLogout = () => {
         Cookies.remove('username'),
         Cookies.remove('token'),
         Cookies.remove('role'),
+        Cookies.remove('admin'),
 
 
         dispatch({type: 'LOGOUT'})

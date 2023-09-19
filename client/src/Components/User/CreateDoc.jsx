@@ -9,7 +9,7 @@ export const AddDoctorAccout = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const {signup, isLoading, error} = useSignup()
-    const role = "Doctor"
+    const role = "doctor"
     const service = new Service
     const {id} = useParams();
     

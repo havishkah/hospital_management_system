@@ -81,7 +81,7 @@ const getAllprescriptionsbypatient = async (req, res) => {
   const { patientid } = req.params;
 
   try {
-    const prescription = await Prescription.findOne({ patientid: patientid });
+    const prescription = await Prescription.find({ patientid: patientid });
 
     if (!prescription) {
       return res.status(404).json({ error: "no prescriptions found" });

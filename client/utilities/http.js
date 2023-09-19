@@ -29,7 +29,7 @@ const headers = {
 // }
 
 const axiosInstance = axios.create({
-	baseURL: "http://4.247.171.89:4000/api",
+	baseURL: "http://localhost:4000/api",
 	headers,
 });
 
@@ -78,18 +78,16 @@ axiosInstance.interceptors.response.use(
 
 class Service {
 	async post(url, data) {
-		// let res = null;
-		// if (data.file) {
-		// 	res = await axiosInstance.post(url, data, {
-		// 		headers: {
-		// 			"Content-Type": "multipart/form-data", // Set the content type to multipart/form-data
-		// 		},
-		// 	});
-		// } else {
-		// 	res = await axiosInstance.post(url, data);
-		// }
-		const res = await axiosInstance.post(url, data);
-		
+		let res = null;
+		if (data.file) {
+			res = await axiosInstance.post(url, data, {
+				headers: {
+					"Content-Type": "multipart/form-data", // Set the content type to multipart/form-data
+				},
+			});
+		} else {
+			res = await axiosInstance.post(url, data);
+		}
 		return res;
 	}
 
