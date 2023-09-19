@@ -1,19 +1,22 @@
 
 import React, { useState, useEffect } from 'react';
 import Service from '../../../utilities/http';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
+import axios from 'axios';
 
 function PatientDiagnosis() {
   const service = new Service();
-  const navigate = useNavigate();
   const [patients, setPatients] = useState([]);
   const [patientid, setPatientid] = useState('');
   const [reports, setReports] = useState([]);
+  const [file, setFile] = useState('')
+
 
   useEffect(() => {
     getPatients();
   }, []);
 
+  
   function getPatients() {
     const response = service.get('patient');
     response
@@ -26,6 +29,8 @@ function PatientDiagnosis() {
       });
   }
 
+  
+
   const handleClick = (e) => {
     e.preventDefault();
     if (!patientid) {
@@ -35,14 +40,53 @@ function PatientDiagnosis() {
     const response = service.get(`reports/${patientid}`);
     response
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setReports(res.data);
+        setFiles
       })
       .catch((error) => {
         console.error('Error fetching reports:', error);
       });
   };
 
+  
+
+  const downloadReport = () => {
+    // if (!files) {
+    //     console.error('File is undefined or empty.');
+    //     return;
+    //   }
+
+     // console.log(files)
+     const viewReport = {
+        file: file
+      }
+      console.log(viewReport)
+      const data = '1694925987971.pdf'
+   // Make a POST request to your backend to download the report
+    const response = service.post('reports/download', viewReport)
+      response.then((res) => {
+        console.log(res);
+        // Create a Blob from the response data
+        //const blob = new Blob([response.data]);
+        //const url = window.URL.createObjectURL(blob);
+        // Create a temporary <a> element to trigger the download
+        // const a = document.createElement('a');
+        // a.href = url;
+        // a.download = files; // Set the desired file name
+        // document.body.appendChild(a);
+        // a.click();
+        // Cleanup
+       // window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        // console.error('Error downloading report:', error);
+        console.log(error);
+      });
+
+  };
+
+  
   return (
     <main className="main-container">
       <div className="row">
@@ -104,10 +148,13 @@ function PatientDiagnosis() {
       </thead>
       <tbody>
         {reports.map((report) => (
-          <tr key={report.id}>
+          <tr key={report._id}>
+      
+          
             <td>{report.title}</td>
             <td>{report.type}</td>
-            <td>{report.file}</td>
+           
+            <td><button onClick={downloadReport}>Download</button></td>
             {/* <td>
               <a
                 href={report.file} 

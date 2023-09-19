@@ -30,7 +30,8 @@ const createReport = (req, res, next) => {
 };
 
 const getReopts = (req, res, next) => {
-  const { file }= req.body;
+  const  {file} = req.body;
+  console.log(file)
   const Path = paths.resolve(
     __dirname,
     `../../uploads/reports/${file}`
@@ -45,6 +46,22 @@ const getReopts = (req, res, next) => {
     }
   });
 };
+
+const getReportByID = async (req,res) =>{
+  const { id } = req.params;
+
+  try {
+    const report = await Report.findById(id);
+
+    if (!report) {
+      return res.status(404).json({ error: "No such Report found" });
+    }
+
+    res.status(200).json(report);
+  } catch (error) {
+    res.status(500).json({ error: "internal Server error" });
+  }
+}
 
 const getAllReoprts = async (req, res) => {
   const report = await Report.find({}).sort({ createdAt: -1 });
@@ -120,5 +137,6 @@ module.exports = {
   removeReport: deleteRepotsByid,
   editReports: updateaReportbyID,
   getReopts,
+  getReportByID
   //reportRetrieve: reportRetrieve,
 };

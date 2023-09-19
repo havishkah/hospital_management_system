@@ -21,8 +21,8 @@ import Cookies from "js-cookie";
             <div className="logo">
                 <h1><span>Coronory </span> Care Unit</h1>
             </div>
-            <div className="form-log" onSubmit={handleSignup}>
-                <form className="login">
+            <div className="form-log" >
+                <form className="login" onSubmit={handleSignup}>
                 <h1>Login Admin</h1>
                 <div>
                     <label>Username</label>
