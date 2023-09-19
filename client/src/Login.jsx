@@ -41,6 +41,8 @@ import Cookies from "js-cookie";
                     />
                 </div>
                 <button className="logbutton">Login</button>
+
+                {error && <div className="error">{error}</div>}
                 </form>
             </div>
         </div>

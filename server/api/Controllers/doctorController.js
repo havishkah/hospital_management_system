@@ -22,11 +22,12 @@ const createaDoctor = async (req, res, next) => {
         email = data.email,
         contact = data.contact,
         specialist = data.specialist,
-        ward = data.ward,
-        password = data.password);
+        ward = data.ward
+        );
 
       res.status(200).json({doctor})
     }catch(error){
+      console.log(error)
       res.status(400).json({error: error.message})
     }
 };

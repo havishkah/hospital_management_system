@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import Service from '../../../utilities/http';
+import { Link } from 'react-router-dom';
 
 export const ViewDoctors = () => {
 
@@ -80,6 +81,7 @@ function doctorView(id){
                             <td className='text-center'>03</td>
                             <td>
                             <a href={`/viewdocd/${doctor._id}`}><button type="button" onClick={() => doctorView(doctor._id)} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
+                            <Link className="btn btn-primary mx-1" to={`/adddoctoruser/${doctor._id}`} >Create a User Account</Link>
                             </td>
                             </tr> 
 

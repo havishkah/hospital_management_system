@@ -1,14 +1,16 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { useSignup } from "../../hooks/useSignup"
+import { useParams } from "react-router-dom"
+import Service from "../../../utilities/http"
 
-function AddDoctorAccout () {
+export const AddDoctorAccout = () => {
     const [username, setUsername] = useState('')
     const [contact, setContact] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const {signup, isLoading, error} = useSignup()
     const role = "Doctor"
-
+    const service = new Service
     const {id} = useParams();
     
   
@@ -28,7 +30,7 @@ function AddDoctorAccout () {
     //loading existing data to form
     useEffect(() =>{
       loadDoctor();
-      getPatients();
+      
     },[])
   
   function loadDoctor(){
@@ -61,7 +63,7 @@ function AddDoctorAccout () {
                     <div className="col-md-12">
                         <div className="mb-3">
                             <label style={{fontSize:'14px'}} className="form-lable">Username</label>
-                            <input type="text" name="username" className="form-control" onChange={(e) => {
+                            <input type="text" name="username" className="form-control" value={username} onChange={(e) => {
                                 setUsername(e.target.value);
                             }} />
                         </div>
@@ -69,7 +71,7 @@ function AddDoctorAccout () {
                     <div className="col-md-12">
                         <div className="mb-3">
                             <label style={{fontSize:'14px'}} className="form-lable">Email</label>
-                            <input type="email" name="email" className="form-control" onChange={(e) => {
+                            <input type="email" name="email" className="form-control" value={email} onChange={(e) => {
                                 setEmail(e.target.value);
                             }} />
                         </div>
@@ -77,7 +79,7 @@ function AddDoctorAccout () {
                     <div className="col-md-12">
                         <div className="mb-3">
                             <label style={{fontSize:'14px'}}className="form-lable">Contact</label>
-                            <input type="number" name="phone" className="form-control" onChange={(e) => {
+                            <input type="number" name="phone" className="form-control" value={contact} onChange={(e) => {
                                 setContact(e.target.value);
                             }}/>
                         </div>
@@ -85,7 +87,7 @@ function AddDoctorAccout () {
                     <div className="col-md-12">
                         <div className="mb-3">
                             <label style={{fontSize:'14px'}} className="form-lable">Password</label>
-                            <input type="password" name="address" className="form-control" onChange={(e) => {
+                            <input type="password" name="address" className="form-control" value={password} onChange={(e) => {
                                 setPassword(e.target.value);
                             }} />
                         </div>
@@ -107,5 +109,3 @@ function AddDoctorAccout () {
 
     )
 }
-
-export default AddDoctorAccout;

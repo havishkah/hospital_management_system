@@ -9,7 +9,6 @@ function Auth({ position, children }) {
   const { admin } = useAuthContext()
   
   const role = Cookies.get('role');
-    console.log(role)
   return <div>{position == role && children }</div>;
 
 }
