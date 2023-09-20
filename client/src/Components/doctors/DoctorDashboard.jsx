@@ -5,7 +5,8 @@ import doctor from "../../assets/doctor.png";
 
 export const DoctorDashboard = () => {
 	const [doctorCount, setDoctorCount] = useState(0);
-	const [patientCount, setPatientCount] = useState(0);
+	const [dischargedPatientCount, setDischargedPatientCount] = useState(0);
+	const [admittedPatientCount, setAdmittedPatientCount] = useState(0);
 	const [availableBeds, setAvailableBeds] = useState(0);
 	const service = new Service();
 
@@ -39,6 +40,32 @@ export const DoctorDashboard = () => {
 			});
 	}
 
+	function getAdmittedPatientCount() {
+		const response = service.get('admit/'); 
+		response
+		  .then((res) => {
+			const admittedPatients = res.data.filter((patient) => patient.status === 'Admitted');
+			const count = admittedPatients.length;
+			setAdmittedPatientCount(count);
+		  })
+		  .catch((error) => {
+			console.error('Error fetching admitted patient count:', error);
+		  });
+	  }
+
+	function getDischargedPatientCount() {
+		const response = service.get('admit/'); 
+		response
+		  .then((res) => {
+			const dischargedPatients = res.data.filter((patient) => patient.status === 'Discharge');
+			const count = dischargedPatients.length;
+			setDischargedPatientCount(count);
+		  })
+		  .catch((error) => {
+			console.error('Error fetching discharged patient count:', error);
+		  });
+	  }
+
 	function getAvailableBeds() {
 		const response = service.get("bed/");
 		response
@@ -68,7 +95,7 @@ export const DoctorDashboard = () => {
 						Total Patients Onboard
 					</h5>
 					<div className="card-inner">
-						<h2>{patientCount}</h2>
+						<h2>{admittedPatientCount}</h2>
 						<BsPeopleFill className="card_icon" />
 					</div>
 				</div>
@@ -78,7 +105,7 @@ export const DoctorDashboard = () => {
 						Total Patients Discharged
 					</h5>
 					<div className="card-inner">
-						<h2>100</h2>
+						<h2>{dischargedPatientCount}</h2>
 						<BsPeopleFill className="card_icon" />
 					</div>
 				</div>
