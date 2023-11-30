@@ -11,19 +11,15 @@ export const useSignup = () =>{
  
 
     const[error, setError] = useState(null)
-
+    const[sucess,setSuccess] = useState(null)
     const[isLoading, setIsLoading] = useState(null)
-
     const { dispatch } = useAuthContext()
-
     const service = new Service();
 
-
- 
-
-    const signup = async (username,email, contact, password, role) =>{
+    const signup = async (username, email, contact, password, role,id) =>{
 
         setError(null)
+        setSuccess(null)
         setIsLoading(true)
 
         const data =  {
@@ -31,38 +27,31 @@ export const useSignup = () =>{
             email:email,
             password:password,
             contact:contact,
-            role:role
+            role:role,
+            id:id,
         }
+
+        console.log(data)
 
         const respone =  service.post('admin/signup', data )
         respone.then((res) => {
            console.log(res);
+           setError("User Added!")
+           setIsLoading(false)
 
         }).catch((err) => {
             console.log(err);
+            
+            setError("User Adding Failed")
+            setIsLoading(false)
         })
         
-         const json = await respone.json()
-         if(!respone.ok){
-             setError(json.error)
-             setIsLoading(false)
-         }
-
- 
-
-         if(respone.ok){
-
-            localStorage.setItem('admin', JSON.stringify(json))
-            dispatch({type: 'LOGIN', payload: json})
-            isLoading(false)
-            alert('User Added')
-        }
 
     }
 
  
 
-    return {signup, error, isLoading}
+    return {signup, error,sucess, isLoading}
 
  
 

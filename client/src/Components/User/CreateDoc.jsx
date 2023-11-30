@@ -49,7 +49,7 @@ export const AddDoctorAccout = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        await signup(username,email,contact,password, role)
+        await signup(username, email,contact,password, role,id)
     }
 
     return(

@@ -29,6 +29,7 @@ function AddDrugs () {
             alert('Drug added Successfully');
             navigate('/alldrug');
         }).catch((error) => {
+            alert('Fill All the Fields');
             console.error('Error with adding data:', error);
         });
         
@@ -91,7 +92,7 @@ function AddDrugs () {
                             <div className="col-md-6"></div>
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                   <Link to='/'><button style={{marginLeft:'280px',height:'40px',fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
+                                   <Link to='/'><button style={{marginLeft:'20px',height:'40px',fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
                                     
                                     <button style={{height:'40px',fontSize:'16px'}} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
 

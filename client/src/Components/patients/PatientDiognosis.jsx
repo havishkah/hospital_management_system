@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Service from '../../../utilities/http';
 import { useNavigate,Link } from 'react-router-dom';
+import Cookies from "js-cookie";
 import axios from 'axios';
 
 function PatientDiagnosis() {
@@ -11,7 +12,9 @@ function PatientDiagnosis() {
   const [reports, setReports] = useState([]);
   const [files, setFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
- // const [file, setFile] = useState('')
+
+  
+ const token = Cookies.get('token')
 
 
   useEffect(() => {
@@ -59,7 +62,10 @@ function PatientDiagnosis() {
         return;
       }
      
-      axios.post('http://localhost:4000/api/reports/download', { file: selectedFile }, { responseType: 'blob' })
+      axios.post('http://4.247.171.89:4000/api/reports/download', { file: selectedFile }, { responseType: 'blob',
+      headers: {
+        Authorization: `Bearer ${token}`, 
+      }, })
       .then((response) => {
         // Create a Blob from the response data
         const blob = new Blob([response.data]);

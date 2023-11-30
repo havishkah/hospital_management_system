@@ -10,6 +10,10 @@ const adminSchema = new mongoose.Schema(
       required: true,
     },
 
+    id: {
+      type: String,
+    },
+
     email: {
       type: String,
       unique: true,
@@ -38,7 +42,8 @@ adminSchema.statics.signup = async function (
   email,
   contact,
   password,
-  role
+  role,
+  id,
 ) {
   const exists = await this.findOne({ email });
   const existsUn = await this.findOne({ username });
@@ -66,7 +71,7 @@ adminSchema.statics.signup = async function (
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const admin = await this.create({ username, email,contact, password: hash, role });
+  const admin = await this.create({ username, email,contact, password: hash, role,id });
 
   return admin;
 };

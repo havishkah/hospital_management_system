@@ -6,13 +6,14 @@ export const Signup = () => {
     const [contact, setcontact] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const {signup, isLoading, error} = useSignup()
+    const {signup, isLoading,sucess, error} = useSignup()
     const role = "Admin"
+    const id="userAdmin"
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        await signup(username,email,contact,password, role)
+        await signup(username,email,contact,password, role, id)
     }
 
     return(

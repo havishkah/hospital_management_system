@@ -18,7 +18,6 @@ function AddDocs() {
     const [contact, setContact] = useState('');
     const [specialist, setSpecialist] = useState('');
     const [ward,setWard] = useState('');
-    const role = "doctor"
     const service = new Service();
 
     const handleSubmit = async (e) => {
@@ -48,6 +47,7 @@ function AddDocs() {
             alert('Doctor added Successfully');
             navigate('/alldoc');
         }).catch((error) => {
+            alert('Failed');
             console.error('Error with adding data:', error);
         });
 
@@ -172,8 +172,8 @@ function AddDocs() {
 
                             <div className="col-md-6">
                                 <div className="mb-3">
-                                    <label className="form-lable"></label>
-                                    <Link to='/'><button style={{ marginLeft: '320px', height: '40px', fontSize: '16px' }} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
+                                    <label className="form-lable d-flex"></label>
+                                    <Link to='/'><button style={{ height: '40px', fontSize: '16px' }} type="submit" className="btn btn-primary bg-white text-primary btn-lg me-auto">Back</button></Link>&nbsp;
 
                                     <button style={{ height: '40px', fontSize: '16px' }} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
                                    

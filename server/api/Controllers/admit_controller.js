@@ -6,7 +6,6 @@ const {
 } = require("../../utilities/data_validation");
 
 const Admit = require("../models/admit");
-
 const createAdmit = (req, res) => {
   try {
     const data = req.body;
@@ -17,13 +16,7 @@ const createAdmit = (req, res) => {
       [
         "patientid",
         "docName",
-        "name",
-        "nic",
-        "status", 
-        "bht", 
-        "specialist", 
-        "ward", 
-        "bed", 
+        "name", 
         "diagnosis"
       ],
 
@@ -40,7 +33,7 @@ const createAdmit = (req, res) => {
       return;
     }
     const validatedResult = validateInputs(
-      ["patientid","docName","name","nic", "status", "bht", "specialist", "ward", "bed", "diagnosis"],
+      ["patientid","docName","name", "diagnosis"],
 
       data
     );
@@ -54,12 +47,6 @@ const createAdmit = (req, res) => {
       patientid: data.patientid,
       docName:data.docName,
       name:data.name,
-      nic:data.nic,
-      status: data.status,
-      bht: data.bht,
-      bed: data.bed,
-      specialist: data.specialist,
-      ward: data.ward,
       diagnosis: data.diagnosis,
     });
 
@@ -100,13 +87,13 @@ const getadmitbyID = async (req,res) => {
     return res.status(404).json({ error : "No bed Available"});
   }
 
-  const admit = await Admit0.findById(id);
+  const admit = await Admit.findById(id);
 
-  if (!doctor) {
+  if (!admit) {
     return res.status(404).json({ error: "No such Doctor" });
   }
 
-  res.status(200).json(doctor);
+  res.status(200).json(admit);
 };
 
 const deleteAdmit = async (req, res) => {
@@ -138,22 +125,17 @@ const viewAdmitsbystatus = async (req,res) =>{
 }
 
 const updateaAdmitbyID = (req, res) => {
-  const patientid = req.params.patientid;
+  const id = req.params.id;
   console.log(req.params);
   const data = req.body;
   // if (!mongoose.Types.ObjectId.isValid(id)) {
   //   return res.status(404).json({ error: "No such doctor" });
   // }
   const admit = Admit.findOneAndUpdate(
-    { patientid: patientid },
+    { _id: id },
     {
       docName:data.docName,
       name:data.name,
-      status: data.status,
-      bht: data.bht,
-      bed: data.bed,
-      specialist: data.specialist,
-      ward: data.ward,
       diagnosis: data.diagnosis,
     }
   );
@@ -191,7 +173,7 @@ const getPatientbyDoctorID =  (req, res) => {
 module.exports = {
   admitapatient: createAdmit,
   viewAdmits: getAlladmits,
-  getAdmit: getAdmitsbyID,
+  getAdmitPatient: getAdmitsbyID,
   removeAdmit: deleteAdmit,
   updateAdmit: updateaAdmitbyID,
   viewAdmitsonly:viewAdmitsbystatus,

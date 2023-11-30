@@ -16,6 +16,7 @@ function PUMedicalReport() {
   const service = new Service();
 
   const un = Cookies.get('username')
+  const id = Cookies.get('id');
 
   function handleFile(event) {
     setFile(event.target.files[0]);
@@ -45,7 +46,7 @@ function PUMedicalReport() {
 
     
     const newMed = {
-      patientid: patientid,
+      patientid:id,
       title: title,
       type: type,
       file: file,

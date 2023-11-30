@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Service from '../../../utilities/http';
 import {BsPeopleFill} from 'react-icons/bs'
 import doctor from '../../assets/doctor.png'
@@ -10,6 +9,7 @@ export const AdminDashboard= () =>{
   const [dischargedPatientCount, setDischargedPatientCount] = useState(0);
   const [admittedPatientCount, setAdmittedPatientCount] = useState(0);
   const service = new Service();
+  
 
   useEffect(() => {
     getDoctorCount(); 
@@ -48,10 +48,10 @@ export const AdminDashboard= () =>{
   }
 
   function getAdmittedPatientCount() {
-    const response = service.get('admit/'); 
+    const response = service.get('patient/'); 
     response
       .then((res) => {
-        const admittedPatients = res.data.filter((patient) => patient.status === 'Admitted');
+        const admittedPatients = res.data.filter((patient) => patient.Status === 'Onboard');
         const count = admittedPatients.length;
         setAdmittedPatientCount(count);
       })
@@ -61,10 +61,10 @@ export const AdminDashboard= () =>{
   }
 
   function getDischargedPatientCount() {
-    const response = service.get('admit/'); 
+    const response = service.get('patient/'); 
     response
       .then((res) => {
-        const dischargedPatients = res.data.filter((patient) => patient.status === 'Discharge');
+        const dischargedPatients = res.data.filter((patient) => patient.Status === 'Discharged');
         const count = dischargedPatients.length;
         setDischargedPatientCount(count);
       })

@@ -53,12 +53,13 @@ function MedicalReport() {
       alert("Medical Report added Successfully");
       navigate("/admin");
     } catch (error) {
+      alert(error);
       console.error("Error with adding data:", error);
     }
   };
 
   return (
-    <main className="main-container">
+    <main className="main-container p-5">
       <div className="main-title">
         <h4>MEDICAL REPORT</h4>
       </div>
@@ -80,7 +81,7 @@ function MedicalReport() {
           <div className="col-md-6">
             <div className="mb-3">
               <label style={{ fontSize: "14px" }} className="form-lable">
-                Nic
+                Patient Name
               </label>
 
               <select
@@ -151,29 +152,19 @@ function MedicalReport() {
           </div>
           <div className="col-md-6"></div>
           <div className="col-md-6"></div>
-          <div className="col-md-6">
-            <div className="mb-3">
-              <button
-                style={{
-                  marginLeft: "280px",
-                  width: "100px",
-                  height: "40px",
-                  fontSize: "16px",
-                }}
-                type="button"
-                className="btn btn-primary bg-white text-primary btn-lg"
-              >
-                Back
-              </button>
+          <div className="col-md-6"></div>
+          <div className="col-md-6 d-flex">
+            <div className="mb-3 ms-auto d-flex">
               &nbsp;
               <button
                 style={{
+                 
                   width: "100px",
                   height: "40px",
                   fontSize: "16px",
                 }}
                 type="submit"
-                className="btn btn-primary text-white btn-lg"
+                className="btn btn-primary text-white btn-lg ms-auto"
               >
                 Upload
               </button>

@@ -11,33 +11,9 @@ const admitSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    name: {
+    name:{
       type: String,
-      required: true,
-    },
-    nic: {
-      type: String,
-      required: true,
-    },
-    status: {
-      type: String,
-      required: true,
-    },
-    bht: {
-      type: String,
-      required: true,
-    },
-    specialist: {
-      type: String,
-      required: true,
-    },
-    ward: {
-      type: String,
-      required: true,
-    },
-    bed: {
-      type: String,
-      required: true,
+      required: true
     },
     diagnosis: {
       type: String,

@@ -14,6 +14,7 @@ const createabed = (req, res) =>{
     
           [
            "status",
+           "BedNo",
            "catagory",
            "description",
            "specialist",
@@ -41,6 +42,7 @@ const createabed = (req, res) =>{
           [
             "status",
            "catagory",
+           "BedNo",
            "description",
            "specialist",
            "ward"
@@ -59,6 +61,7 @@ const createabed = (req, res) =>{
 
         const bed = new Bed({
             status:data.status,
+            BedNo:data.BedNo,
             catagory:data.catagory,
             description:data.description,
             specialist:data.specialist,
@@ -122,13 +125,42 @@ const updateaBedbyID = (req, res) => {
   const bed = Bed.findOneAndUpdate(
     { _id: id },
     {    
-        specialist: data.specialist,
-        ward:data.ward,
-        catagory:data.catagory,
-        description:data.description,
-        status:data.status
+      status:data.status,
+      BedNo:data.BedNo,
+      catagory:data.catagory,
+      description:data.description,
+      specialist:data.specialist,
+      ward:data.ward
         
       }
+   
+  );
+
+  bed.then((data) => {
+    console.log(data);
+    if (!data) {
+      return res.status(404).json({ error: "Unable to process" });
+    }
+    
+    res.status(201).json(data);
+  })
+  .catch((error) => {
+    console.log(error.message)
+  })
+
+};
+
+const updateaBedStatus = (req, res) => {
+  const id = req.params.id;
+
+  console.log(req.params);
+  const data = req.body;
+ 
+  const bed = Bed.findOneAndUpdate(
+    { _id: id },
+    {    
+      status:data.status,
+    }
    
   );
 
@@ -171,5 +203,6 @@ module.exports = {
     getBedbyid : getBedbyID,
     getBedbyStatus: filterbed,
     updateBed: updateaBedbyID,
+    updateStatus:updateaBedStatus,
     deleteBedbyId: deletebed
 }

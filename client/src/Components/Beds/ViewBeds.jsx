@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import Service from '../../../utilities/http';
+import { Link } from 'react-router-dom';
 
 export const ViewBeds = () => {
 
@@ -72,13 +73,13 @@ const filterData = value => {
                     <tbody>
                     {beds.map((bed,index) => (
                             <tr key={bed._id}>
-                            <td>{index+1}</td>
+                            <td>{bed.BedNo}</td>
                             <td>{bed.catagory}</td>
                             <td>{bed.specialist}</td>
                             <td>{bed.ward}</td>
                             <td>{bed.status}</td>
                             <td>
-                            <a href={`/beddetails/${bed._id}`}><button type="button" className="btn btn-primary" onClick={() => bedView(bed._id)} style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
+                            <Link to={`/beddetails/${bed._id}`}><button type="button" className="btn btn-primary" onClick={() => bedView(bed._id)} style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></Link>
                             </td>
                             </tr> 
                     ))

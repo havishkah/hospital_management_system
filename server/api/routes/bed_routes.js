@@ -7,6 +7,7 @@ const {
     getBedbyid,
     getBedbyStatus,
     updateBed,
+    updateStatus,
     deleteBedbyId
 } = require('../Controllers/bed_controller');
 
@@ -18,6 +19,7 @@ router.post("/add",createBed);
 router.get("/",getAllbedsdetails);
 router.get("/:id",getBedbyid);
 router.get("/status/:status",getBedbyStatus);
+router.put("/status/:id", updateStatus)
 router.put("/:id",updateBed);
 router.delete("/:id",deleteBedbyId)
 

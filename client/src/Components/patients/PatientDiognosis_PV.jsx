@@ -18,6 +18,8 @@ function PatientDiagnosis_PV() {
   
 
  const un = Cookies.get('username')
+ const id = Cookies.get('id')
+ const token = Cookies.get('token')
 
 
   useEffect(() => {
@@ -42,11 +44,11 @@ function PatientDiagnosis_PV() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (!patientid) {
+    if (!id) {
       return;
     }
 
-    const response = service.get(`reports/${patientid}`);
+    const response = service.get(`reports/${id}`);
     response
       .then((res) => {
         // console.log(res.data);
@@ -66,7 +68,11 @@ function PatientDiagnosis_PV() {
         return;
       }
      
-      axios.post('http://localhost:4000/api/reports/download', { file: selectedFile }, { responseType: 'blob' })
+      axios.post('http://4.247.171.89:4000/api/reports/download', { file: selectedFile }, 
+      { responseType: 'blob',
+      headers: {
+        Authorization: `Bearer ${token}`, 
+      }, })
       .then((response) => {
         // Create a Blob from the response data
         const blob = new Blob([response.data]);
