@@ -11,13 +11,14 @@ export const ViewPatients = () => {
   const navigate = useNavigate();
   const {id} = useParams()
   const role = Cookies.get('role')
+  const status="Onboard";
 
   useEffect(() => {
     getPatients();
   }, []);
 
   function getPatients(){
-    const respone = service.get ('patient/') 
+    const respone = service.get ('patient') 
     respone.then((res) => {
       console.log (res.data)
       setPatients(res.data);
@@ -33,18 +34,17 @@ export const ViewPatients = () => {
 }
 
 const filterData = value => {
-    const lowerCaseValue = value.toLowerCase().trim();
-    if(!lowerCaseValue){
-        getPatients();
-    }
-    else{      
-        const filteredData = patients.filter(item => {
-            return Object.keys(item).some(key => {
-                return item[key].toString().toLowerCase().includes(lowerCaseValue);
-            })
-        });
-        setPatients(filteredData);
-    }
+  const lowerCaseValue = value.toLowerCase().trim();
+  if(!lowerCaseValue){
+      getPatients();
+  }
+  else{      
+      const filteredData = patients.filter(item => {
+        const fullName = `${item.firstName} ${item.lastName}`.toLowerCase();
+        return fullName.includes(lowerCaseValue);
+      });
+      setPatients(filteredData);
+  }
 }
 
 //View details function
@@ -62,7 +62,7 @@ function patientView(){
           <input style={{marginLeft:'715px'}} type="search" className="form-control"  placeholder="Search.." onChange={ e => handlesearchArea(e.target.value)}/>
         </div> <br />
         <div>
-        <table class="table" celled>
+        <table className="table" celled>
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -89,8 +89,7 @@ function patientView(){
                             </td>
                             </tr> 
                     ))
-}
-
+                      }
                     </tbody>
                 </table>
 

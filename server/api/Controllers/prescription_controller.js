@@ -12,7 +12,7 @@ const createPrescription = (req, res) => {
     data = req.body;
 
     const verifiedResult = verifyInputs(
-      ["doctorid", "patientid","catagory", "diagnosis","drug", "frequency", "dosage", "qty"],
+      ["patientid", "doctorid","drug", "duration","frequency", "dosage", "qty"],
 
       data
     );
@@ -27,7 +27,7 @@ const createPrescription = (req, res) => {
       return;
     }
     const validatedResult = validateInputs(
-      ["doctorid", "patientid", "catagory", "diagnosis", "drug", "frequency", "dosage", "qty"],
+      ["patientid", "doctorid","drug", "duration","frequency", "dosage", "qty"],
 
       data
     );
@@ -41,9 +41,9 @@ const createPrescription = (req, res) => {
     const prescription = new Prescription({
       doctorid: data.doctorid,
       patientid: data.patientid,
-      catagory:data.catagory,
-      diagnosis: data.diagnosis,
-      drug:data.drug,
+      drug: data.drug,
+      duration: data.duration,
+      frequency: data.frequency,
       frequency: data.frequency,
       dosage: data.dosage,
       qty: data.qty,
@@ -52,6 +52,7 @@ const createPrescription = (req, res) => {
       res.json(200);
     });
   } catch (error) {
+    console.log(error)
     res.status(500).json(error);
   }
 };
@@ -134,17 +135,19 @@ const updateprescripByID = (req, res) => {
   //   return res.status(404).json({ error: "No such doctor" });
   // }
 
-  const admit = Admit.findOneAndUpdate(
+  const prescription = Prescription.findOneAndUpdate(
     { _id: id },
     {
       diagnosis: data.diagnosis,
       frequency: data.frequency,
       dosage: data.dosage,
+      catagory:data.catagory,
+      drug:data.drug,
       qty: data.qty,
     }
   );
 
-  admit
+  prescription
     .then((data) => {
       console.log(data);
       if (!data) {

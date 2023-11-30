@@ -1,5 +1,6 @@
 import React from 'react'
 import Auth from '../../Auth/auth'
+import { Link } from 'react-router-dom'
 
 export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
   return (
@@ -15,71 +16,60 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
       <Auth position="admin">
       <hr className="text-dark" />
       <div className='list-group list-group-flush'>
-          <a href="/admin" className="list-group-item py-1">
+          <Link to="/admin" className="list-group-item py-1">
             <small>Menu</small><br />
             <i className="fa-solid fa-house fs-6 me-3 my-2"></i>
             <span className='fs-6 my-2'>Dashboard</span>
-          </a>
-          <a href="" className="list-group-item py-3">
+          </Link>
+          <Link to="/" className="list-group-item py-3">
             <small>Manage Doctors</small><br />
             <i className="fa-solid fa-user-doctor fs-6 me-3 my-2"></i>
-            <a href="/adddoc" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Doctors</span></a>
+            <Link to="/adddoc" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Doctors</span></Link>
             <br />
             <i className="fa-solid fa-users fs-6 me-3 my-2"></i>
-            <a href="/alldoc" className='text-decoration-none text-black'><span className='fs-6'>View Doctors</span></a>
-          </a>
-          <a href="" className="list-group-item py-3">
+            <Link to="/alldoc" className='text-decoration-none text-black'><span className='fs-6'>View Doctors</span></Link>
+          </Link>
+          <Link to="" className="list-group-item py-3">
             <small>Manage Patients</small><br />
             <i className="fa-solid fa-user-plus fs-6 me-3 my-2"></i>
-            <a href="/addpatients" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Patients</span></a>
+            <Link to="/addpatients" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Patients</span></Link>
             <br />
             <i className="fa-solid fa-user-group fs-6 me-3 my-2"></i>
-            <a href="/allpatient" className='text-decoration-none text-black'><span className='fs-6'>View Patients</span></a>
-          </a>
-          <a href="" className="list-group-item py-3">
+            <Link to="/allpatient" className='text-decoration-none text-black'><span className='fs-6'>View Patients</span></Link>
+          </Link>
+          <Link to="/" className="list-group-item py-3">
             <small>Manage Beds</small><br />
             <i className="fa-solid fa-bed-pulse fs-6 me-3 my-2"></i>
-            <a href="/addbeds" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Beds</span></a>
+            <Link to="/addbeds" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Beds</span></Link>
             <br />
             <i className="fa-solid fa-bed fs-6 me-3 my-2"></i>
-            <a href="/allbed" className='text-decoration-none text-black'><span className='fs-6'>View Beds</span></a>
-          </a>
-          <a href="" className="list-group-item py-3">
+            <Link to="/allbed" className='text-decoration-none text-black'><span className='fs-6'>View Beds</span></Link>
+          </Link>
+          <Link to="/" className="list-group-item py-3">
             <small>Manage Drugs</small><br />
 
-            <i class="fa-solid fa-tablets fs-6 me-3 my-2"></i>
-            <a href="/adddrugs" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Drugs</span></a>
+            <i className="fa-solid fa-tablets fs-6 me-3 my-2"></i>
+            <Link to="/adddrugs" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Drugs</span></Link>
             <br />
-            <i class="fa-solid fa-pills fs-6 me-3 my-2"></i>
-            <a href="/alldrug" className='text-decoration-none text-black'><span className='fs-6'>View Drugs</span></a>
-          </a> <a href="" className="list-group-item py-3">
+            <i className="fa-solid fa-pills fs-6 me-3 my-2"></i>
+            <Link to="/alldrug" className='text-decoration-none text-black'><span className='fs-6'>View Drugs</span></Link>
+          </Link>
+           <Link to="/" className="list-group-item py-3">
           <small>Reports</small><br />
-          <i class="fa-solid fa-file fs-6 me-3 my-2"></i>
-          <a href="/patientdiognosis" className='text-decoration-none text-black'><span className='fs-6 my-2'>Diagnosis Report</span></a>
+          <i className="fa-solid fa-file fs-6 me-3 my-2"></i>
+          <Link to="/patientdiognosis" className='text-decoration-none text-black'><span className='fs-6 my-2'>View Reports</span></Link>
           <br />
-          <i class="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
-          <a href="/medical_rprt" className='text-decoration-none text-black'><span className='fs-6'>Medical Report</span></a>
-        </a>
-        <a href="" className="list-group-item py-3">
+          <i className="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
+          <Link to="/medical_rprt" className='text-decoration-none text-black'><span className='fs-6'>Upload Medical Report</span></Link>
+        </Link>
+        <Link to="" className="list-group-item py-3">
           <small>Manage Users</small><br />
-          <i class="fa-solid fa-file fs-6 me-3 my-2"></i>
-          <a href="/addadmin" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Admin User</span></a>
+          <i className="fa-solid fa-file fs-6 me-3 my-2"></i>
+          <Link to="/addadmin" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Admin User</span></Link>
           <br />
-          <i class="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
-          <a href="/addAdmin" className='text-decoration-none text-black'><span className='fs-6'>View Users</span></a>
-        </a>
-        
-        
-            <small>Manage Users</small><br />
-            <a href="/addadmin" className="list-group-item py-1">
-            <i className="fa-solid fa-user-plus fs-6 me-3 my-1"></i>
-            <span className='fs-6 my-1'>Add user</span>
-          </a>
-          <a href="/addadmin" className="list-group-item py-1">
-            <i className="fa-solid fa-user fs-6 me-3 my-1"></i>
-            <span className='fs-6 my-1'>View user</span>
-          </a>
-
+          <i className="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
+          <Link to="/viewUsers" className='text-decoration-none text-black'><span className='fs-6'>View Users</span></Link>
+        </Link>
       </div>
       </Auth>
       
@@ -87,21 +77,21 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
       <Auth position="patient">
     <hr className="text-dark" />
     <div className='list-group list-group-flush'>
-        <a href="/patientdashboard" className="list-group-item py-1">
+        <Link to="/patientdashboard" className="list-group-item py-1">
           <small>Menu</small><br />
           <i className="fa-solid fa-house fs-6 me-3 my-2"></i>
           <span className='fs-6 my-2'>Dashboard</span>
-        </a>
+        </Link>
         
-        <a href="" className="list-group-item py-3">
+        <Link to="/" className="list-group-item py-3">
           <small>Reports</small><br />
 
-          <i class="fa-solid fa-file fs-6 me-3 my-2"></i>
-          <a href="/patient_Report_view" className='text-decoration-none text-black'><span className='fs-6 my-2'>View Reports</span></a>
+          <i className="fa-solid fa-file fs-6 me-3 my-2"></i>
+          <Link to="/patient_Report_view" className='text-decoration-none text-black'><span className='fs-6 my-2'>View Reports</span></Link>
           <br />
-          <i class="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
-          <a href="/patient_Report_upload" className='text-decoration-none text-black'><span className='fs-6'>Upload Report</span></a>
-        </a>
+          <i className="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
+          <Link to="/patient_Report_upload" className='text-decoration-none text-black'><span className='fs-6'>Upload Report</span></Link>
+        </Link>
         
     </div>
     </Auth>
@@ -109,29 +99,30 @@ export const SideBar = ({openSidebarToggle,OpenSidebar}) => {
     <Auth position="doctor">
     <hr className="text-dark" />
     <div className='list-group list-group-flush'>
-        <a href="/doctor" className="list-group-item py-1">
+        <Link to="/doctor" className="list-group-item py-1">
           <small>Menu</small><br />
-          <i class="fa-solid fa-house fs-6 me-3 my-2"></i>
+          <i className="fa-solid fa-house fs-6 me-3 my-2"></i>
           <span className='fs-6 my-2'>Dashboard</span>
-        </a>
+        </Link>
         
-        <a href="" className="list-group-item py-3">
+        <Link to="/" className="list-group-item py-3">
           <small>Manage Patients</small><br />
           <i className="fa-solid fa-user-plus fs-6 me-3 my-2"></i>
-          <a href="/addpatients" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Patients</span></a>
+          <Link to="/addpatients" className='text-decoration-none text-black'><span className='fs-6 my-2'>Add Patients</span></Link>
           <br />
           <i className="fa-solid fa-user-group fs-6 me-3 my-2"></i>
-          <a href="/allpatient" className='text-decoration-none text-black'><span className='fs-6'>View Patients</span></a>
-        </a>
-
-        <a href="" className="list-group-item py-3">
-          <small>Reports</small><br />
-          <i class="fa-solid fa-file fs-6 me-3 my-2"></i>
-          <a href="/patientdiognosis" className='text-decoration-none text-black'><span className='fs-6 my-2'>View Reports</span></a>
+          <Link to="/allpatient" className='text-decoration-none text-black'><span className='fs-6'>View Patients</span></Link>
           <br />
-          <i class="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
-          <a href="/medical_rprt" className='text-decoration-none text-black'><span className='fs-6'>Upload Report</span></a>
-        </a>
+        </Link>
+
+        <Link to="/" className="list-group-item py-3">
+          <small>Reports</small><br />
+          <i className="fa-solid fa-file fs-6 me-3 my-2"></i>
+          <Link to="/patientdiognosis" className='text-decoration-none text-black'><span className='fs-6 my-2'>View Reports</span></Link>
+          <br />
+          <i className="fa-solid fa-file-pdf fs-6 me-3 my-2"></i>
+          <Link to="/medical_rprt" className='text-decoration-none text-black'><span className='fs-6'>Upload Report</span></Link>
+        </Link>
         
     </div>
     </Auth>

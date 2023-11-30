@@ -6,234 +6,189 @@ import jsPDF from 'jspdf';
 
 
 
-const ViewDiagnosis = () => {
-
-    const divRef = useRef(null);
-
-    const handleGeneratePdf = () => {
-        // Get the <div> element you want to convert to PDF
-        const divToConvert = divRef.current;
-
-        // Create a new jsPDF instance
-        const pdf = new jsPDF('p', 'mm', 'a4');
-
-        // Use html2canvas to capture the <div> as an image
-        html2canvas(divToConvert).then((canvas) => {
-            // Add the image (canvas) to the PDF
-            const imgData = canvas.toDataURL('image/png');
-            pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
-
-            // Save or display the PDF
-            pdf.save('Diagnosis Card.pdf');
-        });
-    };
-
-
-    const service = new Service()
-    const navigate = useNavigate();
-    const Param = useParams();
-    const id = Param.id
-
-    //view patient details
-    const [gender, setGender] = useState('');
+export const ViewDiagnosis = () => {
+    const [patientName, setPatientName] = useState('');
     const [age, setAge] = useState('');
+    const [bhtNo, setBhtNo] = useState('');
+    const [dateOfAdmission, setDateOfAdmission] = useState('');
+    const [dateOfDischarge, setDateOfDischarge] = useState('');
+    const [gender, setGender] = useState('');
 
-    //loading existing data to form
-    useEffect(() => {
-        loadPatient();
-        loadAdmitPatient();
-    }, [])
+    const [diagnosisA, setDiagnosisA] = useState('');
+    const [diagnosisB, setDiagnosisB] = useState('');
+    const [diagnosisC, setDiagnosisC] = useState('');
+    const [diagnosisD, setDiagnosisD] = useState('');
+    const [diagnosisE, setDiagnosisE] = useState('');
 
-    function loadPatient() {
-        const respone = service.get(`/patient/${id}`)
-        respone.then((res) => {
-            setGender(res.data.Gender);
-            setAge(res.data.Age);
+    const [presentingComplaint, setPresentingComplaint] = useState('');
 
-        }).catch((err) => {
-            alert(err);
-        })
-    }
+    const [hr, setHR] = useState('');
+    const [bp, setBP] = useState('');
 
-    //view admit patients
-    const [name, setName] = useState('');
-    const [bht, setBht] = useState('');
-    const [createdAt, setCreatedAt] = useState('');
-    const [updatedAt, setUpdatedAt] = useState('');
+    const [ecg, setECG] = useState('');
 
-    function loadAdmitPatient() {
-        const respone = service.get(`admit/${id}`)
-        respone.then((res) => {
-            setName(res.data[0].name);
-            setBht(res.data[0].bht);
-            setCreatedAt(res.data[0].createdAt);
-            setUpdatedAt(res.data[0].updatedAt);
-        }).catch((err) => {
-            alert(err);
-        })
-    }
+    const [troponinHb, setTroponinHb] = useState('');
+    const [troponinSerumCreatine, setTroponinSerumCreatine] = useState('');
 
+    const [fbsWBC, setFBSWBC] = useState('');
+    const [fbsK, setFBSK] = useState('');
+
+    const [sgotPit, setSGOTPit] = useState('');
+    const [sgotNa, setSGOTNa] = useState('');
+
+    const [sgpt, setSGPT] = useState('');
+
+    const [management, setManagement] = useState('');
+
+    const [dischargeMedication, setDischargeMedication] = useState('');
+
+    const [plan, setPlan] = useState('');
 
     return (
-
         <main className="main-container">
             <div className="row">
                 <div className="col-md-12">
-                    <div ref={divRef}>
-                        <form>
-
-                            <div style={{ justifyContent: 'space-between', display: 'flex' }} className='main-title mt-3'>
-                                <h5>Patient {name} - Diagnosis Card</h5>
-
+                    <h5 className="mt-2">View Diagnosis</h5>
+                    <form>
+                        <div className="row">
+                            {/* Part 1: Patient Information */}
+                            <div className="col-md-6">
+                                <h6>Part 1: Patient Information</h6>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Patient Name</label>
+                                    <input type="text" name="patientName" className="form-control" value={patientName} onChange={(e) => setPatientName(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Age</label>
+                                    <input type="text" name="age" className="form-control" value={age} onChange={(e) => setAge(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">BHT No</label>
+                                    <input type="text" name="bhtNo" className="form-control" value={bhtNo} onChange={(e) => setBhtNo(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Date of Admission</label>
+                                    <input type="text" name="dateOfAdmission" className="form-control" value={dateOfAdmission} onChange={(e) => setDateOfAdmission(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Date of Discharge</label>
+                                    <input type="text" name="dateOfDischarge" className="form-control" value={dateOfDischarge} onChange={(e) => setDateOfDischarge(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Gender</label>
+                                    <input type="text" name="gender" className="form-control" value={gender} onChange={(e) => setGender(e.target.value)} />
+                                </div>
                             </div>
 
-                            <p className="mt-3" style={{ color: 'grey' }}>Patient Information</p>
-
-
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">Name</label>
-                                        <input type="text" name="username" className="form-control" value={name} onChange={(e) => {
-                                            setName(e.target.value);
-                                        }} />
-                                    </div>
+                            {/* Part 2: Diagnosis */}
+                            <div className="col-md-6">
+                                <h6>Part 2: Diagnosis</h6>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Diagnosis A</label>
+                                    <textarea name="diagnosisA" className="form-control" value={diagnosisA} onChange={(e) => setDiagnosisA(e.target.value)} />
                                 </div>
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">Age</label>
-                                        <input type="text" name="email" className="form-control" value={age} onChange={(e) => {
-                                            setAge(e.target.value);
-                                        }} />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">Gender</label>
-                                        <select className="form-control" onChange={(e) => {
-                                            setGender(e.target.value);
-                                        }} name="status" value={gender}>
-                                            <option value="">--Select Gender--</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">BHT No</label>
-                                        <input type="text" name="address" className="form-control" value={bht} onChange={(e) => {
-                                            setBht(e.target.value);
-                                        }} />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">Admitted Date</label>
-                                        <input type="text" name="address" className="form-control" value={createdAt} onChange={(e) => {
-                                            setCreatedAt(e.target.value);
-                                        }} />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">Discharged Date</label>
-                                        <input type="text" name="address" className="form-control" value={updatedAt} onChange={(e) => {
-                                            setUpdatedAt(e.target.value);
-                                        }} />
-                                    </div>
-                                </div>
-
-                                <div style={{ justifyContent: 'space-between', display: 'flex' }} className='main-title mt-3'>
-                                    <p className="mt-3" style={{ color: 'grey' }}>Other Infromation</p>
-                                    {/* <button style={{marginRight:'40px', height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Edit</button>  */}
-                                </div>
-
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">Presenting Complaint</label>
-                                        <textarea rows="4" cols="50" type="text" name="address" className="form-control" placeholder='Enter Complaint...' />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">Diagnoses</label>
-                                        <textarea rows="4" cols="50" type="text" name="address" className="form-control" placeholder='Enter Diagnoses...' />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">HR</label>
-                                        <textarea rows="4" cols="50" type="text" name="address" className="form-control" placeholder='Enter HR...' />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">BP</label>
-                                        <textarea rows="4" cols="50" type="text" name="address" className="form-control" placeholder='Enter BP...' />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">IX</label>
-                                        <textarea rows="4" cols="50" type="text" name="address" className="form-control" placeholder='Enter IX...' />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">Management</label>
-                                        <textarea rows="4" cols="50" type="text" name="address" className="form-control" placeholder='Enter Management...' />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">Discharge Medication</label>
-                                        <textarea rows="4" cols="50" type="text" name="address" className="form-control" placeholder='Enter Discharge Medication...' />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mb-3">
-                                        <label style={{ fontSize: '14px' }} className="form-lable">Plan</label>
-                                        <textarea rows="4" cols="50" type="text" name="address" className="form-control" placeholder='Enter Plan...' />
-                                    </div>
-                                </div>
-
-
-
+                            
                             </div>
 
+                            {/* Part 3: Presenting Complaint */}
+                            <div className="col-md-6">
+                                <h6>Part 3: Presenting Complaint</h6>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Presenting Complaint</label>
+                                    <textarea name="presentingComplaint" className="form-control" value={presentingComplaint} onChange={(e) => setPresentingComplaint(e.target.value)} />
+                                </div>
+                            </div>
 
-                        </form>
-                    </div>
-                    <div className="row">
-                    <div className="col-md-6">
+                            {/* Part 4: Examination */}
+                            <div className="col-md-6">
+                                <h6>Part 4: Examination</h6>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">HR</label>
+                                    <input type="text" name="hr" className="form-control" value={hr} onChange={(e) => setHR(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">BP</label>
+                                    <input type="text" name="bp" className="form-control" value={bp} onChange={(e) => setBP(e.target.value)} />
+                                </div>
+                            </div>
 
+                            {/* Part 5: Investigations */}
+                            <div className="col-md-6">
+                                <h6>Part 5: Investigations</h6>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">ECG</label>
+                                    <textarea name="ecg" className="form-control" value={ecg} onChange={(e) => setECG(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Troponin Hb</label>
+                                    <input type="text" name="troponinHb" className="form-control" value={troponinHb} onChange={(e) => setTroponinHb(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Troponin Serum Creatine</label>
+                                    <input type="text" name="troponinSerumCreatine" className="form-control" value={troponinSerumCreatine} onChange={(e) => setTroponinSerumCreatine(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">FBS WBC</label>
+                                    <input type="text" name="fbsWBC" className="form-control" value={fbsWBC} onChange={(e) => setFBSWBC(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">FBS K</label>
+                                    <input type="text" name="fbsK" className="form-control" value={fbsK} onChange={(e) => setFBSK(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">SGOT Pit</label>
+                                    <input type="text" name="sgotPit" className="form-control" value={sgotPit} onChange={(e) => setSGOTPit(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">SGOT Na</label>
+                                    <input type="text" name="sgotNa" className="form-control" value={sgotNa} onChange={(e) => setSGOTNa(e.target.value)} />
+                                </div>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">SGPT</label>
+                                    <input type="text" name="sgpt" className="form-control" value={sgpt} onChange={(e) => setSGPT(e.target.value)} />
+                                </div>
+                            </div>
 
-                    </div>
+                            {/* Part 6: Management */}
+                            <div className="col-md-6">
+                                <h6>Part 6: Management</h6>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Management</label>
+                                    <textarea name="management" className="form-control" value={management} onChange={(e) => setManagement(e.target.value)} />
+                                </div>
+                            </div>
 
-                    <div className="col-md-6">
-                        <div className="mb-3">
-                            <Link to={`/viewdocpde/${id}`}><button style={{ marginLeft: '250px', height: '40px', fontSize: '16px' }} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
-                            <button style={{ height: '40px', fontSize: '16px' }} type="button" onClick={handleGeneratePdf} className="btn btn-primary text-white btn-lg">Generate Report</button> &nbsp;
+                            {/* Part 7: Discharge Medication */}
+                            <div className="col-md-6">
+                                <h6>Part 7: Discharge Medication</h6>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Discharge Medication</label>
+                                    <textarea name="dischargeMedication" className="form-control" value={dischargeMedication} onChange={(e) => setDischargeMedication(e.target.value)} />
+                                </div>
+                            </div>
+
+                            {/* Part 8: Plan */}
+                            <div className="col-md-6">
+                                <h6>Part 8: Plan</h6>
+                                <div className="mb-3">
+                                    <label style={{ fontSize: '14px' }} className="form-lable">Plan</label>
+                                    <textarea name="plan" className="form-control" value={plan} onChange={(e) => setPlan(e.target.value)} />
+                                </div>
+                            </div>
+
+                            <div className="col-md-6">
+                                <div className="mb-3">
+                                    <label className="form-lable"></label>
+                                    <Link to='/admin'><button style={{ marginLeft: '320px', height: '40px', fontSize: '16px' }} className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
+
+                                    {/*<button type="submit" style={{ height: '40px', fontSize: '16px' }} className="btn btn-primary btn-lg">Submit</button>*/}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
-
-
+                    </form>
                 </div>
-
-                <br />
-                <br />
-                <br />
-
-
             </div>
-
-
         </main>
-
-
-    )
-}
-
+    );
+};
 export default ViewDiagnosis

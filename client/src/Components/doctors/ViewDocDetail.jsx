@@ -34,7 +34,8 @@ function ViewDocDetail () {
     ward:ward
   }
 
-  //loading existing data to form
+  //loading existing data to form doctors and patient
+  
   useEffect(() =>{
     loadDoctor();
     getPatients();
@@ -95,7 +96,7 @@ function doctorUpdate(){
   function getPatients(){
         const respone = service.get (`admit/details/doctor/${id}`) 
         respone.then((res) => {
-          console.log (res.data)
+          //console.log (res.data)
           setAdmits(res.data);
         })
         .
@@ -128,7 +129,7 @@ const filterData = value => {
 
 //View details function
 function patientView(id){
-    console.log(id);
+    //console.log(id);
     navigate(`/viewdocpde/${id}`)
   }
 
@@ -292,7 +293,7 @@ function patientView(id){
                             <td>{patient.ward}</td>
                             <td>{patient.createdAt}</td>
                             <td>
-                            <a href={`/viewdocpde/${patient.patientid}`}><button type="button" onClick={() => patientView(patient._id)} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
+                            <a href={`/viewdocpde/${patient._id}`}><button type="button" onClick={() => patientView(patient._id)} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
                             </td>
                             </tr> 
 

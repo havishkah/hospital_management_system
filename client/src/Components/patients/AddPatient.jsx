@@ -20,6 +20,8 @@ function AddPatients() {
     const [contact, setContact] = useState('');
     const [password, setPassword] = useState('');
     const [emergencycont, setEmergencycont] = useState('');
+    const [AssignConsultant, setAssignConsultant] = useState('');
+    const [AssignWard, setAssignWard] = useState('');
     
     const service = new Service();
 
@@ -41,7 +43,10 @@ function AddPatients() {
             address: address,
             contact: contact,
             password:password,
-            emergencycont: emergencycont
+            emergencycont: emergencycont,
+            AssignConsultant: AssignConsultant,
+            AssignWard: AssignWard
+
 
         }
 

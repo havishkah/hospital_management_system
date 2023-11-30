@@ -1,359 +1,601 @@
-import React, {useState, useEffect} from "react";
-import Service from '../../../utilities/http';
-import {useParams,useNavigate,Link} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import Service from "../../../utilities/http";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function ViewPatientDetail() {
+  const service = new Service();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const role = Cookies.get("role");
 
-    const service = new Service()
-    const navigate = useNavigate();
-    const [doctors, setDoctors] = useState([]);
-    const {id} = useParams();
+  const [doctor, setDoctor] = useState([]);
+  const [Bed, setBed] = useState([]);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [initials, setInitials] = useState("");
+  const [dob, setDob] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [age, setAge] = useState("");
+  const [nic, setNic] = useState("");
+  const [address, setAddress] = useState("");
+  const [contact, setContact] = useState("");
+  const [emergencycont, setEmergencycont] = useState("");
+  const [assignConsultant, setAssignConsultant] = useState("");
+  const [assignWard, setAssignWard] = useState("");
+  const [WardBed, setWardBed] = useState("");
+  const [BHTNo, setBHTNo] = useState("");
+  const [Status, setStatus] = useState("");
+  const [bedid,setBedid] = useState("")
+  const [bedNo,setBedNo] = useState("");
+  const bStatus = "Unoccupied";
 
-    //view patient details
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [initials, setInitials] = useState('');
-    const [dob, setDob] = useState('');
-    const [email, setEmail] = useState('');
-    const [gender, setGender] = useState('');
-    const [age, setAge] = useState('');
-    const [nic, setNic] = useState('');
-    const [address, setAddress] = useState('');
-    const [contact, setContact] = useState('');
-    const [emergencycont, setEmergencycont] = useState('');
-    const [patientid,setPatientid] = useState('');
+  //loading existing data to form
+  useEffect(() => {
+    loadPatient();
+  }, []);
 
-    // const data = {
-    //     firstName: firstName,
-    //     lastName: lastName,
-    //     initials: initials,
-    //     Dob: dob,
-    //     Gender: gender,
-    //     Age: age,
-    //     nic: nic,
-    //     email: email,
-    //     address: address,
-    //     contact: contact,
-    //     emergencycont: emergencycont,
-      
-    // }
+  function loadPatient() {
+    const respone = service.get(`patient/${id}`);
+    respone
+      .then((res) => {
+        setFirstName(res.data.firstName);
+        setLastName(res.data.lastName);
+        setInitials(res.data.initials);
+        setDob(res.data.Dob);
+        setGender(res.data.Gender);
+        setAge(res.data.Age);
+        setNic(res.data.nic);
+        setEmail(res.data.email);
+        setAddress(res.data.address);
+        setContact(res.data.contact);
+        setEmergencycont(res.data.emergencycont);
+        setAssignConsultant(res.data.AssignConsultant);
+        setAssignWard(res.data.AssignWard);
+        setWardBed(res.data.WardBed);
+        setBHTNo(res.data.BHTNo);
+        setStatus(res.data.Status);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
 
-    //loading existing data to form
-    useEffect(() =>{
-       loadPatient();
-    },[])
+  useEffect(() => {
+    getDoctors();
+    getBeds();
+    loadBed()
+  }, []);
 
-    function loadPatient(){
-         const respone =  service.get(`patient/${id}`)
-         respone.then((res) =>{
-                 console.log(res.data)
-                 setFirstName(res.data.firstName);
-                 setLastName(res.data.lastName);
-                 setInitials(res.data.initials);
-                 setDob(res.data.Dob);
-                 setGender(res.data.Gender);
-                 setAge(res.data.Age);
-                 setNic(res.data.nic);
-                 setEmail(res.data.email);
-                 setAddress(res.data.address);
-                 setContact(res.data.contact);
-                 setEmergencycont(res.data.emergencycont);
+  function loadBed() {
+    const respone = service.get(`bed/${BHTNo}`);
+    respone
+      .then((res) => {
+        console.log(res.data);
+        setBedNo(res.data.BedNo);
+        setBedid(res.data.id);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
 
-         }).catch((err) =>{
-               alert(err);
-     })
-    }
+  function getDoctors() {
+    const respone = service.get("doctor");
+    respone
+      .then((res) => {
+        console.log(res.data);
+        setDoctor(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }
+  //Discharge patient
+  function dischargePatient() {
+    const response = service.put("/patient/discharge", id);
+    response
+      .then(() => {
+        navtoDiagcard();
+      })
+      .catch((e) => {
+        console.log(e);
+        alert("activity failed!");
+      });
+  }
 
-       useEffect(() => {
-        getDoctors();
+  //Delete patient
+  function patientDelete() {
+    const respose = service.delete(`patient`, id);
+    respose
+      .then(() => {
+        alert("Are you confirm to remove patient??");
+        navigate("/allpatient");
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
+  // Update patient
+  const updatePatient = async (e) => {
+    e.preventDefault();
+    const updatePatient = {
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      initials: initials,
+      Dob: dob,
+      Gender: gender,
+      Age: age,
+      nic: nic,
+      email: email,
+      address: address,
+      contact: contact,
+      emergencycont: emergencycont,
+      AssignConsultant: assignConsultant,
+      AssignWard: assignWard,
+      WardBed: WardBed,
+      BHTNo: bedid,
+      Status: Status,
+    };
+    const respose = service.put(`patient/patient`, id, updatePatient);
+    respose
+      .then((res) => {
+        alert("Patient Details Updated");
 
-        
-       }, []);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
 
-    function getDoctors() {
-        const respone = service.get('doctor/')
-        respone.then((res) => {
-            console.log(res.data)
-            setDoctors(res.data);
-        })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-    }
+  function navtoDiagcard() {
+    navigate(`/dignosiscard/${id}/${assignConsultant}/${BHTNo}`)
+}
 
-     //Delete patient
-     function patientDelete(){
-    
-        const respose = service.delete(`patient`,id)
-        respose.then(() => {
-          alert('Are you confirm to remove patient??');
-          navigate('/allpatient');
-        })
-        .catch((err) =>{
-           alert(err);
-        })
-    } 
 
-    //admit a patient
-    // const [patientid,setPatientid] = useState('');
-    const [docName, setDocName] = useState('');
-    const [name, setName] = useState('');
-    const [bht, setBht] = useState('');
-    const [specialist, setSpecialist] = useState('');
-    const [ward, setWard] = useState('');
-    const [bed, setBed] = useState('');
-    const [status, setStatus] = useState('');
-    const [diagnosis, setDiagnosis] = useState('');
+  function getBeds() {
+    const respone = service.get("bed/status", bStatus);
+    respone
+      .then((res) => {
+        setBed(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }
 
-    const handleSubmit = () => {
-
-    const admitedPatient = {
-        patientid:patientid,
-        docName:docName,
-        name:name,
-        nic:nic,
-        bht:bht,
-        specialist:specialist,
-        ward:ward,
-        bed:bed,
-        status:status,
-        diagnosis:diagnosis
-    }
-
-    const respone = service.post(`admit/add`, admitedPatient)
-        respone.then((res) => {
-            console.log(res);
-            alert('Patient admited Successfully');
-            navigate('/admitpatients');
-        }).catch((error) => {
-            console.error('Error with adding data:', error);
-        });
-
-    }
+   function navtoDiagcard() {
+        navigate(`/dignosiscard/${id}/${assignConsultant}/${BHTNo}`)
+  }
 
   return (
-
-      <main className="main-container">
-                <div className="row">
-                    <div className="col-md-12">
-                    <div style={{justifyContent: 'space-between', display : 'flex' }} className='main-title mt-3'>
-                    <h5 className="mt-2">Patient {firstName}'s Details</h5>
-                    <div>
-                    {/* <button style={{marginLeft:'400px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Add Prescription</button> &nbsp;
+    <main className="main-container">
+      <div className="row">
+        <div className="col-md-12">
+          <div
+            style={{ justifyContent: "space-between", display: "flex" }}
+            className="main-title mt-3"
+          >
+            <h5 className="mt-2">Patient {firstName}'s Details</h5>
+            <div>
+              {/* <button style={{marginLeft:'400px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Add Prescription</button> &nbsp;
                     <button style={{height:'40px', fontSize:'16px'}}type="submit" className="btn btn-primary text-white btn-lg">View Diagnosis</button> &nbsp;*/}
-                    <button style={{height:'40px', fontSize:'16px'}}type="button" onClick={patientDelete} className="btn btn-danger text-white btn-lg">Delete</button>  
-                    </div>
-                    </div>
 
-                    <p className="mt-3" style={{color:'grey'}}>Basic Infromation</p>
-                    <form>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">First name</label>
-                                    <input type="text" name="username" className="form-control" value={firstName}  onChange={(e) => {
-                                     setFirstName(e.target.value);
-                                    }}/>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Last Name</label>
-                                    <input type="text" name="email" className="form-control" value={lastName} onChange={(e) => {
-                                     setLastName(e.target.value);
-                                    }}/>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}}className="form-lable">Name with Initials</label>
-                                    <input type="text" name="phone" className="form-control" value={initials} onChange={(e) => {
-                                     setInitials(e.target.value);
-                                    }} />
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Date of Birth</label>
-                                    <input type="date" name="address" className="form-control" value={dob} />
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Nic</label>
-                                    <input type="text" name="address" className="form-control" value={nic} onChange={(e) => {
-                                     setNic(e.target.value);
-                                    }} />
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Gender</label>
-                                    <select className="form-control" onChange={(e) => {
-                                        setGender(e.target.value);
-                                    }} name="status" value={gender}>
-                                        <option value="">--Select Gender--</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                    </select>
-                                </div>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Age</label>
-                                    <input type="text" className="form-control" value={age} onChange={(e) => {
-                                        setAge(e.target.value);
-                                    }} />
-                                </div>
-                            </div>
-                            <p className="mt-3" style={{color:'grey'}}>Contact Infromation</p>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Contact Number</label>
-                                    <input type="text" className="form-control" value={contact} onChange={(e) => {
-                                        setContact(e.target.value);
-                                    }}/>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Email</label>
-                                    <input type="text" className="form-control" value={email} onChange={(e) => {
-                                        setEmail(e.target.value);
-                                    }} />
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Address</label>
-                                    <input type="text" className="form-control" input value={address} onChange={(e) => {
-                                        setAddress(e.target.value);
-                                    }}/>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Emergency Contact Number</label>
-                                    <input type="text" className="form-control" value={emergencycont} onChange={(e) => {
-                                        setEmergencycont(e.target.value);
-                                    }} />
-                                </div>
-                            </div>
+              
+{
+                  Status==="Discharged" ? <button
+                  style={{
+                    height: "40px",
+                    fontSize: "16px",
+                    marginRight: "10px",
+                  }}
+                  type="button"
+                  onClick={dischargePatient}
+                  className="btn btn-primary text-white btn-lg"
+                >
+                  Diagnosis Card
+                </button> : 
+                <button
+                  style={{
+                    height: "40px",
+                    fontSize: "16px",
+                    marginRight: "10px",
+                  }}
+                  type="button"
+                  onClick={dischargePatient}
+                  className="btn btn-primary text-white btn-lg"
+                >
+                  Discharge 
+                </button>
+                
+                }
+             
 
-                            <hr className="text-grey mt-4" />
+              <button
+                style={{
+                  height: "40px",
+                  fontSize: "16px",
+                  marginRight: "10px",
+                }}
+                type="button"
+                onClick={updatePatient}
+                className="btn btn-success text-white btn-lg"
+              >
+                Update
+              </button>
 
-                            {/* admit patient */}
-                            <h4 className="mt-3 mb-3" style={{color:'grey'}}>Admit the Patient</h4>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{ fontSize: '14px' }} className="form-lable">Doctor Name</label>
-                                    <select className="form-control" onChange={(e) => {
-                                        setDocName(e.target.value);
-                                    }}>
-                                        <option value="">--Select Doctor Name--</option>
-                                        {doctors.map((doctor) => (
-                                            <option value={doctor._id}>Dr. {doctor.firstName + " " + doctor.lastName}</option>
-                                        ))}
+              <button
+                style={{ height: "40px", fontSize: "16px" }}
+                type="button"
+                onClick={patientDelete}
+                className="btn btn-danger text-white btn-lg"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
 
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{ fontSize: '14px' }} className="form-lable">Patient Name</label>
-                                    <input type="text" className="form-control" onChange={(e) => {
-                                        setName(e.target.value);
-                                    }}/>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{ fontSize: '14px' }} className="form-lable">BHT No</label>
-                                    <input type="text" className="form-control" onChange={(e) => {
-                                        setBht(e.target.value);
-                                    }}/>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{ fontSize: '14px' }} className="form-lable">Ward Specialist</label>
-                                    <select className="form-control" onChange={(e) => {
-                                        setSpecialist(e.target.value);
-                                    }}>
-                                        <option value="">--Select Ward Specialist--</option>
-                                        <option value="Cardiology Specialist">Cardiology Specialist</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{ fontSize: '14px' }} className="form-lable">Assigned Ward</label>
-                                    <select className="form-control" onChange={(e) => {
-                                        setWard(e.target.value);
-                                    }}>
-                                        <option value="">--Select Assigned Ward--</option>
-                                        <option value="Cardiology Ward 01">Cardiology Ward 01</option>
-                                        <option value="1">Cardiology Ward 02</option>
-                                        <option value="1">Cardiology Ward 02</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{ fontSize: '14px' }} className="form-lable"> Ward Bed</label>
-                                    <select className="form-control" onChange={(e) => {
-                                        setBed(e.target.value);
-                                    }}>
-                                        <option value="">--Select Ward Bed--</option>
-                                        <option value="Electrical">Cardiology Ward 01-Electrical</option>
-                                        <option value="Semi-Electrical">Cardiology Ward 01-Semi-Electrical</option>
-                                        <option value="Non-Electrical">Cardiology Ward 01-Non-Electrical</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{ fontSize: '14px' }} className="form-lable">Status</label>
-                                    <select className="form-control" onChange={(e) => {
-                                        setStatus(e.target.value);
-                                    }}>
-                                        <option value="">--Select Status--</option>
-                                        <option value="Admitted">Admitted</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{ fontSize: '14px' }} className="form-lable">Diagnosis</label>
-                                    <textarea rows="4" cols="50" type="text" className="form-control" onChange={(e) => {
-                                        setDiagnosis(e.target.value);
-                                    }} />
-                                </div>
-                            </div>
-
-                            <div className="col-md-6">
-                            </div>
-                         
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                {/* <label className="form-lable"></label> */}
-                                    <Link to='/allpatient'><button style={{marginLeft:'320px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
-                                    
-                                    <button style={{height:'40px', fontSize:'16px'}} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Admit</button>
-                                </div>
-                               
-                            </div>
-
-                        </div>
-                    </form>
-                    </div>
+          <p className="mt-3" style={{ color: "grey" }}>
+            Basic Infromation
+          </p>
+          <form onSubmit={updatePatient}>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    First name
+                  </label>
+                  <input
+                    type="text"
+                    name="username"
+                    className="form-control"
+                    value={firstName}
+                    onChange={(e) => {
+                      setFirstName(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    Last Name
+                  </label>
+                  <input
+                    type="text"
+                    name="email"
+                    className="form-control"
+                    value={lastName}
+                    onChange={(e) => {
+                      setLastName(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    Name with Initials
+                  </label>
+                  <input
+                    type="text"
+                    name="phone"
+                    className="form-control"
+                    value={initials}
+                    onChange={(e) => {
+                      setInitials(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    Date of Birth
+                  </label>
+                  <input
+                    type="date"
+                    name="address"
+                    className="form-control"
+                    value={dob}
+                  />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    Nic
+                  </label>
+                  <input
+                    type="text"
+                    name="address"
+                    className="form-control"
+                    value={nic}
+                    onChange={(e) => {
+                      setNic(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <div className="mb-3">
+                    <label style={{ fontSize: "14px" }} className="form-lable">
+                      Gender
+                    </label>
+                    <select
+                      className="form-control"
+                      onChange={(e) => {
+                        setGender(e.target.value);
+                      }}
+                      name="status"
+                      value={gender}
+                    >
+                      <option value="">--Select Gender--</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
                   </div>
-            </main>
-        
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    Age
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={age}
+                    onChange={(e) => {
+                      setAge(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <p className="mt-3" style={{ color: "grey" }}>
+                Contact Infromation
+              </p>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    Contact Number
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={contact}
+                    onChange={(e) => {
+                      setContact(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    Email
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    input
+                    value={address}
+                    onChange={(e) => {
+                      setAddress(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    Emergency Contact Number
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={emergencycont}
+                    onChange={(e) => {
+                      setEmergencycont(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <hr className="text-grey mt-4" />
+              <p className="mt-3" style={{ color: "grey" }}>
+                About Assign Infromation
+              </p>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    Assign Consultant
+                  </label>
+                  <select
+                    className="form-control"
+                    value={assignConsultant}
+                    onChange={(e) => {
+                      setAssignConsultant(e.target.value);
+                    }}
+                  >
+                    <option> --select Consultant -- </option>
+                    {doctor.map((bed) => (
+                      <option key={bed._id} value={bed._id}>
+                        {bed.firstName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    AssignWard
+                  </label>
 
-  )
+                  <select
+                    className="form-control"
+                    name="status"
+                    value={assignWard}
+                    onChange={(e) => {
+                      setAssignWard(e.target.value);
+                    }}
+                  >
+                    <option value="">--Select Assigned Ward--</option>
+                    <option value="Cardiology Ward 01">
+                      Cardiology Ward 01
+                    </option>
+                    <option value="Cardiology Ward 02">
+                      Cardiology Ward 02
+                    </option>
+                    <option value="Cardiology Ward 03">
+                      Cardiology Ward 02
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    Bed Category
+                  </label>
+                  <select
+                    className="form-control"
+                    value={WardBed}
+                    name="status"
+                    onChange={(e) => {
+                      setWardBed(e.target.value);
+                    }}
+                  >
+                    <option value="">--Select Bed Category--</option>
+                    <option value="Electric">Electric</option>
+                    <option value="Semi-Electric">Semi-electric</option>
+                    <option value="Manual">Manual</option>
+                  </select>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    BHTNo
+                  </label>
+                  <select
+                    className="form-control"
+                    value={bedid}
+                    onChange={(e) => {
+                      setBedid(e.target.value);
+                    }}
+                  >
+                    <option value={BHTNo}> {bedNo} </option>
+                    {Bed.map((bed) => (
+                      <option key={bed._id} value={bed._id}>
+                        {bed.BedNo}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="mb-3">
+                  <label style={{ fontSize: "14px" }} className="form-lable">
+                    Status:
+                  </label>
+                  <select
+                    className="form-control"
+                    value={Status}
+                    onChange={(e) => {
+                      setStatus(e.target.value);
+                    }}
+                  >
+                    <option value={Status}> {Status} </option>
+                    <option value="Onboard"> Onboard </option>
+                    <option value="Discharge"> Discharge </option>
+                    
+                      
+                  </select>
+                </div>
+              </div>
+
+              <div className="col-md-6"></div>
+            </div>
+          </form>
+
+          <hr className="text-grey mt-4 mb-7" />
+
+          <button
+            style={{
+              height: "40px",
+              fontSize: "16px",
+              margin: "50px 30px 30px 0",
+            }}
+            type="button"
+            onClick={() => navigate(`/addprescrip/${id}`)}
+            className="btn btn-primary text-white btn-lg"
+          >
+            Add Medication
+          </button>
+          <button
+            style={{
+              height: "40px",
+              fontSize: "16px",
+              margin: "50px 30px 30px 0",
+            }}
+            type="button"
+            onClick={() => navigate(`/viewprescripton/${id}`)}
+            className="btn btn-primary text-white btn-lg"
+          >
+            View Medication
+          </button>
+
+          <button
+            style={{
+              height: "40px",
+              fontSize: "16px",
+              margin: "50px 30px 30px 0",
+            }}
+            type="button"
+            onClick={() => navigate(`/adddiagnosis/${id}`)}
+            className="btn btn-primary text-white btn-lg"
+          >
+            Add Diagnosis Report
+          </button>
+
+          <button
+            style={{
+              height: "40px",
+              fontSize: "16px",
+              margin: "50px 30px 30px 0",
+            }}
+            type="button"
+            onClick={() => navigate(`/diagnosisHistory/${id}`)}
+            className="btn btn-primary text-white btn-lg"
+          >
+            View Diagnosis History
+          </button>
+        </div>
+      </div>
+    </main>
+  );
 }
+
 //test
-export default ViewPatientDetail
+export default ViewPatientDetail;

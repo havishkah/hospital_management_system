@@ -27,6 +27,7 @@ function AddPatientAccout  () {
                   setContact(res.data.contact);
                   setUsername(res.data.username);
                   setPassword(res.data.password)
+
  
           }).catch((err) =>{
                 alert(err);
@@ -36,7 +37,8 @@ function AddPatientAccout  () {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        await signup(username,email,contact,password, role)
+        await signup(username, email,contact,password, role,id)
+        
     }
 
     return(

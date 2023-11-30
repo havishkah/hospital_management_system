@@ -12,7 +12,7 @@ const {
 
 const requireAuth = require('../middleware/Auth/requireauth')
 
-//router.use(requireAuth)
+router.use(requireAuth)
 
 router.get("/", getAlldoctors);
 router.get("/:id", getDoctor);

@@ -5,11 +5,12 @@ import { useNavigate,Link } from "react-router-dom";
 function AddBeds () {
 
     const navigate = useNavigate();
+    const [bedNo, setBedNo] = useState('');
     const [specialist, setSpecialist] = useState('');
     const [ward,setWard] = useState('');
     const [catagory,setCatagory] = useState('')
     const [description,setDescription] = useState('')
-    const [status,setStatus] = useState('')
+    const status= "Unoccupied";
     const service = new Service();
 
     const handleSubmit = () => {
@@ -18,7 +19,8 @@ function AddBeds () {
 
 
         const newBed = {
-            specialist: specialist,
+            BedNo: bedNo,
+            specialist:specialist,
             ward:ward,
             catagory:catagory,
             description:description,
@@ -31,6 +33,7 @@ function AddBeds () {
             alert('Bed added Successfully');
             navigate('/allbed');
         }).catch((error) => {
+            alert('Fill All Fields');
             console.error('Error with adding data:', error);
         });
 
@@ -47,7 +50,18 @@ function AddBeds () {
                             <p className="mt-3" style={{color:'grey'}}>Ward & Bed Infromation</p>
                             <div className="col-md-6">
                                 <div className="mb-3">
+                                    <label style={{fontSize:'14px'}} className="form-lable">Bed No</label>
+                                    <input 
+                                        type='text' 
+                                        value={bedNo} 
+                                        onChange={(e) => { setBedNo(e.target.value)}} 
+                                        className='form-control'/>
+                                </div>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="mb-3">
                                     <label style={{fontSize:'14px'}} className="form-lable">Ward Specialist</label>
+                                   
                                     <select className="form-control" name="status" onChange={(e) => {
                                         setSpecialist(e.target.value);
                                     }} >
@@ -91,18 +105,6 @@ function AddBeds () {
                                 </div>
                             </div>
 
-                            <div className="col-md-6">
-                                <div className="mb-3">
-                                    <label style={{fontSize:'14px'}} className="form-lable">Status</label>
-                                    <select className='form-control' onChange={(e) => {
-                                        setStatus(e.target.value);
-                                    }} >
-                                        <option value="">--Select Status--</option>
-                                        <option value="Occupied">Occupied</option>
-                                        <option value="Unoccupied">Unoccupied</option>
-                                    </select>
-                                </div>
-                            </div>
 
                             <div className="col-md-6"></div>
                             
@@ -114,7 +116,7 @@ function AddBeds () {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                 <label className="form-lable"></label>
-                                    <Link to='/'><button style={{marginLeft:'320px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">Back</button></Link>&nbsp;
+                                    <Link to='/' style={{height:'40px', fontSize:'16px'}} className="btn btn-primary bg-white text-primary btn-lg">Back</Link>&nbsp;
                                     
                                     <button style={{height:'40px', fontSize:'16px'}} type="button" onClick={handleSubmit} className="btn btn-primary btn-lg">Submit</button>
                                 </div>

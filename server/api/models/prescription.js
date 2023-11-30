@@ -11,19 +11,14 @@ const prescriptionSchema = new mongoose.Schema({
       required:true
    },
 
-   catagory:{
-      type:String,
-      required:true
-   },
-
    drug:{
       type:String,
       required:true
    },
 
-   diagnosis:{
-    type:String,
-    required:true
+   duration:{
+      type:String,
+      required:true
    },
 
    frequency:{
@@ -37,9 +32,9 @@ const prescriptionSchema = new mongoose.Schema({
    },
 
    qty:{
-    type:Number,
+    type:String,
     required:true
-   }
+   },
     
 },{timestamps:true});
 

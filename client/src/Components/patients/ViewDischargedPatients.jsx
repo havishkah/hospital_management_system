@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import Service from "../../../utilities/http";
 import { Link, useNavigate } from "react-router-dom";
 
-function AdmitPatient() {
+function DischargedPatients() {
   const [patients, setPatients] = useState([]);
   const [searchText, setSearchText] = useState("");
   const service = new Service();
   const navigate = useNavigate();
-  const status = "Onboard";
-  const viewStat="Discharged";
+  const status = "Discharged";
+  const viewStat = "Onboard";
 
   useEffect(() => {
     getPatients();
@@ -26,9 +26,8 @@ function AdmitPatient() {
       });
   }
 
-  function handleStatus(){
-   
-    navigate('/dischargedpatients')
+  function handleStatus() {
+    navigate('/admitpatients')
   }
 
   const handlesearchArea = (value) => {
@@ -61,10 +60,12 @@ function AdmitPatient() {
       <div className="main-title">
         <h4>VIEW ADMITTED & DISCHARGED PATIENTS</h4>
       </div>
-      <button className="btn btn-primary" onClick={handleStatus}>{viewStat} patients</button>
+      <button className="btn btn-primary" onClick={handleStatus}>
+        {viewStat} patients
+      </button>
       <div className="col-lg-3 mt-2 mb-2 d-flex">
         <input
-          style={{ marginLeft: "0", width:"60%" }}
+          style={{ marginLeft: "0", width: "60%" }}
           type="search"
           className="form-control mx-2"
           placeholder="Search.."
@@ -109,8 +110,6 @@ function AdmitPatient() {
                       <i className="fas fa-eye"></i>&nbsp;Details
                     </button>
                   </Link>
-                 
-                  
                 </td>
               </tr>
             ))}
@@ -121,4 +120,4 @@ function AdmitPatient() {
   );
 }
 
-export default AdmitPatient;
+export default DischargedPatients;

@@ -70,12 +70,12 @@ function ViewDoctorPDetail() {
      function loadAdmitPatient(){
           const respone =  service.get(`admit/${id}`)
           respone.then((res) =>{
-                //   setDocName(res.data.docName);
-                //   setBht(res.data.bht);
-                //   setSpecialist(res.data.specialist);
-                //   setWard(res.data.ward);
-                //   setBed(res.data.bed);
-                //   setStatus(res.data.status);
+                  setDocName(res.data[0].docName);
+                  setBht(res.data[0].bht);
+                  setSpecialist(res.data[0].specialist);
+                  setWard(res.data[0].ward);
+                  setBed(res.data[0].bed);
+                  setStatus(res.data[0].status);
  
           }).catch((err) =>{
                 alert(err);
@@ -331,7 +331,7 @@ const filterData = value => {
                             <div className="col-md-6">
                                 <div className="mb-3">
                                 {/* <label className="form-lable"></label> */}
-                                    <button style={{marginLeft:'95px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">View Patient History</button> &nbsp;
+                                   <Link to={`/viewdiagnosis/${id}`}><button style={{marginLeft:'95px',height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary bg-white text-primary btn-lg">View Patient History</button></Link> &nbsp;
                                     
                                     <Link to={`/viewdiagnosis/${id}`}><button style={{height:'40px', fontSize:'16px'}} type="submit" className="btn btn-primary btn-lg">View Diagonosis Report</button></Link>
                                 </div>
@@ -374,7 +374,7 @@ const filterData = value => {
                               <td>{prescription.drug}</td>
                               <td>{prescription.frequency}</td>
                               <td>
-                              <a href={`/doc_pa_priscripd/${prescription.patientid}`}><button type="button" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
+                              <a href={`/doc_pa_priscripd/${prescription._id}`}><button type="button" className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></a>
                               </td>
                               </tr> 
                         ))}

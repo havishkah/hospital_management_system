@@ -6,6 +6,11 @@ const bedSchema = new mongoose.Schema({
     required:true
    },
 
+   BedNo:{
+      type:String,
+      required:true
+   },
+
    catagory:{
     type:String,
     required:true
