@@ -3,18 +3,7 @@ import Service from '../../../utilities/http';
 import {BsPeopleFill} from 'react-icons/bs'
 import doctor from '../../assets/doctor.png'
 
-export const DoctorDashboard = () => {
-	const [doctorCount, setDoctorCount] = useState(0);
-	const [dischargedPatientCount, setDischargedPatientCount] = useState(0);
-	const [admittedPatientCount, setAdmittedPatientCount] = useState(0);
-	const [availableBeds, setAvailableBeds] = useState(0);
-	const service = new Service();
 
-	useEffect(() => {
-		getDoctorCount();
-		getPatientCount();
-		getAvailableBeds();
-	}, []);
 export const DoctorDashboard= () =>{
   const [doctorCount, setDoctorCount] = useState(0);
   const [availableBeds, setAvailableBeds] = useState(0);
