@@ -46,7 +46,6 @@ app.use('/api/prescription',prescriptionRoutes)
 app.use('/api/admit',admitRoutes)
 
 
-
 //Error handle function
 app.use(apiErrorHandler);
 

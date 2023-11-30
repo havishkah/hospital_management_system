@@ -34,7 +34,8 @@ function ViewDocDetail () {
     ward:ward
   }
 
-  //loading existing data to form
+  //loading existing data to form doctors and patient
+  
   useEffect(() =>{
     loadDoctor();
     getPatients();
