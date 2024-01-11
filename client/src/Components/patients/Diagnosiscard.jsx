@@ -4,9 +4,14 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import "./dgcard.css";
+import bp from "../../assets/bp.png"
+import lungs from "../../assets/lungs.png"
+
 import { AddnewDiagnosis } from "./Diagnosecard/Diagnosis";
 import { ManagmentPlan } from "./Diagnosecard/ManagementPlan";
 import { DischargeMedi } from "./Diagnosecard/DischargeMedi";
+import { Plan } from "./Diagnosecard/plan";
+import { Invevsigations } from "./Diagnosecard/Investigation";
 
 export const Dignosiscard = () => {
   
@@ -100,7 +105,14 @@ export const Dignosiscard = () => {
 
   const divRef = useRef(null);
 
-  const handleGeneratePdf = () => {
+  // function
+
+  const handleGeneratePdf = async () => {
+
+    
+
+
+
     // Get the <div> element you want to convert to PDF
     const divToConvert = divRef.current;
 
@@ -208,8 +220,14 @@ export const Dignosiscard = () => {
                   <label>BP:</label>
                   <input type="text" className="form-control" />
                 </div>
-                <div className="col-md-5"><textarea className="form-control" rows={5}></textarea></div>
-                <div className="col-md-5"><textarea className="form-control" rows={5}></textarea></div>
+                <div className="col-md-5 row"><img className="w-25"
+                  src={lungs}
+                ></img><textarea className="form-control w-75" rows={5}></textarea></div>
+                <div className="col-md-5 row">
+                <img className="w-25"
+                  src={bp}
+                ></img>
+                  <textarea className="form-control w-75" rows={5}></textarea></div>
               </div>
             </div>
           </div>
@@ -218,6 +236,7 @@ export const Dignosiscard = () => {
               <label>
                 <b>Invevsigations: </b>
               </label>
+              <Invevsigations/>
               <textarea
                 className="form-control text-diagnosis"
                 rows={5}
@@ -255,6 +274,7 @@ export const Dignosiscard = () => {
               <label>
                 <b>Plan: </b>
               </label>
+              <div><Plan/></div>
               <textarea
                 className="form-control text-diagnosis"
                 rows={5}

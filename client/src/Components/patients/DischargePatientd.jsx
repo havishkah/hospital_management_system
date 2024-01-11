@@ -4,6 +4,25 @@ import {Link,useNavigate} from 'react-router-dom'
 
 export const DischargePatientd = () => {
 
+  const handlesearchArea = value => {
+    setSearchText(value);
+    filterData(value);   
+}
+
+const filterData = value => {
+  const lowerCaseValue = value.toLowerCase().trim();
+  if(!lowerCaseValue){
+      getPatients();
+  }
+  else{      
+      const filteredData = patients.filter(item => {
+        const fullName = `${item.firstName} ${item.lastName}`.toLowerCase();
+        return fullName.includes(lowerCaseValue);
+      });
+      setPatients(filteredData);
+  }
+}
+
   return (
     <main className='main-container'>
         <div className="main-title">
