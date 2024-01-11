@@ -31,24 +31,24 @@ function AdmitPatient() {
     navigate('/dischargedpatients')
   }
 
-  const handlesearchArea = (value) => {
+  const handlesearchArea = value => {
     setSearchText(value);
-    filterData(value);
-  };
+    filterData(value);   
+}
 
-  const filterData = (value) => {
-    const lowerCaseValue = value.toLowerCase().trim();
-    if (!lowerCaseValue) {
+const filterData = value => {
+  const lowerCaseValue = value.toLowerCase().trim();
+  if(!lowerCaseValue){
       getPatients();
-    } else {
-      const filteredData = patients.filter((item) => {
-        return Object.keys(item).some((key) => {
-          return item[key].toString().toLowerCase().includes(lowerCaseValue);
-        });
+  }
+  else{      
+      const filteredData = patients.filter(item => {
+        const fullName = `${item.firstName} ${item.lastName}`.toLowerCase();
+        return fullName.includes(lowerCaseValue);
       });
       setPatients(filteredData);
-    }
-  };
+  }
+}
 
   //View details function
   function patientView(id) {

@@ -3,6 +3,19 @@ export const ManagmentPlan = () => {
 
     const [selectedValue, setSelectedValue] = useState("");
     const [yourArray, setYourArray] = useState([]);
+    const [selectHide,setSelectHide] = useState("Show");
+
+    
+    const handleHide=(e)=>{
+        e.preventDefault()
+
+        if(selectHide==="Show"){
+            setSelectHide("Hide")
+            console.log
+        }else{
+            setSelectHide("Show")
+        }
+    }
 
     const handleSelectChange = (e) => {
         const newValue = e.target.value;
@@ -22,11 +35,14 @@ export const ManagmentPlan = () => {
 
     return (
         <div>
-            <select value={selectedValue} onChange={handleSelectChange} className="form-control sele-op">
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-            </select>
+            <div className="row">
+            {selectHide === "Show" ? <select value={selectedValue} onChange={handleSelectChange} className="form-control sele-op">
+                <option value="Aspirin 300mg stat and 75mg nocte">Aspirin 300mg stat and 75mg nocte</option>
+                <option value="Clopidogrel 300mg stat and 75mg nocte">Clopidogrel 300mg stat and 75mg nocte</option>
+                <option value="Atovarstatin  40mg stat and 40mg nocte">Atovarstatin  40mg stat and 40mg nocte</option>
+            </select>:""}
+            <button className="optn" onClick={handleHide}>Hide/Show</button>
+            </div>
             <div>
         {yourArray.map((value, index) => (
           <div key={index} className="my-2">
