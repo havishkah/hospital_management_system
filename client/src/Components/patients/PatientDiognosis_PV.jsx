@@ -68,7 +68,7 @@ function PatientDiagnosis_PV() {
         return;
       }
      
-      axios.post('http://4.247.171.89:4000/api/reports/download', { file: selectedFile }, 
+      axios.post('http://127.0.0.1:4000/api/reports/download', { file: selectedFile }, 
       { responseType: 'blob',
       headers: {
         Authorization: `Bearer ${token}`, 
