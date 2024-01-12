@@ -52,4 +52,20 @@
 
   .sele-op{
     border: none;
+    width: 80%;
+  }
+  .optn{
+    background: transparent;
+    color: #ffffff;
+    width: 15%;
+    border: none;
+  }
+
+  .optn:hover{
+    background: #df1010;
+    color: #ffffff;
+  }
+
+  .invesInput{
+    width: 90%;
   }

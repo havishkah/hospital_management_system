@@ -56,22 +56,23 @@ axiosInstance.interceptors.response.use(
 		return response;
 	},
 	(err) => {
+		const errorResponse = err.response;
 		if (err.response.status === 400) {
-			throw new Error("Bad Request");
+			throw new Error(errorResponse.data.error);
 		} else if (err.response.status === 401) {
 			throw new Error("Unauthorized");
 		} else if (err.response.status === 403) {
-			throw new Error("Forbidden ");
+			throw new Error(errorResponse.data.error);
 		} else if (err.response.status === 404) {
 			throw new Error("Not Found");
 		} else if (err.response.status === 408) {
-			throw new Error("Request Timeout");
+			throw new Error(errorResponse.data.error);
 		} else if (err.response.status === 409) {
-			throw new Error("Already exist");
+			throw new Error(errorResponse.data.error);
 		} else if (err.response.status === 500) {
-			throw new Error(" Internal Server Error");
+			throw new Error(errorResponse.data.error);
 		} else {
-			throw new Error(err.message);
+			throw new Error(errorResponse.data.error);
 		}
 	},
 );

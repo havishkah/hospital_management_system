@@ -114,9 +114,10 @@ function MedicalReport() {
                 }}
               >
                 <option value="">--Select Report Type--</option>
-                <option value="01">Blood Report</option>
-                <option value="02">Heart Report</option>
-                <option value="03">BP Report</option>
+                <option value="Blood Report">Blood Report</option>
+                <option value="Heart Report">Heart Report</option>
+                <option value="BP Report">BP Report</option>
+                <option value="Diagnosis Report">Diagnosis Report</option>
               </select>
             </div>
           </div>

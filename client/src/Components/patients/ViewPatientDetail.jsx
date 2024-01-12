@@ -98,6 +98,19 @@ function ViewPatientDetail() {
     const response = service.put("/patient/discharge", id);
     response
       .then(() => {
+        const  bedstatus={
+          status:"Occupied"
+        }
+        if(Status=="Onboard"){
+          const respone1 = service.put(`bed`, BHTNo, bedstatus);
+          respone1
+            .then((res) => {
+              console.log(res.data);
+            })
+            .catch((err) => {
+              alert(err);
+            });
+        }
         navtoDiagcard();
       })
       .catch((e) => {
@@ -112,6 +125,18 @@ function ViewPatientDetail() {
     respose
       .then(() => {
         alert("Are you confirm to remove patient??");
+        const  bedstatus={
+          status:"Occupied"
+        }
+        const respone1 = service.put(`bed`, BHTNo, bedstatus);
+        respone1
+          .then((res) => {
+            console.log(res.data);
+            
+          })
+          .catch((err) => {
+            alert(err);
+          });
         navigate("/allpatient");
       })
       .catch((err) => {
@@ -440,7 +465,7 @@ function ViewPatientDetail() {
                     <option> --select Consultant -- </option>
                     {doctor.map((bed) => (
                       <option key={bed._id} value={bed._id}>
-                        {bed.firstName}
+                        {bed.firstName+" "+bed.lastName}
                       </option>
                     ))}
                   </select>
@@ -522,6 +547,7 @@ function ViewPatientDetail() {
                   <select
                     className="form-control"
                     value={Status}
+                    disabled
                     onChange={(e) => {
                       setStatus(e.target.value);
                     }}

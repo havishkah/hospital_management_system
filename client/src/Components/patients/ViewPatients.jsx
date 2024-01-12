@@ -85,7 +85,7 @@ function patientView(){
                             <td>{patient.Gender}</td>
                             <td>
                             <Link to={`/viewpatientdetail/${patient._id}`}><button type="button" onClick={patientView} className="btn btn-primary" style={{color:'white'}}><i className="fas fa-eye"></i>&nbsp;Details</button></Link>
-                            {role ==="admin" ? <Link className="btn btn-primary mx-1" to={`/addpatientuser/${patient._id}`}>Create a User Account</Link>: null}
+                           
                             </td>
                             </tr> 
                     ))

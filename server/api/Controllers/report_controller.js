@@ -16,6 +16,10 @@ const createReport = (req, res, next) => {
   if (!req.file.path) {
     return res.status(400).json({ message: "No file uploaded" });
   }
+
+  if(patientid==""|| title==""|| type=="" ){
+    return res.status(400).json({ message: "Fill all the fields" });
+  }
   const report = new Report({
     patientid,
     title,

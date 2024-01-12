@@ -151,8 +151,6 @@ function PatientDiagnosis() {
       <tbody>
         {reports.map((report) => (
           <tr key={report._id}>
-      
-          
             <td>{report.title}</td>
             <td>{report.type}</td>
             <td>
