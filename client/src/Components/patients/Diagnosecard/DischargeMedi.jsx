@@ -26,7 +26,7 @@ export const DischargeMedi = () => {
         const newArray = yourArray.filter((value) => value !== valueToRemove);
         setYourArray(newArray);
       };
-
+      // Add the new value to the array
       const handleInputChange = (index, newValue) => {
         const newArray = [...yourArray];
         newArray[index] = newValue;
