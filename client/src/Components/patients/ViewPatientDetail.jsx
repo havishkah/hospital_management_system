@@ -602,7 +602,7 @@ function ViewPatientDetail() {
             onClick={() => navigate(`/adddiagnosis/${id}`)}
             className="btn btn-primary text-white btn-lg"
           >
-            Add Diagnosis Report
+            Add Diagnosis
           </button>
 
           <button
