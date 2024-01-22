@@ -58,7 +58,6 @@ const getAllpatientsdetails = (req, res) => {
   const patient = Patient.find();
   patient
     .then((data) => {
-      console.log(data);
       res.status(200).json(data);
     })
     .catch((error) => {
@@ -72,7 +71,6 @@ const getAllpatientstatus = (req, res) => {
   const patient = Patient.find( {Status: Status});
   patient
     .then((data) => {
-      console.log(data);
       res.status(200).json(data);
     })
     .catch((error) => {
@@ -196,7 +194,6 @@ const getPatientbyDoctorID = (req, res) => {
   const patient = Patient.find({ docName: id });
   patient
     .then((data) => {
-      console.log(data);
       res.status(200).json(data);
     })
     .catch((e) => {

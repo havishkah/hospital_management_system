@@ -7,7 +7,8 @@ const AllPrescription = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [doctor, setDoctor] = useState("");
-
+  const [docName, setDocName] = useState("");
+  const [docLName, setDocLName] = useState("");
   const [dFiname, setDFiname] = useState("");
   const [dLiname, setDLiname] = useState("");
 
@@ -38,6 +39,23 @@ const AllPrescription = () => {
       });
   }
 
+  const getData =() =>{
+    const response = service.get("doctor");
+    response.then((res) => {
+      console.log(res.data);
+      const doc = res.data.reduce((ace, doctor) => {
+        ace[doctor._id] = doctor.firstName;
+        return ace;
+      }, {});
+      const docL = res.data.reduce((acc, doctor) => {
+        acc[doctor._id] = doctor.lastName;
+        return acc;
+      }, {});
+      setDocName(doc);
+      setDocLName(docL);
+    });
+  }
+
   function loadPatient() {
     const respone = service.get(`patient/${id}`);
     respone
@@ -52,6 +70,7 @@ const AllPrescription = () => {
   useEffect(() => {
     getPrescription();
     loadPatient();
+    getData();
   }, []);
 
   return (
@@ -89,7 +108,7 @@ const AllPrescription = () => {
               prescription.map((presc, index) => (
                 <tr key={presc._id}>
                   <td>{index + 1}</td>
-                  <td>{doctor ? `${dFiname} ${dLiname}` : presc.doctorid}</td>
+                  <td>{docName[presc.doctorid]+" "+ docLName[presc.doctorid]} </td>
                   <td>{presc.dosage}</td>
                   <td>{presc.drug}</td>
                   <td>{presc.duration}</td>

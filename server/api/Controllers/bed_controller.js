@@ -137,7 +137,6 @@ const updateaBedbyID = (req, res) => {
   );
 
   bed.then((data) => {
-    console.log(data);
     if (!data) {
       return res.status(404).json({ error: "Unable to process" });
     }
@@ -153,7 +152,6 @@ const updateaBedbyID = (req, res) => {
 const updateaBedStatus = (req, res) => {
   const id = req.params.id;
 
-  console.log(req.params);
   const data = req.body;
  
   const bed = Bed.findOneAndUpdate(
@@ -193,9 +191,6 @@ const deletebed = async (req, res) => {
 
   res.status(200).json("Bed deleted");
 };
-
-
-
 
 module.exports = {
     createBed: createabed,
